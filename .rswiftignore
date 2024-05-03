@@ -1,0 +1,23 @@
+# Ignore a specific font file
+# fonts/myspecialfont.ttf
+
+# Ignore all tiff and tif files in the images folder
+# images/*.tif
+# images/*.tiff
+
+# Ignore all strings files wherever they are
+# **/*.strings
+
+# Ignore all files containing '.ignore.'
+# **/*.ignore.*
+
+# Explicitly include a single file
+# !keepme.ignore.png
+
+# Explicitly include all files containing '.keepme.'
+# !**/*.keepme.*
+
+# Ignore file xib
+**/NativeAdView.xib
+**/BottomNativeAdView.xib
+**/SmallNativeAdView.xib

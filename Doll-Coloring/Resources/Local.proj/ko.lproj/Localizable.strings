@@ -1,0 +1,97 @@
+/*
+ Localizable.strings
+ */
+
+// Common
+title_open_camera = "카메라 열기";
+message_open_camera = "사진을 찍기 위해 카메라를 엽니다";
+title_open_library = "라이브러리 열기";
+message_open_libary = "라이브러리를 열고 사진을 선택합니다";
+
+Common.OK                                       =       "확인";
+Common.Cancel                                   =       "취소";
+Common.Done                                     =       "완료";
+Common.Complete                                 =       "완료";
+Common.Next                                     =       "다음";
+Common.Start                                    =       "시작";
+Common.Confirm                                  =       "확인";
+Common.Button.Agree                             =       "동의";
+Common.Button.Disagree                          =       "거부";
+Common.PhotoPicker.Gallery                      =       "라이브러리에서 선택";
+Common.PhotoPicker.Camera                       =       "사진 촬영";
+Common.Home                                     =       "홈";
+Common.StartColoring                            =       "색칠 시작";
+Common.Collections                              =       "컬렉션";
+Common.Settings                                 =       "설정";
+Common.History                                  =       "기록";
+Common.CreateNew                                =       "새로 만들기";
+Common.Music                                    =       "음악";
+Common.Sound                                    =       "소리";
+Common.RateApp                                  =       "앱 평가";
+Common.Save                                     =       "저장";
+Common.Delete                                   =       "삭제";
+Common.Language                                 =       "언어";
+Common.EmptyCollections                         =       "아직 사진이 없습니다!";
+Content_delete_collection                       =       "색상이 삭제됩니다. \n 계속하려면 삭제를 클릭하십시오.";
+Common.Continue = "계속하다";
+
+// Splash
+Splash.Copyright                                =       "®Binary Bridge Labs에 의한 저작권";
+
+// Intro
+Intro.introTitlePage1                           =       "아름다운 인형 스타일 그래픽";
+Intro.introContentPage1                         =       "모든 연령에 적합한 독특한 인형 스타일 그래픽!";
+Intro.introTitlePage2                           =       "풍부한 색상 팔레트";
+Intro.introContentPage2                         =       "20가지 이상의 풍부한 색상 팔레트, 그라데이션 색상";
+Intro.introTitlePage3                           =       "저장 또는 공유";
+Intro.introContentPage3                         =       "쉽게 좋아하는 그림을 모든 소셜 미디어로 공유하거나 공유";
+
+// Language
+Language.Title                                  =       "언어 변경";
+Language.SubTitle                               =       "언어를 선택하세요";
+Language.PlaceholderSearch                      =       "입력: 국가 이름 | 코드 | 다이얼 코드";
+
+Language.english                                =       "미국";
+Language.hindi                                  =       "힌디어";
+Language.spanish                                =       "스페인어";
+Language.french                                 =       "프랑스어";
+Language.portuguese                             =       "포르투갈어";
+Language.brazil                                 =       "브라질";
+Language.japanese                               =       "일본어";
+Language.korean                                 =       "한국어";
+Language.vietnam                                =       "베트남어";
+Language.germany                                =       "독일어";
+Language.rusia                                  =       "러시아어";
+
+
+// IAP
+IAP.week                                        =       "주";
+IAP.year                                        =       "년";
+IAP.weekly                                      =       "주간 액세스";
+IAP.yearly                                      =       "연간 액세스";
+
+// ForceUpdate
+ForceUpdate.Title                               =       "새 버전 이용 가능";
+ForceUpdate.Description                         =       "앱을 사용하려면 최신 버전을 다운로드해야 합니다.";
+ForceUpdate.Button                              =       "앱 업데이트";
+
+
+// Table Color
+
+table.skin_color                                =       "피부 색깔";
+table.basic_color                               =       "기본 색";
+table.vivid_color                               =       "선명한 색";
+table.hot_color                                 =       "뜨거운 색";
+table.natural_color                             =       "자연스러운 색";
+table.sky_color                                 =       "하늘 색";
+table.purple_color                              =       "보라색";
+table.gradient_color                            =       "그라데이션 색 %d";
+table.galaxy_color                              =       "은하 색";
+table.pastel_color                              =       "파스텔 색";
+table.sweet_color                               =       "달콤한 색";
+table.mystical_color                            =       "신비한 색";
+
+subtite_delete = "색상이 삭제됩니다. 계속하려면 삭제를 클릭하십시오.";
+
+save_picture_success = "사진이 저장되었습니다.";
+save_picture_fail = "사진이 저장되지 않았습니다.";

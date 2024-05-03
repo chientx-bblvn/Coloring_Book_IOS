@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ButtonView" customModule="Pet_Translator" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="fOF-0F-iUU"/>
+                <outlet property="lbTitle" destination="iYd-6O-D8G" id="Blp-nF-gKI"/>
+                <outlet property="loadingIndicatorView" destination="Onq-Iw-sdB" id="ozE-Kl-jbU"/>
+                <outlet property="viewButton" destination="i4U-Wy-Edf" id="1aa-Jq-zzM"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i4U-Wy-Edf" customClass="GradientView" customModule="Pet_Translator" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYd-6O-D8G">
+                            <rect key="frame" x="12" y="0.0" width="351" height="60"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                            <color key="textColor" name="TextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Onq-Iw-sdB">
+                            <rect key="frame" x="157.5" y="0.0" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Onq-Iw-sdB" secondAttribute="height" multiplier="1:1" id="14h-HU-8eu"/>
+                            </constraints>
+                            <color key="color" name="TextColorSecondary"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Onq-Iw-sdB" firstAttribute="top" secondItem="i4U-Wy-Edf" secondAttribute="top" id="BPw-i3-LBD"/>
+                        <constraint firstAttribute="bottom" secondItem="Onq-Iw-sdB" secondAttribute="bottom" id="C8G-zL-WWX"/>
+                        <constraint firstItem="iYd-6O-D8G" firstAttribute="leading" secondItem="i4U-Wy-Edf" secondAttribute="leading" constant="12" id="Ijm-cb-cCg"/>
+                        <constraint firstItem="Onq-Iw-sdB" firstAttribute="centerX" secondItem="i4U-Wy-Edf" secondAttribute="centerX" id="PZZ-pB-QX9"/>
+                        <constraint firstAttribute="trailing" secondItem="iYd-6O-D8G" secondAttribute="trailing" constant="12" id="QfP-cN-ukF"/>
+                        <constraint firstItem="iYd-6O-D8G" firstAttribute="top" secondItem="i4U-Wy-Edf" secondAttribute="top" id="jj1-pI-6qT"/>
+                        <constraint firstAttribute="bottom" secondItem="iYd-6O-D8G" secondAttribute="bottom" id="wQb-qB-LsN"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="horizontalMode" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="diagonalMode" value="NO"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                            <color key="value" name="MainPrimary"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="middleColor">
+                            <color key="value" name="MainPrimary"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                            <color key="value" name="MainPrimary"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="i4U-Wy-Edf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Awh-q2-R6F"/>
+                <constraint firstItem="i4U-Wy-Edf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="CDd-rr-v5d"/>
+                <constraint firstAttribute="bottom" secondItem="i4U-Wy-Edf" secondAttribute="bottom" id="jq1-na-gs6"/>
+                <constraint firstAttribute="trailing" secondItem="i4U-Wy-Edf" secondAttribute="trailing" id="mN8-xZ-iur"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                    <real key="value" value="6"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                    <real key="value" value="1"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                    <size key="value" width="0.0" height="4"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                    <color key="value" name="color_shadow_button"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="131.15942028985509" y="368.30357142857139"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="MainPrimary">
+            <color red="1" green="0.77647058823529413" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextColor">
+            <color red="0.41176470588235292" green="0.24705882352941178" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextColorSecondary">
+            <color red="0.41176470588235292" green="0.24705882352941178" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color_shadow_button">
+            <color red="0.24300000071525574" green="0.52499997615814209" blue="0.98000001907348633" alpha="0.23999999463558197" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

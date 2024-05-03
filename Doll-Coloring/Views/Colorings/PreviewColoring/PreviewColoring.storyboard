@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Preview Coloring Controller-->
+        <scene sceneID="XJ1-QA-Nrj">
+            <objects>
+                <viewController storyboardIdentifier="PreviewColoringController" modalPresentationStyle="fullScreen" id="zIc-eW-6fX" customClass="PreviewColoringController" customModule="Remove_Object" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z2g-4m-atm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_home" translatesAutoresizingMaskIntoConstraints="NO" id="M7f-UG-oas">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lcd-hc-5JA" customClass="TopBarView" customModule="Remove_Object" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="2Dd-RA-aPx"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                        <color key="value" name="ColorTextTopBar"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorView">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rk6-vj-VoK">
+                                <rect key="frame" x="123.5" y="299" width="128" height="89"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Qz-aK-2NW">
+                                <rect key="frame" x="50" y="627" width="275" height="10"/>
+                                <subviews>
+                                    <progressView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dEE-Cq-l2r">
+                                        <rect key="frame" x="0.0" y="0.0" width="275" height="10"/>
+                                        <color key="progressTintColor" name="ColorTextTopBar"/>
+                                        <color key="trackTintColor" red="0.76470588235294112" green="0.62745098039215685" blue="0.94509803921568625" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </progressView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="GA7-IP-JBM"/>
+                                    <constraint firstAttribute="trailing" secondItem="dEE-Cq-l2r" secondAttribute="trailing" id="ViC-nv-fVs"/>
+                                    <constraint firstItem="dEE-Cq-l2r" firstAttribute="leading" secondItem="1Qz-aK-2NW" secondAttribute="leading" id="dHb-4M-4r4"/>
+                                    <constraint firstItem="dEE-Cq-l2r" firstAttribute="top" secondItem="1Qz-aK-2NW" secondAttribute="top" id="n9N-si-bfK"/>
+                                    <constraint firstAttribute="bottom" secondItem="dEE-Cq-l2r" secondAttribute="bottom" id="qeg-Lu-zgW"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3pi-N7-nbV"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="M7f-UG-oas" secondAttribute="trailing" id="29t-7a-f3L"/>
+                            <constraint firstItem="1Qz-aK-2NW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rk6-vj-VoK" secondAttribute="bottom" constant="40" id="61O-Kw-0Rj"/>
+                            <constraint firstItem="1Qz-aK-2NW" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" constant="50" id="9n4-rv-FT7"/>
+                            <constraint firstItem="lcd-hc-5JA" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="Aya-mf-gtS"/>
+                            <constraint firstItem="M7f-UG-oas" firstAttribute="top" secondItem="Z2g-4m-atm" secondAttribute="top" id="FUb-9h-5Lk"/>
+                            <constraint firstItem="M7f-UG-oas" firstAttribute="leading" secondItem="Z2g-4m-atm" secondAttribute="leading" id="GXh-FO-Ufe"/>
+                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="lcd-hc-5JA" secondAttribute="trailing" id="LKI-kv-q2d"/>
+                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rk6-vj-VoK" secondAttribute="trailing" constant="40" id="N3B-xz-4qN"/>
+                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="1Qz-aK-2NW" secondAttribute="trailing" constant="50" id="VUF-Xr-IM4"/>
+                            <constraint firstItem="rk6-vj-VoK" firstAttribute="centerY" secondItem="3pi-N7-nbV" secondAttribute="centerY" id="ZvF-6y-Jwv"/>
+                            <constraint firstItem="lcd-hc-5JA" firstAttribute="top" secondItem="3pi-N7-nbV" secondAttribute="top" id="h02-Ku-rSf"/>
+                            <constraint firstItem="3pi-N7-nbV" firstAttribute="bottom" secondItem="1Qz-aK-2NW" secondAttribute="bottom" constant="30" id="hqZ-fe-xjl"/>
+                            <constraint firstAttribute="bottom" secondItem="M7f-UG-oas" secondAttribute="bottom" id="jaY-cJ-42u"/>
+                            <constraint firstItem="rk6-vj-VoK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="lcd-hc-5JA" secondAttribute="bottom" constant="40" id="sD1-GZ-NLK"/>
+                            <constraint firstItem="rk6-vj-VoK" firstAttribute="centerX" secondItem="3pi-N7-nbV" secondAttribute="centerX" id="tTW-a6-XQh"/>
+                            <constraint firstItem="rk6-vj-VoK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3pi-N7-nbV" secondAttribute="leading" constant="40" id="zss-SK-wzi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imgView" destination="rk6-vj-VoK" id="iuT-3a-JjH"/>
+                        <outlet property="progressView" destination="dEE-Cq-l2r" id="HpK-bu-QvE"/>
+                        <outlet property="topBarView" destination="lcd-hc-5JA" id="iLQ-Q9-bf7"/>
+                        <outlet property="viewLoading" destination="1Qz-aK-2NW" id="I2Q-pj-ZQg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rle-ol-2Ax" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="304.80000000000001" y="302.6986506746627"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="background_home" width="393" height="852"/>
+        <namedColor name="ColorTextTopBar">
+            <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

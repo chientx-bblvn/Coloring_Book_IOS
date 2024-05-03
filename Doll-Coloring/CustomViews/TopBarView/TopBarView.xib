@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Fredoka-Bold.ttf">
+            <string>Fredoka-Bold</string>
+        </array>
+        <array key="Rubik-SemiBold.ttf">
+            <string>Rubik-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TopBarView" customModule="Doll_Coloring" customModuleProvider="target">
+            <connections>
+                <outlet property="btnLeft" destination="Kua-HD-q5C" id="V7n-Vn-UIK"/>
+                <outlet property="btnRight" destination="Nfo-Jj-cPU" id="vMB-V8-CPr"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="cxR-XU-Xbh"/>
+                <outlet property="lbTitle" destination="4oh-aG-OPp" id="euV-lr-ZYz"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8AW-4J-7C8">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mdY-53-yPd">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kua-HD-q5C">
+                                    <rect key="frame" x="0.0" y="0.0" width="74" height="74"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="Kua-HD-q5C" secondAttribute="height" id="zfl-jQ-iNf"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Rubik-SemiBold" family="Rubik" pointSize="18"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="clickLeftButton:" destination="-1" eventType="touchUpInside" id="2zv-Zi-AV1"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nzf-7Q-yOS">
+                                    <rect key="frame" x="74" y="0.0" width="157" height="74"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oh-aG-OPp">
+                                            <rect key="frame" x="16" y="0.0" width="125" height="74"/>
+                                            <fontDescription key="fontDescription" name="Fredoka-Bold" family="Fredoka" pointSize="18"/>
+                                            <color key="textColor" name="TextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="4oh-aG-OPp" firstAttribute="top" secondItem="nzf-7Q-yOS" secondAttribute="top" id="4L2-Rr-XJe"/>
+                                        <constraint firstAttribute="trailing" secondItem="4oh-aG-OPp" secondAttribute="trailing" constant="16" id="6sA-ZH-WtM"/>
+                                        <constraint firstAttribute="bottom" secondItem="4oh-aG-OPp" secondAttribute="bottom" id="r05-sQ-RvK"/>
+                                        <constraint firstItem="4oh-aG-OPp" firstAttribute="leading" secondItem="nzf-7Q-yOS" secondAttribute="leading" constant="16" id="u88-IK-1Qy"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nfo-Jj-cPU">
+                                    <rect key="frame" x="231" y="0.0" width="144" height="74"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="Nfo-Jj-cPU" secondAttribute="height" id="zp9-9b-37a"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Rubik-SemiBold" family="Rubik" pointSize="14"/>
+                                    <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
+                                    <state key="normal">
+                                        <color key="titleColor" name="ColorBGInput"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="clickRightButton:" destination="-1" eventType="touchUpInside" id="ymV-GG-GSP"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="mdY-53-yPd" secondAttribute="bottom" id="NgW-7i-rTa"/>
+                        <constraint firstItem="mdY-53-yPd" firstAttribute="leading" secondItem="8AW-4J-7C8" secondAttribute="leading" id="kmS-Ls-naZ"/>
+                        <constraint firstItem="mdY-53-yPd" firstAttribute="top" secondItem="8AW-4J-7C8" secondAttribute="top" id="sRP-Kh-iXg"/>
+                        <constraint firstAttribute="trailing" secondItem="mdY-53-yPd" secondAttribute="trailing" id="wUA-OQ-iTX"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="8AW-4J-7C8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="LYH-tu-Bsk"/>
+                <constraint firstAttribute="bottom" secondItem="8AW-4J-7C8" secondAttribute="bottom" id="Xv7-DL-Kx0"/>
+                <constraint firstAttribute="trailing" secondItem="8AW-4J-7C8" secondAttribute="trailing" id="Zhz-kO-mrm"/>
+                <constraint firstItem="8AW-4J-7C8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="faP-2l-peN"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="131.15942028985509" y="372.32142857142856"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="ColorBGInput">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

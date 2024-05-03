@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PremiumFloatingView" customModule="Pet_Translator" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="uXa-Wf-VpH"/>
+                <outlet property="imageCloseView" destination="ASM-ZX-TOe" id="3Su-Zu-euC"/>
+                <outlet property="imageMainPremiumView" destination="H92-Ja-hpS" id="H9E-MJ-MtE"/>
+                <outlet property="leadingClose" destination="C8k-fn-Pux" id="Avf-4E-ncr"/>
+                <outlet property="lottieAnimateView" destination="k1L-VZ-mbB" id="uF1-3e-SAv"/>
+                <outlet property="trailingClose" destination="w4A-py-iJf" id="E5B-LL-cMq"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="107" height="108"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_close_floating" translatesAutoresizingMaskIntoConstraints="NO" id="ASM-ZX-TOe">
+                    <rect key="frame" x="79" y="4" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="eej-Y2-wRs"/>
+                        <constraint firstAttribute="width" secondItem="ASM-ZX-TOe" secondAttribute="height" id="lRZ-Fw-RGc"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="floating_premium" translatesAutoresizingMaskIntoConstraints="NO" id="H92-Ja-hpS">
+                    <rect key="frame" x="4" y="24" width="99" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="FZd-B1-Es1"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k1L-VZ-mbB" customClass="LottieAnimationView" customModule="Lottie">
+                    <rect key="frame" x="33.666666666666664" y="34" width="39.999999999999993" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="31J-Br-EHH"/>
+                        <constraint firstAttribute="width" secondItem="k1L-VZ-mbB" secondAttribute="height" id="sTD-hg-8TV"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="H92-Ja-hpS" secondAttribute="trailing" constant="4" id="6Ma-6f-X1J"/>
+                <constraint firstItem="ASM-ZX-TOe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="6dk-VK-qLx"/>
+                <constraint firstItem="ASM-ZX-TOe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="C8k-fn-Pux"/>
+                <constraint firstItem="k1L-VZ-mbB" firstAttribute="centerX" secondItem="H92-Ja-hpS" secondAttribute="centerX" id="FsJ-55-Xr4"/>
+                <constraint firstItem="k1L-VZ-mbB" firstAttribute="top" secondItem="H92-Ja-hpS" secondAttribute="top" constant="10" id="djD-lW-Ztp"/>
+                <constraint firstItem="H92-Ja-hpS" firstAttribute="top" secondItem="ASM-ZX-TOe" secondAttribute="bottom" constant="-4" id="o7q-kw-azI"/>
+                <constraint firstAttribute="bottom" secondItem="H92-Ja-hpS" secondAttribute="bottom" constant="4" id="w2y-2x-xKq"/>
+                <constraint firstAttribute="trailing" secondItem="ASM-ZX-TOe" secondAttribute="trailing" constant="4" id="w4A-py-iJf"/>
+                <constraint firstItem="H92-Ja-hpS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="xw8-oz-6HM"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="C8k-fn-Pux"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="-194.6564885496183" y="183.45070422535213"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="floating_premium" width="72" height="81"/>
+        <image name="icon_close_floating" width="32" height="32"/>
+    </resources>
+</document>

@@ -1,0 +1,97 @@
+/*
+ Localizable.strings
+ */
+
+// Common
+title_open_camera = "カメラを開く";
+message_open_camera = "写真を撮るためにカメラを開く";
+title_open_library = "ライブラリを開く";
+message_open_libary = "ライブラリを開いて写真を選択する";
+
+Common.OK                                       =       "OK";
+Common.Cancel                                   =       "キャンセル";
+Common.Done                                     =       "完了";
+Common.Complete                                 =       "完了";
+Common.Next                                     =       "次へ";
+Common.Start                                    =       "開始";
+Common.Confirm                                  =       "確認";
+Common.Button.Agree                             =       "同意する";
+Common.Button.Disagree                          =       "同意しない";
+Common.PhotoPicker.Gallery                      =       "ライブラリから選択";
+Common.PhotoPicker.Camera                       =       "写真を撮る";
+Common.Home                                     =       "ホーム";
+Common.StartColoring                            =       "塗り絵を開始";
+Common.Collections                              =       "コレクション";
+Common.Settings                                 =       "設定";
+Common.History                                  =       "履歴";
+Common.CreateNew                                =       "新規作成";
+Common.Music                                    =       "音楽";
+Common.Sound                                    =       "サウンド";
+Common.RateApp                                  =       "アプリを評価";
+Common.Save                                     =       "保存";
+Common.Delete                                   =       "削除";
+Common.Language                                 =       "言語";
+Common.EmptyCollections                         =       "まだ画像がありません！";
+Content_delete_collection                       =       "色が削除されます。\n削除をクリックして続行してください。";
+Common.Continue = "続ける";
+
+// Splash
+Splash.Copyright                                =       "®Binary Bridge Labs";
+
+// Intro
+Intro.introTitlePage1                           =       "美しいドールスタイルのグラフィック";
+Intro.introContentPage1                         =       "すべての年齢に適したユニークなドールスタイルのグラフィック！";
+Intro.introTitlePage2                           =       "豊富なカラーパレット";
+Intro.introContentPage2                         =       "20以上の豊富なカラーパレット、グラデーションカラー";
+Intro.introTitlePage3                           =       "保存または共有";
+Intro.introContentPage3                         =       "お気に入りの絵を簡単にすべてのソーシャルメディアに共有または共有";
+
+// Language
+Language.Title                                  =       "言語を変更";
+Language.SubTitle                               =       "あなたの言語を選択してください";
+Language.PlaceholderSearch                      =       "入力：国名|コード|ダイヤルコード";
+
+Language.english                                =       "アメリカ合衆国";
+Language.hindi                                  =       "ヒンディー語";
+Language.spanish                                =       "スペイン語";
+Language.french                                 =       "フランス語";
+Language.portuguese                             =       "ポルトガル語";
+Language.brazil                                 =       "ブラジル";
+Language.japanese                               =       "日本語";
+Language.korean                                 =       "韓国語";
+Language.vietnam                                =       "ベトナム語";
+Language.germany                                =       "ドイツ語";
+Language.rusia                                  =       "ロシア語";
+
+
+// IAP
+IAP.week                                        =       "週";
+IAP.year                                        =       "年";
+IAP.weekly                                      =       "週間アクセス";
+IAP.yearly                                      =       "年間アクセス";
+
+// ForceUpdate
+ForceUpdate.Title                               =       "新しいバージョンが利用可能です";
+ForceUpdate.Description                         =       "アプリを使用するには、最新バージョンをダウンロードする必要があります。";
+ForceUpdate.Button                              =       "アプリを更新する";
+
+
+// Table Color
+
+table.skin_color                                =       "肌の色";
+table.basic_color                               =       "基本色";
+table.vivid_color                               =       "鮮やかな色";
+table.hot_color                                 =       "ホットカラー";
+table.natural_color                             =       "自然な色";
+table.sky_color                                 =       "空の色";
+table.purple_color                              =       "紫の色";
+table.gradient_color                            =       "グラデーションカラー %d";
+table.galaxy_color                              =       "銀河の色";
+table.pastel_color                              =       "パステルカラー";
+table.sweet_color                               =       "甘い色";
+table.mystical_color                            =       "神秘的な色";
+
+subtite_delete = "色が削除されます。削除して続行します。";
+
+save_picture_success = "写真は写真に保存されました。";
+save_picture_fail = "写真は保存されませんでした。";

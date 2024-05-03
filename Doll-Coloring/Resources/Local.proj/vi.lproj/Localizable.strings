@@ -1,0 +1,95 @@
+/*
+ Localizable.strings
+ */
+
+// Common
+title_open_camera = "Mở camera";
+message_open_camera = "Mở camera để chụp ảnh";
+title_open_library = "Mở thư viện";
+message_open_libary = "Mở thư viện và chọn một bức ảnh";
+
+Common.OK = "OK";
+Common.Cancel = "Hủy";
+Common.Done = "Hoàn tất";
+Common.Complete = "Hoàn thành";
+Common.Next = "Tiếp";
+Common.Start = "Bắt đầu";
+Common.Confirm = "Xác nhận";
+Common.Button.Agree = "Đồng ý";
+Common.Button.Disagree = "Không đồng ý";
+Common.PhotoPicker.Gallery = "Chọn từ thư viện";
+Common.PhotoPicker.Camera = "Chụp ảnh";
+Common.Home = "Trang chủ";
+Common.StartColoring = "Bắt đầu tô màu";
+Common.Collections = "Bộ sưu tập";
+Common.Settings = "Cài đặt";
+Common.History = "Lịch sử";
+Common.CreateNew = "Tạo mới";
+Common.Music = "Âm nhạc";
+Common.Sound = "Âm thanh";
+Common.RateApp = "Đánh giá ứng dụng";
+Common.Save = "Lưu";
+Common.Delete = "Xóa";
+Common.Language = "Ngôn ngữ";
+Common.EmptyCollections = "Chưa có hình ảnh nào!";
+Content_delete_collection = "Màu sẽ bị xóa \n Nhấn Xóa để tiếp tục.";
+Common.Continue = "Tiếp tục";
+
+// Splash
+Splash.Copyright = "®Bản quyền thuộc Binary Bridge Labs 2024";
+
+// Intro
+Intro.introTitlePage1 = "Đồ họa phong cách búp bê đẹp";
+Intro.introContentPage1 = "Đồ họa phong cách búp bê độc đáo phù hợp với mọi độ tuổi!";
+Intro.introTitlePage2 = "Bảng màu phong phú";
+Intro.introContentPage2 = "Hơn 20 bảng màu phong phú, màu chuyển động";
+Intro.introTitlePage3 = "Lưu hoặc Chia sẻ";
+Intro.introContentPage3 = "Dễ dàng chia sẻ hoặc chia sẻ hình vẽ yêu thích của bạn lên tất cả các phương tiện truyền thông xã hội";
+
+// Language
+Language.Title = "Thay đổi ngôn ngữ";
+Language.SubTitle = "Chọn ngôn ngữ của bạn";
+Language.PlaceholderSearch = "Nhập: tên quốc gia| mã| mã quốc gia";
+
+Language.english = "Hoa Kỳ";
+Language.hindi = "Hindi";
+Language.spanish = "Tiếng Tây Ban Nha";
+Language.french = "Tiếng Pháp";
+Language.portuguese = "Tiếng Bồ Đào Nha";
+Language.brazil = "Brazil";
+Language.japanese = "Tiếng Nhật";
+Language.korean = "Hàn Quốc";
+Language.vietnam = "Tiếng Việt";
+Language.germany = "Đức";
+Language.rusia = "Nga";
+
+// IAP
+IAP.week = "tuần";
+IAP.year = "năm";
+IAP.weekly = "TRUY CẬP HÀNG TUẦN";
+IAP.yearly = "TRUY CẬP HÀNG NĂM";
+
+// ForceUpdate
+ForceUpdate.Title = "Có phiên bản mới";
+ForceUpdate.Description = "Để sử dụng ứng dụng, bạn phải tải xuống phiên bản mới nhất.";
+ForceUpdate.Button = "Cập nhật ứng dụng";
+
+// Table Color
+
+table.skin_color = "Màu da";
+table.basic_color = "Màu cơ bản";
+table.vivid_color = "Màu sắc rực rỡ";
+table.hot_color = "Màu nóng";
+table.natural_color = "Màu tự nhiên";
+table.sky_color = "Màu trời";
+table.purple_color = "Màu tím";
+table.gradient_color = "Màu chuyển động %d";
+table.galaxy_color = "Màu thiên hà";
+table.pastel_color = "Màu pastel";
+table.sweet_color = "Màu ngọt ngào";
+table.mystical_color = "Màu huyền bí";
+
+subtite_delete = "Màu sẽ bị xóa. Nhấn vào xóa để tiếp tục.";
+
+save_picture_success = "Bức ảnh của bạn đã được lưu vào ảnh của bạn.";
+save_picture_fail = "Bức ảnh của bạn không được lưu vào ảnh của bạn.";

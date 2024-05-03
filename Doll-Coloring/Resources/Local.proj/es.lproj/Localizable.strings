@@ -1,0 +1,97 @@
+/*
+ Localizable.strings
+ */
+
+// Common
+title_open_camera = "Abrir cámara";
+message_open_camera = "Abrir la cámara para tomar una foto";
+title_open_library = "Abrir biblioteca";
+message_open_libary = "Abrir la biblioteca y seleccionar una foto";
+
+Common.OK                                       =       "Aceptar";
+Common.Cancel                                   =       "Cancelar";
+Common.Done                                     =       "Hecho";
+Common.Complete                                 =       "Completar";
+Common.Next                                     =       "Siguiente";
+Common.Start                                    =       "Iniciar";
+Common.Confirm                                  =       "Confirmar";
+Common.Button.Agree                             =       "Aceptar";
+Common.Button.Disagree                          =       "Rechazar";
+Common.PhotoPicker.Gallery                      =       "Seleccionar de la biblioteca";
+Common.PhotoPicker.Camera                       =       "Tomar foto";
+Common.Home                                     =       "Inicio";
+Common.StartColoring                            =       "Comenzar a colorear";
+Common.Collections                              =       "Colecciones";
+Common.Settings                                 =       "Configuración";
+Common.History                                  =       "Historial";
+Common.CreateNew                                =       "Crear nuevo";
+Common.Music                                    =       "Música";
+Common.Sound                                    =       "Sonido";
+Common.RateApp                                  =       "Calificar aplicación";
+Common.Save                                     =       "Guardar";
+Common.Delete                                   =       "Eliminar";
+Common.Language                                 =       "Idioma";
+Common.EmptyCollections                         =       "¡Aún no hay imágenes!";
+Content_delete_collection                       =       "El color será eliminado \n Haga clic en Eliminar para continuar.";
+Common.Continue = "Continuar";
+
+// Splash
+Splash.Copyright                                =       "®Derechos de autor por Binary Bridge Labs";
+
+// Intro
+Intro.introTitlePage1                           =       "Gráficos hermosos de estilo de muñeca";
+Intro.introContentPage1                         =       "¡Gráficos únicos de estilo de muñeca adecuados para todas las edades!";
+Intro.introTitlePage2                           =       "Paletas de colores ricos";
+Intro.introContentPage2                         =       "Más de 20 paletas de colores ricos, colores degradados";
+Intro.introTitlePage3                           =       "Guardar o compartir";
+Intro.introContentPage3                         =       "Comparte o guarda fácilmente tu pintura favorita en todas las redes sociales";
+
+// Language
+Language.Title                                  =       "Cambiar idioma";
+Language.SubTitle                               =       "Seleccione su idioma";
+Language.PlaceholderSearch                      =       "Ingrese: nombre del país|código|código de marcado";
+
+Language.english                                =       "Estados Unidos";
+Language.hindi                                  =       "Hindi";
+Language.spanish                                =       "Español";
+Language.french                                 =       "Francés";
+Language.portuguese                             =       "Portugués";
+Language.brazil                                 =       "Portugués de Brasil";
+Language.japanese                               =       "Japonés";
+Language.korean                                 =       "Coreano";
+Language.vietnam                                =       "Vietnamita";
+Language.germany                                =       "Alemán";
+Language.rusia                                  =       "Ruso";
+
+
+// IAP
+IAP.week                                        =       "semana";
+IAP.year                                        =       "año";
+IAP.weekly                                      =       "Acceso semanal";
+IAP.yearly                                      =       "Acceso anual";
+
+// ForceUpdate
+ForceUpdate.Title                               =       "Nueva versión disponible";
+ForceUpdate.Description                         =       "Para usar la aplicación, debe descargar la última versión.";
+ForceUpdate.Button                              =       "Actualizar aplicación";
+
+
+// Table Color
+
+table.skin_color                                =       "Color de piel";
+table.basic_color                               =       "Color básico";
+table.vivid_color                               =       "Color vivo";
+table.hot_color                                 =       "Color caliente";
+table.natural_color                             =       "Color natural";
+table.sky_color                                 =       "Color del cielo";
+table.purple_color                              =       "Color morado";
+table.gradient_color                            =       "Color degradado %d";
+table.galaxy_color                              =       "Color de la galaxia";
+table.pastel_color                              =       "Color pastel";
+table.sweet_color                               =       "Color dulce";
+table.mystical_color                            =       "Color místico";
+
+subtite_delete = "El color será eliminado. Haga clic en eliminar para continuar.";
+
+save_picture_success = "Su imagen ha sido guardada en tus fotos.";
+save_picture_fail = "Tu imagen no ha sido guardada en tus fotos.";

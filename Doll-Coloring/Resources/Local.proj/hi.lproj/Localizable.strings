@@ -1,0 +1,95 @@
+/*
+ Localizable.strings
+ */
+
+// Common
+title_open_camera = "कैमरा खोलें";
+message_open_camera = "फोटो लेने के लिए कैमरा खोलें";
+title_open_library = "लाइब्रेरी खोलें";
+message_open_libary = "लाइब्रेरी खोलें और एक फोटो का चयन करें";
+
+Common.OK = "ठीक";
+Common.Cancel = "रद्द करें";
+Common.Done = "संपन्न";
+Common.Complete = "पूरा करें";
+Common.Next = "आगे";
+Common.Start = "शुरू";
+Common.Confirm = "पुष्टि करें";
+Common.Button.Agree = "सहमत";
+Common.Button.Disagree = "असहमत";
+Common.PhotoPicker.Gallery = "लाइब्रेरी से चुनें";
+Common.PhotoPicker.Camera = "फोटो लें";
+Common.Home = "होम";
+Common.StartColoring = "रंग भरना शुरू करें";
+Common.Collections = "संग्रह";
+Common.Settings = "सेटिंग्स";
+Common.History = "इतिहास";
+Common.CreateNew = "नया बनाएं";
+Common.Music = "संगीत";
+Common.Sound = "ध्वनि";
+Common.RateApp = "ऐप को रेट करें";
+Common.Save = "सहेजें";
+Common.Delete = "हटाएं";
+Common.Language = "भाषा";
+Common.EmptyCollections = "अब तक कोई तस्वीरें नहीं!";
+Content_delete_collection = "रंग हटा दिया जाएगा। \n जारी रखने के लिए हटाएं पर क्लिक करें।";
+Common.Continue = "जारी रखें";
+
+// Splash
+Splash.Copyright = "®कॉपीराइट बाइ बाइनरी ब्रिज लैब्स 2024";
+
+// Intro
+Intro.introTitlePage1 = "सुंदर गुड़िया-शैली ग्राफिक्स";
+Intro.introContentPage1 = "सभी आयु के लिए उपयुक्त अद्वितीय गुड़िया-शैली ग्राफिक्स!";
+Intro.introTitlePage2 = "धनी-रंगीन पैलेट";
+Intro.introContentPage2 = "20 से अधिक धनी-रंगीन पैलेट, ढाल रंग";
+Intro.introTitlePage3 = "सहेजें या साझा करें";
+Intro.introContentPage3 = "अपनी पसंदीदा पेंट को आसानी से साझा करें या सभी सोशल मीडिया पर साझा करें";
+
+// Language
+Language.Title = "भाषा बदलें";
+Language.SubTitle = "अपनी भाषा का चयन करें";
+Language.PlaceholderSearch = "दर्ज करें: देश का नाम|कोड|डायल कोड";
+
+Language.english = "संयुक्त राज्य अमेरिका";
+Language.hindi = "हिंदी";
+Language.spanish = "इस्पानियोल";
+Language.french = "फ्रेंच";
+Language.portuguese = "पुर्तगाली";
+Language.brazil = "ब्राज़ील";
+Language.japanese = "जापानी";
+Language.korean = "कोरियाई";
+Language.vietnam = "वियतनामी";
+Language.germany = "जर्मन";
+Language.rusia = "रूसी";
+
+// IAP
+IAP.week = "सप्ताह";
+IAP.year = "साल";
+IAP.weekly = "साप्ताहिक पहुंच";
+IAP.yearly = "सालाना पहुंच";
+
+// ForceUpdate
+ForceUpdate.Title = "नई संस्करण उपलब्ध है";
+ForceUpdate.Description = "ऐप का उपयोग करने के लिए, आपको नवीनतम संस्करण डाउनलोड करना होगा।";
+ForceUpdate.Button = "ऐप को अपडेट करें";
+
+// Table Color
+
+table.skin_color = "त्वचा का रंग";
+table.basic_color = "मूल रंग";
+table.vivid_color = "चमकीला रंग";
+table.hot_color = "गरम रंग";
+table.natural_color = "प्राकृतिक रंग";
+table.sky_color = "आकाश का रंग";
+table.purple_color = "बैंगनी रंग";
+table.gradient_color = "ढाल रंग %d";
+table.galaxy_color = "गैलेक्सी का रंग";
+table.pastel_color = "पास्टेल रंग";
+table.sweet_color = "मिठाई का रंग";
+table.mystical_color = "रहस्यमय रंग";
+
+subtite_delete = "रंग हटा दिया जाएगा क्लिक करें जारी रखने के लिए।";
+
+save_picture_success = "आपकी तस्वीर आपके फोटो में सहेजी गई है।";
+save_picture_fail = "आपकी तस्वीर आपके फोटो में सहेजी नहीं गई है।";

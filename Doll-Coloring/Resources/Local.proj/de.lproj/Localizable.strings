@@ -1,0 +1,95 @@
+/*
+ Localizable.strings
+ */
+
+// Common
+title_open_camera = "Kamera öffnen";
+message_open_camera = "Öffnen Sie die Kamera, um ein Foto aufzunehmen";
+title_open_library = "Bibliothek öffnen";
+message_open_libary = "Öffnen Sie die Bibliothek und wählen Sie ein Foto aus";
+
+Common.OK = "OK";
+Common.Cancel = "Abbrechen";
+Common.Done = "Fertig";
+Common.Complete = "Abschließen";
+Common.Next = "Weiter";
+Common.Start = "Start";
+Common.Confirm = "Bestätigen";
+Common.Button.Agree = "Zustimmen";
+Common.Button.Disagree = "Nicht zustimmen";
+Common.PhotoPicker.Gallery = "Aus Bibliothek auswählen";
+Common.PhotoPicker.Camera = "Foto aufnehmen";
+Common.Home = "Startseite";
+Common.StartColoring = "Ausmalen starten";
+Common.Collections = "Sammlungen";
+Common.Settings = "Einstellungen";
+Common.History = "Verlauf";
+Common.CreateNew = "Neu erstellen";
+Common.Music = "Musik";
+Common.Sound = "Ton";
+Common.RateApp = "App bewerten";
+Common.Save = "Speichern";
+Common.Delete = "Löschen";
+Common.Language = "Sprache";
+Common.EmptyCollections = "Keine Bilder vorhanden!";
+Content_delete_collection = "Die Farbe wird gelöscht \n Klicken Sie auf Löschen, um fortzufahren.";
+Common.Continue = "Weitermachen";
+
+// Splash
+Splash.Copyright = "®Urheberrecht von Binary Bridge Labs 2024";
+
+// Intro
+Intro.introTitlePage1 = "Schöne Puppenstil-Grafiken";
+Intro.introContentPage1 = "Einzigartige Puppenstil-Grafiken, geeignet für alle Altersgruppen!";
+Intro.introTitlePage2 = "Reichhaltige Farbpaletten";
+Intro.introContentPage2 = "Über 20 reichhaltige Farbpaletten, Farbverläufe";
+Intro.introTitlePage3 = "Speichern oder Teilen";
+Intro.introContentPage3 = "Speichern oder teilen Sie Ihre Lieblingsmalerei ganz einfach in allen sozialen Medien";
+
+// Language
+Language.Title = "Sprache ändern";
+Language.SubTitle = "Wählen Sie Ihre Sprache aus";
+Language.PlaceholderSearch = "Eingeben: Ländername|Code|Vorwahl";
+
+Language.english = "Vereinigte Staaten";
+Language.hindi = "Hindi";
+Language.spanish = "Spanisch";
+Language.french = "Französisch";
+Language.portuguese = "Portugiesisch";
+Language.brazil = "Brasilianisch";
+Language.japanese = "Japanisch";
+Language.korean = "Koreanisch";
+Language.vietnam = "Vietnamesisch";
+Language.germany = "Deutsch";
+Language.rusia = "Russisch";
+
+// IAP
+IAP.week = "Woche";
+IAP.year = "Jahr";
+IAP.weekly = "WÖCHENTLICHER ZUGANG";
+IAP.yearly = "JÄHRLICHER ZUGANG";
+
+// ForceUpdate
+ForceUpdate.Title = "Neue Version verfügbar";
+ForceUpdate.Description = "Um die App zu nutzen, müssen Sie die neueste Version herunterladen.";
+ForceUpdate.Button = "App aktualisieren";
+
+// Table Color
+
+table.skin_color = "Hautfarbe";
+table.basic_color = "Grundfarbe";
+table.vivid_color = "Lebhafte Farbe";
+table.hot_color = "Heiße Farbe";
+table.natural_color = "Naturfarbe";
+table.sky_color = "Himmelsfarbe";
+table.purple_color = "Lila Farbe";
+table.gradient_color = "Farbverlauf %d";
+table.galaxy_color = "Galaxiefarbe";
+table.pastel_color = "Pastellfarbe";
+table.sweet_color = "Süße Farbe";
+table.mystical_color = "Mystische Farbe";
+
+subtite_delete = "Die Farbe wird gelöscht. Klicken Sie zum Fortfahren auf Löschen.";
+
+save_picture_success = "Ihr Bild wurde in Ihren Fotos gespeichert.";
+save_picture_fail = "Ihr Bild wurde nicht in Ihren Fotos gespeichert.";

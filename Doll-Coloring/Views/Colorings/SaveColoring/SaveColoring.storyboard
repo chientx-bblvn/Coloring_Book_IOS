@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Save Coloring Controller-->
+        <scene sceneID="XJ1-QA-Nrj">
+            <objects>
+                <viewController storyboardIdentifier="SaveColoringController" id="zIc-eW-6fX" customClass="SaveColoringController" customModule="Doll_Coloring" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z2g-4m-atm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundSave" translatesAutoresizingMaskIntoConstraints="NO" id="z7U-bH-z1u">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dqO-CB-yH9">
+                                <rect key="frame" x="0.0" y="20" width="414" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PcJ-M3-geh">
+                                        <rect key="frame" x="10" y="9" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="Pzx-L3-g5B"/>
+                                            <constraint firstAttribute="width" constant="32" id="geY-Rb-Ehs"/>
+                                        </constraints>
+                                        <color key="tintColor" name="ColorTextTopBar"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="ic_share"/>
+                                        <connections>
+                                            <action selector="actionShare:" destination="zIc-eW-6fX" eventType="touchUpInside" id="hJO-d7-EJt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PI0-lv-70a">
+                                        <rect key="frame" x="372" y="9" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="LeJ-ZN-8fB"/>
+                                            <constraint firstAttribute="height" constant="32" id="jcJ-EY-dck"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="ic_dismiss"/>
+                                        <connections>
+                                            <action selector="actionDismis:" destination="zIc-eW-6fX" eventType="touchUpInside" id="yBQ-7I-JIo"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="PI0-lv-70a" secondAttribute="trailing" constant="10" id="1Lu-4E-fea"/>
+                                    <constraint firstItem="PcJ-M3-geh" firstAttribute="leading" secondItem="dqO-CB-yH9" secondAttribute="leading" constant="10" id="4T4-ta-fCv"/>
+                                    <constraint firstItem="PI0-lv-70a" firstAttribute="centerY" secondItem="dqO-CB-yH9" secondAttribute="centerY" id="A2H-Q1-Nr1"/>
+                                    <constraint firstAttribute="height" constant="50" id="kY5-td-gYR"/>
+                                    <constraint firstItem="PcJ-M3-geh" firstAttribute="centerY" secondItem="dqO-CB-yH9" secondAttribute="centerY" id="m5Y-mE-77Q"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LPr-oA-MIX">
+                                <rect key="frame" x="66" y="94" width="282" height="298"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" name="ColorTitle"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="mVl-LC-kVe">
+                                <rect key="frame" x="16" y="432" width="382" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJH-3t-CFA">
+                                        <rect key="frame" x="0.0" y="0.0" width="102" height="44"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                                        <state key="normal" title="Delete" image="ic_delete_photo" backgroundImage="color_bling3_pastel12"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="actionDelete:" destination="zIc-eW-6fX" eventType="touchUpInside" id="GfM-Su-4Ey"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6DJ-1e-DU3">
+                                        <rect key="frame" x="118" y="0.0" width="102.33333333333331" height="44"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                                        <state key="normal" title="Save" image="ic_save_photo" backgroundImage="color_bling3_pastel12">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="actionSave:" destination="zIc-eW-6fX" eventType="touchUpInside" id="6Ie-fD-gXh"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICc-d7-Igo">
+                                        <rect key="frame" x="236.33333333333337" y="0.0" width="145.66666666666663" height="44"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                                        <state key="normal" title="Collections" image="ic_collection_photo" backgroundImage="color_bling3_pastel12"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="actionCollection:" destination="zIc-eW-6fX" eventType="touchUpInside" id="adB-hL-iUw"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="6DJ-1e-DU3" firstAttribute="width" secondItem="ICc-d7-Igo" secondAttribute="width" multiplier="0.7" id="5hV-6N-mmG"/>
+                                    <constraint firstAttribute="height" constant="44" id="V89-EA-ttP"/>
+                                    <constraint firstItem="dJH-3t-CFA" firstAttribute="width" secondItem="6DJ-1e-DU3" secondAttribute="width" id="sXg-nt-zE7"/>
+                                </constraints>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8L-la-ezy">
+                                <rect key="frame" x="0.0" y="486" width="414" height="250"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="a8t-kT-Owy"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3pi-N7-nbV"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="z7U-bH-z1u" firstAttribute="leading" secondItem="Z2g-4m-atm" secondAttribute="leading" id="1Ai-gu-JCT"/>
+                            <constraint firstItem="mVl-LC-kVe" firstAttribute="top" secondItem="LPr-oA-MIX" secondAttribute="bottom" constant="40" id="6UT-kE-gQu"/>
+                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="dqO-CB-yH9" secondAttribute="trailing" id="DJF-Dr-kuR"/>
+                            <constraint firstItem="LPr-oA-MIX" firstAttribute="top" secondItem="dqO-CB-yH9" secondAttribute="bottom" constant="24" id="Ff7-Qf-MIU"/>
+                            <constraint firstItem="mVl-LC-kVe" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" constant="16" id="K7X-71-qn5"/>
+                            <constraint firstItem="f8L-la-ezy" firstAttribute="top" secondItem="mVl-LC-kVe" secondAttribute="bottom" constant="10" id="LMc-jR-MuR"/>
+                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="f8L-la-ezy" secondAttribute="trailing" id="Ra3-aA-Szr"/>
+                            <constraint firstItem="LPr-oA-MIX" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" constant="66" id="SLW-5c-jnm"/>
+                            <constraint firstAttribute="bottom" secondItem="f8L-la-ezy" secondAttribute="bottom" id="WX7-4A-6r9"/>
+                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="mVl-LC-kVe" secondAttribute="trailing" constant="16" id="Yjc-Fk-Hd1"/>
+                            <constraint firstAttribute="trailing" secondItem="z7U-bH-z1u" secondAttribute="trailing" id="a19-vR-wsd"/>
+                            <constraint firstItem="dqO-CB-yH9" firstAttribute="top" secondItem="3pi-N7-nbV" secondAttribute="top" id="er8-oI-1wj"/>
+                            <constraint firstItem="dqO-CB-yH9" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="jyT-fq-ixk"/>
+                            <constraint firstItem="z7U-bH-z1u" firstAttribute="top" secondItem="Z2g-4m-atm" secondAttribute="top" id="mtf-8Z-Cgp"/>
+                            <constraint firstItem="f8L-la-ezy" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="u1C-EN-73S"/>
+                            <constraint firstAttribute="bottom" secondItem="z7U-bH-z1u" secondAttribute="bottom" id="wLk-Xl-pwS"/>
+                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="LPr-oA-MIX" secondAttribute="trailing" constant="66" id="xGt-yD-s7m"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="PI0-lv-70a" id="eCJ-lZ-hSK"/>
+                        <outlet property="btnCollection" destination="ICc-d7-Igo" id="Z9k-Zi-npz"/>
+                        <outlet property="btnDelete" destination="dJH-3t-CFA" id="R5V-Sn-zyu"/>
+                        <outlet property="btnSave" destination="6DJ-1e-DU3" id="9Kb-QR-cOs"/>
+                        <outlet property="btnShare" destination="PcJ-M3-geh" id="6sd-Zj-Dv9"/>
+                        <outlet property="imgView" destination="LPr-oA-MIX" id="9bM-we-eB9"/>
+                        <outlet property="viewAds" destination="f8L-la-ezy" id="4em-Nf-RG7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rle-ol-2Ax" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="304.80000000000001" y="302.6986506746627"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="backgroundSave" width="392" height="852"/>
+        <image name="color_bling3_pastel12" width="215" height="215"/>
+        <image name="ic_collection_photo" width="24.333333969116211" height="24"/>
+        <image name="ic_delete_photo" width="24" height="24"/>
+        <image name="ic_dismiss" width="24" height="24"/>
+        <image name="ic_save_photo" width="24" height="24"/>
+        <image name="ic_share" width="32" height="32"/>
+        <namedColor name="ColorTextTopBar">
+            <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ColorTitle">
+            <color red="0.14509803921568629" green="0.0" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

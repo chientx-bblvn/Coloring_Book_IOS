@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="FillterColorCell" customModule="Remove_Object" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="220" height="242"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="220" height="242"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UqF-gg-MPb">
+                        <rect key="frame" x="0.0" y="0.0" width="220" height="242"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
+                                <real key="value" value="22"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" name="ColorTextTopBar"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="doc.on.doc.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="se7-VY-byI">
+                        <rect key="frame" x="7" y="5.6666666666666714" width="206" height="232"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="se7-VY-byI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="7" id="21g-c9-XCK"/>
+                <constraint firstAttribute="bottom" secondItem="UqF-gg-MPb" secondAttribute="bottom" id="32p-OZ-FNG"/>
+                <constraint firstAttribute="trailing" secondItem="se7-VY-byI" secondAttribute="trailing" constant="7" id="Jjv-a2-uzU"/>
+                <constraint firstItem="UqF-gg-MPb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ZZp-6w-Uoc"/>
+                <constraint firstAttribute="trailing" secondItem="UqF-gg-MPb" secondAttribute="trailing" id="eeU-Ma-glc"/>
+                <constraint firstItem="se7-VY-byI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="7" id="oHE-Gn-qlw"/>
+                <constraint firstItem="UqF-gg-MPb" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="van-8u-LBd"/>
+                <constraint firstAttribute="bottom" secondItem="se7-VY-byI" secondAttribute="bottom" constant="7" id="xZP-CB-5Du"/>
+            </constraints>
+            <size key="customSize" width="220" height="242"/>
+            <connections>
+                <outlet property="imageView" destination="se7-VY-byI" id="cx4-jp-kNA"/>
+                <outlet property="viewContent" destination="UqF-gg-MPb" id="gE3-7G-tUY"/>
+            </connections>
+            <point key="canvasLocation" x="97.70992366412213" y="56.338028169014088"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="doc.on.doc.fill" catalog="system" width="112" height="128"/>
+        <namedColor name="ColorTextTopBar">
+            <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="132" id="P2t-81-kbo" customClass="EmptyView" customModule="Pet_Translator" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="132"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P2t-81-kbo" id="sZ5-ee-h5X">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="132"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="2GQ-rQ-qqi">
+                        <rect key="frame" x="16" y="57.5" width="382" height="17"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No available data" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHH-g1-Gni">
+                                <rect key="frame" x="0.0" y="0.0" width="382" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" name="TextColorSecondary"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HnQ-1B-Gd8" customClass="ButtonView" customModule="Pet_Translator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="17" width="382" height="0.0"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="horizontalMode" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="heightButton">
+                                        <real key="value" value="42"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="PHH-g1-Gni" firstAttribute="leading" secondItem="2GQ-rQ-qqi" secondAttribute="leading" id="JUD-d1-n3i"/>
+                            <constraint firstAttribute="trailing" secondItem="PHH-g1-Gni" secondAttribute="trailing" id="STd-w0-MHB"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="2GQ-rQ-qqi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="sZ5-ee-h5X" secondAttribute="top" constant="12" id="1t2-al-tOx"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="2GQ-rQ-qqi" secondAttribute="bottom" constant="12" id="A4M-0U-iMX"/>
+                    <constraint firstItem="2GQ-rQ-qqi" firstAttribute="centerY" secondItem="sZ5-ee-h5X" secondAttribute="centerY" id="AH1-O5-k3p"/>
+                    <constraint firstItem="2GQ-rQ-qqi" firstAttribute="leading" secondItem="sZ5-ee-h5X" secondAttribute="leading" constant="16" id="fjG-Z2-4TT"/>
+                    <constraint firstAttribute="trailing" secondItem="2GQ-rQ-qqi" secondAttribute="trailing" constant="16" id="h74-au-k73"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="btnView" destination="HnQ-1B-Gd8" id="V33-AJ-5YI"/>
+                <outlet property="labelDescription" destination="PHH-g1-Gni" id="VDR-x6-xlz"/>
+            </connections>
+            <point key="canvasLocation" x="-355.07246376811599" y="135.26785714285714"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="TextColorSecondary">
+            <color red="0.41176470588235292" green="0.24705882352941178" blue="0.0" alpha="0.80000001192092896" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

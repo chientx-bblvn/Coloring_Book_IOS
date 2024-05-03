@@ -1,0 +1,9 @@
+/*
+ ErrorCode.strings
+ */
+
+PHOTO_PERMISSION_DENIED = "You do not have access to the photo";
+PHOTO_IS_LIMITED = "No photo selected. To add a photo, go to Settings.";
+ERR_NO_INTERNET = "Internal Server Error. Sorry, something went wrong.";
+default_title = "Error";
+default_error = "An error occurred. Please try again later!";

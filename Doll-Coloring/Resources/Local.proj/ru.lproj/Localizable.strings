@@ -1,0 +1,97 @@
+/*
+ Localizable.strings
+ */
+
+// Common
+title_open_camera = "Открыть камеру";
+message_open_camera = "Откройте камеру, чтобы сделать фотографию";
+title_open_library = "Открыть библиотеку";
+message_open_libary = "Открыть библиотеку и выбрать фотографию";
+
+Common.OK                                       =       "ОК";
+Common.Cancel                                   =       "Отмена";
+Common.Done                                     =       "Готово";
+Common.Complete                                 =       "Завершить";
+Common.Next                                     =       "Далее";
+Common.Start                                    =       "Начать";
+Common.Confirm                                  =       "Подтвердить";
+Common.Button.Agree                             =       "Согласен";
+Common.Button.Disagree                          =       "Не согласен";
+Common.PhotoPicker.Gallery                      =       "Выбрать из библиотеки";
+Common.PhotoPicker.Camera                       =       "Сделать фото";
+Common.Home                                     =       "Главная";
+Common.StartColoring                            =       "Начать раскрашивать";
+Common.Collections                              =       "Коллекции";
+Common.Settings                                 =       "Настройки";
+Common.History                                  =       "История";
+Common.CreateNew                                =       "Создать новый";
+Common.Music                                    =       "Музыка";
+Common.Sound                                    =       "Звук";
+Common.RateApp                                  =       "Оценить приложение";
+Common.Save                                     =       "Сохранить";
+Common.Delete                                   =       "Удалить";
+Common.Language                                 =       "Язык";
+Common.EmptyCollections                         =       "Пока нет изображений!";
+Content_delete_collection                       =       "Цвет будет удален \n Нажмите Удалить, чтобы продолжить.";
+Common.Continue = "Продолжить";
+
+// Splash
+Splash.Copyright                                =       "®Авторское право Binary Bridge Labs";
+
+// Intro
+Intro.introTitlePage1                           =       "Красивая графика в стиле куклы";
+Intro.introContentPage1                         =       "Уникальная графика в стиле куклы, подходящая для всех возрастов!";
+Intro.introTitlePage2                           =       "Богатые палитры цветов";
+Intro.introContentPage2                         =       "Более 20 богатых палитр цветов, градиентные цвета";
+Intro.introTitlePage3                           =       "Сохранить или поделиться";
+Intro.introContentPage3                         =       "Легко поделитесь или поделитесь своей любимой краской со всеми социальными медиа";
+
+// Language
+Language.Title                                  =       "Изменить язык";
+Language.SubTitle                               =       "Выберите ваш язык";
+Language.PlaceholderSearch                      =       "Введите: название страны|код|код набора";
+
+Language.english                                =       "Соединенные Штаты";
+Language.hindi                                  =       "Хинди";
+Language.spanish                                =       "Испанский";
+Language.french                                 =       "Французский";
+Language.portuguese                             =       "Португальский";
+Language.brazil                                 =       "Бразильский";
+Language.japanese                               =       "Японский";
+Language.korean                                 =       "Корейский";
+Language.vietnam                                =       "Вьетнамский";
+Language.germany                                =       "Немецкий";
+Language.rusia                                  =       "Русский";
+
+
+// IAP
+IAP.week                                        =       "неделя";
+IAP.year                                        =       "год";
+IAP.weekly                                      =       "ЕЖЕНЕДЕЛЬНЫЙ ДОСТУП";
+IAP.yearly                                      =       "ГОДОВОЙ ДОСТУП";
+
+// ForceUpdate
+ForceUpdate.Title                               =       "Доступна новая версия";
+ForceUpdate.Description                         =       "Чтобы использовать приложение, вы должны загрузить последнюю версию.";
+ForceUpdate.Button                              =       "Обновить приложение";
+
+
+// Table Color
+
+table.skin_color                                =       "Цвет кожи";
+table.basic_color                               =       "Основной цвет";
+table.vivid_color                               =       "Яркий цвет";
+table.hot_color                                 =       "Горячий цвет";
+table.natural_color                             =       "Натуральный цвет";
+table.sky_color                                 =       "Небесный цвет";
+table.purple_color                              =       "Фиолетовый цвет";
+table.gradient_color                            =       "Градиентный цвет %d";
+table.galaxy_color                              =       "Цвет галактики";
+table.pastel_color                              =       "Пастельный цвет";
+table.sweet_color                               =       "Сладкий цвет";
+table.mystical_color                            =       "Мистический цвет";
+
+subtite_delete = "Цвет будет удален. Нажмите удалить, чтобы продолжить.";
+
+save_picture_success = "Ваше изображение было сохранено в ваших фотографиях.";
+save_picture_fail = "Ваше изображение не было сохранено в ваших фотографиях.";

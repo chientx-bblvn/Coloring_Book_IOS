@@ -1,0 +1,181 @@
+//
+//  BuildEnv.swift
+// Doll-Coloring
+//
+//  Created by BBLabs on 10/04/2023.
+//  Copyright © 2024 BBLabs. All rights reserved.
+//
+
+import Foundation
+import AdmobSDK
+
+/**
+ * Check env config for base url request
+ */
+let apiBaseUrl: String = "https://ico.binarybridge.dev"
+
+let isDev = false
+
+enum IAPIdType: String, Decodable, CaseIterable, IAPType {
+    case weekly = "com.bblabs.rmvobj.weekly"
+    case yearly = "com.bblabs.rmvobj.yearly"
+    
+    var title: String {
+        switch self {
+        case .weekly:
+            return LocalizableUtils.iapWeekly()
+        case .yearly:
+            return LocalizableUtils.iapYearly()
+        }
+    }
+    
+    var numberDay: Int {
+        switch self {
+        case .weekly:
+            return 7
+        case .yearly:
+            return 365
+        }
+    }
+    
+    var unit: String {
+        switch self {
+        case .weekly:
+            return LocalizableUtils.iapWeek()
+        case .yearly:
+            return LocalizableUtils.iapYear()
+        }
+    }
+    
+    var id: String {
+        return rawValue
+    }
+    
+}
+
+extension IAPIdType {
+    
+    static func getOption() -> [IAPIdType] {
+        return getIdsOption().compactMap({
+            IAPIdType(rawValue: $0)
+        })
+    }
+}
+
+enum DollColoringAdID: String, CaseIterable, AdConfigId {
+    case inter_splash = "inter_splash"
+    case appopen_splash = "appopen_splash"
+    case native_language = "native_language"
+    case native_language_high = "native_language_high"
+    case native_onboarding_high = "native_onboarding_high"
+    case native_onboarding = "native_onboarding"
+    case native_home = "native_home"
+    case inter_alltopic = "inter_alltopic"
+    case reward_alltopic = "reward_alltopic"
+    case banner_coloring = "banner_coloring"
+    case inter_save = "inter_save"
+    case banner_collection = "banner_collection"
+    case appopen_resume = "appopen_resume"
+    case native_result = "native_result"
+    
+    var name: String { return self.rawValue }
+    
+    var adType: AdType {
+        switch self
+        {
+        case .inter_splash:
+            return .Interstitial
+        case .appopen_splash:
+            return .OpenApp
+        case .native_language:
+            return .Native
+        case .native_language_high:
+            return .Native
+        case .native_onboarding_high:
+            return .Native
+        case .native_onboarding:
+            return .Native
+        case .native_home:
+            return .Native
+        case .inter_alltopic:
+            return .Interstitial
+        case .reward_alltopic:
+            return .Reward
+        case .banner_coloring:
+            return .Banner
+        case .inter_save:
+            return .Interstitial
+        case .banner_collection:
+            return .Banner
+        case .appopen_resume:
+            return .OpenApp
+        case .native_result:
+            return .Native
+        }
+    }
+    
+    var adId: String {
+        switch self {
+        case .inter_splash:
+            return "ca-app-pub-3850749456614322/7931400606"
+        case .appopen_splash:
+            return "ca-app-pub-3850749456614322/8346333570"
+        case .native_language:
+            return "ca-app-pub-3850749456614322/2112097713"
+        case .native_language_high:
+            return "ca-app-pub-3850749456614322/3038166573"
+        case .native_onboarding_high:
+            return "ca-app-pub-3850749456614322/8098921560"
+        case .native_onboarding:
+            return "ca-app-pub-3850749456614322/9420075238"
+        case .native_home:
+            return "ca-app-pub-3850749456614322/1533513213"
+        case .inter_alltopic:
+            return "ca-app-pub-3850749456614322/1334202669"
+        case .reward_alltopic:
+            return "ca-app-pub-3850749456614322/2663095192"
+        case .banner_coloring:
+            return "ca-app-pub-3850749456614322/4878711910"
+        case .inter_save:
+            return "ca-app-pub-3850749456614322/8973019537"
+        case .banner_collection:
+            return "ca-app-pub-3850749456614322/7392677691"
+        case .appopen_resume:
+            return "ca-app-pub-3850749456614322/5033774529"
+        case .native_result:
+            return "ca-app-pub-3850749456614322/2299115185"
+        }
+    }
+    
+}
+enum RMBGEventTracking: String, EventTracking {
+    // Splash
+    case splashScr = "splash_scr"
+    
+    // Language
+    case languageScr = "language_scr"
+    
+    // Onboarding
+    case scrOnboard1 = "scr_onboard_1"
+    case scrOnboard2 = "scr_onboard_2"
+    case scrOnboard3 = "scr_onboard_3"
+    
+    // IAP
+    case iapScreenViewed = "iap_screen_viewed"
+    case iapScreenContinueClicked = "iap_screen_continue_clicked"
+    case iapScreenTrialClicked = "iap_screen_trial_clicked"
+    case iapScreenPurchase_made = "iap_screen_purchase_made"
+    
+    // Notify
+    case notiSent = "noti_sent"
+    case notiClick = "noti_click"
+    
+    var key: String { return rawValue }
+    
+}
+
+enum KeyRemoteConfig: String, KeyRemote {
+    case NumberClickItemAllTopic = "number_click_item_all_topic"
+    
+    var key: String {return self.rawValue}
+}

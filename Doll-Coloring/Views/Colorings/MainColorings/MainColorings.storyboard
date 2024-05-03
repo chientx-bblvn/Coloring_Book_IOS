@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main Colorings Controller-->
+        <scene sceneID="XJ1-QA-Nrj">
+            <objects>
+                <viewController storyboardIdentifier="MainColoringsController" id="zIc-eW-6fX" customClass="MainColoringsController" customModule="Remove_Object" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z2g-4m-atm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_home" translatesAutoresizingMaskIntoConstraints="NO" id="Tj5-uD-9et">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m1U-3V-jyZ" customClass="TopBarView" customModule="Remove_Object" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="3NW-x2-fmy"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                        <color key="value" name="ColorTextTopBar"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorView">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="ic_back"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="textAlignmentCenter" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="rightIcon" value="ic_setting"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Jhg-jf-FX5">
+                                <rect key="frame" x="63" y="76" width="249" height="1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="Ssl-4O-Ork"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                            </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tbW-Nq-JoI">
+                                <rect key="frame" x="0.0" y="84" width="375" height="533"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aku-Ty-ZUJ">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="s7E-sl-taD"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3pi-N7-nbV"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Aku-Ty-ZUJ" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="1DD-ng-SYn"/>
+                            <constraint firstItem="Jhg-jf-FX5" firstAttribute="top" secondItem="m1U-3V-jyZ" secondAttribute="bottom" id="5V7-t9-bvd"/>
+                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="m1U-3V-jyZ" secondAttribute="trailing" id="6xy-4P-jja"/>
+                            <constraint firstItem="Jhg-jf-FX5" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" constant="63" id="7DC-gf-9RN"/>
+                            <constraint firstAttribute="bottom" secondItem="Tj5-uD-9et" secondAttribute="bottom" id="7PN-sj-FxI"/>
+                            <constraint firstItem="Aku-Ty-ZUJ" firstAttribute="top" secondItem="tbW-Nq-JoI" secondAttribute="bottom" id="Cyx-PT-5Vv"/>
+                            <constraint firstItem="m1U-3V-jyZ" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="Edc-xW-gwZ"/>
+                            <constraint firstItem="tbW-Nq-JoI" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="Ehz-Gn-1Ya"/>
+                            <constraint firstAttribute="bottom" secondItem="Aku-Ty-ZUJ" secondAttribute="bottom" id="Ibp-d9-Ybg"/>
+                            <constraint firstItem="Tj5-uD-9et" firstAttribute="top" secondItem="Z2g-4m-atm" secondAttribute="top" id="LQY-ZE-fSk"/>
+                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="Jhg-jf-FX5" secondAttribute="trailing" constant="63" id="LrL-tU-9V1"/>
+                            <constraint firstItem="tbW-Nq-JoI" firstAttribute="top" secondItem="Jhg-jf-FX5" secondAttribute="bottom" constant="8" symbolic="YES" id="lPe-PR-r3A"/>
+                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="tbW-Nq-JoI" secondAttribute="trailing" id="nff-WQ-nvP"/>
+                            <constraint firstAttribute="trailing" secondItem="Tj5-uD-9et" secondAttribute="trailing" id="nwW-ft-glV"/>
+                            <constraint firstItem="Tj5-uD-9et" firstAttribute="leading" secondItem="Z2g-4m-atm" secondAttribute="leading" id="q6g-IW-QG0"/>
+                            <constraint firstAttribute="trailing" secondItem="Aku-Ty-ZUJ" secondAttribute="trailing" id="qJs-pO-N8L"/>
+                            <constraint firstItem="m1U-3V-jyZ" firstAttribute="top" secondItem="3pi-N7-nbV" secondAttribute="top" id="zot-uX-vf5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="heightAdsView" destination="s7E-sl-taD" id="Oqo-Lb-77T"/>
+                        <outlet property="segmentedView" destination="Jhg-jf-FX5" id="FGi-hl-C3h"/>
+                        <outlet property="topBarView" destination="m1U-3V-jyZ" id="bmQ-eJ-sdk"/>
+                        <outlet property="viewAds" destination="Aku-Ty-ZUJ" id="dtF-We-ONZ"/>
+                        <outlet property="viewContent" destination="tbW-Nq-JoI" id="xrx-RV-QZL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rle-ol-2Ax" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="fuz-Um-XVS">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+            </objects>
+            <point key="canvasLocation" x="304.80000000000001" y="302.6986506746627"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="background_home" width="393" height="852"/>
+        <image name="ic_back" width="32" height="32"/>
+        <image name="ic_setting" width="24" height="24"/>
+        <namedColor name="ColorTextTopBar">
+            <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

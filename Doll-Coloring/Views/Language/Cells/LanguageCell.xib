@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Rubik-SemiBold.ttf">
+            <string>Rubik-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FPNCountryView" customModule="Pet_Translator" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FPNCountryView" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="94" id="xH0-ku-jot" customClass="LanguageCell" customModule="Pet_Translator" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="471" height="94"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xH0-ku-jot" id="7Gk-Wr-zun">
+                <rect key="frame" x="0.0" y="0.0" width="471" height="94"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iDC-Wf-Osc">
+                        <rect key="frame" x="0.0" y="8" width="471" height="78"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VN" translatesAutoresizingMaskIntoConstraints="NO" id="KFd-mf-a6Z">
+                                <rect key="frame" x="12" y="23" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="KFd-mf-a6Z" secondAttribute="height" id="ADV-pC-eao"/>
+                                    <constraint firstAttribute="height" constant="32" id="zqv-E5-7kJ"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Unknown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dia-wo-OOX">
+                                <rect key="frame" x="61" y="28.5" width="74" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="nis-FU-EGz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rubik-SemiBold" family="Rubik" pointSize="16"/>
+                                <color key="textColor" name="TextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="ColorBGGray"/>
+                        <constraints>
+                            <constraint firstItem="dia-wo-OOX" firstAttribute="leading" secondItem="KFd-mf-a6Z" secondAttribute="trailing" constant="17" id="LIO-5w-KdT"/>
+                            <constraint firstItem="KFd-mf-a6Z" firstAttribute="leading" secondItem="iDC-Wf-Osc" secondAttribute="leading" constant="12" id="W8W-Q0-Cix"/>
+                            <constraint firstItem="dia-wo-OOX" firstAttribute="centerY" secondItem="iDC-Wf-Osc" secondAttribute="centerY" id="WVB-Mx-Gzz"/>
+                            <constraint firstItem="KFd-mf-a6Z" firstAttribute="centerY" secondItem="iDC-Wf-Osc" secondAttribute="centerY" id="m7t-hi-Cff"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                <real key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                <size key="value" width="0.0" height="2"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" name="color_shadow_button"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="iDC-Wf-Osc" secondAttribute="trailing" id="ACz-Hv-dIw"/>
+                    <constraint firstAttribute="bottom" secondItem="iDC-Wf-Osc" secondAttribute="bottom" constant="8" id="d42-37-szU"/>
+                    <constraint firstItem="iDC-Wf-Osc" firstAttribute="top" secondItem="7Gk-Wr-zun" secondAttribute="top" constant="8" id="hlN-Ev-6l7"/>
+                    <constraint firstItem="iDC-Wf-Osc" firstAttribute="leading" secondItem="7Gk-Wr-zun" secondAttribute="leading" id="lmm-Dh-EFO"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="imageViewFlag" destination="KFd-mf-a6Z" id="XgJ-yr-jAW"/>
+                <outlet property="lbName" destination="dia-wo-OOX" id="TPK-vz-hKt"/>
+                <outlet property="viewContainer" destination="iDC-Wf-Osc" id="NdF-dI-ctY"/>
+            </connections>
+            <point key="canvasLocation" x="66.400000000000006" y="144.82758620689657"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="VN" width="21" height="15"/>
+        <namedColor name="ColorBGGray">
+            <color red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextColor">
+            <color red="0.41176470588235292" green="0.24705882352941178" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color_shadow_button">
+            <color red="0.24300000071525574" green="0.52499997615814209" blue="0.98000001907348633" alpha="0.23999999463558197" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
