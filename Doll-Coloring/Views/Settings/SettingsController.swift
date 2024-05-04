@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import UIKit
+import StoreKit
 
 class SettingsController: BaseViewController {
     
@@ -103,7 +104,15 @@ class SettingsController: BaseViewController {
     }
     
     @objc func onclickViewRate() {
-        
+        rateApp()
+    }
+    
+    func rateApp() {
+        if #available(iOS 10.3, *) {
+            SKStoreReviewController.requestReview()
+        } else if let url = URL(string: "itms-apps://itunes.apple.com/app/" + "6502046149") {
+            UIApplication.shared.openURL(url)
+        }
     }
     
 }
