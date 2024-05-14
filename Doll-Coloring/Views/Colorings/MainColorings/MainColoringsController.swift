@@ -40,13 +40,6 @@ class MainColoringsController: BaseViewController {
         topBarView.onRightClick = {
             self.showSettingView()
         }
-        let archiveFiles = ArchiveFileLocal.allCases
-        
-        for file in archiveFiles {
-            if !FileManagerLocal.shared.checkFileExits(typeFile: file, fileName: "") {
-                FileManagerLocal.shared.createFolderManager(fileName: file.rawValue)
-            }
-        }
     }
     
     override func onLanguageChange() {

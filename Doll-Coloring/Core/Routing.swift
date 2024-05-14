@@ -100,7 +100,7 @@ public extension Router {
         switch transition {
         case .modal:
             viewController.modalPresentationStyle = .overFullScreen
-            currentViewController?.present(viewController, animated: animated, completion: completion)
+            getTopMostViewController()?.present(viewController, animated: animated, completion: completion)
             currentViewController = viewController
         case .push:
             if let navigation = navigation {
@@ -213,6 +213,16 @@ public extension Router {
         currentViewController?.dismiss(animated: animated, completion: completion)
 //        currentViewController = presentingViewController
         currentViewController = rootViewController?.topViewController
+    }
+    
+    func getTopMostViewController() -> UIViewController? {
+        var topMostViewController = UIApplication.shared.windows.last?.rootViewController
+
+        while let presentedViewController = topMostViewController?.presentedViewController {
+            topMostViewController = presentedViewController
+        }
+
+        return topMostViewController
     }
 }
 

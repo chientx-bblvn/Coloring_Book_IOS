@@ -16,6 +16,10 @@
 		080ACD8D2BC3EA2800E00E2C /* HomeRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACD862BC3EA2800E00E2C /* HomeRoute.swift */; };
 		080ACD8E2BC3EA2800E00E2C /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACD872BC3EA2800E00E2C /* HomeService.swift */; };
 		080ACD8F2BC3EA2800E00E2C /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACD882BC3EA2800E00E2C /* HomeVM.swift */; };
+		080CB5812BEBDFEE0036A471 /* animation_progess.json in Resources */ = {isa = PBXBuildFile; fileRef = 080CB5802BEBDFEE0036A471 /* animation_progess.json */; };
+		080CB5852BECBD9C0036A471 /* animation_loading_preview.json in Resources */ = {isa = PBXBuildFile; fileRef = 080CB5842BECBD9B0036A471 /* animation_loading_preview.json */; };
+		080CB5872BECD1B20036A471 /* Vibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CB5862BECD1B20036A471 /* Vibration.swift */; };
+		080CB5892BECD6540036A471 /* animation_coloring.json in Resources */ = {isa = PBXBuildFile; fileRef = 080CB5882BECD6540036A471 /* animation_coloring.json */; };
 		083CA39F2BC67287006033EE /* DeleteColoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083CA39C2BC67287006033EE /* DeleteColoringViewController.swift */; };
 		083CA3A72BC672C5006033EE /* Collections.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083CA3A02BC672C5006033EE /* Collections.storyboard */; };
 		083CA3A82BC672C5006033EE /* CollectionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083CA3A12BC672C5006033EE /* CollectionsController.swift */; };
@@ -67,12 +71,6 @@
 		0847C9E42BD162780007FC00 /* ColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0847C9E22BD162780007FC00 /* ColorCell.xib */; };
 		084A8B262BC4DC7600C8D045 /* animation_splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 084A8B252BC4DC7600C8D045 /* animation_splash.json */; };
 		0852B0D52BD63DB400F95856 /* animationView_StartColoring.json in Resources */ = {isa = PBXBuildFile; fileRef = 0852B0D42BD63DB400F95856 /* animationView_StartColoring.json */; };
-		0852B0E02BD645BD00F95856 /* FillColoring.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0852B0D92BD645BC00F95856 /* FillColoring.storyboard */; };
-		0852B0E12BD645BD00F95856 /* FillColoringController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852B0DA2BD645BC00F95856 /* FillColoringController.swift */; };
-		0852B0E22BD645BD00F95856 /* FillColoringModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852B0DB2BD645BC00F95856 /* FillColoringModel.swift */; };
-		0852B0E32BD645BD00F95856 /* FillColoringRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852B0DC2BD645BC00F95856 /* FillColoringRoute.swift */; };
-		0852B0E42BD645BD00F95856 /* FillColoringService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852B0DD2BD645BC00F95856 /* FillColoringService.swift */; };
-		0852B0E52BD645BD00F95856 /* FillColoringVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852B0DE2BD645BC00F95856 /* FillColoringVM.swift */; };
 		0852B0EA2BD64D3100F95856 /* PaintImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852B0E72BD64D3000F95856 /* PaintImageView.swift */; };
 		0852B0EB2BD64D3100F95856 /* StackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852B0E82BD64D3000F95856 /* StackList.swift */; };
 		0857E4CF2BD0C941000ABB76 /* CategoryColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0857E4CE2BD0C941000ABB76 /* CategoryColorCell.xib */; };
@@ -84,6 +82,8 @@
 		085A06822BC69FD3002D5F1D /* ListThemeColoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085A06802BC69FD3002D5F1D /* ListThemeColoringViewController.swift */; };
 		085A06832BC69FD3002D5F1D /* ListThemeColoringViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085A06812BC69FD3002D5F1D /* ListThemeColoringViewController.xib */; };
 		085A06852BC6A7E0002D5F1D /* animation_collection.json in Resources */ = {isa = PBXBuildFile; fileRef = 085A06842BC6A7E0002D5F1D /* animation_collection.json */; };
+		088448AF2BEA053B00636C36 /* CategoryColoringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088448AD2BEA053B00636C36 /* CategoryColoringCell.swift */; };
+		088448B02BEA053B00636C36 /* CategoryColoringCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 088448AE2BEA053B00636C36 /* CategoryColoringCell.xib */; };
 		08971F762BCFB8B700623026 /* HistoryCellCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08971F752BCFB8B700623026 /* HistoryCellCollectionViewCell.xib */; };
 		08971F772BCFB8B700623026 /* HistoryCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08971F742BCFB8B700623026 /* HistoryCellCollectionViewCell.swift */; };
 		08A0C29E2BE490AA00C6E42D /* asrmColoring.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08A0C29D2BE490AA00C6E42D /* asrmColoring.mp3 */; };
@@ -97,6 +97,26 @@
 		08E3AEEC2BE346C100B22163 /* musicBackground.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08E3AEEB2BE346C100B22163 /* musicBackground.mp3 */; };
 		08E3AEEF2BE3472000B22163 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3AEEE2BE3472000B22163 /* AudioPlayer.swift */; };
 		08E3AEF22BE3481000B22163 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3AEF12BE3481000B22163 /* UserDefaultManager.swift */; };
+		08F6936D2BEE22A1005FAEF5 /* animation_ads_video.json in Resources */ = {isa = PBXBuildFile; fileRef = 08F6936C2BEE22A1005FAEF5 /* animation_ads_video.json */; };
+		08F75CE72BE8D12A005ACDA9 /* DetailCollection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08F75CE02BE8D12A005ACDA9 /* DetailCollection.storyboard */; };
+		08F75CE82BE8D12A005ACDA9 /* DetailCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F75CE12BE8D12A005ACDA9 /* DetailCollectionController.swift */; };
+		08F75CE92BE8D12A005ACDA9 /* DetailCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F75CE22BE8D12A005ACDA9 /* DetailCollectionModel.swift */; };
+		08F75CEA2BE8D12A005ACDA9 /* DetailCollectionRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F75CE32BE8D12A005ACDA9 /* DetailCollectionRoute.swift */; };
+		08F75CEB2BE8D12A005ACDA9 /* DetailCollectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F75CE42BE8D12A005ACDA9 /* DetailCollectionService.swift */; };
+		08F75CEC2BE8D12A005ACDA9 /* DetailCollectionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F75CE52BE8D12A005ACDA9 /* DetailCollectionVM.swift */; };
+		08F75CF02BE8DC65005ACDA9 /* HomeAdsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F75CEE2BE8DC65005ACDA9 /* HomeAdsCell.swift */; };
+		08F75CF12BE8DC65005ACDA9 /* HomeAdsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F75CEF2BE8DC65005ACDA9 /* HomeAdsCell.xib */; };
+		08F75CF42BE8DC84005ACDA9 /* FeatureHomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F75CF22BE8DC84005ACDA9 /* FeatureHomeCell.swift */; };
+		08F75CF52BE8DC84005ACDA9 /* FeatureHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F75CF32BE8DC84005ACDA9 /* FeatureHomeCell.xib */; };
+		08F75CF82BE8E1AD005ACDA9 /* HeaderHomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F75CF62BE8E1AD005ACDA9 /* HeaderHomeCell.swift */; };
+		08F75CF92BE8E1AD005ACDA9 /* HeaderHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F75CF72BE8E1AD005ACDA9 /* HeaderHomeCell.xib */; };
+		08F75D022BE8EE8F005ACDA9 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F75CFE2BE8EE8D005ACDA9 /* PinterestLayout.swift */; };
+		08F75D0E2BE9DC3E005ACDA9 /* DetailColoring.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08F75D072BE9DC3E005ACDA9 /* DetailColoring.storyboard */; };
+		08F75D0F2BE9DC3E005ACDA9 /* DetailColoringController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F75D082BE9DC3E005ACDA9 /* DetailColoringController.swift */; };
+		08F75D102BE9DC3E005ACDA9 /* DetailColoringModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F75D092BE9DC3E005ACDA9 /* DetailColoringModel.swift */; };
+		08F75D112BE9DC3E005ACDA9 /* DetailColoringRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F75D0A2BE9DC3E005ACDA9 /* DetailColoringRoute.swift */; };
+		08F75D122BE9DC3E005ACDA9 /* DetailColoringService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F75D0B2BE9DC3E005ACDA9 /* DetailColoringService.swift */; };
+		08F75D132BE9DC3E005ACDA9 /* DetailColoringVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F75D0C2BE9DC3E005ACDA9 /* DetailColoringVM.swift */; };
 		08FCC5CD2BD2122B004085C5 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCC5C52BD2122A004085C5 /* Stack.swift */; };
 		08FCC5CE2BD2122B004085C5 /* ColoringImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCC5C62BD2122A004085C5 /* ColoringImage.swift */; };
 		08FCC5CF2BD2122B004085C5 /* SpatialHashMasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCC5C72BD2122A004085C5 /* SpatialHashMasks.swift */; };
@@ -256,6 +276,10 @@
 		080ACD862BC3EA2800E00E2C /* HomeRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRoute.swift; sourceTree = "<group>"; };
 		080ACD872BC3EA2800E00E2C /* HomeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
 		080ACD882BC3EA2800E00E2C /* HomeVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
+		080CB5802BEBDFEE0036A471 /* animation_progess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_progess.json; sourceTree = "<group>"; };
+		080CB5842BECBD9B0036A471 /* animation_loading_preview.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_loading_preview.json; sourceTree = "<group>"; };
+		080CB5862BECD1B20036A471 /* Vibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibration.swift; sourceTree = "<group>"; };
+		080CB5882BECD6540036A471 /* animation_coloring.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_coloring.json; sourceTree = "<group>"; };
 		083CA39C2BC67287006033EE /* DeleteColoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteColoringViewController.swift; sourceTree = "<group>"; };
 		083CA3A02BC672C5006033EE /* Collections.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Collections.storyboard; sourceTree = "<group>"; };
 		083CA3A12BC672C5006033EE /* CollectionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsController.swift; sourceTree = "<group>"; };
@@ -307,12 +331,6 @@
 		0847C9E22BD162780007FC00 /* ColorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorCell.xib; sourceTree = "<group>"; };
 		084A8B252BC4DC7600C8D045 /* animation_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_splash.json; sourceTree = "<group>"; };
 		0852B0D42BD63DB400F95856 /* animationView_StartColoring.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animationView_StartColoring.json; sourceTree = "<group>"; };
-		0852B0D92BD645BC00F95856 /* FillColoring.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FillColoring.storyboard; sourceTree = "<group>"; };
-		0852B0DA2BD645BC00F95856 /* FillColoringController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillColoringController.swift; sourceTree = "<group>"; };
-		0852B0DB2BD645BC00F95856 /* FillColoringModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillColoringModel.swift; sourceTree = "<group>"; };
-		0852B0DC2BD645BC00F95856 /* FillColoringRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillColoringRoute.swift; sourceTree = "<group>"; };
-		0852B0DD2BD645BC00F95856 /* FillColoringService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillColoringService.swift; sourceTree = "<group>"; };
-		0852B0DE2BD645BC00F95856 /* FillColoringVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillColoringVM.swift; sourceTree = "<group>"; };
 		0852B0E72BD64D3000F95856 /* PaintImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintImageView.swift; sourceTree = "<group>"; };
 		0852B0E82BD64D3000F95856 /* StackList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackList.swift; sourceTree = "<group>"; };
 		0857E4CD2BD0C941000ABB76 /* CategoryColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColorCell.swift; sourceTree = "<group>"; };
@@ -324,6 +342,8 @@
 		085A06802BC69FD3002D5F1D /* ListThemeColoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListThemeColoringViewController.swift; sourceTree = "<group>"; };
 		085A06812BC69FD3002D5F1D /* ListThemeColoringViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListThemeColoringViewController.xib; sourceTree = "<group>"; };
 		085A06842BC6A7E0002D5F1D /* animation_collection.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_collection.json; sourceTree = "<group>"; };
+		088448AD2BEA053B00636C36 /* CategoryColoringCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColoringCell.swift; sourceTree = "<group>"; };
+		088448AE2BEA053B00636C36 /* CategoryColoringCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryColoringCell.xib; sourceTree = "<group>"; };
 		08971F742BCFB8B700623026 /* HistoryCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCellCollectionViewCell.swift; sourceTree = "<group>"; };
 		08971F752BCFB8B700623026 /* HistoryCellCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryCellCollectionViewCell.xib; sourceTree = "<group>"; };
 		08A0C29D2BE490AA00C6E42D /* asrmColoring.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = asrmColoring.mp3; sourceTree = "<group>"; };
@@ -357,6 +377,26 @@
 		08E3AEEB2BE346C100B22163 /* musicBackground.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = musicBackground.mp3; sourceTree = "<group>"; };
 		08E3AEEE2BE3472000B22163 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		08E3AEF12BE3481000B22163 /* UserDefaultManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		08F6936C2BEE22A1005FAEF5 /* animation_ads_video.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_ads_video.json; sourceTree = "<group>"; };
+		08F75CE02BE8D12A005ACDA9 /* DetailCollection.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailCollection.storyboard; sourceTree = "<group>"; };
+		08F75CE12BE8D12A005ACDA9 /* DetailCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionController.swift; sourceTree = "<group>"; };
+		08F75CE22BE8D12A005ACDA9 /* DetailCollectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionModel.swift; sourceTree = "<group>"; };
+		08F75CE32BE8D12A005ACDA9 /* DetailCollectionRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionRoute.swift; sourceTree = "<group>"; };
+		08F75CE42BE8D12A005ACDA9 /* DetailCollectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionService.swift; sourceTree = "<group>"; };
+		08F75CE52BE8D12A005ACDA9 /* DetailCollectionVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionVM.swift; sourceTree = "<group>"; };
+		08F75CEE2BE8DC65005ACDA9 /* HomeAdsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAdsCell.swift; sourceTree = "<group>"; };
+		08F75CEF2BE8DC65005ACDA9 /* HomeAdsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeAdsCell.xib; sourceTree = "<group>"; };
+		08F75CF22BE8DC84005ACDA9 /* FeatureHomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureHomeCell.swift; sourceTree = "<group>"; };
+		08F75CF32BE8DC84005ACDA9 /* FeatureHomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeatureHomeCell.xib; sourceTree = "<group>"; };
+		08F75CF62BE8E1AD005ACDA9 /* HeaderHomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderHomeCell.swift; sourceTree = "<group>"; };
+		08F75CF72BE8E1AD005ACDA9 /* HeaderHomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderHomeCell.xib; sourceTree = "<group>"; };
+		08F75CFE2BE8EE8D005ACDA9 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
+		08F75D072BE9DC3E005ACDA9 /* DetailColoring.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailColoring.storyboard; sourceTree = "<group>"; };
+		08F75D082BE9DC3E005ACDA9 /* DetailColoringController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailColoringController.swift; sourceTree = "<group>"; };
+		08F75D092BE9DC3E005ACDA9 /* DetailColoringModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailColoringModel.swift; sourceTree = "<group>"; };
+		08F75D0A2BE9DC3E005ACDA9 /* DetailColoringRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailColoringRoute.swift; sourceTree = "<group>"; };
+		08F75D0B2BE9DC3E005ACDA9 /* DetailColoringService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailColoringService.swift; sourceTree = "<group>"; };
+		08F75D0C2BE9DC3E005ACDA9 /* DetailColoringVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailColoringVM.swift; sourceTree = "<group>"; };
 		08FCC5C52BD2122A004085C5 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		08FCC5C62BD2122A004085C5 /* ColoringImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoringImage.swift; sourceTree = "<group>"; };
 		08FCC5C72BD2122A004085C5 /* SpatialHashMasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpatialHashMasks.swift; sourceTree = "<group>"; };
@@ -541,6 +581,7 @@
 		080ACD892BC3EA2800E00E2C /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				08F75CED2BE8DC39005ACDA9 /* Cell */,
 				080ACD832BC3EA2800E00E2C /* Home.storyboard */,
 				080ACD842BC3EA2800E00E2C /* HomeController.swift */,
 				080ACD852BC3EA2800E00E2C /* HomeModel.swift */,
@@ -556,11 +597,11 @@
 			children = (
 				0843961D2BCD630D00C8E213 /* Cell */,
 				083CA3B32BC672DA006033EE /* SaveColoring */,
-				0852B0DF2BD645BC00F95856 /* FillColoring */,
 				083CA3BA2BC672DA006033EE /* StartColoring */,
 				083CA3D62BC672DA006033EE /* PreviewColoring */,
 				083CA3C82BC672DA006033EE /* HistoryColoring */,
 				083CA3C12BC672DA006033EE /* ListThemeColoring */,
+				08F75D0D2BE9DC3E005ACDA9 /* DetailColoring */,
 				083CA3DD2BC672DA006033EE /* ListTopPicksColoring */,
 				083CA4102BC67988006033EE /* MainColorings */,
 			);
@@ -570,6 +611,7 @@
 		083CA3A62BC672C5006033EE /* Collections */ = {
 			isa = PBXGroup;
 			children = (
+				08F75CE62BE8D12A005ACDA9 /* DetailCollection */,
 				08083FEB2BCDF861005091B0 /* Cell */,
 				083CA3A02BC672C5006033EE /* Collections.storyboard */,
 				083CA3A12BC672C5006033EE /* CollectionsController.swift */,
@@ -680,6 +722,8 @@
 				0857E4D62BD0C977000ABB76 /* FillterColorCell.xib */,
 				0847C9E12BD162780007FC00 /* ColorCell.swift */,
 				0847C9E22BD162780007FC00 /* ColorCell.xib */,
+				088448AD2BEA053B00636C36 /* CategoryColoringCell.swift */,
+				088448AE2BEA053B00636C36 /* CategoryColoringCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -705,24 +749,15 @@
 		084A8B242BC4DC4800C8D045 /* Lottie_Json */ = {
 			isa = PBXGroup;
 			children = (
+				080CB5882BECD6540036A471 /* animation_coloring.json */,
+				080CB5842BECBD9B0036A471 /* animation_loading_preview.json */,
+				08F6936C2BEE22A1005FAEF5 /* animation_ads_video.json */,
+				080CB5802BEBDFEE0036A471 /* animation_progess.json */,
 				0852B0D42BD63DB400F95856 /* animationView_StartColoring.json */,
 				085A06842BC6A7E0002D5F1D /* animation_collection.json */,
 				084A8B252BC4DC7600C8D045 /* animation_splash.json */,
 			);
 			path = Lottie_Json;
-			sourceTree = "<group>";
-		};
-		0852B0DF2BD645BC00F95856 /* FillColoring */ = {
-			isa = PBXGroup;
-			children = (
-				0852B0D92BD645BC00F95856 /* FillColoring.storyboard */,
-				0852B0DA2BD645BC00F95856 /* FillColoringController.swift */,
-				0852B0DB2BD645BC00F95856 /* FillColoringModel.swift */,
-				0852B0DC2BD645BC00F95856 /* FillColoringRoute.swift */,
-				0852B0DD2BD645BC00F95856 /* FillColoringService.swift */,
-				0852B0DE2BD645BC00F95856 /* FillColoringVM.swift */,
-			);
-			path = FillColoring;
 			sourceTree = "<group>";
 		};
 		0852B0E92BD64D3000F95856 /* FillColor */ = {
@@ -796,6 +831,54 @@
 				08E3AEF12BE3481000B22163 /* UserDefaultManager.swift */,
 			);
 			path = UserDefaultManager;
+			sourceTree = "<group>";
+		};
+		08F75CE62BE8D12A005ACDA9 /* DetailCollection */ = {
+			isa = PBXGroup;
+			children = (
+				08F75CE02BE8D12A005ACDA9 /* DetailCollection.storyboard */,
+				08F75CE12BE8D12A005ACDA9 /* DetailCollectionController.swift */,
+				08F75CE22BE8D12A005ACDA9 /* DetailCollectionModel.swift */,
+				08F75CE32BE8D12A005ACDA9 /* DetailCollectionRoute.swift */,
+				08F75CE42BE8D12A005ACDA9 /* DetailCollectionService.swift */,
+				08F75CE52BE8D12A005ACDA9 /* DetailCollectionVM.swift */,
+			);
+			path = DetailCollection;
+			sourceTree = "<group>";
+		};
+		08F75CED2BE8DC39005ACDA9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				08F75CFC2BE8EE7E005ACDA9 /* CustomLayoutCell */,
+				08F75CEE2BE8DC65005ACDA9 /* HomeAdsCell.swift */,
+				08F75CEF2BE8DC65005ACDA9 /* HomeAdsCell.xib */,
+				08F75CF22BE8DC84005ACDA9 /* FeatureHomeCell.swift */,
+				08F75CF32BE8DC84005ACDA9 /* FeatureHomeCell.xib */,
+				08F75CF62BE8E1AD005ACDA9 /* HeaderHomeCell.swift */,
+				08F75CF72BE8E1AD005ACDA9 /* HeaderHomeCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		08F75CFC2BE8EE7E005ACDA9 /* CustomLayoutCell */ = {
+			isa = PBXGroup;
+			children = (
+				08F75CFE2BE8EE8D005ACDA9 /* PinterestLayout.swift */,
+			);
+			path = CustomLayoutCell;
+			sourceTree = "<group>";
+		};
+		08F75D0D2BE9DC3E005ACDA9 /* DetailColoring */ = {
+			isa = PBXGroup;
+			children = (
+				08F75D072BE9DC3E005ACDA9 /* DetailColoring.storyboard */,
+				08F75D082BE9DC3E005ACDA9 /* DetailColoringController.swift */,
+				08F75D092BE9DC3E005ACDA9 /* DetailColoringModel.swift */,
+				08F75D0A2BE9DC3E005ACDA9 /* DetailColoringRoute.swift */,
+				08F75D0B2BE9DC3E005ACDA9 /* DetailColoringService.swift */,
+				08F75D0C2BE9DC3E005ACDA9 /* DetailColoringVM.swift */,
+			);
+			path = DetailColoring;
 			sourceTree = "<group>";
 		};
 		56114A23DED698BDFC4CB81C /* Pods */ = {
@@ -1066,6 +1149,7 @@
 				57AC399F2AA8707D0062ADF1 /* CameraManager.swift */,
 				57AC39A32AA8729D0062ADF1 /* PreviewView.swift */,
 				578A5EE12B8219D000827ADA /* DBHelpers.swift */,
+				080CB5862BECD1B20036A471 /* Vibration.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1337,14 +1421,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				080CB5812BEBDFEE0036A471 /* animation_progess.json in Resources */,
 				0847C9E42BD162780007FC00 /* ColorCell.xib in Resources */,
+				080CB5852BECBD9C0036A471 /* animation_loading_preview.json in Resources */,
+				08F75CF12BE8DC65005ACDA9 /* HomeAdsCell.xib in Resources */,
 				570070B32A93C4BD00D7C1C6 /* Images.xcassets in Resources */,
 				570070B52A93C4BD00D7C1C6 /* EmptyView.xib in Resources */,
 				084396202BCD633800C8E213 /* AllColoringCell.xib in Resources */,
 				570070B82A93C4BD00D7C1C6 /* LanguageController.xib in Resources */,
+				08F75D0E2BE9DC3E005ACDA9 /* DetailColoring.storyboard in Resources */,
 				570070BB2A93C4BD00D7C1C6 /* countryCodes.json in Resources */,
 				08D0EFDA2BC65273003B000D /* Settings.storyboard in Resources */,
 				570070BE2A93C4BD00D7C1C6 /* IntroductionCell.xib in Resources */,
+				08F75CF52BE8DC84005ACDA9 /* FeatureHomeCell.xib in Resources */,
 				570070C32A93C4BD00D7C1C6 /* FlagKit.xcassets in Resources */,
 				570070C62A93C4BD00D7C1C6 /* SplashController.xib in Resources */,
 				083CA4112BC67988006033EE /* MainColorings.storyboard in Resources */,
@@ -1358,25 +1447,29 @@
 				570070D42A93C4BD00D7C1C6 /* AlertViewController.xib in Resources */,
 				085A06832BC69FD3002D5F1D /* ListThemeColoringViewController.xib in Resources */,
 				084396282BCD637400C8E213 /* ThemeCell.xib in Resources */,
+				08F6936D2BEE22A1005FAEF5 /* animation_ads_video.json in Resources */,
 				570070DC2A93C4BD00D7C1C6 /* LaunchScreen.storyboard in Resources */,
 				570070DD2A93C4BD00D7C1C6 /* ButtonView.xib in Resources */,
 				5729F27E2B7469800059AB40 /* Localizable.strings in Resources */,
 				570070E32A93C4BD00D7C1C6 /* ToastView.xib in Resources */,
+				080CB5892BECD6540036A471 /* animation_coloring.json in Resources */,
 				570070F02A93C4BD00D7C1C6 /* TopBarView.xib in Resources */,
 				083CA3F02BC672DA006033EE /* HistoryColoring.storyboard in Resources */,
 				08A0C29E2BE490AA00C6E42D /* asrmColoring.mp3 in Resources */,
 				5729F27F2B7469800059AB40 /* ErrorCode.strings in Resources */,
+				08F75CE72BE8D12A005ACDA9 /* DetailCollection.storyboard in Resources */,
 				085A067F2BC69FB5002D5F1D /* ListTopPicksColoringViewController.xib in Resources */,
 				084396242BCD635000C8E213 /* FillterCell.xib in Resources */,
 				08083FEE2BCDF877005091B0 /* CollectionCell.xib in Resources */,
 				083CA3A72BC672C5006033EE /* Collections.storyboard in Resources */,
 				083CA3E42BC672DA006033EE /* StartColoring.storyboard in Resources */,
+				08F75CF92BE8E1AD005ACDA9 /* HeaderHomeCell.xib in Resources */,
 				570070F32A93C4BD00D7C1C6 /* MenuActionCell.xib in Resources */,
 				57CAAC242B22372900C56E11 /* IAPController.xib in Resources */,
 				083CA3DE2BC672DA006033EE /* SaveColoring.storyboard in Resources */,
 				084A8B262BC4DC7600C8D045 /* animation_splash.json in Resources */,
+				088448B02BEA053B00636C36 /* CategoryColoringCell.xib in Resources */,
 				0857E4D72BD0C977000ABB76 /* FillterColorCell.xib in Resources */,
-				0852B0E02BD645BD00F95856 /* FillColoring.storyboard in Resources */,
 				08971F762BCFB8B700623026 /* HistoryCellCollectionViewCell.xib in Resources */,
 				571B13552B231C1B0084F92B /* PremiumFloatingView.xib in Resources */,
 				0857E4CF2BD0C941000ABB76 /* CategoryColorCell.xib in Resources */,
@@ -1497,6 +1590,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08F75CE82BE8D12A005ACDA9 /* DetailCollectionController.swift in Sources */,
 				5700702F2A93C4BD00D7C1C6 /* MenuActionCell.swift in Sources */,
 				08FCC5D22BD2122B004085C5 /* UIView+fixInView.swift in Sources */,
 				08FCC5D12BD2122B004085C5 /* Mask.swift in Sources */,
@@ -1512,6 +1606,7 @@
 				5700703A2A93C4BD00D7C1C6 /* AlertViewController.swift in Sources */,
 				5700703C2A93C4BD00D7C1C6 /* EmptyView.swift in Sources */,
 				5700703D2A93C4BD00D7C1C6 /* FSPageControl.swift in Sources */,
+				080CB5872BECD1B20036A471 /* Vibration.swift in Sources */,
 				083CA3AB2BC672C5006033EE /* CollectionsService.swift in Sources */,
 				5700703E2A93C4BD00D7C1C6 /* Notification++.swift in Sources */,
 				57F1B1A82AA7B82E00F554E7 /* AudioTone.m in Sources */,
@@ -1520,6 +1615,7 @@
 				083CA3E92BC672DA006033EE /* StartColoringVM.swift in Sources */,
 				570070402A93C4BD00D7C1C6 /* IntroductionCell.swift in Sources */,
 				570070412A93C4BD00D7C1C6 /* Extension.swift in Sources */,
+				08F75D122BE9DC3E005ACDA9 /* DetailColoringService.swift in Sources */,
 				570070422A93C4BD00D7C1C6 /* BindableType.swift in Sources */,
 				570070442A93C4BD00D7C1C6 /* PickerController.swift in Sources */,
 				571B13592B231C2A0084F92B /* PremiumFloatingView.swift in Sources */,
@@ -1528,8 +1624,6 @@
 				570070462A93C4BD00D7C1C6 /* SplashRoute.swift in Sources */,
 				085A067E2BC69FB5002D5F1D /* ListTopPicksColoringViewController.swift in Sources */,
 				570070472A93C4BD00D7C1C6 /* BaseAppDelegate.swift in Sources */,
-				0852B0E12BD645BD00F95856 /* FillColoringController.swift in Sources */,
-				0852B0E42BD645BD00F95856 /* FillColoringService.swift in Sources */,
 				570070492A93C4BD00D7C1C6 /* SwipeActionButton.swift in Sources */,
 				0852B0EA2BD64D3100F95856 /* PaintImageView.swift in Sources */,
 				08B9928D2BC7DA2C009951BB /* TableColor.swift in Sources */,
@@ -1545,9 +1639,11 @@
 				0847C9E32BD162780007FC00 /* ColorCell.swift in Sources */,
 				083CA3A82BC672C5006033EE /* CollectionsController.swift in Sources */,
 				0843962D2BCD7ADB00C8E213 /* SQLiteManager.swift in Sources */,
+				08F75CF42BE8DC84005ACDA9 /* FeatureHomeCell.swift in Sources */,
 				08D0EFDC2BC65273003B000D /* SettingsModel.swift in Sources */,
 				5700704F2A93C4BD00D7C1C6 /* MyProgressView.swift in Sources */,
 				570070512A93C4BD00D7C1C6 /* SwipeTableViewCell.swift in Sources */,
+				08F75CEC2BE8D12A005ACDA9 /* DetailCollectionVM.swift in Sources */,
 				570070522A93C4BD00D7C1C6 /* SwipeActionTransitioning.swift in Sources */,
 				570070542A93C4BD00D7C1C6 /* UIView+Tranforms.swift in Sources */,
 				080ACD8B2BC3EA2800E00E2C /* HomeController.swift in Sources */,
@@ -1573,10 +1669,13 @@
 				570070662A93C4BD00D7C1C6 /* FSPageViewTransformer.swift in Sources */,
 				570070682A93C4BD00D7C1C6 /* PickerPhotoController.swift in Sources */,
 				570070692A93C4BD00D7C1C6 /* Extensions.swift in Sources */,
+				08F75D022BE8EE8F005ACDA9 /* PinterestLayout.swift in Sources */,
 				080ACD8F2BC3EA2800E00E2C /* HomeVM.swift in Sources */,
+				08F75CE92BE8D12A005ACDA9 /* DetailCollectionModel.swift in Sources */,
 				5700706C2A93C4BD00D7C1C6 /* RippleButton.swift in Sources */,
 				5700706D2A93C4BD00D7C1C6 /* BaseResponse.swift in Sources */,
 				5700706E2A93C4BD00D7C1C6 /* BaseViewController.swift in Sources */,
+				08F75D0F2BE9DC3E005ACDA9 /* DetailColoringController.swift in Sources */,
 				5700706F2A93C4BD00D7C1C6 /* Routing.swift in Sources */,
 				570070712A93C4BD00D7C1C6 /* SwipeTransitionLayout.swift in Sources */,
 				570070722A93C4BD00D7C1C6 /* NSLayoutConstraint+Helpers.swift in Sources */,
@@ -1586,6 +1685,7 @@
 				570070742A93C4BD00D7C1C6 /* LocalNotificationManager.swift in Sources */,
 				08FCC5CF2BD2122B004085C5 /* SpatialHashMasks.swift in Sources */,
 				57FE22042AA8C41E0060606F /* FloatingPoint+Extension.swift in Sources */,
+				08F75D112BE9DC3E005ACDA9 /* DetailColoringRoute.swift in Sources */,
 				570070752A93C4BD00D7C1C6 /* Scanner++.swift in Sources */,
 				570070762A93C4BD00D7C1C6 /* Utilities.swift in Sources */,
 				57FE22072AA8C41E0060606F /* CircularProgressView.swift in Sources */,
@@ -1595,13 +1695,13 @@
 				08FCC5CE2BD2122B004085C5 /* ColoringImage.swift in Sources */,
 				083CA4162BC67988006033EE /* MainColoringsVM.swift in Sources */,
 				570070782A93C4BD00D7C1C6 /* TopBarView.swift in Sources */,
+				088448AF2BEA053B00636C36 /* CategoryColoringCell.swift in Sources */,
 				570070792A93C4BD00D7C1C6 /* UIImageExt.swift in Sources */,
 				083CA3FE2BC672DA006033EE /* PreviewColoringModel.swift in Sources */,
 				5700707A2A93C4BD00D7C1C6 /* LanguageController.swift in Sources */,
 				5700707B2A93C4BD00D7C1C6 /* NumberExt.swift in Sources */,
 				08E3AEF22BE3481000B22163 /* UserDefaultManager.swift in Sources */,
 				083CA3AA2BC672C5006033EE /* CollectionsRoute.swift in Sources */,
-				0852B0E52BD645BD00F95856 /* FillColoringVM.swift in Sources */,
 				080ACD8D2BC3EA2800E00E2C /* HomeRoute.swift in Sources */,
 				083CA3E82BC672DA006033EE /* StartColoringService.swift in Sources */,
 				0852B0EB2BD64D3100F95856 /* StackList.swift in Sources */,
@@ -1627,7 +1727,6 @@
 				083CA4152BC67988006033EE /* MainColoringsService.swift in Sources */,
 				570070882A93C4BD00D7C1C6 /* BuildEnv.swift in Sources */,
 				5700708A2A93C4BD00D7C1C6 /* SwipeTableViewCellDelegate.swift in Sources */,
-				0852B0E22BD645BD00F95856 /* FillColoringModel.swift in Sources */,
 				5700708B2A93C4BD00D7C1C6 /* ToastView.swift in Sources */,
 				5700708C2A93C4BD00D7C1C6 /* SwipeController.swift in Sources */,
 				083CA3DF2BC672DA006033EE /* SaveColoringController.swift in Sources */,
@@ -1635,14 +1734,16 @@
 				08971F772BCFB8B700623026 /* HistoryCellCollectionViewCell.swift in Sources */,
 				083CA3F42BC672DA006033EE /* HistoryColoringService.swift in Sources */,
 				5700708F2A93C4BD00D7C1C6 /* FSPagerView.swift in Sources */,
+				08F75CF02BE8DC65005ACDA9 /* HomeAdsCell.swift in Sources */,
+				08F75D102BE9DC3E005ACDA9 /* DetailColoringModel.swift in Sources */,
 				570FC7F12BC1A2830088CE58 /* AppVersionModel.swift in Sources */,
 				570070902A93C4BD00D7C1C6 /* LottieAnimationView++JSON.swift in Sources */,
 				570070922A93C4BD00D7C1C6 /* TextViewWithPlaceholder.swift in Sources */,
 				083CA3FD2BC672DA006033EE /* PreviewColoringController.swift in Sources */,
-				0852B0E32BD645BD00F95856 /* FillColoringRoute.swift in Sources */,
 				083CA3FF2BC672DA006033EE /* PreviewColoringRoute.swift in Sources */,
 				083CA3A92BC672C5006033EE /* CollectionsModel.swift in Sources */,
 				570070932A93C4BD00D7C1C6 /* IntroController.swift in Sources */,
+				08F75D132BE9DC3E005ACDA9 /* DetailColoringVM.swift in Sources */,
 				570070942A93C4BD00D7C1C6 /* IntroModel.swift in Sources */,
 				084396322BCD86D000C8E213 /* AsynchronousOperation.swift in Sources */,
 				0857E4D02BD0C941000ABB76 /* CategoryColorCell.swift in Sources */,
@@ -1651,6 +1752,7 @@
 				083CA3F52BC672DA006033EE /* HistoryColoringVM.swift in Sources */,
 				570070992A93C4BD00D7C1C6 /* LanguageRoute.swift in Sources */,
 				5700709A2A93C4BD00D7C1C6 /* UIKit++.swift in Sources */,
+				08F75CF82BE8E1AD005ACDA9 /* HeaderHomeCell.swift in Sources */,
 				084396292BCD637400C8E213 /* ThemeCell.swift in Sources */,
 				5700709B2A93C4BD00D7C1C6 /* UITableView++.swift in Sources */,
 				084396332BCD86D000C8E213 /* DowloadOperation.swift in Sources */,
@@ -1662,6 +1764,7 @@
 				570070A02A93C4BD00D7C1C6 /* LanguageModel.swift in Sources */,
 				570070A12A93C4BD00D7C1C6 /* PickerRoute.swift in Sources */,
 				570070A22A93C4BD00D7C1C6 /* PickerPhotoRoute.swift in Sources */,
+				08F75CEA2BE8D12A005ACDA9 /* DetailCollectionRoute.swift in Sources */,
 				570070A42A93C4BD00D7C1C6 /* Array++.swift in Sources */,
 				083CA3E62BC672DA006033EE /* StartColoringModel.swift in Sources */,
 				083CA3F22BC672DA006033EE /* HistoryColoringModel.swift in Sources */,
@@ -1670,6 +1773,7 @@
 				570070A62A93C4BD00D7C1C6 /* ScheduleManagers.swift in Sources */,
 				573EF9692B4FA0A400256367 /* AppDelegate+GDPR+ATT.swift in Sources */,
 				570070A72A93C4BD00D7C1C6 /* MediaLocalUtils.swift in Sources */,
+				08F75CEB2BE8D12A005ACDA9 /* DetailCollectionService.swift in Sources */,
 				573EF96C2B4FA0A400256367 /* AppDelegate+Notifications.swift in Sources */,
 				0857E4D82BD0C977000ABB76 /* FillterColorCell.swift in Sources */,
 				080ACD8E2BC3EA2800E00E2C /* HomeService.swift in Sources */,
@@ -1760,7 +1864,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1805,7 +1909,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

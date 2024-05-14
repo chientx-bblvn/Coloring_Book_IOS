@@ -10,15 +10,16 @@ import Foundation
 import UIKit
 
 enum StartColoringRoute: Route {
-    case main(coloringLocal: ColoringHistoryModel, history: HistoryModel?, isCollection: Bool)
+    case main(coloringLocal: ColoringHistoryModel, history: HistoryModel?, typeScreen: BackToScreenType, coloringBookView: ColoringBookView)
 
     var screen: UIViewController {
         switch self {
-        case let .main(coloringLocal, history, isCollection):
+        case let .main(coloringLocal, history, typeScreen, coloringBookView):
             guard let main = R.storyboard.startColoring.startColoringController() else {
               return UIViewController()
             }
-            main.viewModel = StartColoringVM(coloringLocal: coloringLocal, history: history, isCollection: isCollection)
+            main.viewModel = StartColoringVM(coloringLocal: coloringLocal, history: history, typeScreen: typeScreen)
+            main.coloringBookView = coloringBookView
             return main
         }
     }

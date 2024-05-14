@@ -12,6 +12,7 @@ enum ArchiveFileLocal: String, CaseIterable {
     case Coloring = "Colorings"
     case Theme = "Themes"
     case ColoringSave = "ColoringHistory"
+    case ColoringRew = "ColoringRew"
 }
 
 class FileManagerLocal {
@@ -47,11 +48,11 @@ class FileManagerLocal {
     func getFileColoringlocal() -> [String] {
         do {
             let urls = try FileManager.default.contentsOfDirectory(at: getFileFoderFileUssing(typeFile: .ColoringSave),
-                                                                       includingPropertiesForKeys: [.contentModificationDateKey],
-                                                                       options:.skipsHiddenFiles)
-                return urls.map { url in
-                    (url.lastPathComponent, (try? url.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate ?? Date.distantPast)
-                }.sorted(by: { $0.1 > $1.1 }).map { $0.0 }// extract file names
+                                                                   includingPropertiesForKeys: [.contentModificationDateKey],
+                                                                   options:.skipsHiddenFiles)
+            return urls.map { url in
+                (url.lastPathComponent, (try? url.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate ?? Date.distantPast)
+            }.sorted(by: { $0.1 > $1.1 }).map { $0.0 }// extract file names
         } catch {
             print(error.localizedDescription)
             return []
@@ -61,7 +62,7 @@ class FileManagerLocal {
     func checkFileExits(typeFile: ArchiveFileLocal, fileName: String) -> Bool {
         let urlPath = getDocumentsDirectory().appendingPathComponent(typeFile.rawValue)
         let path = urlPath.appendingPathComponent(fileName).path
-         return fileManager.fileExists(atPath: path)
+        return fileManager.fileExists(atPath: path)
     }
     
     func addImageToLocal(typeFile: ArchiveFileLocal, fileName: String, image: UIImage) -> Bool  {
@@ -123,16 +124,6 @@ class FileManagerLocal {
             print(error.localizedDescription)
         }
     }
-    
-    func convertModelToString(model: [HistoryModel]) -> String {
-        if let jsonData = try? JSONEncoder().encode(model),
-           let jsonString = String(data: jsonData, encoding: .utf8) {
-           return jsonString
-        } else {
-            print("Không thể chuyển đổi thành chuỗi JSON.")
-            return ""
-        }
-    }
 }
 
 class SQLiteManager {
@@ -146,14 +137,16 @@ class SQLiteManager {
     
     let tableColoring = Table("Coloring")
     let tableTheme = Table("ThemeAlbum")
+    let tableColoringRew = Table("TableColoringRew")
     
     func connectionDatabase() {
         if let foder =  path {
             do {
                 db = try Connection("\(foder)\(dbName)")
-                createTableColoring()
+                tablesColoringExists()
+                tablesColoringRewExists()
             } catch {
-               print("Connect DB fail")
+                print("Connect DB fail")
             }
         }
     }
@@ -162,6 +155,24 @@ class SQLiteManager {
         guard let itExists = try? db?.scalar(tableColoring.exists), itExists else {
             createTableColoring()
             return
+        }
+    }
+    
+    func tablesColoringRewExists() {
+        guard let itExists = try? db?.scalar(tableColoring.exists), itExists else {
+            createTableColoringRew()
+            return
+        }
+    }
+    
+    func createTableColoringRew() {
+        let filePath = Expression<String>("filePath")
+        do {
+            try db?.run(tableColoringRew.create(ifNotExists: true){ column in
+                column.column(filePath, primaryKey: true)
+            })
+        } catch {
+            print("Create table coloring rew fail", error.localizedDescription)
         }
     }
     
@@ -187,10 +198,21 @@ class SQLiteManager {
         let filePath = Expression<String>("filePath")
         let fileLocal = Expression<String>("fileLocal")
         let historys = Expression<String>("historys")
+        let history = convertModelToString(model: data.historys) ?? ""
         let insert = tableColoring.insert(id <-  data.id,
                                           filePath <- data.filePath,
                                           fileLocal <- data.fileLocal,
-                                          historys <-  convertModelToString(model: data.historys) )
+                                          historys <-  history)
+        do {
+            try db?.run(insert)
+        } catch {
+            print("Insert fail", error.localizedDescription)
+        }
+    }
+    
+    func insertTableColoringRew(data: ColoringImage) {
+        let filePath = Expression<String>("filePath")
+        let insert = tableColoringRew.insert(filePath <- data.filePath ?? "")
         do {
             try db?.run(insert)
         } catch {
@@ -214,14 +236,33 @@ class SQLiteManager {
         }
     }
     
-    func updateColorings(data: ColoringHistoryModel) {
+    func selectionColoringsRew() -> [ColoringImage] {
+        let filePath = Expression<String>("filePath")
+        do {
+            let collections = try db?.prepare(tableColoringRew)
+            return collections?.map({ color in
+                ColoringImage(filePath: color[filePath], filePreview: nil, isPremium: nil)
+            }) ?? []
+        } catch {
+            print("select TableColoring fail: ", error.localizedDescription)
+            return []
+        }
+    }
+    
+    func updateColorings(data: ColoringHistoryModel) -> Bool {
         let id = Expression<Int>("id")
         let historys = Expression<String>("historys")
+        guard let history = convertModelToString(model: data.historys) else {
+            return false
+        }
         do {
             let coloring = tableColoring.filter(id == data.id)
-            try db?.run(coloring.update(historys <- convertModelToString(model: data.historys)))
+            try db?.run(coloring.update(historys <- history))
+            return true
         } catch {
+            
             print("updateColorings error", error.localizedDescription)
+            return false
         }
     }
     
@@ -255,13 +296,14 @@ extension String {
     }
 }
 
-func convertModelToString(model: [HistoryModel]) -> String {
-    if let jsonData = try? JSONEncoder().encode(model),
-       let jsonString = String(data: jsonData, encoding: .utf8) {
-       return jsonString
-    } else {
-        print("Không thể chuyển đổi thành chuỗi JSON.")
-        return ""
+func convertModelToString(model: [HistoryModel]) -> String? {
+    do {
+        let jsonData = try JSONEncoder().encode(model)
+        let jsonString = String(data: jsonData, encoding: .utf8)
+        return jsonString
+    } catch {
+        print("Không thể chuyển đổi thành chuỗi JSON. \(error.localizedDescription)")
+        return nil
     }
 }
 

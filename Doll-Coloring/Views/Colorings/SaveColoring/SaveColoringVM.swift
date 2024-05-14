@@ -14,13 +14,13 @@ class SaveColoringVM {
     private let serviceManager = SaveColoringManager()
     var coloringLocal: ColoringHistoryModel
     var history: HistoryModel?
-    var isCollection: Bool
+    var typeScreen: BackToScreenType
     var imageColoring: UIImage
     
-    init(imageColoring: UIImage, coloringLocal: ColoringHistoryModel, history: HistoryModel?, isCollection: Bool) {
+    init(imageColoring: UIImage, coloringLocal: ColoringHistoryModel, history: HistoryModel?, typeScreen: BackToScreenType) {
         self.coloringLocal = coloringLocal
         self.history = history
-        self.isCollection = isCollection
+        self.typeScreen = typeScreen
         self.imageColoring = imageColoring
     }
 }

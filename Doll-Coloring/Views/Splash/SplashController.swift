@@ -18,6 +18,7 @@ import SwiftyStoreKit
 class SplashController: BaseViewController {
     @IBOutlet private weak var lbCopyright: UILabel!
     @IBOutlet private weak var animationView: LottieAnimationView!
+    @IBOutlet weak var animationColoring: LottieAnimationView!
     
     private var isSetLanguage = false
     private var configLoaded = false
@@ -32,8 +33,9 @@ class SplashController: BaseViewController {
         loadSavedLanguage()
         
         self.requestNotification()
-        
-        self.loadConfigData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.loadConfigData()
+        }
     }
     
     override func bindingData() {
@@ -74,7 +76,6 @@ extension SplashController {
                 }
             }
         }
-        
     }
     
     // MARK: - Check IAP config
@@ -242,6 +243,7 @@ extension SplashController {
     private func setupView() {
         FirebaseEventManager.logEvent(with: RMBGEventTracking.splashScr)
         animationView.loadAnimation(file: "animation_splash", loopMode: .loop, autoPlay: true)
+        animationColoring.loadAnimation(file: "animation_coloring", loopMode: .loop, autoPlay: true, animationSpeed: 2)
         let style = ThemeStyleAds
             .custom(backgroundColor: UIColor.secondarySystemBackground.withAlphaComponent(0.8),
                     titleColor: R.color.textColor()!,

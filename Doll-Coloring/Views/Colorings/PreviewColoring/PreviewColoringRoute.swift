@@ -10,15 +10,15 @@ import Foundation
 import UIKit
 
 enum PreviewColoringRoute: Route {
-    case main(coloring: ColoringImage?, coloringLocal: ColoringHistoryModel?, history: HistoryModel?, isCollection: Bool = false)
+    case main(coloring: ColoringImage?, coloringLocal: ColoringHistoryModel?, history: HistoryModel?, typeScreen: BackToScreenType)
 
     var screen: UIViewController {
         switch self {
-        case let .main(coloring, coloringLocal, history: history, isCollection):
+        case let .main(coloring, coloringLocal, history: history, typeScreen):
             guard let main = R.storyboard.previewColoring.previewColoringController() else {
               return UIViewController()
             }
-            main.viewModel = PreviewColoringVM(coloring: coloring, coloringLocal: coloringLocal, history: history, isCollection: isCollection)
+            main.viewModel = PreviewColoringVM(coloring: coloring, coloringLocal: coloringLocal, history: history, typeScreen: typeScreen)
             return main
         }
     }

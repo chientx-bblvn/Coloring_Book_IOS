@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="HeaderHomeCell" customModule="Doll_Coloring" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="541" height="40"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="541" height="40"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="livephoto" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9EJ-bx-ABN">
+                        <rect key="frame" x="5" y="4.9999999999999964" width="30" height="30.333333333333332"/>
+                        <color key="tintColor" name="SystemRed"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="9EJ-bx-ABN" secondAttribute="height" id="xGA-iB-Fgt"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trending" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klP-h3-8CH">
+                        <rect key="frame" x="45" y="0.0" width="486" height="40"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                        <color key="textColor" name="ColorTextTopBar"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="9EJ-bx-ABN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="8bU-Hr-kas"/>
+                <constraint firstItem="klP-h3-8CH" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="HGR-Jy-oE2"/>
+                <constraint firstAttribute="bottom" secondItem="klP-h3-8CH" secondAttribute="bottom" id="PpP-uF-a1Q"/>
+                <constraint firstAttribute="trailing" secondItem="klP-h3-8CH" secondAttribute="trailing" constant="10" id="Yyy-2Y-LTV"/>
+                <constraint firstItem="9EJ-bx-ABN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="a1I-WN-xPc"/>
+                <constraint firstItem="klP-h3-8CH" firstAttribute="leading" secondItem="9EJ-bx-ABN" secondAttribute="trailing" constant="10" id="dAV-JV-1Kv"/>
+                <constraint firstAttribute="bottom" secondItem="9EJ-bx-ABN" secondAttribute="bottom" constant="5" id="mWA-ax-hV2"/>
+            </constraints>
+            <size key="customSize" width="541" height="40"/>
+            <connections>
+                <outlet property="lbTitle" destination="klP-h3-8CH" id="jhe-VO-4lP"/>
+            </connections>
+            <point key="canvasLocation" x="365.64885496183206" y="68.309859154929583"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="livephoto" catalog="system" width="128" height="124"/>
+        <namedColor name="ColorTextTopBar">
+            <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SystemRed">
+            <color red="0.87800002098083496" green="0.3059999942779541" blue="0.36100000143051147" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

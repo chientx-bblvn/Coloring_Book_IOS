@@ -11,11 +11,12 @@ import Lottie
 
 extension LottieAnimationView {
     
-    func loadAnimation(file name: String, loopMode: LottieLoopMode = .playOnce, autoPlay: Bool = true) {
+    func loadAnimation(file name: String, loopMode: LottieLoopMode = .playOnce, autoPlay: Bool = true, animationSpeed: CGFloat = 1) {
         let animation = LottieAnimation.named(name)
         self.animation = animation
         self.contentMode = .scaleAspectFit
         self.loopMode = loopMode
+        self.animationSpeed = animationSpeed
         if autoPlay {
             self.play()
         }

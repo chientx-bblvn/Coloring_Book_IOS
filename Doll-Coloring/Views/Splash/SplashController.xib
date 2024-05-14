@@ -14,8 +14,9 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashController" customModule="Remove_Object" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashController" customModule="Doll_Coloring" customModuleProvider="target">
             <connections>
+                <outlet property="animationColoring" destination="2cy-Tt-e4J" id="pBh-gY-ivu"/>
                 <outlet property="animationView" destination="YQR-e8-KXa" id="52F-Pz-bVS"/>
                 <outlet property="lbCopyright" destination="Wxy-10-aHC" id="Fsl-xT-adt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -26,10 +27,10 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_splash" translatesAutoresizingMaskIntoConstraints="NO" id="0ip-ou-XSG">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_splash" translatesAutoresizingMaskIntoConstraints="NO" id="0ip-ou-XSG">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                 </imageView>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4ji-dl-tk0">
+                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4ji-dl-tk0">
                     <rect key="frame" x="24" y="343.66666666666669" width="345" height="190.00000000000006"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_app_intro" translatesAutoresizingMaskIntoConstraints="NO" id="nRH-q2-T38">
@@ -49,6 +50,13 @@
                         </view>
                     </subviews>
                 </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2cy-Tt-e4J" customClass="LottieAnimationView" customModule="Lottie">
+                    <rect key="frame" x="24" y="282.33333333333337" width="345" height="287.33333333333337"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="2cy-Tt-e4J" secondAttribute="height" multiplier="1.2" id="vQf-X2-n2j"/>
+                    </constraints>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="®2024 Power by Binary Bridge Labs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wxy-10-aHC">
                     <rect key="frame" x="24" y="780" width="345" height="14"/>
                     <fontDescription key="fontDescription" name="Rubik-Light_Bold" family="Rubik" pointSize="12"/>
@@ -62,11 +70,15 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Wxy-10-aHC" secondAttribute="trailing" constant="24" id="20l-p8-Gny"/>
                 <constraint firstItem="4ji-dl-tk0" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="6Lv-RU-INt"/>
                 <constraint firstItem="4ji-dl-tk0" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="7h7-BN-xNE"/>
+                <constraint firstItem="2cy-Tt-e4J" firstAttribute="centerY" secondItem="0ip-ou-XSG" secondAttribute="centerY" id="9Cc-SN-3U2"/>
                 <constraint firstItem="4ji-dl-tk0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Cuf-d1-TJc"/>
                 <constraint firstAttribute="trailing" secondItem="0ip-ou-XSG" secondAttribute="trailing" id="Htn-tp-gOL"/>
                 <constraint firstItem="0ip-ou-XSG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="I2Q-Lg-QQe"/>
+                <constraint firstItem="2cy-Tt-e4J" firstAttribute="centerX" secondItem="0ip-ou-XSG" secondAttribute="centerX" id="MTb-Is-Ibe"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2cy-Tt-e4J" secondAttribute="trailing" constant="24" id="T9J-vt-HqK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4ji-dl-tk0" secondAttribute="trailing" constant="24" id="Wtb-n6-egs"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Wxy-10-aHC" secondAttribute="bottom" constant="24" id="gF2-he-z6d"/>
+                <constraint firstItem="2cy-Tt-e4J" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="kaD-3V-Cne"/>
                 <constraint firstItem="0ip-ou-XSG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qDt-OY-THY"/>
                 <constraint firstAttribute="bottom" secondItem="0ip-ou-XSG" secondAttribute="bottom" id="uTV-Sq-6d4"/>
                 <constraint firstItem="Wxy-10-aHC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="y1h-Sw-j9J"/>

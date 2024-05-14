@@ -115,10 +115,15 @@ extension SaveColoringController {
     func deleteColoring() {
         let coloring = viewModel.coloringLocal
         guard let history = viewModel.history else {
-            if viewModel.isCollection {
-                AppRouter.shared.popToController(controller: CollectionsController.classForCoder())
-            } else {
+            switch viewModel.typeScreen {
+            case .home:
+                AppRouter.shared.popToController(controller: HomeController.classForCoder())
+            case .coloring:
                 AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
+            case .detailColoring:
+                AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
+            case .collection:
+                AppRouter.shared.popToController(controller: CollectionsController.classForCoder())
             }
             return
         }
@@ -130,13 +135,18 @@ extension SaveColoringController {
             var newHis = coloring.historys
             newHis.removeAll(where: {$0.imagePath == history.imagePath})
             let historys = ColoringHistoryModel(id: coloring.id, filePath: coloring.filePath, fileLocal: coloring.fileLocal, historys: newHis)
-            SQLiteManager.shared.updateColorings(data: historys)
+            _ = SQLiteManager.shared.updateColorings(data: historys)
             FileManagerLocal.shared.deleteFile(typeFile: .ColoringSave, fileName: history.imagePath)
         }
-        if viewModel.isCollection {
-            AppRouter.shared.popToController(controller: CollectionsController.classForCoder())
-        } else {
+        switch viewModel.typeScreen {
+        case .home:
+            AppRouter.shared.popToController(controller: HomeController.classForCoder())
+        case .coloring:
             AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
+        case .detailColoring:
+            AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
+        case .collection:
+            AppRouter.shared.popToController(controller: CollectionsController.classForCoder())
         }
     }
     
@@ -227,10 +237,15 @@ extension SaveColoringController {
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: {_ in
             DispatchQueue.main.async {
-                if self.viewModel.isCollection {
-                    AppRouter.shared.popToController(controller: CollectionsController.classForCoder())
-                } else {
+                switch self.viewModel.typeScreen {
+                case .home:
+                    AppRouter.shared.popToController(controller: HomeController.classForCoder())
+                case .coloring:
                     AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
+                case .detailColoring:
+                    AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
+                case .collection:
+                    AppRouter.shared.popToController(controller: CollectionsController.classForCoder())
                 }
             }
         }))

@@ -23,7 +23,9 @@ class MainColoringsVM {
         SVProgressHUD.show()
         serviceManager.requestAPI(.list, type: [ColoringModel].self) {[weak self] isSuccess, response in
             SVProgressHUD.dismiss()
-            self?.colorings = response
+            var data = response
+            data.removeFirst()
+            self?.colorings = data
             complection()
         } onFailed: { error in
             complection()

@@ -17,6 +17,7 @@ struct ColoringModel: Codable {
 // MARK: - ImageURL
 struct ColoringImage: Codable {
     let filePath: String?
+    let filePreview: String?
     let isPremium: Bool?
 }
 

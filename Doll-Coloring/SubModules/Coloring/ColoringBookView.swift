@@ -14,7 +14,7 @@ protocol ColoringBookViewDelegate: AnyObject {
 }
 
 class ColoringBookView: UIView {
-
+    
     private (set) var pixelSize:CGSize!
     //Stroke history
     private (set) var strokes:[Stroke] = [Stroke](){
@@ -25,7 +25,7 @@ class ColoringBookView: UIView {
     private (set) var redoStrokes:[Stroke] = [Stroke]()
     
     private (set) var activeStroke:Stroke? = nil
-//A "frozen context" to actually draw, based on Apple's https://developer.apple.com/documentation/uikit/touches_presses_and_gestures/illustrating_the_force_altitude_and_azimuth_properties_of_touch_input
+    //A "frozen context" to actually draw, based on Apple's https://developer.apple.com/documentation/uikit/touches_presses_and_gestures/illustrating_the_force_altitude_and_azimuth_properties_of_touch_input
     //More efficient than drawing directly into the view
     private var frozenContext:CGContext!
     
@@ -112,8 +112,8 @@ class ColoringBookView: UIView {
         
         self.coloringLayer = CALayer()
         coloringLayer.frame = CGRect(origin: .zero,
-                                            size: CGSize(width: pixelSize.width / UIScreen.main.scale,
-                                                         height: pixelSize.height / UIScreen.main.scale))
+                                     size: CGSize(width: pixelSize.width / UIScreen.main.scale,
+                                                  height: pixelSize.height / UIScreen.main.scale))
         coloringLayer.contents = self.coloringImage.cgImage
         self.layer.addSublayer(coloringLayer)
     }
@@ -140,6 +140,7 @@ class ColoringBookView: UIView {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard touches.count == 1 else {return}
         //Send a signal to delegate
         delegate?.viewWillStartDrawing()
         
@@ -162,8 +163,8 @@ class ColoringBookView: UIView {
         self.generatingMask = true
         let strokeID = activeStroke?.id
         DispatchQueue.global(qos: .background).async {
-             let (clipRect, mask) = self.coloringImage.getFillMaskAt(x: Int(firstLocation.x * UIScreen.main.scale),
-                                                           y: Int(firstLocation.y * UIScreen.main.scale))
+            let (clipRect, mask) = self.coloringImage.getFillMaskAt(x: Int(firstLocation.x * UIScreen.main.scale),
+                                                                    y: Int(firstLocation.y * UIScreen.main.scale))
             
             self.generatingMask = false
             if let mask = mask{
@@ -186,11 +187,10 @@ class ColoringBookView: UIView {
                     }
                 }
             }
-            
         }
         
         //Use coalescedtouches to get a smoother line when drawing with an Apple Pencil
-        if let point = touches.first, let coalescedTouches = event?.coalescedTouches(for: point){
+        if  let point = touches.first, let coalescedTouches = event?.coalescedTouches(for: point){
             for touch in coalescedTouches{
                 pointAccumulator.append(touch.location(in: self))
             }
@@ -200,6 +200,11 @@ class ColoringBookView: UIView {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard touches.count == 1 else {return}
+        guard isPens else {
+            
+            return
+        }
         if let point = touches.first, let coalescedTouches = event?.coalescedTouches(for: point){
             for touch in coalescedTouches{
                 pointAccumulator.append(touch.location(in: self))
@@ -212,28 +217,65 @@ class ColoringBookView: UIView {
         //Reset variables after a cancelation
         activeStroke = nil
         frozenContext.resetClip()
-        
         pointAccumulator = []
         initialTimestamp = nil
         delegate?.viewDidEndDrawing()
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        guard touches.count == 1 else {return}
+        
         //Active stroke goes to the array of already drawn strokes
-        if let activeStroke = self.activeStroke{
+        if isPens, let activeStroke = self.activeStroke{
             strokes.append(activeStroke)
         }
+        if !isPens, touches.count == 1, let firstLocation = touches.first?.location(in: self) {
+            let id = activeStroke?.id
+            DispatchQueue.global(qos: .background).async {
+                let (clipRect, mask) = self.coloringImage.getFillMaskAt(x: Int(firstLocation.x * UIScreen.main.scale),
+                                                                        y: Int(firstLocation.y * UIScreen.main.scale))
+                
+                self.generatingMask = false
+                //We check the id of the current stroke to make sure we didn't took too long to process the mask
+                if self.activeStroke?.id == id {
+                    DispatchQueue.main.async {
+                        //Redraw the whole view so any temporary mark gets erased
+                        let size = clipRect.size
+                        let width = Int(size.width)
+                        let height = Int(size.height)
+                        let origin = clipRect.origin
+                        let x = Int(origin.x)
+                        let y = Int(origin.y)
+                        for i in x..<x+width {
+                            for j in y..<y+height {
+                                let point = CGPoint(x: i, y: j)
+                                self.pointAccumulator.append(point)
+                            }
+                        }
+                        self.fillColoring()
+                        self.resetVariables()
+                    }
+                }
+            }
+        } else {
+            //Reset variables
+            resetVariables()
+        }
+    }
+    
+    private func resetVariables() {
         //Reset variables
         activeStroke = nil
         frozenContext.resetClip()
-        
         pointAccumulator = []
         initialTimestamp = nil
-        
         delegate?.viewDidEndDrawing()
     }
     
     private func drawActiveFrozenContext(){
+        
+        guard isPens else {return}
         
         //If we have an initial timestamp check if enough time has passed so a cancel is not likely
         if let initialTimeStamp = self.initialTimestamp{
@@ -249,7 +291,7 @@ class ColoringBookView: UIView {
         }
         
         //Add point from accumulator to active stroke and reset
-        for point in pointAccumulator{
+        for point in pointAccumulator {
             activeStroke?.addPoint(point)
         }
         
@@ -271,11 +313,27 @@ class ColoringBookView: UIView {
         }
     }
     
+    func fillColoring() {
+        for point in pointAccumulator {
+            activeStroke?.addPoint(point)
+        }
+        if !isPens, let activeStroke = self.activeStroke {
+            strokes.append(activeStroke)
+        }
+        pointAccumulator = []
+        redrawInFrozenContext()
+    }
+    
     public func undo(){
         if let last = self.strokes.popLast(){
             self.redoStrokes.append(last)
             redrawInFrozenContext()
         }
+    }
+    
+    public func reloadStrokes() {
+        _ = self.strokes.popLast()
+        redrawInFrozenContext()
     }
     
     public func redo(){
@@ -296,8 +354,7 @@ class ColoringBookView: UIView {
     }
     
     private func redrawInFrozenContext(updateScreen:Bool = true){
-        let begin = ProcessInfo.processInfo.systemUptime
-        
+        let dispathGroup = DispatchGroup()
         frozenContext.clear(self.bounds)
         
         //Write saved image first if it exists
@@ -310,10 +367,10 @@ class ColoringBookView: UIView {
             frozenContext.draw(startImage, in: self.bounds)
         }
         
-        for stroke in strokes{
+        for stroke in strokes {
             if let firstPoint = stroke.points.first{
                 let (clipRect,mask) = self.coloringImage.getFillMaskAt(x: Int(firstPoint.x * UIScreen.main.scale),
-                                                               y: Int(firstPoint.y * UIScreen.main.scale))
+                                                                       y: Int(firstPoint.y * UIScreen.main.scale))
                 if let mask = mask{
                     self.setClip(clipRect, maskImage: mask)
                 }
@@ -325,17 +382,13 @@ class ColoringBookView: UIView {
             stroke.drawInContext(frozenContext)
             frozenContext.resetClip()
         }
-        
-        let dif = ProcessInfo.processInfo.systemUptime - begin
-        NSLog("Took \(dif) seconds to redraw \(self.strokes.count) strokes")
-        
         if updateScreen{
             self.setNeedsDisplay()
         }
     }
     
     private func setClip(_ rect:CGRect, maskImage:CGImage) {
-
+        
         if coloringImage.isOptimized{
             //Optimized images don't flip the mask for us, this is necessary to apply the mask correctly (mixing coordinate systems suck)
             self.frozenContext.translateBy(x: 0, y: rect.origin.y + rect.height)
@@ -348,7 +401,7 @@ class ColoringBookView: UIView {
             
             self.frozenContext.scaleBy(x: 1.0, y: -1.0)
             self.frozenContext.translateBy(x: 0, y: -(rect.origin.y + rect.height))
-//            self.frozenContext.restoreGState()
+            //            self.frozenContext.restoreGState()
         }
         else{
             self.frozenContext.clip(to: rect,

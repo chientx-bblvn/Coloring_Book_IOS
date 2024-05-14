@@ -111,19 +111,12 @@ extension CollectionsController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: CollectionCell.self)
         let data = listCollection[indexPath.row]
         cell.imageView.setLocalImage(with: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: data).path, placeholder: nil)
-        cell.onclickEdit = {
-            self.editColoring(fileName: data)
-        }
-        
-        cell .onclickDelete = {
-            DeleteColoringViewController.show(in: self) {
-            
-            } onclickDelete: {
-                self.deteleColoring(fileName: data)
-            }
-        }
-        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let data = listCollection[indexPath.row]
+        naviScreenColoring(fileName: data)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -139,50 +132,20 @@ extension CollectionsController: UICollectionViewDelegate, UICollectionViewDataS
         return 0
     }
     
-    func editColoring(fileName: String) {
+    func naviScreenColoring(fileName: String) {
         if let coloring = listColoring.first (where: { coloring in
             coloring.historys.contains { history in
-                fileName.contains(history.imagePath)
+                history.imagePath.contains(fileName)
             }
-        }) {
-            let history = coloring.historys.first(where: { model in
-                fileName.contains(model.imagePath)})
-            let imageUrlString = FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: history?.imagePath ?? "")
+        }), let history = coloring.historys.first(where: { model in
+            fileName.contains(model.imagePath)}) {
+            
+            let imageUrlString = FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: history.imagePath)
             let cacheKey = SDWebImageManager.shared.cacheKey(for: imageUrlString)
             SDImageCache.shared.removeImage(forKey: cacheKey, withCompletion: nil)
-            AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: nil, coloringLocal: coloring, history: history, isCollection: true), with: .push)
+            AppRouter.shared.navigate(to: DetailCollectionRoute.main(coloringLocal: coloring, history: history, isCollection: true), with: .push)
+            
         }
-    }
-    
-    func deteleColoring(fileName: String) {
-        if let coloring = listColoring.first (where: { coloring in
-            coloring.historys.contains { history in
-                fileName.contains(history.imagePath)
-            }
-        }) {
-            if coloring.historys.count == 1 {
-                let imageUrlString = FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: coloring.historys.first?.imagePath ?? "")
-                let cacheKey = SDWebImageManager.shared.cacheKey(for: imageUrlString)
-                SDImageCache.shared.removeImage(forKey: cacheKey, withCompletion: nil)
-                SQLiteManager.shared.deleteColorings(id: coloring.id)
-                FileManagerLocal.shared.deleteFile(typeFile: .Coloring, fileName: coloring.fileLocal)
-                FileManagerLocal.shared.deleteFile(typeFile: .ColoringSave, fileName: coloring.historys.first?.imagePath ?? "")
-            } else {
-                if let history =  coloring.historys.first(where: { model in
-                    fileName.contains(model.imagePath)
-                }) {
-                    var newHis = coloring.historys
-                    newHis.removeAll(where: {$0.imagePath == history.imagePath})
-                    let imageUrlString = FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: history.imagePath)
-                    let cacheKey = SDWebImageManager.shared.cacheKey(for: imageUrlString)
-                    SDImageCache.shared.removeImage(forKey: cacheKey, withCompletion: nil)
-                    FileManagerLocal.shared.deleteFile(typeFile: .ColoringSave, fileName: history.imagePath)
-                    let historys = ColoringHistoryModel(id: coloring.id, filePath: coloring.filePath, fileLocal: coloring.fileLocal, historys: newHis)
-                    SQLiteManager.shared.updateColorings(data: historys)
-                }
-            }
-        }
-        reloadDataColection()
     }
     
     func reloadDataColection() {

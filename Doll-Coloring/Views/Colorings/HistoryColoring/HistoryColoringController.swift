@@ -74,7 +74,7 @@ class HistoryColoringController: BaseViewController {
     
     @objc private func actionCreateColoring() {
         AppRouter.shared.dismiss(animated: false)
-        AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: nil, coloringLocal: viewModel.coloring, history: nil), with: .push)
+        AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: viewModel.coloringAPI, coloringLocal: viewModel.coloring, history: nil, typeScreen: viewModel.typeScreen), with: .push)
     }
     
     @IBAction func btnDismiss(_ sender: Any) {
@@ -100,7 +100,7 @@ extension HistoryColoringController: FSPagerViewDelegate, FSPagerViewDataSource 
         pagerView.deselectItem(at: index, animated: true)
         pagerView.scrollToItem(at: index, animated: true)
         AppRouter.shared.dismiss(animated: false)
-        AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: nil, coloringLocal: viewModel.coloring, history: viewModel.coloring.historys[index]), with: .push)
+        AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: nil, coloringLocal: viewModel.coloring, history: viewModel.coloring.historys[index], typeScreen: viewModel.typeScreen), with: .push)
     }
     
 }

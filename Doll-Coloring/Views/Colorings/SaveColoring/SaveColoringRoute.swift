@@ -10,15 +10,15 @@ import Foundation
 import UIKit
 
 enum SaveColoringRoute: Route {
-    case main(imageColoring: UIImage, coloringLocal: ColoringHistoryModel, history: HistoryModel?, isCollection: Bool)
+    case main(imageColoring: UIImage, coloringLocal: ColoringHistoryModel, history: HistoryModel?, typeScreen: BackToScreenType)
 
     var screen: UIViewController {
         switch self {
-        case let .main(imageColoring, coloringLocal, history, isCollection):
+        case let .main(imageColoring, coloringLocal, history, typeScreen):
             guard let main = R.storyboard.saveColoring.saveColoringController() else {
               return UIViewController()
             }
-            main.viewModel = SaveColoringVM(imageColoring: imageColoring, coloringLocal: coloringLocal, history: history, isCollection: isCollection)
+            main.viewModel = SaveColoringVM(imageColoring: imageColoring, coloringLocal: coloringLocal, history: history, typeScreen: typeScreen)
             return main
         }
     }

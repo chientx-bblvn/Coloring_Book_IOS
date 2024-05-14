@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Detail Coloring Controller-->
+        <scene sceneID="XJ1-QA-Nrj">
+            <objects>
+                <viewController storyboardIdentifier="DetailColoringController" id="zIc-eW-6fX" customClass="DetailColoringController" customModule="Doll_Coloring" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z2g-4m-atm">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_home" translatesAutoresizingMaskIntoConstraints="NO" id="dSU-hY-Yhn">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                            </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KDS-st-5ep">
+                                <rect key="frame" x="0.0" y="107" width="428" height="754"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="13B-CQ-E9f">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B3k-b7-b3a" customClass="TopBarView" customModule="Doll_Coloring" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="47" width="428" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="3Nh-Em-7z8"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                        <color key="value" name="ColorTextTopBar"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="ic_back"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k4W-K8-QoK">
+                                <rect key="frame" x="0.0" y="866" width="428" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="E3C-mw-vfx"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3pi-N7-nbV"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="dSU-hY-Yhn" secondAttribute="trailing" id="04O-zt-5MI"/>
+                            <constraint firstAttribute="bottom" secondItem="dSU-hY-Yhn" secondAttribute="bottom" id="7eg-RA-OB5"/>
+                            <constraint firstItem="KDS-st-5ep" firstAttribute="top" secondItem="B3k-b7-b3a" secondAttribute="bottom" constant="10" id="8cQ-n2-iqM"/>
+                            <constraint firstItem="dSU-hY-Yhn" firstAttribute="leading" secondItem="Z2g-4m-atm" secondAttribute="leading" id="E2Z-iG-t8l"/>
+                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="k4W-K8-QoK" secondAttribute="trailing" id="Jo4-9K-5RG"/>
+                            <constraint firstItem="B3k-b7-b3a" firstAttribute="top" secondItem="3pi-N7-nbV" secondAttribute="top" id="Mcp-cS-qTk"/>
+                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="KDS-st-5ep" secondAttribute="trailing" id="QkS-ef-3ts"/>
+                            <constraint firstItem="KDS-st-5ep" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="UpY-d6-IeN"/>
+                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="B3k-b7-b3a" secondAttribute="trailing" id="cl7-T3-ctC"/>
+                            <constraint firstItem="B3k-b7-b3a" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="mMw-hQ-bAR"/>
+                            <constraint firstItem="k4W-K8-QoK" firstAttribute="top" secondItem="KDS-st-5ep" secondAttribute="bottom" constant="5" id="u8q-hD-1GV"/>
+                            <constraint firstAttribute="bottom" secondItem="k4W-K8-QoK" secondAttribute="bottom" id="uBz-Sz-KfM"/>
+                            <constraint firstItem="k4W-K8-QoK" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="vyV-UB-VQs"/>
+                            <constraint firstItem="dSU-hY-Yhn" firstAttribute="top" secondItem="Z2g-4m-atm" secondAttribute="top" id="zga-bI-a0k"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="adsView" destination="k4W-K8-QoK" id="8w3-6w-eId"/>
+                        <outlet property="collectionView" destination="KDS-st-5ep" id="75e-bN-nfq"/>
+                        <outlet property="heightAds" destination="E3C-mw-vfx" id="Lxq-3o-Ppx"/>
+                        <outlet property="topBarView" destination="B3k-b7-b3a" id="DaX-dQ-5Rb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rle-ol-2Ax" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="304.80000000000001" y="302.6986506746627"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="background_home" width="393" height="852"/>
+        <image name="ic_back" width="32" height="32"/>
+        <namedColor name="ColorTextTopBar">
+            <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

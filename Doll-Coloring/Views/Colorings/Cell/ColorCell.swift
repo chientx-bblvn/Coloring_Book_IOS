@@ -19,11 +19,15 @@ class ColorCell: UICollectionViewCell, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         viewColor.layer.cornerRadius = viewColor.frame.height / 2
         viewContent.layer.cornerRadius = viewContent.frame.height / 2
         boderView.layer.cornerRadius = boderView.frame.height / 2
-        self.layoutIfNeeded()
     }
+    
     
     func setData(color: UIColor?, isSelect: Bool) {
         viewColor.backgroundColor = color

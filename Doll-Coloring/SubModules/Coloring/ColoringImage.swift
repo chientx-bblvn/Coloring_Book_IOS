@@ -40,11 +40,6 @@ struct ColoringImageBook {
             fatalError("There is no B&W filter!!!!!!!")
         }
         
-        guard let sharpenFilter = CIFilter(name: "CISharpenLuminance")
-        else {
-            fatalError("There is no Sharpen Luminance filter!!!!!!!")
-        }
-        
         guard let posterizeFilter = CIFilter(name: "CIColorPosterize")
         else {
             fatalError("There is no Color Posterize filter!!!!!!!")
@@ -176,9 +171,6 @@ struct ColoringImageBook {
                                 self.spatialSearch.add(newMask)
                                 let originalBytes = ColoringImageBook.byteFormatter.string(fromByteCount: Int64(maskBitmap.count))
                                 let pngBytes = ColoringImageBook.byteFormatter.string(fromByteCount: Int64(pngData.count))
-                                
-                                NSLog("Created Mask, compressed from \(originalBytes) to \(pngBytes)")
-                                
                                 self.maskBytes += Int64(pngData.count)
                                 self.totalMasks += 1
                             }
@@ -187,9 +179,6 @@ struct ColoringImageBook {
                 }
             }
         }
-        
-        let totalSize = ColoringImageBook.byteFormatter.string(fromByteCount: self.maskBytes)
-        NSLog("Created \(totalMasks) masks with a size of \(totalSize)")
     }
     
     //X and Y are pixel position

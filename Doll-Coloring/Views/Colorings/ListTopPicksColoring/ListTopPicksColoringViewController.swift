@@ -9,137 +9,128 @@ import UIKit
 
 class ListTopPicksColoringViewController: UIViewController {
     
-    @IBOutlet weak var listFilter: UICollectionView!
-    
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var tableView: UITableView!
     
     private var colorings: [ColoringModel] = []
-    private var listCategory: [String] = []
-    private var coloring: [ColoringImage] = []
     private var coloringLocal: [ColoringHistoryModel] = []
-    private var indexFillter: Int = 0
     private var numberClick: Int = 3
+    private var indexCategory: Int = -1
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCollectionView()
+        setupTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         coloringLocal = SQLiteManager.shared.selectionColorings()
-        collectionView.reloadData()
+        
+        if indexCategory != -1 {
+           let cell =  tableView.cellForRow(at: IndexPath(row: indexCategory, section: 0)) as? CategoryColoringCell
+            cell?.reloadCollectionView(coloringLocal: coloringLocal)
+        } else {
+            tableView.reloadData()
+        }
+        
     }
     
     public func reloadData(data: [ColoringModel]) {
         colorings = data
-        listCategory = []
-        coloring = []
-        let dispathGroup = DispatchGroup()
-        dispathGroup.enter()
-        data.enumerated().forEach { (index, image) in
-            if index == 0 {
-                listCategory.append("All")
-            }
-            listCategory.append(image.categoryName ?? "")
-            coloring.append(contentsOf: image.imageUrls ?? [])
-        }
-        dispathGroup.leave()
-        listFilter.reloadData()
-        collectionView.reloadData()
+        tableView.reloadData()
     }
     
     
-    private func setupCollectionView() {
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        collectionView.register(cellType: AllColoringCell.self)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        listFilter.register(cellType: FillterCell.self)
-        listFilter.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        listFilter.delegate = self
-        listFilter.dataSource = self
+    private func setupTableView() {
+        tableView.register(cellType: CategoryColoringCell.self)
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
-    func fillterCategory(index: Int) {
-        coloring = []
-        let dispathGroup = DispatchGroup()
-        dispathGroup.enter()
-        if index == 0 {
-            colorings.enumerated().forEach { (index, image) in
-                coloring.append(contentsOf: image.imageUrls ?? [])
-            }
-        } else {
-            coloring = colorings.first(where: {$0.categoryName == listCategory[index]})?.imageUrls ?? []
-        }
-        dispathGroup.leave()
-        collectionView.reloadData()
-    }
 }
 
-extension ListTopPicksColoringViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == listFilter {
-            return listCategory.count
-        } else {
-            return coloring.count
-        }
+extension ListTopPicksColoringViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return colorings.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == listFilter {
-            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: FillterCell.self)
-            cell.setupView(title: listCategory[indexPath.row], isSelected: indexPath.row == indexFillter)
-            return cell
-        } else {
-            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: AllColoringCell.self)
-            cell.setupView(image: coloring[indexPath.row].filePath, coloringLocal: coloringLocal)
-            return cell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CategoryColoringCell.self)
+        let coloring = colorings[indexPath.row]
+        cell.setupView(coloringLocal: coloringLocal, coloringModel: coloring)
+        cell.onClickSeeAll = {
+            AppRouter.shared.navigate(to: DetailColoringRoute.main(coloring: coloring), with: .push)
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == listFilter {
-            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            indexFillter = indexPath.row
-            fillterCategory(index: indexPath.row)
-            collectionView.reloadData()
-        } else {
-            let data = coloring[indexPath.row]
-            numberClick += 1
-            guard numberClick < UserDefaultManager.numberClickItemAllTopic  else {
-                if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath == data.filePath}) {
-                    AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal), with: .modal)
+        cell.didSelectItemColoring = {[weak self] item in
+            guard let self = self else {return}
+            let data = item
+            guard !(data.isPremium ?? false) else {
+                guard SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) == nil else {
+                    if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath == data.filePath}) {
+                        AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .coloring, coloringAPI: data), with: .modal)
+                    } else {
+                        AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .coloring), with: .modal)
+                    }
+                    return
+                }
+                ADManager.shared.loadReward(DollColoringAdID.reward_alltopic) { status in
+                    switch status {
+                    case .closed:
+                        SQLiteManager.shared.insertTableColoringRew(data: data)
+                        if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath == data.filePath}) {
+                            AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .coloring, coloringAPI: data), with: .modal)
+                        } else {
+                            AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .coloring), with: .modal)
+                        }
+                    case .error:
+                        if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath == data.filePath}) {
+                            AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .coloring, coloringAPI: data), with: .modal)
+                        } else {
+                            AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .coloring), with: .modal)
+                        }
+                    default:
+                        break
+                    }
+                }
+                return
+            }
+            self.indexCategory = indexPath.row
+            self.numberClick += 1
+            guard self.numberClick >= UserDefaultManager.numberClickItemAllTopic  else {
+                if let colorLocal = self.coloringLocal.first(where: {$0.filePath == data.filePath}) {
+                    AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .coloring, coloringAPI: data), with: .modal)
                 } else {
-                    AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil), with: .modal)
+                    AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .coloring), with: .modal)
                 }
                 return
             }
             ADManager.shared.loadFull(DollColoringAdID.inter_alltopic) { status in
                 switch status {
                 case .closed, .error:
-                    if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath == data.filePath}) {
-                        AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal), with: .modal)
+                    self.numberClick = 0
+                    if let colorLocal = self.coloringLocal.first(where: {$0.filePath == data.filePath}) {
+                        AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .coloring, coloringAPI: data), with: .modal)
                     } else {
-                        AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil), with: .modal)
+                        AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .coloring), with: .modal)
                     }
                 default:
                     break
                 }
             }
         }
+        return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == listFilter {
-            let index = indexPath.row
-            let item = listCategory[index]
-            let widthF = item.trimmingCharacters(in: .whitespaces).width(withConstrainedHeight: 8, font: UIFont.systemFont(ofSize: 14))
-            return CGSize(width: 32 + widthF, height: listFilter.frame.height)
-        } else {
-            let width = (collectionView.frame.width - 40) / 2
-            return CGSize(width: width, height: width * 1.2)
-        }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let width = UIScreen.main.bounds.width - 32
+        return width * (200 / width)
     }
+   
 }
 
+enum TypeHome: String, CaseIterable {
+    case ads = ""
+    case feature = "Discover"
+    case trending = "Trending"
+}

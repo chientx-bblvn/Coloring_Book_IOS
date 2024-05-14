@@ -14,11 +14,11 @@ class StartColoringVM {
     private let serviceManager = StartColoringManager()
     var coloringLocal: ColoringHistoryModel
     var history: HistoryModel?
-    var isCollection: Bool
-    init(coloringLocal: ColoringHistoryModel, history: HistoryModel?, isCollection: Bool) {
+    var typeScreen: BackToScreenType
+    init(coloringLocal: ColoringHistoryModel, history: HistoryModel?, typeScreen: BackToScreenType) {
         self.coloringLocal = coloringLocal
         self.history = history
-        self.isCollection = isCollection
+        self.typeScreen = typeScreen
     }
 }
 

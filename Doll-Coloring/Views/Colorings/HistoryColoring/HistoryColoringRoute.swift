@@ -10,15 +10,15 @@ import Foundation
 import UIKit
 
 enum HistoryColoringRoute: Route {
-    case main(coloring: ColoringHistoryModel)
+    case main(coloring: ColoringHistoryModel, typeScreen: BackToScreenType, coloringAPI: ColoringImage)
 
     var screen: UIViewController {
         switch self {
-        case let .main(coloring):
+        case let .main(coloring, typeScreen, coloringAPI):
             guard let main = R.storyboard.historyColoring.historyColoringController() else {
               return UIViewController()
             }
-            main.viewModel = HistoryColoringVM(coloring: coloring)
+            main.viewModel = HistoryColoringVM(coloring: coloring, typeScreen: typeScreen, coloringAPI: coloringAPI)
             return main
         }
     }

@@ -8,27 +8,26 @@
 
 import RxSwift
 import UIKit
+import SVProgressHUD
 
 class HomeVM {
     private var disposeBag = DisposeBag()
     private let serviceManager = HomeManager()
     
+    var colorings: [ColoringModel] = []
+    
     init() {
     }
-
-    func requestAPI(callback apiCallback: @escaping (HomeModel?) -> Void) {
-        serviceManager.provider.request(HomeService.list) { result in
-            switch result {
-            case let .success(moyaResponse):
-                do {
-                    let response = try JSONDecoder().decode(HomeModel.self, from: moyaResponse.data)
-                    apiCallback(response)
-                } catch {
-                    apiCallback(nil)
-                }
-            case let .failure(error):
-                print(error)
-            }
+    
+    func getColorings(complection: @escaping () -> Void) {
+        SVProgressHUD.show()
+        serviceManager.requestAPI(.list, type: [ColoringModel].self) {[weak self] isSuccess, response in
+            SVProgressHUD.dismiss()
+            self?.colorings = response
+            complection()
+        } onFailed: { error in
+            complection()
+            SVProgressHUD.dismiss()
         }
     }
 }

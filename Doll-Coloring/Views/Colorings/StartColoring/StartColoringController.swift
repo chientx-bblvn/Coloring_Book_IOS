@@ -78,19 +78,18 @@ class StartColoringController: BaseViewController {
     private let endColor = UIColor.white
     private let minimumNumberOfTouches = 2
     private var currentColor: UIColor = .black
-    private var coloringBookView: ColoringBookView!
-    
+    var coloringBookView: ColoringBookView!
+    private let circleLayer = CAShapeLayer()
     
     override func setup() {
         super.setup()
         setupView()
-        if let img = UIImage(contentsOfFile: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .Coloring, file:  viewModel.coloringLocal.fileLocal).path) {
-            createColoringBookView(with: img)
-        }
+        createColoringBookView()
         loadAdsView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        listColor.reloadData()
         viewAnimation.loadAnimation(file: "animationView_StartColoring", animationSpeed: 0.7) {[weak self] isSuccess in
             self?.viewAnimation.isHidden = isSuccess
         }
@@ -106,7 +105,8 @@ class StartColoringController: BaseViewController {
     }
     
     func setupView() {
-        let heightView = ((listColor.frame.width - 56) / 8) * 2 + 8
+        let screen = UIScreen.main.bounds.width - 62
+        let heightView = ((screen - 56) / 8) * 2 + 8
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(changePinchGestureTemplate(_ :)))
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(changePanGestureTemplate(_ :)))
         
@@ -118,10 +118,15 @@ class StartColoringController: BaseViewController {
         topBarView.title = LocalizableUtils.commonStartColoring().uppercased()
         topBarView.titleFont = UIFont.systemFont(ofSize: 20, weight: .bold)
         topBarView.onLeftClick = {
-            if self.viewModel.isCollection {
-                AppRouter.shared.popToController(controller: CollectionsController.classForCoder())
-            } else {
+            switch self.viewModel.typeScreen {
+            case .home:
+                AppRouter.shared.popToController(controller: HomeController.classForCoder())
+            case .coloring:
                 AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
+            case .detailColoring:
+                AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
+            case .collection:
+                AppRouter.shared.popToController(controller: CollectionsController.classForCoder())
             }
         }
         
@@ -231,8 +236,26 @@ class StartColoringController: BaseViewController {
     }
     
     func updateLineWidthPen() {
+        addDashedCircle(size: lineWidthPen * 100)
         coloringBookView.currentWidth = CGFloat(simd_mix(1.0, 40.0, lineWidthPen))
     }
+    
+    func addDashedCircle(size: Float) {
+        circleLayer.removeFromSuperlayer()
+        circleLayer.path = UIBezierPath(arcCenter: CGPoint(x: contentView.frame.size.width / 2,
+                                                           y: contentView.frame.size.height / 2),
+                                        radius: CGFloat(size / 2.0),
+                                        startAngle: 0,
+                                        endAngle: .pi * 2,
+                                        clockwise: true).cgPath
+        circleLayer.lineWidth = 2.0
+        circleLayer.strokeColor =  UIColor.red.cgColor//border of circle
+        circleLayer.fillColor = currentColor.cgColor//inside the circle
+        circleLayer.lineJoin = .round
+        circleLayer.lineDashPattern = [6,3]
+        contentView.layer.addSublayer(circleLayer)
+    }
+    
     
     func blend(_ start: UIColor, _ end: UIColor, percentage: CGFloat) -> UIColor {
         var startRed: CGFloat = 0, startGreen: CGFloat = 0, startBlue: CGFloat = 0, startAlpha: CGFloat = 0
@@ -311,13 +334,13 @@ class StartColoringController: BaseViewController {
     
     @IBAction func actionDelete(_ sender: Any) {
         coloringBookView.layer.borderWidth = 0
-        AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: coloringBookView.asImage(), coloringLocal: viewModel.coloringLocal, history: viewModel.history, isCollection: viewModel.isCollection), with: .push)
+        AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: coloringBookView.asImage(), coloringLocal: viewModel.coloringLocal, history: viewModel.history, typeScreen: viewModel.typeScreen), with: .push)
         coloringBookView.layer.borderWidth = 0.5
     }
     
     @IBAction func actionSave(_ sender: Any) {
         coloringBookView.layer.borderWidth = 0
-        AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: coloringBookView.asImage(), coloringLocal: viewModel.coloringLocal, history: viewModel.history, isCollection: viewModel.isCollection), with: .push)
+        AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: coloringBookView.asImage(), coloringLocal: viewModel.coloringLocal, history: viewModel.history, typeScreen: viewModel.typeScreen), with: .push)
         coloringBookView.layer.borderWidth = 0.5
     }
     
@@ -346,66 +369,33 @@ class StartColoringController: BaseViewController {
     }
     
     func loadAdsView() {
-        ADManager.shared.loadCollapsibleBannerAdaptive(DollColoringAdID.banner_coloring, viewBanner: viewAds) {[weak self] success in
+        ADManager.shared.loadBanner(DollColoringAdID.banner_coloring, viewBanner: viewAds) {[weak self] success in
             self?.viewAds.isHidden = !success
         }
     }
 }
 
 extension StartColoringController {
-    func createColoringBookView(with image:UIImage, optimized:Bool = true) {
-        let messageView = UIView()
-        messageView.translatesAutoresizingMaskIntoConstraints = false
-        messageView.backgroundColor = .white
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.distribution = .fillEqually
+    func createColoringBookView() {
         
-        let label = UILabel()
-        label.text = "Currently proccesing your image, please wait"
-        label.textAlignment = .center
-        
-        let indicator = UIActivityIndicatorView()
-        indicator.startAnimating()
-        stack.addArrangedSubview(label)
-        stack.addArrangedSubview(indicator)
-        
-        stack.fixInView(messageView)
-        
-        UIView.transition(with: self.view,
-                          duration: 0.3,
-                          options: .transitionCrossDissolve) {
-            messageView.fixInView(self.view)
-        }
-        
-        DispatchQueue.global(qos: .background).async{
-            //Create the coloring image struct in a background thread
-            let coloringImage = ColoringImageBook(from: image, optimized: optimized)
-            //Once done return to the main thread
-            DispatchQueue.main.async{
-                messageView.removeFromSuperview()
-                //Create the Coloring Book View
-                self.coloringBookView = ColoringBookView(coloringImage: coloringImage)
-                //Add to contentView settings constraints
-                self.coloringBookView.layer.cornerRadius = 16
-                self.coloringBookView.layer.borderWidth = 0.5
-                self.coloringBookView.layer.borderColor = UIColor.black.cgColor
-                self.coloringBookView.clipsToBounds = true
-                self.coloringBookView?.translatesAutoresizingMaskIntoConstraints = false
-                self.contentView.addSubview(self.coloringBookView)
-                NSLayoutConstraint.activate([
-                    self.coloringBookView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
-                    self.coloringBookView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
-                ])
-                //Change the default color and width of the new coloring Book View
-                self.coloringBookView.currentColor = self.currentColor
-                self.coloringBookView.nameColor = ""
-                self.coloringBookView.currentWidth = CGFloat(simd_mix(1.0, 40.0, self.lineWidthPen))
-                self.coloringBookView.delegate = self
-                self.coloringBookView.transform = .identity.scaledBy(x: 2.5, y: 2.5)
-                self.getHistoryColoring()
-            }
-        }
+        //Add to contentView settings constraints
+        self.coloringBookView.layer.cornerRadius = 16
+        self.coloringBookView.layer.borderWidth = 0.5
+        self.coloringBookView.layer.borderColor = UIColor.black.cgColor
+        self.coloringBookView.clipsToBounds = true
+        self.coloringBookView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(self.coloringBookView)
+        NSLayoutConstraint.activate([
+            self.coloringBookView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+            self.coloringBookView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
+        ])
+        //Change the default color and width of the new coloring Book View
+        self.coloringBookView.currentColor = self.currentColor
+        self.coloringBookView.nameColor = ""
+        self.coloringBookView.currentWidth = CGFloat(simd_mix(1.0, 40.0, self.lineWidthPen))
+        self.coloringBookView.delegate = self
+        self.coloringBookView.transform = .identity.scaledBy(x: 1.5, y: 1.5)
+        self.getHistoryColoring()
     }
     
     private func checkColoringBookState(){
@@ -443,12 +433,34 @@ extension StartColoringController {
                 newHis.removeAll(where: {$0.imagePath == history.imagePath})
                 newHis.append(newHistory)
                 let historys = ColoringHistoryModel(id: coloring.id, filePath: coloring.filePath, fileLocal: coloring.fileLocal, historys: newHis)
-                SQLiteManager.shared.updateColorings(data: historys)
+                if !SQLiteManager.shared.updateColorings(data: historys) {
+                    self.coloringBookView?.reloadStrokes()
+                    let new = HistoryModel(imagePath: fileName, strokes: coloringBookView.strokes.map({ stroke in
+                        StrokeModel(lineWidth: stroke.lineWidth, color: stroke.color.toHexString(), id: 0, nameColor: stroke.nameColor, points: stroke.points.map({ point in
+                            PointModel(x: point.x, y: point.y)
+                        }), strokeRect: StrokeRectMode(x: stroke.strokeRect.x, y: stroke.strokeRect.y, width: stroke.strokeRect.width, height: stroke.strokeRect.height))
+                    }))
+                    newHis.removeAll(where: {$0.imagePath == new.imagePath})
+                    newHis.append(new)
+                    let his = ColoringHistoryModel(id: coloring.id, filePath: coloring.filePath, fileLocal: coloring.fileLocal, historys: newHis)
+                    _ = SQLiteManager.shared.updateColorings(data: his)
+                }
             } else {
                 var newHis = coloring.historys
                 newHis.append(newHistory)
                 let historys = ColoringHistoryModel(id: coloring.id, filePath: coloring.filePath, fileLocal: coloring.fileLocal, historys: newHis)
-                SQLiteManager.shared.updateColorings(data: historys)
+                if !SQLiteManager.shared.updateColorings(data: historys) {
+                    self.coloringBookView?.reloadStrokes()
+                    let new = HistoryModel(imagePath: fileName, strokes: coloringBookView.strokes.map({ stroke in
+                        StrokeModel(lineWidth: stroke.lineWidth, color: stroke.color.toHexString(), id: 0, nameColor: stroke.nameColor, points: stroke.points.map({ point in
+                            PointModel(x: point.x, y: point.y)
+                        }), strokeRect: StrokeRectMode(x: stroke.strokeRect.x, y: stroke.strokeRect.y, width: stroke.strokeRect.width, height: stroke.strokeRect.height))
+                    }))
+                    newHis.removeAll(where: {$0.imagePath == new.imagePath})
+                    newHis.append(new)
+                    let his = ColoringHistoryModel(id: coloring.id, filePath: coloring.filePath, fileLocal: coloring.fileLocal, historys: newHis)
+                    _ = SQLiteManager.shared.updateColorings(data: his)
+                }
             }
             if let coloringModel = SQLiteManager.shared.selectionColorings().first(where: {$0.id == viewModel.coloringLocal.id}) {
                 viewModel.coloringLocal = coloringModel
@@ -493,9 +505,11 @@ extension StartColoringController {
 
 extension StartColoringController: ColoringBookViewDelegate {
     func viewWillStartDrawing() {
+        circleLayer.removeFromSuperlayer()
         if !UserDefaultManager.disableSound {
             soundColoring.loadAudio(type: .Sound)
         }
+        Vibration.rigid.vibrate()
     }
     
     func viewDidEndDrawing() {

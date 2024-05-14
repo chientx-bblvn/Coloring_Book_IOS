@@ -16,13 +16,13 @@ class PreviewColoringVM {
     var coloring: ColoringImage?
     var coloringLocal: ColoringHistoryModel?
     var history: HistoryModel?
-    var isCollection: Bool
+    var typeScreen: BackToScreenType
     
-    init(coloring: ColoringImage?, coloringLocal: ColoringHistoryModel?, history: HistoryModel?, isCollection: Bool) {
+    init(coloring: ColoringImage?, coloringLocal: ColoringHistoryModel?, history: HistoryModel?, typeScreen: BackToScreenType) {
         self.coloring = coloring
         self.coloringLocal = coloringLocal
         self.history = history
-        self.isCollection = isCollection
+        self.typeScreen = typeScreen
     }
 
 }

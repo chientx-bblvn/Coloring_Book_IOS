@@ -51,6 +51,7 @@ class AppDelegate: BaseAppDelegate {
     
     override func applicationWillEnterForeground(_ application: UIApplication) {
         super.applicationWillEnterForeground(application)
+        if !DollColoringAdID.appopen_resume.isEnableAd { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             ADManager.shared.loadOpen(DollColoringAdID.appopen_resume)
         }

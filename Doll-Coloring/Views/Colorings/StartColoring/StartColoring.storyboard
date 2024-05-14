@@ -84,13 +84,13 @@
                                                     <action selector="actionRedo:" destination="zIc-eW-6fX" eventType="touchUpInside" id="an0-I7-XCD"/>
                                                 </connections>
                                             </button>
-                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="01Z-Mi-6oi">
-                                                <rect key="frame" x="175" y="0.0" width="32" height="32"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="01Z-Mi-6oi">
+                                                <rect key="frame" x="155" y="0.0" width="72" height="32"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xi1-al-9nl">
-                                                        <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="72" height="32"/>
                                                         <subviews>
-                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RiL-6h-KH9">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RiL-6h-KH9">
                                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="RiL-6h-KH9" secondAttribute="height" id="oN1-7F-Ogq"/>
@@ -103,7 +103,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euy-8y-mf5">
-                                                                <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                                                <rect key="frame" x="40" y="0.0" width="32" height="32"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="euy-8y-mf5" secondAttribute="height" id="s7S-Iq-6WO"/>
                                                                 </constraints>
@@ -147,11 +147,11 @@
                                         </constraints>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tmj-Mq-2Xt">
-                                        <rect key="frame" x="5" y="53" width="372" height="307"/>
+                                        <rect key="frame" x="5" y="53" width="372" height="337"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9W-Ef-pPW">
-                                        <rect key="frame" x="16" y="365" width="350" height="30"/>
+                                        <rect key="frame" x="16" y="395" width="350" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hjw-DP-0b8">
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -198,7 +198,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0se-Ad-yck">
-                                        <rect key="frame" x="15" y="403" width="352" height="288"/>
+                                        <rect key="frame" x="15" y="433" width="352" height="288"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rMP-Vl-ZX5">
                                                 <rect key="frame" x="0.0" y="8" width="352" height="32"/>
@@ -342,14 +342,14 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b4a-Fo-jgn">
-                                        <rect key="frame" x="0.0" y="706" width="382" height="90"/>
+                                        <rect key="frame" x="0.0" y="736" width="382" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="hru-bh-xMJ"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C3i-fl-jeu" customClass="LottieAnimationView" customModule="Lottie">
-                                        <rect key="frame" x="166" y="195" width="200" height="200"/>
+                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C3i-fl-jeu" customClass="LottieAnimationView" customModule="Lottie">
+                                        <rect key="frame" x="166" y="225" width="200" height="200"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="LUg-uC-cEu"/>
@@ -427,6 +427,9 @@
             <point key="canvasLocation" x="302.89855072463769" y="301.63043478260875"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="C3i-fl-jeu"/>
+    </designables>
     <resources>
         <image name="background_home" width="393" height="852"/>
         <image name="ic_back" width="32" height="32"/>

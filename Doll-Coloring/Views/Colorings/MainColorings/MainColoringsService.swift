@@ -21,7 +21,7 @@ extension MainColoringsService: TargetType {
     public var path: String {
         switch self {
         case .list:
-            return "/doll-coloring/doll.json"
+            return "/doll-coloring2/doll_v3.json"
         }
     }
     
