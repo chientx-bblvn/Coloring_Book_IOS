@@ -70,4 +70,24 @@ class UserDefaultManager {
             UserDefaults.standard.synchronize()
         }
     }
+    
+    static var ABTestFillColoring: Bool {
+        if let isShow = UserDefaultManager.currentAccessABTestFillColoring {
+            return isShow
+        } else {
+           return false
+        }
+    }
+    
+    static var currentAccessABTestFillColoring: Bool? {
+        get {
+            let isShow = UserDefaults.standard.bool(forKey: UserDefault.fill_coloring.rawValue)
+            return isShow
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefault.fill_coloring.rawValue)
+            UserDefaults.standard.synchronize()
+        }
+    }
 }

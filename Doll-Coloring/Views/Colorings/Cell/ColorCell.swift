@@ -23,9 +23,10 @@ class ColorCell: UICollectionViewCell, NibReusable {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        viewColor.layer.cornerRadius = viewColor.frame.height / 2
-        viewContent.layer.cornerRadius = viewContent.frame.height / 2
-        boderView.layer.cornerRadius = boderView.frame.height / 2
+        let width = 40
+        viewColor.layer.cornerRadius = CGFloat((width - 10) / 2)
+        viewContent.layer.cornerRadius = CGFloat(width / 2)
+        boderView.layer.cornerRadius = CGFloat(width / 2)
     }
     
     
@@ -34,6 +35,13 @@ class ColorCell: UICollectionViewCell, NibReusable {
         viewContent.backgroundColor = color
         boderView.layer.borderColor = color?.cgColor
         viewContent.isHidden = isSelect
+        
+    }
+    
+    func setupCornerRadius(_ width: CGFloat = 30) {
+        viewColor.layer.cornerRadius = (width - 10) / 2
+        viewContent.layer.cornerRadius = width / 2
+        boderView.layer.cornerRadius = width / 2
     }
     
     

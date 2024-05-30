@@ -16,6 +16,8 @@ class HomeVM {
     
     var colorings: [ColoringModel] = []
     
+    var itemColoring: [ColoringImage] = []
+    
     init() {
     }
     
@@ -24,6 +26,7 @@ class HomeVM {
         serviceManager.requestAPI(.list, type: [ColoringModel].self) {[weak self] isSuccess, response in
             SVProgressHUD.dismiss()
             self?.colorings = response
+            self?.itemColoring = response.first?.imageUrls ?? []
             complection()
         } onFailed: { error in
             complection()

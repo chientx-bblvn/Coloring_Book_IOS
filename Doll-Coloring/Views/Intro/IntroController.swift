@@ -88,7 +88,7 @@ extension IntroController {
             customPageControl(currentIndex: currentPage)
         } else {
             UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
-            AppRouter.shared.navigate(to: HomeRoute.main, with: .changeRoot)
+            AppRouter.shared.navigate(to: TabbarViewRoute.main, with: .changeRoot)
         }
     }
     
@@ -129,7 +129,6 @@ extension IntroController {
     }
     
     func preloadAdsNative() {
-        ADManager.shared.preLoadNative(DollColoringAdID.native_home)
     }
     
 }

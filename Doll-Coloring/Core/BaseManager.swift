@@ -202,7 +202,7 @@ open class BaseManager<T>: ServiceManager where T: TargetType {
             guard let `self` = self else { return }
             switch response {
             case let .success(moyaResponse):
-                print("Data request: \n\((try? moyaResponse.mapString()) ?? "")")
+//                print("Data request: \n\((try? moyaResponse.mapString()) ?? "")")
                 if moyaResponse.statusCode >= 500 {
                     onFailed(APIError(messageId: moyaResponse.statusCode, title: ErrorUtils.default_error(),
                                       message: ErrorUtils.err_NO_INTERNET(),

@@ -100,7 +100,7 @@
                                         <rect key="frame" x="118" y="0.0" width="102.33333333333331" height="44"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
-                                        <state key="normal" title="Save" image="ic_save_photo" backgroundImage="color_bling3_pastel12">
+                                        <state key="normal" title="Save" image="ic_ads_video" backgroundImage="color_bling3_pastel12">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -194,10 +194,10 @@
     <resources>
         <image name="backgroundSave" width="392" height="852"/>
         <image name="color_bling3_pastel12" width="215" height="215"/>
+        <image name="ic_ads_video" width="24" height="24"/>
         <image name="ic_collection_photo" width="24.333333969116211" height="24"/>
         <image name="ic_delete_photo" width="24" height="24"/>
         <image name="ic_dismiss" width="24" height="24"/>
-        <image name="ic_save_photo" width="24" height="24"/>
         <image name="ic_share" width="32" height="32"/>
         <namedColor name="ColorTextTopBar">
             <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

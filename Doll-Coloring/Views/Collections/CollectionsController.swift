@@ -37,12 +37,29 @@ class CollectionsController: BaseViewController {
     
     private var listColoring: [ColoringHistoryModel] = []
     
+    lazy var collectionViewLayout: PinterestCollectionViewLayout = {
+        let layout = PinterestCollectionViewLayout()
+        layout.delegate = self
+        
+        return layout
+    }()
+    
+    var navigate: Bool = false
+    
+    private var isLandscape: Bool = false
+    
     override func setup() {
         super.setup()
         viewAnimation.loadAnimation(file: "animation_collection", loopMode: .loop, autoPlay: true)
-        topBarView.title = LocalizableUtils.commonCollections().uppercased()
-        topBarView.titleFont = UIFont.systemFont(ofSize: 20, weight: .bold)
+        topBarView.title = ""
+        topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
+        if navigate {
+            topBarView.title = LocalizableUtils.commonCollections().uppercased()
+            topBarView.leftIcon = R.image.ic_back()
+            topBarView.textAlignmentCenter = true
+        }
         topBarView.onLeftClick = {
+            self.topBarView.textAlignmentCenter = false
             AppRouter.shared.dismissDetail()
         }
         topBarView.onRightClick = {
@@ -63,7 +80,34 @@ class CollectionsController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         reloadDataColection()
-        loadAdsNative()
+        updateLayoutContent()
+        
+    }
+    
+    override func updateMorePortrait() {
+        super.updateMorePortrait()
+        updateLayoutContent()
+    }
+    
+    override func updateMoreLandscape() {
+        super.updateMoreLandscape()
+        updateLayoutContent()
+    }
+    
+    private func updateLayoutContent() {
+        let rotation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation
+        switch rotation {
+        case .unknown:
+            break
+        case .portrait, .portraitUpsideDown:
+            isLandscape = false
+            collectionView.reloadData()
+        case .landscapeLeft, .landscapeRight:
+            isLandscape = true
+            collectionView.reloadData()
+        default:
+            break
+        }
     }
     
     func setupCollectionView() {
@@ -74,6 +118,7 @@ class CollectionsController: BaseViewController {
     }
     
     @IBAction func actionStartColoring(_ sender: Any) {
+        FirebaseEventManager.logEvent(with: RMBGEventTracking.collection_start_coloring)
         AppRouter.shared.navigate(to: MainColoringsRoute.main, with: .push)
     }
     
@@ -101,6 +146,13 @@ extension CollectionsController {
     }
 }
 
+extension CollectionsController: PinterestCollectionViewLayoutDelegate {
+    func heightForImage(at indexPath: IndexPath) -> CGFloat? {
+        let data = listCollection[indexPath.row]
+        return UIImage(contentsOfFile: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: data).path)?.size.height
+    }
+}
+
 extension CollectionsController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -120,8 +172,15 @@ extension CollectionsController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.width - 40) / 2
-        return CGSize(width: width, height: width * 1.2)
+        var width = (collectionView.frame.width - 32)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            if isLandscape {
+                return CGSize(width: (Int(width) - 42) / 5, height: Int(width / 5))
+            } else {
+                return CGSize(width: (Int(width) - 34) / 4, height: Int(width / 4))
+            }
+        }
+        return CGSize(width: (Int(width) - 8) / 2, height: Int(width / 2))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

@@ -91,5 +91,6 @@ table.mystical_color = "Màu huyền bí";
 
 subtite_delete = "Màu sẽ bị xóa. Nhấn vào xóa để tiếp tục.";
 
+save_picture_ads = "Để lưu bức vẽ vào thiết bị của bạn, vui lòng xem một quảng cáo ngắn. Quảng cáo sẽ tự động kết thúc sau vài giây. Khi quảng cáo kết thúc, bạn sẽ có thể tải bức vẽ xuống.";
 save_picture_success = "Bức ảnh của bạn đã được lưu vào ảnh của bạn.";
 save_picture_fail = "Bức ảnh của bạn không được lưu vào ảnh của bạn.";

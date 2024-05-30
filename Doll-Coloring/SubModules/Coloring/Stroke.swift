@@ -20,14 +20,16 @@ struct Stroke {
     let color:UIColor
     let nameColor: String
     let id:UInt64
+    let isPens: Bool
     
     //Helper variable to know which points the active stroke has already drawn
     private (set) var lastDrawnPoint:Int = -1
     
-    init(color:UIColor = .black, lineWidth:CGFloat = 5.0, nameColor:String = ""){
+    init(color:UIColor = .black, lineWidth:CGFloat = 5.0, nameColor:String = "", isPens: Bool =  true){
         self.color = color
         self.lineWidth = lineWidth
         self.nameColor = nameColor
+        self.isPens = isPens
         self.id = Stroke.currentID
         Stroke.currentID += 1
     }

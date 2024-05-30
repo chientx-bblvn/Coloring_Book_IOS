@@ -34,6 +34,8 @@ class DetailCollectionController: BaseViewController {
         super.setup()
         setupView()
         loadNativeAds()
+        FirebaseEventManager.logEvent(with: RMBGEventTracking.collection_detail)
+        ADManager.shared.preLoadReward(DollColoringAdID.reward_save)
     }
 
     override func bindingData() {
@@ -43,7 +45,11 @@ class DetailCollectionController: BaseViewController {
     private func setupView() {
         topBarView.title = LocalizableUtils.commonCollections().uppercased()
         topBarView.onLeftClick = {
-            AppRouter.shared.dismissDetail()
+            if self.viewModel.isCollection {
+                AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+            } else {
+                AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+            }
         }
         topBarView.titleFont = UIFont.systemFont(ofSize: 20, weight: .bold)
         imageView.setLocalImage(with: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: viewModel.history?.imagePath ?? "").path, placeholder: nil)
@@ -70,12 +76,13 @@ class DetailCollectionController: BaseViewController {
         let coloring = viewModel.coloringLocal
         guard let history = viewModel.history else {
             if viewModel.isCollection {
-                AppRouter.shared.popToController(controller: CollectionsController.classForCoder())
+                AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
             } else {
-                AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
+                AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
             }
             return
         }
+        FirebaseEventManager.logEvent(with: RMBGEventTracking.collection_detele)
         if coloring.historys.count == 1 {
             SQLiteManager.shared.deleteColorings(id: coloring.id)
             FileManagerLocal.shared.deleteFile(typeFile: .ColoringSave, fileName: history.imagePath)
@@ -88,9 +95,9 @@ class DetailCollectionController: BaseViewController {
             FileManagerLocal.shared.deleteFile(typeFile: .ColoringSave, fileName: history.imagePath)
         }
         if viewModel.isCollection {
-            AppRouter.shared.popToController(controller: CollectionsController.classForCoder())
+            AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
         } else {
-            AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
+            AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
         }
     }
     
@@ -100,12 +107,20 @@ class DetailCollectionController: BaseViewController {
         case .authorized:
             //handle authorized status
             DispatchQueue.main.async {
-                self.loadAdsView()
+                PopupSaveColoringViewController.show(in: self) {
+                    
+                } onclickDelete: {
+                    DispatchQueue.main.async {
+                        self.loadAdsView()
+                    }
+                }
             }
         case .denied, .restricted :
             DispatchQueue.main.async {
                 self.createMyAlert(title: LocalizableUtils.title_open_library(), LocalizableUtils.message_open_libary()) {
-                    self.gotoSettings()
+                    DispatchQueue.main.async {
+                        self.gotoSettings()
+                    }
                 }
             }
         case .notDetermined:
@@ -114,11 +129,25 @@ class DetailCollectionController: BaseViewController {
                 switch status {
                 case .authorized:
                     DispatchQueue.main.async {
-                        self.loadAdsView()
+                        PopupSaveColoringViewController.show(in: self) {
+                            
+                        } onclickDelete: {
+                            DispatchQueue.main.async {
+                                self.loadAdsView()
+                            }
+                        }
+
                     }
                 case .limited:
                     DispatchQueue.main.async {
-                        self.loadAdsView()
+                        PopupSaveColoringViewController.show(in: self) {
+                            
+                        } onclickDelete: {
+                            DispatchQueue.main.async {
+                                self.loadAdsView()
+                            }
+                        }
+
                     }
                 case .notDetermined:
                     break
@@ -132,7 +161,14 @@ class DetailCollectionController: BaseViewController {
             }
         case .limited:
             DispatchQueue.main.async {
-                self.loadAdsView()
+                PopupSaveColoringViewController.show(in: self) {
+                    
+                } onclickDelete: {
+                    DispatchQueue.main.async {
+                        self.loadAdsView()
+                    }
+                }
+
             }
         @unknown default:
             break
@@ -145,11 +181,24 @@ class DetailCollectionController: BaseViewController {
         UIApplication.shared.open(settingsUrl, options: [:])
     }
     
-    func loadAdsView() {
+    func loadInterAds() {
         ADManager.shared.loadFull(DollColoringAdID.inter_save) {[weak self] status in
             switch status {
             case .closed, .error:
                 self?.savePhotosAlbum()
+            default:
+                break
+            }
+        }
+    }
+    
+    func loadAdsView() {
+        ADManager.shared.loadReward(DollColoringAdID.reward_save) {[weak self] status in
+            switch status {
+            case .closed:
+                self?.savePhotosAlbum()
+            case .error:
+                self?.loadInterAds()
             default:
                 break
             }
@@ -164,6 +213,7 @@ class DetailCollectionController: BaseViewController {
     
     func savePhotosAlbum() {
         if let image = imageView.image {
+            FirebaseEventManager.logEvent(with: RMBGEventTracking.collection_save)
             UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
         }
     }
@@ -183,9 +233,9 @@ class DetailCollectionController: BaseViewController {
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: {_ in
             DispatchQueue.main.async {
                 if self.viewModel.isCollection {
-                    AppRouter.shared.popToController(controller: CollectionsController.classForCoder())
+                    AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
                 } else {
-                    AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
+                    AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
                 }
             }
         }))
@@ -197,6 +247,7 @@ class DetailCollectionController: BaseViewController {
         let coloring = viewModel.coloringLocal
         let imageUrlString = FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: history?.imagePath ?? "")
         let cacheKey = SDWebImageManager.shared.cacheKey(for: imageUrlString)
+        FirebaseEventManager.logEvent(with: RMBGEventTracking.collection_edit)
         SDImageCache.shared.removeImage(forKey: cacheKey, withCompletion: nil)
         AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: nil, coloringLocal: coloring, history: history, typeScreen: .collection), with: .push)
     }

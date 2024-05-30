@@ -18,15 +18,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="541" height="40"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="livephoto" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9EJ-bx-ABN">
-                        <rect key="frame" x="5" y="4.9999999999999964" width="30" height="30.333333333333332"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_trengding" translatesAutoresizingMaskIntoConstraints="NO" id="9EJ-bx-ABN">
+                        <rect key="frame" x="5" y="10" width="20" height="20"/>
                         <color key="tintColor" name="SystemRed"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="9EJ-bx-ABN" secondAttribute="height" id="xGA-iB-Fgt"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trending" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klP-h3-8CH">
-                        <rect key="frame" x="45" y="0.0" width="486" height="40"/>
+                        <rect key="frame" x="35" y="0.0" width="496" height="40"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                         <color key="textColor" name="ColorTextTopBar"/>
                         <nil key="highlightedColor"/>
@@ -39,9 +39,9 @@
                 <constraint firstItem="klP-h3-8CH" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="HGR-Jy-oE2"/>
                 <constraint firstAttribute="bottom" secondItem="klP-h3-8CH" secondAttribute="bottom" id="PpP-uF-a1Q"/>
                 <constraint firstAttribute="trailing" secondItem="klP-h3-8CH" secondAttribute="trailing" constant="10" id="Yyy-2Y-LTV"/>
-                <constraint firstItem="9EJ-bx-ABN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="a1I-WN-xPc"/>
+                <constraint firstItem="9EJ-bx-ABN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="a1I-WN-xPc"/>
                 <constraint firstItem="klP-h3-8CH" firstAttribute="leading" secondItem="9EJ-bx-ABN" secondAttribute="trailing" constant="10" id="dAV-JV-1Kv"/>
-                <constraint firstAttribute="bottom" secondItem="9EJ-bx-ABN" secondAttribute="bottom" constant="5" id="mWA-ax-hV2"/>
+                <constraint firstAttribute="bottom" secondItem="9EJ-bx-ABN" secondAttribute="bottom" constant="10" id="mWA-ax-hV2"/>
             </constraints>
             <size key="customSize" width="541" height="40"/>
             <connections>
@@ -51,7 +51,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="livephoto" catalog="system" width="128" height="124"/>
+        <image name="ic_trengding" width="22.666666030883789" height="26.333333969116211"/>
         <namedColor name="ColorTextTopBar">
             <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

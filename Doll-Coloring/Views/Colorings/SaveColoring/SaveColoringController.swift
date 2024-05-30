@@ -34,6 +34,8 @@ class SaveColoringController: BaseViewController {
         super.setup()
         setupView()
         loadNativeAds()
+        ADManager.shared.preLoadReward(DollColoringAdID.reward_save)
+        
     }
     
     override func bindingData() {
@@ -48,11 +50,21 @@ class SaveColoringController: BaseViewController {
     }
     
     @IBAction func actionShare(_ sender: Any) {
+        
         showActivityController()
     }
     
     @IBAction func actionDismis(_ sender: Any) {
-        AppRouter.shared.dismissDetail()
+        switch viewModel.typeScreen {
+        case .home:
+            AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+        case .coloring:
+            AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
+        case .detailColoring:
+            AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
+        case .collection:
+            AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+        }
     }
     
     @IBAction func actionDelete(_ sender: Any) {
@@ -64,7 +76,8 @@ class SaveColoringController: BaseViewController {
     }
     
     @IBAction func actionCollection(_ sender: Any) {
-        AppRouter.shared.navigate(to: CollectionsRoute.main, with: .push)
+        FirebaseEventManager.logEvent(with: RMBGEventTracking.colletion_coloring_screen)
+        AppRouter.shared.navigate(to: CollectionsRoute.main(), with: .push)
     }
 }
 
@@ -107,30 +120,31 @@ extension SaveColoringController {
             UIActivity.ActivityType.airDrop
             
         ]
-        
+        FirebaseEventManager.logEvent(with: RMBGEventTracking.share_coloring_screen)
         activityViewController.isModalInPresentation = true
         self.present(activityViewController, animated: true, completion: nil)
     }
     
     func deleteColoring() {
+        FirebaseEventManager.logEvent(with: RMBGEventTracking.delete_coloring_screen)
         let coloring = viewModel.coloringLocal
         guard let history = viewModel.history else {
             switch viewModel.typeScreen {
             case .home:
-                AppRouter.shared.popToController(controller: HomeController.classForCoder())
+                AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
             case .coloring:
                 AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
             case .detailColoring:
                 AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
             case .collection:
-                AppRouter.shared.popToController(controller: CollectionsController.classForCoder())
+                AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
             }
             return
         }
         if coloring.historys.count == 1 {
             SQLiteManager.shared.deleteColorings(id: coloring.id)
             FileManagerLocal.shared.deleteFile(typeFile: .ColoringSave, fileName: history.imagePath)
-            FileManagerLocal.shared.deleteFile(typeFile: .Coloring, fileName: coloring.filePath)
+            FileManagerLocal.shared.deleteFile(typeFile: .Coloring, fileName: coloring.fileLocal)
         } else {
             var newHis = coloring.historys
             newHis.removeAll(where: {$0.imagePath == history.imagePath})
@@ -140,13 +154,13 @@ extension SaveColoringController {
         }
         switch viewModel.typeScreen {
         case .home:
-            AppRouter.shared.popToController(controller: HomeController.classForCoder())
+            AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
         case .coloring:
             AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
         case .detailColoring:
             AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
         case .collection:
-            AppRouter.shared.popToController(controller: CollectionsController.classForCoder())
+            AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
         }
     }
     
@@ -156,12 +170,21 @@ extension SaveColoringController {
         case .authorized:
             //handle authorized status
             DispatchQueue.main.async {
-                self.loadAdsView()
+                PopupSaveColoringViewController.show(in: self) {
+                    
+                } onclickDelete: {
+                    DispatchQueue.main.async {
+                        self.loadAdsView()
+                    }
+                }
+
             }
         case .denied, .restricted :
             DispatchQueue.main.async {
                 self.createMyAlert(title: LocalizableUtils.title_open_library(), LocalizableUtils.message_open_libary()) {
-                    self.gotoSettings()
+                    DispatchQueue.main.async {
+                        self.gotoSettings()
+                    }
                 }
             }
         case .notDetermined:
@@ -170,11 +193,25 @@ extension SaveColoringController {
                 switch status {
                 case .authorized:
                     DispatchQueue.main.async {
-                        self.loadAdsView()
+                        PopupSaveColoringViewController.show(in: self) {
+                            
+                        } onclickDelete: {
+                            DispatchQueue.main.async {
+                                self.loadAdsView()
+                            }
+                        }
+
                     }
                 case .limited:
                     DispatchQueue.main.async {
-                        self.loadAdsView()
+                        PopupSaveColoringViewController.show(in: self) {
+                            
+                        } onclickDelete: {
+                            DispatchQueue.main.async {
+                                self.loadAdsView()
+                            }
+                        }
+
                     }
                 case .notDetermined:
                     break
@@ -188,7 +225,14 @@ extension SaveColoringController {
             }
         case .limited:
             DispatchQueue.main.async {
-                self.loadAdsView()
+                PopupSaveColoringViewController.show(in: self) {
+                    
+                } onclickDelete: {
+                    DispatchQueue.main.async {
+                        self.loadAdsView()
+                    }
+                }
+
             }
         @unknown default:
             break
@@ -201,11 +245,24 @@ extension SaveColoringController {
         UIApplication.shared.open(settingsUrl, options: [:])
     }
     
-    func loadAdsView() {
+    func loadInterAds() {
         ADManager.shared.loadFull(DollColoringAdID.inter_save) {[weak self] status in
             switch status {
             case .closed, .error:
                 self?.savePhotosAlbum()
+            default:
+                break
+            }
+        }
+    }
+    
+    func loadAdsView() {
+        ADManager.shared.loadReward(DollColoringAdID.reward_save) {[weak self] status in
+            switch status {
+            case .closed:
+                self?.savePhotosAlbum()
+            case .error:
+                self?.loadInterAds()
             default:
                 break
             }
@@ -220,6 +277,7 @@ extension SaveColoringController {
     
     func savePhotosAlbum() {
         let image = viewModel.imageColoring
+        FirebaseEventManager.logEvent(with: RMBGEventTracking.save_coloring_screen)
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
@@ -239,13 +297,13 @@ extension SaveColoringController {
             DispatchQueue.main.async {
                 switch self.viewModel.typeScreen {
                 case .home:
-                    AppRouter.shared.popToController(controller: HomeController.classForCoder())
+                    AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
                 case .coloring:
                     AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
                 case .detailColoring:
                     AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
                 case .collection:
-                    AppRouter.shared.popToController(controller: CollectionsController.classForCoder())
+                    AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
                 }
             }
         }))

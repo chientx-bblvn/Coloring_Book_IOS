@@ -93,5 +93,6 @@ table.mystical_color                            =       "神秘的な色";
 
 subtite_delete = "色が削除されます。削除して続行します。";
 
+save_picture_ads = "デバイスに絵を保存するには、短い広告をご覧ください。広告は数秒後に自動的に終了します。広告が終了すると、絵をダウンロードできます。";
 save_picture_success = "写真は写真に保存されました。";
 save_picture_fail = "写真は保存されませんでした。";

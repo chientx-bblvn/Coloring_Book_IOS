@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic_comeback.png",
+      "filename" : "Undo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic_comeback@2x.png",
+      "filename" : "Undo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ic_comeback@3x.png",
+      "filename" : "Undo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

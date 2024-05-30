@@ -20,6 +20,7 @@ var appDelegate: AppDelegate? {
 }
 
 @UIApplicationMain
+
 class AppDelegate: BaseAppDelegate {
     
     private var reachability: Reachability?

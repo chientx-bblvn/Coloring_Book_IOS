@@ -93,5 +93,6 @@ table.mystical_color                            =       "Color místico";
 
 subtite_delete = "El color será eliminado. Haga clic en eliminar para continuar.";
 
+save_picture_ads = "Para guardar el dibujo en tu dispositivo, mira un breve anuncio. El anuncio terminará automáticamente después de unos segundos. Una vez que termine el anuncio, podrás descargar el dibujo.";
 save_picture_success = "Su imagen ha sido guardada en tus fotos.";
 save_picture_fail = "Tu imagen no ha sido guardada en tus fotos.";

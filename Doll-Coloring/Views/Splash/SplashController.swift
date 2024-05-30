@@ -65,6 +65,7 @@ extension SplashController {
         dispatchGroup.enter()
         fetchRemoteConfig {
             UserDefaultManager.currentAccessNumberClick = RemoteConfigManager.shared.number(forKey: KeyRemoteConfig.NumberClickItemAllTopic)
+            UserDefaultManager.currentAccessABTestFillColoring = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.ABTestFillColoring)
             dispatchGroup.leave()
         }
         dispatchGroup.notify(queue: .main) { [weak self] in
@@ -185,7 +186,7 @@ extension SplashController {
             return
         }
         if showIntro {
-            ADManager.shared.preLoadNative(DollColoringAdID.native_home)
+            
         } else {
             ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding)
             ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_high)
@@ -231,7 +232,7 @@ extension SplashController {
                 return
             }
             BBLLogging.d("Check:: gotoHome")
-            AppRouter.shared.navigate(to: HomeRoute.main, with: .changeRoot)
+            AppRouter.shared.navigate(to: TabbarViewRoute.main, with: .changeRoot)
         }
     }
     

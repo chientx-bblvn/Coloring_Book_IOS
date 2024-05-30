@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroController" customModule="Remove_Object" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroController" customModule="Doll_Coloring" customModuleProvider="target">
             <connections>
                 <outlet property="btnNext" destination="Kvs-1d-9gg" id="icD-mv-w7B"/>
                 <outlet property="fsPagerView" destination="Zie-vQ-sXN" id="S5i-BS-4aa"/>
@@ -29,7 +29,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Srs-rs-EI0">
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zie-vQ-sXN" customClass="FSPagerView" customModule="Remove_Object" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zie-vQ-sXN" customClass="FSPagerView" customModule="Doll_Coloring" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="461"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>

@@ -77,6 +77,8 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
     case banner_collection = "banner_collection"
     case appopen_resume = "appopen_resume"
     case native_result = "native_result"
+    case reward_save = "reward_save"
+    case banner_home = "banner_home"
     
     var name: String { return self.rawValue }
     
@@ -111,6 +113,10 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
             return .OpenApp
         case .native_result:
             return .Native
+        case .reward_save:
+            return .Reward
+        case .banner_home:
+            return .Banner
         }
     }
     
@@ -144,6 +150,10 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
             return "ca-app-pub-3850749456614322/5033774529"
         case .native_result:
             return "ca-app-pub-3850749456614322/2299115185"
+        case .reward_save:
+            return "ca-app-pub-3850749456614322/1262025796"
+        case .banner_home:
+            return "ca-app-pub-3850749456614322/9959855034"
         }
     }
     
@@ -170,12 +180,46 @@ enum RMBGEventTracking: String, EventTracking {
     case notiSent = "noti_sent"
     case notiClick = "noti_click"
     
+    case table_color = "table_color"
+    
+    case start_coloring = "picture_choose"
+    
+    case item_color = "item_color"
+    
+    case category_name = "category_name"
+    
+    case collection_start_coloring = "collections_start_coloring"
+    
+    case collection_detail = "collections_detail"
+    
+    case collection_detele = "collections_delete"
+    
+    case collection_save = "collections_save"
+    
+    case collection_edit = "collections_edit"
+    
+    case collection_share = "collection_share"
+    
+    case color_fill_click = "color_fill_click"
+    case color_draw_click = "color_draw_click"
+    case tool_click = "tool_click"
+    case color_click = "color_click"
+    
+    case save_coloring_screen = "save_coloring_screen"
+    
+    case delete_coloring_screen = "delete_coloring_screen"
+    
+    case colletion_coloring_screen = "colletion_coloring_screen"
+    
+    case share_coloring_screen = "share_coloring_screen"
+    
     var key: String { return rawValue }
     
 }
 
 enum KeyRemoteConfig: String, KeyRemote {
     case NumberClickItemAllTopic = "number_click_item_all_topic"
+    case ABTestFillColoring = "ABTestFillColoring"
     
     var key: String {return self.rawValue}
 }

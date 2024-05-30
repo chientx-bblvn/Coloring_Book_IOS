@@ -93,5 +93,6 @@ table.mystical_color                            =       "신비한 색";
 
 subtite_delete = "색상이 삭제됩니다. 계속하려면 삭제를 클릭하십시오.";
 
+save_picture_ads = "그림을 기기에 저장하려면 짧은 광고를 시청해 주세요. 광고는 몇 초 후 자동으로 종료됩니다. 광고가 종료되면 그림을 다운로드할 수 있습니다.";
 save_picture_success = "사진이 저장되었습니다.";
 save_picture_fail = "사진이 저장되지 않았습니다.";

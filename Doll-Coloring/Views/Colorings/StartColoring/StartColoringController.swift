@@ -63,6 +63,7 @@ class StartColoringController: BaseViewController {
     
     @IBOutlet weak var sliderLineWidth: UISlider!
     
+    @IBOutlet weak var viewFake: UIView!
     @IBOutlet weak var viewChangeLineWidth: UIView!
     
     let soundColoring =  AudioPlayer()
@@ -76,10 +77,10 @@ class StartColoringController: BaseViewController {
     private var lineWidthPen: Float = 0.2
     private let startColor = UIColor.black
     private let endColor = UIColor.white
-    private let minimumNumberOfTouches = 2
-    private var currentColor: UIColor = .black
+    private var currentColor: UIColor? = .black
     var coloringBookView: ColoringBookView!
     private let circleLayer = CAShapeLayer()
+    private var panGesture: UIPanGestureRecognizer!
     
     override func setup() {
         super.setup()
@@ -108,25 +109,22 @@ class StartColoringController: BaseViewController {
         let screen = UIScreen.main.bounds.width - 62
         let heightView = ((screen - 56) / 8) * 2 + 8
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(changePinchGestureTemplate(_ :)))
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(changePanGestureTemplate(_ :)))
-        
-        panGesture.minimumNumberOfTouches = minimumNumberOfTouches
-        panGesture.maximumNumberOfTouches = minimumNumberOfTouches
-        viewContent.addGestureRecognizer(pinchGesture)
-        viewContent.addGestureRecognizer(panGesture)
+        panGesture = UIPanGestureRecognizer(target: self, action: #selector(changePanGestureTemplate(_ :)))
+        contentView.addGestureRecognizer(pinchGesture)
+        contentView.addGestureRecognizer(panGesture)
         heightListColor.constant = heightView
         topBarView.title = LocalizableUtils.commonStartColoring().uppercased()
         topBarView.titleFont = UIFont.systemFont(ofSize: 20, weight: .bold)
         topBarView.onLeftClick = {
             switch self.viewModel.typeScreen {
             case .home:
-                AppRouter.shared.popToController(controller: HomeController.classForCoder())
+                AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
             case .coloring:
                 AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
             case .detailColoring:
                 AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
             case .collection:
-                AppRouter.shared.popToController(controller: CollectionsController.classForCoder())
+                AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
             }
         }
         
@@ -157,7 +155,7 @@ class StartColoringController: BaseViewController {
         listLibraryColor.register(cellType: CategoryColorCell.self)
         listLibraryColor.delegate = self
         listLibraryColor.dataSource = self
-        reloadCategory(.Skin_Color)
+        reloadCategory(.Basic_Color)
     }
     
     func reloadCategory(_ item: TableColor) {
@@ -165,6 +163,7 @@ class StartColoringController: BaseViewController {
         indexTheme = 0
         viewFillterColor.isHidden = true
         viewSliderColor.isHidden = true
+        viewFake.isHidden = true
         switch item {
         case .Pastel_Color, .Sweet_Color, .Mystical_Color:
             viewFillterColor.isHidden = false
@@ -172,6 +171,7 @@ class StartColoringController: BaseViewController {
             reloadTheme(0)
         default:
             viewSliderColor.isHidden = false
+            viewFake.isHidden = false
             listItemColor = item.listColor
             selectItemColor(0)
         }
@@ -208,7 +208,7 @@ class StartColoringController: BaseViewController {
         var minddleColor = UIColor()
         guard !listItemColor.isEmpty, let hex = listItemColor[indexItemColor].hex else {
             currentColor = listItemColor[indexItemColor].color ?? .black
-            coloringBookView.currentColor = currentColor
+            coloringBookView.currentColor = currentColor ?? .red
             coloringBookView.nameColor = listItemColor[indexItemColor].name ?? ""
             return
         }
@@ -250,7 +250,7 @@ class StartColoringController: BaseViewController {
                                         clockwise: true).cgPath
         circleLayer.lineWidth = 2.0
         circleLayer.strokeColor =  UIColor.red.cgColor//border of circle
-        circleLayer.fillColor = currentColor.cgColor//inside the circle
+        circleLayer.fillColor = currentColor?.cgColor//inside the circle
         circleLayer.lineJoin = .round
         circleLayer.lineDashPattern = [6,3]
         contentView.layer.addSublayer(circleLayer)
@@ -276,6 +276,8 @@ class StartColoringController: BaseViewController {
         btnFill.isSelected = !isPens
         viewChangeLineWidth.isHidden = !isPens
         coloringBookView.isPens = isPens
+        panGesture.maximumNumberOfTouches = isPens ? 2 : 1
+        panGesture.minimumNumberOfTouches = isPens ? 2 : 1
     }
     
     @objc func sliderValueChanged(_ sender: UISlider) {
@@ -290,7 +292,7 @@ class StartColoringController: BaseViewController {
     @objc private func changePanGestureTemplate(_ gesture: UIPanGestureRecognizer) {
         let transform = coloringBookView.transform
         coloringBookView.transform = CGAffineTransform.identity
-        let point: CGPoint = gesture.translation(in: coloringBookView)
+        let point: CGPoint = gesture.translation(in: contentView)
         let movedPoint = CGPoint(x: coloringBookView.center.x + point.x,
                                  y: coloringBookView.center.y + point.y)
         coloringBookView.center = movedPoint
@@ -299,15 +301,39 @@ class StartColoringController: BaseViewController {
     }
     
     @objc private func changePinchGestureTemplate(_ gesture: UIPinchGestureRecognizer) {
-        if gesture.state == UIGestureRecognizer.State.changed { // Pinching in operating
-            
+        switch gesture.state {
+        case .possible:
+            print("changePinchGestureTemplate possible")
+        case .began:
+            coloringBookView.isZooming = true
+        case .changed:
             let pinchCenter = CGPoint(x: gesture.location(in: coloringBookView).x - coloringBookView.bounds.midX,
                                       y: gesture.location(in: coloringBookView).y - coloringBookView.bounds.midY)
             let transform = coloringBookView.transform.translatedBy(x: pinchCenter.x, y: pinchCenter.y)
                 .scaledBy(x: gesture.scale, y: gesture.scale)
                 .translatedBy(x: -pinchCenter.x, y: -pinchCenter.y)
+            let minScale: CGFloat = 0.7
+            let maxScale: CGFloat = 5.0
+            if transform.a < minScale || transform.d < minScale {
+                return
+            }
+            
+            if transform.a > maxScale || transform.d > maxScale {
+                return
+            }
+            
             coloringBookView.transform = transform
             gesture.scale = 1
+        case .ended:
+            coloringBookView.isZooming = false
+        case .cancelled:
+            coloringBookView.isZooming = false
+        case .failed:
+            coloringBookView.isZooming = false
+        case .recognized:
+            print("changePinchGestureTemplate recognized")
+        @unknown default:
+            break
         }
     }
     
@@ -390,7 +416,7 @@ extension StartColoringController {
             self.coloringBookView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
         ])
         //Change the default color and width of the new coloring Book View
-        self.coloringBookView.currentColor = self.currentColor
+        self.coloringBookView.currentColor = self.currentColor ?? .red
         self.coloringBookView.nameColor = ""
         self.coloringBookView.currentWidth = CGFloat(simd_mix(1.0, 40.0, self.lineWidthPen))
         self.coloringBookView.delegate = self
@@ -421,7 +447,7 @@ extension StartColoringController {
         coloringBookView.layer.borderWidth = 0.5
         // lưu các config và đường đãn của ảnh vừa vẽ vào DB
         let newHistory = HistoryModel(imagePath: fileName, strokes: coloringBookView.strokes.map({ stroke in
-            StrokeModel(lineWidth: stroke.lineWidth, color: stroke.color.toHexString(), id: 0, nameColor: stroke.nameColor, points: stroke.points.map({ point in
+            StrokeModel(lineWidth: stroke.lineWidth, color: stroke.color.toHexString(), id: 0, nameColor: stroke.nameColor, isPens: stroke.isPens, points: stroke.points.map({ point in
                 PointModel(x: point.x, y: point.y)
             }), strokeRect: StrokeRectMode(x: stroke.strokeRect.x, y: stroke.strokeRect.y, width: stroke.strokeRect.width, height: stroke.strokeRect.height))
         }))
@@ -481,7 +507,7 @@ extension StartColoringController {
                 if let c = ItemThemeColor.allCases.first(where: {$0.name == detail.nameColor})?.color {
                    color = c
                 } else if let name = TableColor.allCases.first(where: {$0.listColor.contains(where: {$0.name == detail.nameColor})}) {
-                    if let c = name.listColor.first(where: {$0.name == detail.nameColor})?.color {
+                    if let c = name.listColor.first(where: {$0.name?.contains(detail.nameColor) ?? true })?.color {
                         color = c
                     } else {
                         let hex = name.listColor.first(where: {$0.name == detail.nameColor})?.name
@@ -490,7 +516,7 @@ extension StartColoringController {
                 } else {
                     color = UIColor(hexString: detail.color.replacingOccurrences(of: "#", with: ""))
                 }
-                var item = Stroke(color: color, lineWidth: detail.lineWidth, nameColor: detail.nameColor)
+                var item = Stroke(color: color, lineWidth: detail.lineWidth, nameColor: detail.nameColor, isPens: detail.isPens ?? true)
                 detail.points.forEach { point in
                     item.addPoint(CGPoint(x: point.x, y: point.y))
                 }
@@ -499,6 +525,7 @@ extension StartColoringController {
             coloringBookView.setStrokes(stroke)
             checkColoringBookState()
         }
+        changeStateColoring(UserDefaultManager.ABTestFillColoring)
     }
     
 }
@@ -506,10 +533,9 @@ extension StartColoringController {
 extension StartColoringController: ColoringBookViewDelegate {
     func viewWillStartDrawing() {
         circleLayer.removeFromSuperlayer()
-        if !UserDefaultManager.disableSound {
+        if !UserDefaultManager.disableSound, coloringBookView.isPens{
             soundColoring.loadAudio(type: .Sound)
         }
-        Vibration.rigid.vibrate()
     }
     
     func viewDidEndDrawing() {

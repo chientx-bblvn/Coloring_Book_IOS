@@ -30,8 +30,15 @@ class HistoryColoringController: BaseViewController {
     
     @IBOutlet weak var fsPageView: FSPagerView!
     
+    @IBOutlet var contraintView: [NSLayoutConstraint]!
+    
     override func setup() {
         super.setup()
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            contraintView.forEach { contraint in
+                contraint.constant = 40
+            }
+        }
         self.view.alpha = 0.0
         viewContent.transform = .identity.scaledBy(x: 0, y: 0)
         setupView()
@@ -41,6 +48,7 @@ class HistoryColoringController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         showAnimate()
+        setupView()
     }
     
     override func onLanguageChange() {
@@ -53,8 +61,9 @@ class HistoryColoringController: BaseViewController {
     }
     
     func setupView() {
-        let transform = CGAffineTransform(scaleX: 0.6, y: 0.75)
-        fsPageView.itemSize = fsPageView.frame.size.applying(transform)
+        let transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+//        fsPageView.frame.size.applying(transform)
+        fsPageView.itemSize = CGSize(width: fsPageView.frame.height, height: fsPageView.frame.height).applying(transform)
         fsPageView.transformer = FSPagerViewTransformer(type: .coverFlow)
         fsPageView.decelerationDistance = FSPagerView.automaticDistance
         fsPageView.register(cellType: HistoryCellCollectionViewCell.self)

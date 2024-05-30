@@ -97,5 +97,7 @@ subtite_delete = "The color will be deleted Click delete to continue.";
 
 // StartColoring
 
+save_picture_ads = "To save the drawing to your device, please watch a short advertisement. The advertisement will automatically end after a few seconds. Once the advertisement finishes, you will be able to download the drawing.";
+
 save_picture_success = "Your picture has been saved to your photos.";
 save_picture_fail = "Your picture has not been saved to your photos.";

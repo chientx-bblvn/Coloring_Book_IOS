@@ -7,6 +7,7 @@
 
 import UIKit
 import MobileCoreServices
+import CoreImage
 
 struct ColoringImageBook {
     //Processing can be optimized or not
@@ -60,6 +61,19 @@ struct ColoringImageBook {
             fatalError("There is no Mask to Alpha filter!!!!!!!")
         }
         
+        guard let filter = CIFilter(name: "CILanczosScaleTransform") else {
+            fatalError("There is no CILanczosScaleTransform filter!!!!!!!")
+        }
+        
+        guard let blurFilter = CIFilter(name: "CIGaussianBlur") else {
+            fatalError("There is no CILanczosScaleTransform filter!!!!!!!")
+        }
+        
+        guard let sharpenFilter = CIFilter(name: "CIUnsharpMask") else {
+            fatalError("There is no CILanczosScaleTransform filter!!!!!!!")
+        }
+        
+        
         guard let ciimage = CIImage(image: image) else{
             fatalError("Couldn transform UIImage to CIImage!!!!!!")
         }
@@ -85,9 +99,21 @@ struct ColoringImageBook {
         //Turn white pixels to black (the lines of our drawing)
         secondColorInvert.setValue(maskToAlpha.outputImage!, forKey: kCIInputImageKey)
         
+        filter.setValue(secondColorInvert.outputImage!, forKey: kCIInputImageKey)
+        filter.setValue(1.0, forKey: kCIInputScaleKey)
+        filter.setValue(1.0, forKey: kCIInputAspectRatioKey)
+        
+        blurFilter.setValue(secondColorInvert.outputImage!, forKey: kCIInputImageKey)
+        blurFilter.setValue(2.0, forKey: kCIInputRadiusKey)
+        
+        sharpenFilter.setValue(filter.outputImage!, forKey: kCIInputImageKey)
+        sharpenFilter.setValue(2.5, forKey: kCIInputRadiusKey) // Bán kính làm nét
+        sharpenFilter.setValue(0.5, forKey: kCIInputIntensityKey) // Độ sắc nét
+        
         //Create a CGImage for the Coloring View
-        self.cgImage = ColoringImageBook.ciContext.createCGImage(secondColorInvert.outputImage!,
-                                                             from: secondColorInvert.outputImage!.extent)!
+        self.cgImage = ColoringImageBook.ciContext.createCGImage(sharpenFilter.outputImage!,
+                                                                 from: sharpenFilter.outputImage!.extent)!
+        
         self.width = Int(image.size.width * image.scale)
         self.height = Int(image.size.height * image.scale)
         
@@ -104,13 +130,11 @@ struct ColoringImageBook {
         if self.isOptimized{
             self.createMasks()
         }
-        
     }
     
     private mutating func createMasks(){
         guard let data = self.cgImage.dataProvider?.data else {return}
         let dataLenght:Int = CFDataGetLength(data) as Int
-
         
         //A copy of the bitmap from the drawing (we are going to turn in full black)
         var bitmapCopy:[UInt8] = [UInt8].init(repeating: 0, count: dataLenght)
@@ -132,8 +156,8 @@ struct ColoringImageBook {
                                                               count: maskBytes)
                         
                         let boundingRect = self.maskFillScanLine(x: x, y: y,
-                                              bitmap: &bitmapCopy,
-                                              mask: &maskBitmap)
+                                                                 bitmap: &bitmapCopy,
+                                                                 mask: &maskBitmap)
                         //No bounding rect for mask found, shouldn't happen
                         if boundingRect.isNull {return}
                         
@@ -144,14 +168,14 @@ struct ColoringImageBook {
                         
                         //Create a CGImage from the mask, cropping to the bounding rect of the mask
                         guard let maskImage = CGImage(width: self.width,
-                                       height: self.height,
-                                       bitsPerComponent: 8,
-                                       bitsPerPixel: 8,
-                                       bytesPerRow: self.width,
-                                       space: CGColorSpaceCreateDeviceGray(),
-                                       bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue),
-                                       provider: provider, decode: nil,
-                                       shouldInterpolate: true, intent: .defaultIntent)?.cropping(to: boundingRect)
+                                                      height: self.height,
+                                                      bitsPerComponent: 8,
+                                                      bitsPerPixel: 8,
+                                                      bytesPerRow: self.width,
+                                                      space: CGColorSpaceCreateDeviceGray(),
+                                                      bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue),
+                                                      provider: provider, decode: nil,
+                                                      shouldInterpolate: true, intent: .defaultIntent)?.cropping(to: boundingRect)
                         else{return}
                         
                         let pngData:NSMutableData = NSMutableData()
@@ -169,8 +193,6 @@ struct ColoringImageBook {
                                                    data: pngData)
                                 
                                 self.spatialSearch.add(newMask)
-                                let originalBytes = ColoringImageBook.byteFormatter.string(fromByteCount: Int64(maskBitmap.count))
-                                let pngBytes = ColoringImageBook.byteFormatter.string(fromByteCount: Int64(pngData.count))
                                 self.maskBytes += Int64(pngData.count)
                                 self.totalMasks += 1
                             }
@@ -183,14 +205,7 @@ struct ColoringImageBook {
     
     //X and Y are pixel position
     func getFillMaskAt(x:Int, y:Int)->(CGRect, CGImage?){
-        if self.isOptimized{
-            //Optimized mask is searched
-            return self.getFillMaskOptimizedAt(x: x, y: y)
-        }
-        else{
-            //None optimized mask gets created at runtime
-            return self.getFillMaskNotOptimizedAt(x: x, y: y)
-        }
+        return self.getFillMaskOptimizedAt(x: x, y: y)
     }
     
     private func getFillMaskNotOptimizedAt(x:Int, y:Int)->(CGRect, CGImage?){
@@ -215,8 +230,7 @@ struct ColoringImageBook {
         }
         
         let dif = ProcessInfo.processInfo.systemUptime - start
-        NSLog("Took \(dif) seconds to create mask")
-    
+        
         let maskData:CFData = Data(bytes: &maskBitmap,
                                    count: maskBitmap.count * MemoryLayout<UInt8>.size) as CFData
         
@@ -227,14 +241,14 @@ struct ColoringImageBook {
                        width: self.width / Int(scale),
                        height: self.height / Int(scale))
                 ,CGImage(width: self.width,
-                       height: self.height,
-                       bitsPerComponent: 8,
-                       bitsPerPixel: 8,
-                       bytesPerRow: self.width,
-                       space: CGColorSpaceCreateDeviceGray(),
-                       bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue),
-                       provider: provider, decode: nil,
-                       shouldInterpolate: true, intent: .defaultIntent))
+                         height: self.height,
+                         bitsPerComponent: 8,
+                         bitsPerPixel: 8,
+                         bytesPerRow: self.width,
+                         space: CGColorSpaceCreateDeviceGray(),
+                         bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue),
+                         provider: provider, decode: nil,
+                         shouldInterpolate: true, intent: .defaultIntent))
     }
     
     private func getFillMaskOptimizedAt(x:Int, y:Int)->(CGRect, CGImage?){
@@ -243,8 +257,7 @@ struct ColoringImageBook {
         guard let bitmapPointer = CFDataGetBytePtr(data) else {return (.null,nil)}
         
         //Check if touch is inside a black pixel, no point in searching after this
-        if bitmapPointer[(self.bytesPerRow * y) + (bytesPerPixel * x) + 3] == 255{
-            print("Touched black line")
+        if bitmapPointer[(bytesPerRow * y) + (bytesPerPixel * x) + 3] == 255{
             return (.null,nil)
         }
         
@@ -271,10 +284,8 @@ struct ColoringImageBook {
         //Order mask with origin closer to point first
         masks = masks.sorted(by: { (mask0, mask1) -> Bool in
             return mask0.squaredDistanceFromOriginTo(CGPoint(x: x, y: y)) <
-            mask1.squaredDistanceFromOriginTo(CGPoint(x: x, y: y))
+                mask1.squaredDistanceFromOriginTo(CGPoint(x: x, y: y))
         })
-        
-        NSLog("\(masks.count) masks detected")
         
         //Ideally only 1 mask will be found
         for mask in masks{
@@ -428,8 +439,8 @@ struct ColoringImageBook {
             x1 = position.x
             
             while( x1 >= 0 &&
-                    bitmap[(bytesPerRow * position.y ) + (bytesPerPixel * x1) + 3] != 255 &&
-                    mask[(self.width * ((self.height - 1) - position.y)) + x1] != 255){
+                   bitmap[(bytesPerRow * position.y ) + (bytesPerPixel * x1) + 3] != 255 &&
+                   mask[(self.width * ((self.height - 1) - position.y)) + x1] != 255){
                 x1 -= 1
             }
             x1 += 1
@@ -438,20 +449,20 @@ struct ColoringImageBook {
             spanBelow = false
             
             while ( x1 < self.width &&
-                        bitmap[(bytesPerRow * position.y ) + (bytesPerPixel * x1) + 3] != 255 &&
-                        mask[(self.width * ((self.height - 1) - position.y)) + x1] != 255){
+                    bitmap[(bytesPerRow * position.y ) + (bytesPerPixel * x1) + 3] != 255 &&
+                    mask[(self.width * ((self.height - 1) - position.y)) + x1] != 255){
                 
                 let maskIndex = (self.width * ((self.height - 1) - position.y)) + (x1)
                 mask[maskIndex] = 255
                 
                 if !spanAbove && position.y > 0 &&
                     bitmap[self.bytesPerRow * (position.y - 1) + (bytesPerPixel * x1) + 3] != 255
-                   && mask[(self.width * ((self.height - 1) - (position.y - 1))) + x1] != 255{
+                    && mask[(self.width * ((self.height - 1) - (position.y - 1))) + x1] != 255{
                     stack.push(PixelPosition(x: x1, y: position.y - 1))
                     spanAbove = true
                 }
                 else if spanAbove && position.y > 0 &&
-                bitmap[self.bytesPerRow * (position.y - 1) + (bytesPerPixel * x1) + 3] == 255
+                            bitmap[self.bytesPerRow * (position.y - 1) + (bytesPerPixel * x1) + 3] == 255
                 {
                     spanAbove = false
                 }
@@ -463,7 +474,7 @@ struct ColoringImageBook {
                     spanBelow = true
                 }
                 else if spanBelow && position.y < (self.height - 1) &&
-                    bitmap[self.bytesPerRow * (position.y + 1) + (bytesPerPixel * x1) + 3] == 255{
+                            bitmap[self.bytesPerRow * (position.y + 1) + (bytesPerPixel * x1) + 3] == 255{
                     spanBelow = false
                 }
                 
@@ -491,7 +502,7 @@ struct ColoringImageBook {
             x1 = position.x
             
             while( x1 >= 0 &&
-                    bitmap[(bytesPerRow * position.y ) + (bytesPerPixel * x1) + 3] != 255){
+                   bitmap[(bytesPerRow * position.y ) + (bytesPerPixel * x1) + 3] != 255){
                 x1 -= 1
             }
             x1 += 1
@@ -500,7 +511,7 @@ struct ColoringImageBook {
             spanBelow = false
             
             while ( x1 < self.width &&
-                        bitmap[(bytesPerRow * position.y ) + (bytesPerPixel * x1) + 3] != 255){
+                    bitmap[(bytesPerRow * position.y ) + (bytesPerPixel * x1) + 3] != 255){
                 
                 let maskIndex = (self.width *  position.y) + (x1)
                 mask[maskIndex] = 255
@@ -519,7 +530,7 @@ struct ColoringImageBook {
                     spanAbove = true
                 }
                 else if spanAbove && position.y > 0 &&
-                bitmap[self.bytesPerRow * (position.y - 1) + (bytesPerPixel * x1) + 3] == 255
+                            bitmap[self.bytesPerRow * (position.y - 1) + (bytesPerPixel * x1) + 3] == 255
                 {
                     spanAbove = false
                 }
@@ -530,7 +541,7 @@ struct ColoringImageBook {
                     spanBelow = true
                 }
                 else if spanBelow && position.y < (self.height - 1) &&
-                    bitmap[self.bytesPerRow * (position.y + 1) + (bytesPerPixel * x1) + 3] == 255{
+                            bitmap[self.bytesPerRow * (position.y + 1) + (bytesPerPixel * x1) + 3] == 255{
                     spanBelow = false
                 }
                 

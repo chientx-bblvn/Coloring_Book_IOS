@@ -39,6 +39,7 @@ class PreviewColoringController: BaseViewController {
     }
     
     func setupView() {
+        topBarView.titleFont = .systemFont(ofSize: 24, weight: .bold)
         animationView.loadAnimation(file: "animation_progess", loopMode: .loop)
         animationPreview.loadAnimation(file: "animation_loading_preview", loopMode: .loop, autoPlay: true, animationSpeed: 1.2)
         let preview = apiBaseUrl + "/doll-coloring2/canvas/" + (viewModel.coloring?.filePreview ?? "")
@@ -126,10 +127,10 @@ extension PreviewColoringController: DownloadProcessProtocol {
     }
     
     func dismissView(isDownloadSucceeded: Bool) {
+        self.imgView.image = nil
         AppRouter.shared.dismiss(animated: !isDownloadSucceeded) {
-            self.imgView.image = nil
             if let coloring = self.viewModel.coloringLocal {
-                AppRouter.shared.navigate(to: StartColoringRoute.main(coloringLocal: coloring, history: self.viewModel.history, typeScreen: self.viewModel.typeScreen, coloringBookView: self.coloringBookView), with: .push)
+                AppRouter.shared.navigate(to: StartColoringRoute.startColoring(coloringLocal: coloring, history: self.viewModel.history, typeScreen: self.viewModel.typeScreen, coloringBookView: self.coloringBookView), with: .push)
             }
         }
     }

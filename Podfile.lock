@@ -2,7 +2,7 @@ PODS:
   - Adjust (4.38.1):
     - Adjust/Core (= 4.38.1)
   - Adjust/Core (4.38.1)
-  - AdmobSDK (0.0.11):
+  - AdmobSDK (0.0.13):
     - Adjust
     - Firebase/RemoteConfig
     - FirebaseAnalytics
@@ -11,6 +11,7 @@ PODS:
     - GoogleMobileAdsMediationAppLovin
     - GoogleMobileAdsMediationFacebook
     - GoogleUserMessagingPlatform
+    - lottie-ios
     - MONActivityIndicatorView
     - RxCocoa (~> 5.1.0)
     - RxSwift (~> 5.1.0)
@@ -206,7 +207,7 @@ PODS:
   - Toast-Swift (5.1.1)
 
 DEPENDENCIES:
-  - AdmobSDK (from `https://github.com/Binary-Bridge-Labs/ADMobSDK`, tag `v0.0.11`)
+  - AdmobSDK (from `https://github.com/Binary-Bridge-Labs/ADMobSDK`, tag `v0.0.13`)
   - BmoViewPager (from `./Submodules/BmoViewPager`)
   - Firebase/Messaging
   - IQKeyboardManagerSwift (= 6.5.10)
@@ -270,18 +271,18 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   AdmobSDK:
     :git: https://github.com/Binary-Bridge-Labs/ADMobSDK
-    :tag: v0.0.11
+    :tag: v0.0.13
   BmoViewPager:
     :path: "./Submodules/BmoViewPager"
 
 CHECKOUT OPTIONS:
   AdmobSDK:
     :git: https://github.com/Binary-Bridge-Labs/ADMobSDK
-    :tag: v0.0.11
+    :tag: v0.0.13
 
 SPEC CHECKSUMS:
   Adjust: e449a8b88cd2261d8f548df023823f7e861a059c
-  AdmobSDK: f908fd87f4f651443a296e49d5882c4e746061cf
+  AdmobSDK: 36e6a291afe3d110f015e5eceb3b87a0c987116c
   Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
   AppLovinSDK: c57ad0d34625c971d2db127f8ef60570b28ff51a
   BmoViewPager: f06da0dd20d115e2ced117268465230d922624b7
@@ -328,6 +329,6 @@ SPEC CHECKSUMS:
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
   Toast-Swift: 7a03a532afe3a560d4044bc7c237e2864d295173
 
-PODFILE CHECKSUM: 760bb3af3fcf455c7b89819f04edeb10dec8efe7
+PODFILE CHECKSUM: 91977f4a5a2b4d49e29365ced9d6f0ef26fed37b
 
 COCOAPODS: 1.15.2

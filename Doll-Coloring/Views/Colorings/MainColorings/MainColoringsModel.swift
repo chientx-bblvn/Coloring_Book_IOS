@@ -39,6 +39,7 @@ struct StrokeModel: Codable {
     var color: String
     var id: Int
     var nameColor: String
+    var isPens: Bool?
     var points: [PointModel]
     var strokeRect: StrokeRectMode
 }

@@ -12,7 +12,7 @@
         <!--Collections Controller-->
         <scene sceneID="XJ1-QA-Nrj">
             <objects>
-                <viewController storyboardIdentifier="CollectionsController" id="zIc-eW-6fX" customClass="CollectionsController" customModule="Remove_Object" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CollectionsController" id="zIc-eW-6fX" customClass="CollectionsController" customModule="Doll_Coloring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Z2g-4m-atm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,7 +20,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_collection" translatesAutoresizingMaskIntoConstraints="NO" id="ZgB-DA-vLf">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X5C-pH-vvG" customClass="TopBarView" customModule="Remove_Object" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X5C-pH-vvG" customClass="TopBarView" customModule="Doll_Coloring" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="375" height="56"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -33,13 +33,12 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorView">
                                         <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="ic_back"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="textAlignmentCenter" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="textAlignmentCenter" value="NO"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="rightIcon" value="ic_setting"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="16n-GJ-sg4">
-                                <rect key="frame" x="0.0" y="84" width="375" height="527"/>
+                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="GDE-XN-bdd">
                                     <size key="itemSize" width="128" height="128"/>
@@ -95,10 +94,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Y9-uA-akL">
-                                <rect key="frame" x="0.0" y="611" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="Dby-LU-mgt"/>
+                                    <constraint firstAttribute="height" id="Dby-LU-mgt"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -143,7 +142,6 @@
     <resources>
         <image name="background_button_collection" width="182" height="92"/>
         <image name="background_collection" width="393" height="852"/>
-        <image name="ic_back" width="32" height="32"/>
         <image name="ic_setting" width="24" height="24"/>
         <namedColor name="ColorTextTopBar">
             <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

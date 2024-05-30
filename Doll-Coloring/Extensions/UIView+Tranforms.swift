@@ -114,7 +114,7 @@ extension UIView {
         })
     }
     
-    func hideTranformToRight(duration: TimeInterval = 1, _ delay: Int, completion: ((_ finished: Bool) -> Void)? = nil) {
+    func hideTranformToRight(duration: TimeInterval = 0.5, _ delay: Int, completion: ((_ finished: Bool) -> Void)? = nil) {
         self.alpha = 1
         self.transform = .identity
         UIView.animate(withDuration: duration, delay: 0.08 * Double(delay), options: .curveEaseInOut, animations: {

@@ -7,9 +7,32 @@
 
 import Foundation
 
+struct ListColorIpad {
+    var table_name: String?
+    var listColor: [[ItemColor?]]
+}
+
+enum BannerHome {
+    case iphone
+    case ipad
+    
+    var images: [String] {
+        switch self {
+        case .iphone:
+            return ["banner1_IP", "banner2_IP", "banner3_IP"]
+        case .ipad:
+            return ["banner1_Ipad", "banner2_Ipad", "banner3_ipad"]
+        }
+    }
+}
+
 enum TableColor: CaseIterable {
-    case Skin_Color
     case Basic_Color
+    case Galaxy_Color
+    case Pastel_Color
+    case Sweet_Color
+    case Mystical_Color
+    case Skin_Color
     case Vivid_Color
     case Hot_Color
     case Natural_Color
@@ -17,17 +40,14 @@ enum TableColor: CaseIterable {
     case Purple_Color
     case Gradient_Color2
     case Gradient_Color1
-    case Galaxy_Color
-    case Pastel_Color
-    case Sweet_Color
-    case Mystical_Color
+    
     
     var title: String {
         switch self {
-        case .Skin_Color:
-            return LocalizableUtils.tableSkin_color()
         case .Basic_Color:
             return LocalizableUtils.tableBasic_color()
+        case .Skin_Color:
+            return LocalizableUtils.tableSkin_color()
         case .Vivid_Color:
             return LocalizableUtils.tableVivid_color()
         case .Hot_Color:
@@ -55,16 +75,13 @@ enum TableColor: CaseIterable {
     
     var listColor: [ItemColor] {
         switch self {
+        case .Basic_Color:
+            return [ItemColor(hex: "D63131", name: "D63131"), ItemColor(hex: "000000", name: "000000"), ItemColor(hex: "DE8900", name: "DE8900"), ItemColor(hex: "68BD00", name: "68BD00"), ItemColor(hex: "026850", name: "026850"), ItemColor(hex: "007AA3", name: "007AA3"), ItemColor(hex: "0E189E", name: "0E189E"), ItemColor(hex: "DECBE0", name: "DECBE0"), ItemColor(hex: "FFFFFF", name: "FFFFFF"), ItemColor(hex: "B34A00", name: "B34A00"), ItemColor(hex: "F0B000", name: "F0B000"), ItemColor(hex: "058708", name: "058708"), ItemColor(hex: "009FAD", name: "009FAD"), ItemColor(hex: "004F8C", name: "004F8C"), ItemColor(hex: "54119C", name: "54119C"), ItemColor(hex: "D92768", name: "D92768")]
         case .Skin_Color:
             return [ItemColor(hex: "FFE6E3", name: "FFE6E3"), ItemColor(hex: "FFBCAA", name: "FFBCAA"), ItemColor(hex: "F5BC9D", name: "F5BC9D"), ItemColor(hex: "F79E85", name: "F79E85"),
                     ItemColor(hex: "FFAEA3", name: "FFAEA3"), ItemColor(hex: "DC8776", name: "DC8776"), ItemColor(hex: "EDBD91", name: "EDBD91"), ItemColor(hex: "69281B", name: "69281B"),
                     ItemColor(hex: "FFC9BE", name: "FFC9BE"), ItemColor(hex: "F0AC99", name: "F0AC99"), ItemColor(hex: "E99586", name: "E99586"), ItemColor(hex: "D28873", name: "D28873"),
                     ItemColor(hex: "F28F6F", name: "F28F6F"), ItemColor(hex: "B05937", name: "B05937"), ItemColor(hex: "A25E53", name: "A25E53"), ItemColor(hex: "BC594E", name: "BC594E")]
-        case .Basic_Color:
-            return [ItemColor(hex: "000000", name: "000000"), ItemColor(hex: "D63131", name: "D63131"), ItemColor(hex: "DE8900", name: "DE8900"), ItemColor(hex: "68BD00", name: "68BD00"),
-                    ItemColor(hex: "026850", name: "026850"), ItemColor(hex: "007AA3", name: "007AA3"), ItemColor(hex: "0E189E", name: "0E189E"), ItemColor(hex: "DECBE0", name: "DECBE0"),
-                    ItemColor(hex: "FFFFFF", name: "FFFFFF"), ItemColor(hex: "B34A00", name: "B34A00"), ItemColor(hex: "F0B000", name: "F0B000"), ItemColor(hex: "058708", name: "058708"),
-                    ItemColor(hex: "009FAD", name: "009FAD"), ItemColor(hex: "004F8C", name: "004F8C"), ItemColor(hex: "54119C", name: "54119C"), ItemColor(hex: "D92768", name: "D92768")]
         case .Vivid_Color:
             return [ItemColor(hex: "E5ACBF", name: "E5ACBF"), ItemColor(hex: "F0939B", name: "F0939B"), ItemColor(hex: "ED6EA5", name: "ED6EA5"), ItemColor(hex: "C85179", name: "C85179"),
                     ItemColor(hex: "F76F86", name: "F76F86"), ItemColor(hex: "E70034", name: "E70034"), ItemColor(hex: "CA2F35", name: "CA2F35"), ItemColor(hex: "A22044", name: "A22044"),
