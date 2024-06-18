@@ -63,10 +63,12 @@ struct Stroke {
             }
         }
         else{
-            context.setStrokeColor(self.color.cgColor)
-            context.setLineWidth(self.lineWidth)
-            context.addLines(between: self.points)
-            context.strokePath()
+            UIView.animate(withDuration: 0.3) {
+                context.setStrokeColor(self.color.cgColor)
+                context.setLineWidth(self.lineWidth)
+                context.addLines(between: self.points)
+                context.strokePath()
+            }
         }
 
     }

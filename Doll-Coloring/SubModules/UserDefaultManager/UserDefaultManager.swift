@@ -90,4 +90,44 @@ class UserDefaultManager {
             UserDefaults.standard.synchronize()
         }
     }
+    
+    static var ABShowIAPColoring: Bool {
+        if let isShow = UserDefaultManager.currentAccessABShowIAPColoring {
+            return isShow
+        } else {
+           return false
+        }
+    }
+    
+    static var currentAccessABShowIAPColoring: Bool? {
+        get {
+            let isShow = UserDefaults.standard.bool(forKey: UserDefault.state_show_iap.rawValue)
+            return isShow
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefault.state_show_iap.rawValue)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    static var ABis_free_trial_us: Bool {
+        if let isShow = UserDefaultManager.currentAccessAB_is_free_trial_US {
+            return isShow
+        } else {
+           return false
+        }
+    }
+    
+    static var currentAccessAB_is_free_trial_US: Bool? {
+        get {
+            let isShow = UserDefaults.standard.bool(forKey: UserDefault.is_free_trial_US.rawValue)
+            return isShow
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefault.is_free_trial_US.rawValue)
+            UserDefaults.standard.synchronize()
+        }
+    }
 }

@@ -51,11 +51,8 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2cy-Tt-e4J" customClass="LottieAnimationView" customModule="Lottie">
-                    <rect key="frame" x="2.5" y="277.5" width="409" height="341"/>
+                    <rect key="frame" x="0.0" y="48" width="414" height="800"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="2cy-Tt-e4J" secondAttribute="height" multiplier="1.2" id="vQf-X2-n2j"/>
-                    </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="®2024 Power by Binary Bridge Labs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wxy-10-aHC">
                     <rect key="frame" x="24" y="824" width="366" height="14"/>
@@ -74,10 +71,12 @@
                 <constraint firstItem="4ji-dl-tk0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Cuf-d1-TJc"/>
                 <constraint firstAttribute="trailing" secondItem="0ip-ou-XSG" secondAttribute="trailing" id="Htn-tp-gOL"/>
                 <constraint firstItem="0ip-ou-XSG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="I2Q-Lg-QQe"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2cy-Tt-e4J" secondAttribute="trailing" id="JPt-xX-tMO"/>
+                <constraint firstItem="2cy-Tt-e4J" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="LBW-b7-T1e"/>
+                <constraint firstItem="2cy-Tt-e4J" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="LXQ-U4-fEJ"/>
                 <constraint firstItem="2cy-Tt-e4J" firstAttribute="centerX" secondItem="0ip-ou-XSG" secondAttribute="centerX" id="MTb-Is-Ibe"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4ji-dl-tk0" secondAttribute="trailing" constant="24" id="Wtb-n6-egs"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Wxy-10-aHC" secondAttribute="bottom" constant="24" id="gF2-he-z6d"/>
-                <constraint firstItem="2cy-Tt-e4J" firstAttribute="height" secondItem="0ip-ou-XSG" secondAttribute="height" multiplier="0.380673" id="iDm-om-uO1"/>
                 <constraint firstItem="0ip-ou-XSG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qDt-OY-THY"/>
                 <constraint firstAttribute="bottom" secondItem="0ip-ou-XSG" secondAttribute="bottom" id="uTV-Sq-6d4"/>
                 <constraint firstItem="Wxy-10-aHC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="y1h-Sw-j9J"/>

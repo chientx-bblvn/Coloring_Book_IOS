@@ -37,7 +37,7 @@ extension UIImageView {
         }
     }
     
-    func setImage(with url: String?, placeholder: UIImage?, size: CGSize = CGSize(width: 250, height: 250)) {
+    func setImage(with url: String?, placeholder: UIImage? = nil, size: CGSize = CGSize(width: 250, height: 250)) {
         var link = url ?? ""
         if !link.starts(with: "http://") && !link.starts(with: "https://") {
             link = "\(apiBaseUrl)\(link)"

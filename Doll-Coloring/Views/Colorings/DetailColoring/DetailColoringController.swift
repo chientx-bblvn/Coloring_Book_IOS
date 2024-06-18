@@ -124,7 +124,7 @@ extension DetailColoringController: UICollectionViewDelegate, UICollectionViewDa
             }
             return
         }
-        ADManager.shared.loadFull(DollColoringAdID.inter_alltopic) { status in
+        ADManager.shared.loadFull(DollColoringAdID.inter_alltopic, isSplash: true) { status in
             switch status {
             case .closed, .error:
                 self.numberClick = 0

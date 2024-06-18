@@ -34,6 +34,15 @@ Common.Language                                 =       "言語";
 Common.EmptyCollections                         =       "まだ画像がありません！";
 Content_delete_collection                       =       "色が削除されます。\n削除をクリックして続行してください。";
 Common.Continue = "続ける";
+Common.UnlockForFree                            =       "無料でアンロック";
+Common.UnlockColoring                           =       "プレミアムを購入: すべての絵をアンロック";
+Common.WatchAShortVideo                         =       "短いビデオを見る";
+Common.Yes                                      =       "はい";
+Common.No                                       =       "いいえ";
+Common.discard                                  =       "破棄する";
+Common.SaveColoring                             =       "保存しますか、それとも破棄しますか?";
+Common.DescExit                                 =       "本当に終了してもよろしいですか";
+Common.NoInternet                               =       "おっと! インターネット接続が切れました";
 
 // Splash
 Splash.Copyright                                =       "®Binary Bridge Labs";
@@ -65,10 +74,20 @@ Language.rusia                                  =       "ロシア語";
 
 
 // IAP
-IAP.week                                        =       "週";
-IAP.year                                        =       "年";
-IAP.weekly                                      =       "週間アクセス";
-IAP.yearly                                      =       "年間アクセス";
+IAP.week = "週";
+IAP.year = "年";
+IAP.month = "月";
+IAP.weekly                                      =       "毎週";
+IAP.yearly                                      =       "毎年";
+IAP.monthly                                     =       "毎月";
+IAP.price_weekly                                =       "週にたったの %@/週";
+IAP.price_package_weekly                        =       "毎週 %@";
+IAP.price_package_monthly                       =       "毎月 %@";
+IAP.price_package_yearly                        =       "毎年 %@";
+IAP.TermOfUse                                   =       "利用規約";
+IAP.PrivacyPolicy                               =       "プライバシーポリシー";
+IAP.RestorePurchase                             =       "購入を復元";
+
 
 // ForceUpdate
 ForceUpdate.Title                               =       "新しいバージョンが利用可能です";
@@ -90,6 +109,8 @@ table.galaxy_color                              =       "銀河の色";
 table.pastel_color                              =       "パステルカラー";
 table.sweet_color                               =       "甘い色";
 table.mystical_color                            =       "神秘的な色";
+table.background_dark_color                     =       "Background Dark";
+table.background_light_color                    =       "Background Light";
 
 subtite_delete = "色が削除されます。削除して続行します。";
 

@@ -14,4 +14,8 @@ extension Bundle {
     var buildVersionNumber: String {
         return (infoDictionary?["CFBundleVersion"] as? String) ?? ""
     }
+    var applicationName: String? {
+        object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ??
+            object(forInfoDictionaryKey: "CFBundleName") as? String
+    }
 }

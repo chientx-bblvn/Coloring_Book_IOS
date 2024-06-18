@@ -22,6 +22,8 @@ class SaveColoringController: BaseViewController {
     
     @IBOutlet weak var imgView: UIImageView!
     
+    @IBOutlet weak var lbNameApp: UILabel!
+    
     @IBOutlet weak var btnDelete: UIButton!
     
     @IBOutlet weak var btnSave: UIButton!
@@ -33,9 +35,12 @@ class SaveColoringController: BaseViewController {
     override func setup() {
         super.setup()
         setupView()
-        loadNativeAds()
         ADManager.shared.preLoadReward(DollColoringAdID.reward_save)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadNativeAds()
     }
     
     override func bindingData() {
@@ -44,9 +49,13 @@ class SaveColoringController: BaseViewController {
     
     private func setupView() {
         imgView.image = viewModel.imageColoring
+        lbNameApp.text = Bundle.main.applicationName
         btnDelete.setTitle(LocalizableUtils.commonDelete(), for: .normal)
         btnSave.setTitle(LocalizableUtils.commonSave(), for: .normal)
         btnCollection.setTitle(LocalizableUtils.commonCollections(), for: .normal)
+        if IAPState.isUserVip {
+            btnSave.setImage(nil, for: .normal)
+        }
     }
     
     @IBAction func actionShare(_ sender: Any) {
@@ -85,20 +94,13 @@ extension SaveColoringController {
     
     func showActivityController() {
         // Setting description
-        let firstActivityItem = "Doll Coloring"
+        let firstActivityItem = Bundle.main.applicationName ?? "Doll Coloring"
         
         // Setting url
-        let imageToShare = [ viewModel.imageColoring ]
+        let imageToShare = [viewModel.imageColoring, firstActivityItem] as [Any]
         
         let activityViewController : UIActivityViewController = UIActivityViewController(
-            activityItems: [firstActivityItem, imageToShare], applicationActivities: nil)
-        
-        // This lines is for the popover you need to show in iPad
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        
-        // This line remove the arrow of the popover to show in iPad
-        activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
-        activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
+            activityItems: imageToShare, applicationActivities: nil)
         
         // Pre-configuring activity items
         activityViewController.activityItemsConfiguration = [
@@ -170,14 +172,7 @@ extension SaveColoringController {
         case .authorized:
             //handle authorized status
             DispatchQueue.main.async {
-                PopupSaveColoringViewController.show(in: self) {
-                    
-                } onclickDelete: {
-                    DispatchQueue.main.async {
-                        self.loadAdsView()
-                    }
-                }
-
+                self.checkVip()
             }
         case .denied, .restricted :
             DispatchQueue.main.async {
@@ -193,25 +188,11 @@ extension SaveColoringController {
                 switch status {
                 case .authorized:
                     DispatchQueue.main.async {
-                        PopupSaveColoringViewController.show(in: self) {
-                            
-                        } onclickDelete: {
-                            DispatchQueue.main.async {
-                                self.loadAdsView()
-                            }
-                        }
-
+                        self.checkVip()
                     }
                 case .limited:
                     DispatchQueue.main.async {
-                        PopupSaveColoringViewController.show(in: self) {
-                            
-                        } onclickDelete: {
-                            DispatchQueue.main.async {
-                                self.loadAdsView()
-                            }
-                        }
-
+                        self.checkVip()
                     }
                 case .notDetermined:
                     break
@@ -225,14 +206,7 @@ extension SaveColoringController {
             }
         case .limited:
             DispatchQueue.main.async {
-                PopupSaveColoringViewController.show(in: self) {
-                    
-                } onclickDelete: {
-                    DispatchQueue.main.async {
-                        self.loadAdsView()
-                    }
-                }
-
+                self.checkVip()
             }
         @unknown default:
             break
@@ -245,8 +219,22 @@ extension SaveColoringController {
         UIApplication.shared.open(settingsUrl, options: [:])
     }
     
+    private func checkVip() {
+        if IAPState.isUserVip {
+            savePhotosAlbum()
+        } else {
+            PopupSaveColoringViewController.show(in: self) {
+                
+            } onclickDelete: {
+                DispatchQueue.main.async {
+                    self.loadAdsView()
+                }
+            }
+        }
+    }
+    
     func loadInterAds() {
-        ADManager.shared.loadFull(DollColoringAdID.inter_save) {[weak self] status in
+        ADManager.shared.loadFull(DollColoringAdID.inter_save, isSplash: true) {[weak self] status in
             switch status {
             case .closed, .error:
                 self?.savePhotosAlbum()
@@ -270,7 +258,8 @@ extension SaveColoringController {
     }
     
     func loadNativeAds() {
-        ADManager.shared.loadNative(DollColoringAdID.native_result, to: viewAds) {[weak self] adId, success, nativeAdView in
+        viewAds.isHidden = false
+        ADManager.shared.loadNative(DollColoringAdID.native_result, to: viewAds, refreshAd: true) {[weak self] adId, success, nativeAdView in
             self?.viewAds.isHidden = !success
         }
     }

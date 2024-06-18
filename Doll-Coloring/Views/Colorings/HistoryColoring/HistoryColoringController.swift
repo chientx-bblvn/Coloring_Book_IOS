@@ -102,6 +102,10 @@ extension HistoryColoringController: FSPagerViewDelegate, FSPagerViewDataSource 
         let cell = pagerView.dequeueReusableCell(for: index, cellType: HistoryCellCollectionViewCell.self)
         let data = viewModel.coloring.historys[index].imagePath
         cell.imageView.setLocalImage(with: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: data).path, placeholder: nil)
+        let percent = Float(viewModel.coloring.historys[index].percent_complete ?? 0)
+        cell.progressRing.isHidden = false
+        cell.progressRing.setProgress(percent, animated: true)
+        cell.lbPercent.text = "\(Int((percent * 100).rounded()))%"
         return cell
     }
     

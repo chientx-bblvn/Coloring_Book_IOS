@@ -44,7 +44,6 @@ class LanguageController: BaseViewController {
     override func setup() {
         super.setup()
         setupView()
-        preloadAdsNative()
     }
     
     override func bindingData() {
@@ -161,13 +160,6 @@ extension LanguageController {
                 self?.viewAds.isHidden = true
                 self?.heightViewAds.constant = 0
             }
-        }
-    }
-    
-    func preloadAdsNative() {
-        if goFrom == .intro {
-            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding)
-            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_high)
         }
     }
     

@@ -39,6 +39,9 @@ class ColoringBookView: UIView {
     //Layer of coloring image, can be hidden
     private var coloringLayer:CALayer!
     
+    public var percentColorImage: Double = 0
+    public var percentColoring: Double = 0
+    
     public var currentColor:UIColor = .red
     public var nameColor: String = ""
     public var currentWidth:CGFloat = 5.0
@@ -86,7 +89,7 @@ class ColoringBookView: UIView {
         super.init(frame: .zero)
         
         self.isOpaque = false
-        self.backgroundColor = .white
+        self.backgroundColor = UIColor(hexString: "FFFFFE")
         
         self.coloringImage = coloringImage
         self.pixelSize = CGSize(width: coloringImage.width,
@@ -116,6 +119,8 @@ class ColoringBookView: UIView {
                                      size: CGSize(width: pixelSize.width / UIScreen.main.scale,
                                                   height: pixelSize.height / UIScreen.main.scale))
         coloringLayer.contents = self.coloringImage.cgImage
+        percentColorImage = calculateColorCoverageLayer()
+        percentColoring = percentColorImage
         self.layer.addSublayer(coloringLayer)
     }
     
@@ -213,7 +218,7 @@ class ColoringBookView: UIView {
         self.redoStrokes.removeAll()
         
         //Reset variables after a cancelation
-        resetVariables()
+        resetVariablesHistory()
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -238,6 +243,7 @@ class ColoringBookView: UIView {
     }
     
     private func resetVariables() {
+        percentColoring = calculateColorCoverage()
         activeStroke = nil
         frozenContext.resetClip()
         pointAccumulator = []
@@ -245,9 +251,16 @@ class ColoringBookView: UIView {
         delegate?.viewDidEndDrawing()
     }
     
+    private func resetVariablesHistory() {
+        activeStroke = nil
+        frozenContext.resetClip()
+        pointAccumulator = []
+        initialTimestamp = nil
+    }
+    
     private func drawActiveFrozenContext(){
         
-        //If we have an initial timestamp check if enough time has passed so a cancel is not likely
+        //If we have an initial time `  amp check if enough time has passed so a cancel is not likely
         if let initialTimeStamp = self.initialTimestamp{
             let dif = ProcessInfo.processInfo.systemUptime - initialTimeStamp
             
@@ -343,13 +356,14 @@ class ColoringBookView: UIView {
                 loadHistoryStrokes(in: newStrokes)
             } else {
                 if let firstPoint = stroke.points.first{
-                    fillColor(at: firstPoint, colorFill: stroke.color) {
+                    fillColor(at: firstPoint, colorFill: stroke.color){
                         self.loadHistoryStrokes(in: newStrokes)
                     }
                 }
             }
         } else {
             self.setNeedsDisplay()
+            self.resetVariables()
         }
     }
     
@@ -458,15 +472,108 @@ class ColoringBookView: UIView {
             let (clipRect, mask) = self.coloringImage.getFillMaskAt(x: Int(location.x), y: Int(location.y))
             if let mask = mask {
                 DispatchQueue.main.async {
-                    self.setClip(clipRect, maskImage: mask)
-                    self.frozenContext.setFillColor(colorFill.cgColor)
-                    self.frozenContext.fill(clipRect)
-                    self.activeStroke?.drawInContext(self.frozenContext)
-                    self.setNeedsDisplay()
-                    self.resetVariables()
+                    UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear) {
+                        self.setClip(clipRect, maskImage: mask)
+                        self.frozenContext.setFillColor(colorFill.cgColor)
+                        self.frozenContext.fill(clipRect)
+                        self.activeStroke?.drawInContext(self.frozenContext)
+                        self.setNeedsDisplay()
+                    }
+                    self.resetVariablesHistory()
                     complete?()
                 }
             }
         }
+    }
+    
+    public func calculateColorCoverage() -> Double {
+        guard let image = frozenContext.makeImage() else { return 0.0 }
+        
+        let width = image.width
+        let height = image.height
+        let totalPixelCount = width * height
+        var coloredPixelCount = 0
+        
+        // Tạo một buffer dành cho dữ liệu pixel
+        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: totalPixelCount * 4)
+        
+        // Lấy dữ liệu pixel từ ảnh
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+        let context = CGContext(data: buffer,
+                                width: width,
+                                height: height,
+                                bitsPerComponent: 8,
+                                bytesPerRow: width * 4,
+                                space: colorSpace,
+                                bitmapInfo: bitmapInfo.rawValue)
+        
+        context?.draw(image, in: CGRect(x: 0, y: 0, width: width, height: height))
+        
+        // Đếm số lượng pixel đã được tô màu
+        for i in 0..<totalPixelCount {
+            let alpha = buffer[i * 4 + 3]
+            let red = buffer[i * 4]
+            let green = buffer[i * 4 + 1]
+            let blue = buffer[i * 4 + 2]
+            
+            // Bỏ qua màu trong suốt và màu FFFFFE RGB(255, 255, 254)
+            if alpha > 0 && !(red == 255 && green == 255 && blue == 254) {
+                coloredPixelCount += 1
+            }
+        }
+        
+        // Giải phóng bộ nhớ của buffer
+        buffer.deallocate()
+        
+        // Tính phần trăm phủ màu
+        var per = Double(coloredPixelCount) / Double(totalPixelCount)
+        per = percentColorImage + per
+        
+        return per
+    }
+    
+    public func calculateColorCoverageLayer() -> Double {
+        let image = coloringImage.cgImage
+        
+        let width = image.width
+        let height = image.height
+        let totalPixelCount = width * height
+        var coloredPixelCount = 0
+        
+        // Tạo một buffer dành cho dữ liệu pixel
+        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: totalPixelCount * 4)
+        
+        // Lấy dữ liệu pixel từ ảnh
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+        let context = CGContext(data: buffer,
+                                width: width,
+                                height: height,
+                                bitsPerComponent: 8,
+                                bytesPerRow: width * 4,
+                                space: colorSpace,
+                                bitmapInfo: bitmapInfo.rawValue)
+        
+        context?.draw(image, in: CGRect(x: 0, y: 0, width: width, height: height))
+        
+        // Đếm số lượng pixel đã được tô màu
+        for i in 0..<totalPixelCount {
+            let alpha = buffer[i * 4 + 3]
+            let red = buffer[i * 4]
+            let green = buffer[i * 4 + 1]
+            let blue = buffer[i * 4 + 2]
+            
+            // Bỏ qua màu trong suốt và màu FFFFFE RGB(255, 255, 254)
+            if alpha > 0 && !(red == 255 && green == 255 && blue == 254) {
+                coloredPixelCount += 1
+            }
+        }
+        
+        // Giải phóng bộ nhớ của buffer
+        buffer.deallocate()
+        
+        // Tính phần trăm phủ màu
+        return Double(coloredPixelCount) / Double(totalPixelCount)
     }
 }

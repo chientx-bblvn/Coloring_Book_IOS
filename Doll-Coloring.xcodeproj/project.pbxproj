@@ -34,7 +34,6 @@
 		083CA3E22BC672DA006033EE /* SaveColoringService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083CA3B12BC672DA006033EE /* SaveColoringService.swift */; };
 		083CA3E32BC672DA006033EE /* SaveColoringVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083CA3B22BC672DA006033EE /* SaveColoringVM.swift */; };
 		083CA3E42BC672DA006033EE /* StartColoring.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083CA3B42BC672DA006033EE /* StartColoring.storyboard */; };
-		083CA3E52BC672DA006033EE /* StartColoringController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083CA3B52BC672DA006033EE /* StartColoringController.swift */; };
 		083CA3E62BC672DA006033EE /* StartColoringModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083CA3B62BC672DA006033EE /* StartColoringModel.swift */; };
 		083CA3E72BC672DA006033EE /* StartColoringRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083CA3B72BC672DA006033EE /* StartColoringRoute.swift */; };
 		083CA3E82BC672DA006033EE /* StartColoringService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083CA3B82BC672DA006033EE /* StartColoringService.swift */; };
@@ -85,12 +84,22 @@
 		085A06822BC69FD3002D5F1D /* ListThemeColoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085A06802BC69FD3002D5F1D /* ListThemeColoringViewController.swift */; };
 		085A06832BC69FD3002D5F1D /* ListThemeColoringViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085A06812BC69FD3002D5F1D /* ListThemeColoringViewController.xib */; };
 		085A06852BC6A7E0002D5F1D /* animation_collection.json in Resources */ = {isa = PBXBuildFile; fileRef = 085A06842BC6A7E0002D5F1D /* animation_collection.json */; };
+		086D2FD12C12C8E500BF5373 /* animation_splash_new.json in Resources */ = {isa = PBXBuildFile; fileRef = 086D2FD02C12C8E400BF5373 /* animation_splash_new.json */; };
+		0878C9382C0D771300B48FD4 /* SubcriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878C9362C0D771300B48FD4 /* SubcriptionViewController.swift */; };
+		0878C9392C0D771300B48FD4 /* SubcriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0878C9372C0D771300B48FD4 /* SubcriptionViewController.xib */; };
+		088333E82C1939CC00FC3901 /* ALTimingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088333E22C1939CC00FC3901 /* ALTimingFunction.swift */; };
+		088333E92C1939CC00FC3901 /* ALProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088333E42C1939CC00FC3901 /* ALProgressBar.swift */; };
+		088333EA2C1939CC00FC3901 /* ALProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088333E52C1939CC00FC3901 /* ALProgressRing.swift */; };
 		088448AF2BEA053B00636C36 /* CategoryColoringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088448AD2BEA053B00636C36 /* CategoryColoringCell.swift */; };
 		088448B02BEA053B00636C36 /* CategoryColoringCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 088448AE2BEA053B00636C36 /* CategoryColoringCell.xib */; };
 		08971F762BCFB8B700623026 /* HistoryCellCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08971F752BCFB8B700623026 /* HistoryCellCollectionViewCell.xib */; };
 		08971F772BCFB8B700623026 /* HistoryCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08971F742BCFB8B700623026 /* HistoryCellCollectionViewCell.swift */; };
 		08A0C29E2BE490AA00C6E42D /* asrmColoring.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08A0C29D2BE490AA00C6E42D /* asrmColoring.mp3 */; };
 		08A525C82C00871200EB9FBA /* VerticalSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A525C72C00871200EB9FBA /* VerticalSlider.swift */; };
+		08B17C522C1BDC7F00720894 /* PopupColoringViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B17C512C1BDC7F00720894 /* PopupColoringViewController.xib */; };
+		08B17C532C1BDC7F00720894 /* PopupColoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B17C502C1BDC7F00720894 /* PopupColoringViewController.swift */; };
+		08B349EA2C16DD7600AFF5F7 /* PopupShowAdsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B349E92C16DD7600AFF5F7 /* PopupShowAdsViewController.swift */; };
+		08B349EC2C17194700AFF5F7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B349EB2C17194700AFF5F7 /* StoreKit.framework */; };
 		08B9928D2BC7DA2C009951BB /* TableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9928C2BC7DA2C009951BB /* TableColor.swift */; };
 		08C688AF2C0499340091882F /* TableColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C688AE2C0499340091882F /* TableColorCell.xib */; };
 		08C688B02C0499340091882F /* TableColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C688AD2C0499340091882F /* TableColorCell.swift */; };
@@ -325,7 +334,6 @@
 		083CA3B12BC672DA006033EE /* SaveColoringService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveColoringService.swift; sourceTree = "<group>"; };
 		083CA3B22BC672DA006033EE /* SaveColoringVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveColoringVM.swift; sourceTree = "<group>"; };
 		083CA3B42BC672DA006033EE /* StartColoring.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StartColoring.storyboard; sourceTree = "<group>"; };
-		083CA3B52BC672DA006033EE /* StartColoringController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartColoringController.swift; sourceTree = "<group>"; };
 		083CA3B62BC672DA006033EE /* StartColoringModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartColoringModel.swift; sourceTree = "<group>"; };
 		083CA3B72BC672DA006033EE /* StartColoringRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartColoringRoute.swift; sourceTree = "<group>"; };
 		083CA3B82BC672DA006033EE /* StartColoringService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartColoringService.swift; sourceTree = "<group>"; };
@@ -376,6 +384,12 @@
 		085A06802BC69FD3002D5F1D /* ListThemeColoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListThemeColoringViewController.swift; sourceTree = "<group>"; };
 		085A06812BC69FD3002D5F1D /* ListThemeColoringViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListThemeColoringViewController.xib; sourceTree = "<group>"; };
 		085A06842BC6A7E0002D5F1D /* animation_collection.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_collection.json; sourceTree = "<group>"; };
+		086D2FD02C12C8E400BF5373 /* animation_splash_new.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_splash_new.json; sourceTree = "<group>"; };
+		0878C9362C0D771300B48FD4 /* SubcriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcriptionViewController.swift; sourceTree = "<group>"; };
+		0878C9372C0D771300B48FD4 /* SubcriptionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubcriptionViewController.xib; sourceTree = "<group>"; };
+		088333E22C1939CC00FC3901 /* ALTimingFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALTimingFunction.swift; sourceTree = "<group>"; };
+		088333E42C1939CC00FC3901 /* ALProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALProgressBar.swift; sourceTree = "<group>"; };
+		088333E52C1939CC00FC3901 /* ALProgressRing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALProgressRing.swift; sourceTree = "<group>"; };
 		088448AD2BEA053B00636C36 /* CategoryColoringCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColoringCell.swift; sourceTree = "<group>"; };
 		088448AE2BEA053B00636C36 /* CategoryColoringCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryColoringCell.xib; sourceTree = "<group>"; };
 		08971F742BCFB8B700623026 /* HistoryCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCellCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -402,6 +416,10 @@
 		08AEF5562BE38E9D0061E214 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/ErrorCode.strings; sourceTree = "<group>"; };
 		08AEF5572BE390A00061E214 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		08AEF5582BE390A00061E214 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/ErrorCode.strings"; sourceTree = "<group>"; };
+		08B17C502C1BDC7F00720894 /* PopupColoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupColoringViewController.swift; sourceTree = "<group>"; };
+		08B17C512C1BDC7F00720894 /* PopupColoringViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupColoringViewController.xib; sourceTree = "<group>"; };
+		08B349E92C16DD7600AFF5F7 /* PopupShowAdsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupShowAdsViewController.swift; sourceTree = "<group>"; };
+		08B349EB2C17194700AFF5F7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		08B9928C2BC7DA2C009951BB /* TableColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableColor.swift; sourceTree = "<group>"; };
 		08C688AD2C0499340091882F /* TableColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableColorCell.swift; sourceTree = "<group>"; };
 		08C688AE2C0499340091882F /* TableColorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableColorCell.xib; sourceTree = "<group>"; };
@@ -624,6 +642,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B349EC2C17194700AFF5F7 /* StoreKit.framework in Frameworks */,
 				57F1B1A32AA7B7F800F554E7 /* AudioToolbox.framework in Frameworks */,
 				DAE8372C97D7447D9C640FF7 /* Pods_Doll_Coloring.framework in Frameworks */,
 			);
@@ -659,6 +678,7 @@
 		083CA3882BC670A8006033EE /* Colorings */ = {
 			isa = PBXGroup;
 			children = (
+				08B17C4F2C1BDC3300720894 /* PopupColoring */,
 				08EC01DF2BFEEB8B00E98627 /* TableColorIpad */,
 				0843961D2BCD630D00C8E213 /* Cell */,
 				083CA3B32BC672DA006033EE /* SaveColoring */,
@@ -706,7 +726,6 @@
 			children = (
 				083CA3B42BC672DA006033EE /* StartColoring.storyboard */,
 				08F5D1CA2BFE3D22002DC669 /* StartColoringIPadViewController.swift */,
-				083CA3B52BC672DA006033EE /* StartColoringController.swift */,
 				083CA3B62BC672DA006033EE /* StartColoringModel.swift */,
 				083CA3B72BC672DA006033EE /* StartColoringRoute.swift */,
 				083CA3B82BC672DA006033EE /* StartColoringService.swift */,
@@ -826,6 +845,7 @@
 			children = (
 				080CB5882BECD6540036A471 /* animation_coloring.json */,
 				080CB5842BECBD9B0036A471 /* animation_loading_preview.json */,
+				086D2FD02C12C8E400BF5373 /* animation_splash_new.json */,
 				08F6936C2BEE22A1005FAEF5 /* animation_ads_video.json */,
 				080CB5802BEBDFEE0036A471 /* animation_progess.json */,
 				0852B0D42BD63DB400F95856 /* animationView_StartColoring.json */,
@@ -845,6 +865,32 @@
 			path = FillColor;
 			sourceTree = "<group>";
 		};
+		088333E32C1939CC00FC3901 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				088333E22C1939CC00FC3901 /* ALTimingFunction.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		088333E62C1939CC00FC3901 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				088333E42C1939CC00FC3901 /* ALProgressBar.swift */,
+				088333E52C1939CC00FC3901 /* ALProgressRing.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		088333E72C1939CC00FC3901 /* ALProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				088333E32C1939CC00FC3901 /* Model */,
+				088333E62C1939CC00FC3901 /* Views */,
+			);
+			path = ALProgressView;
+			sourceTree = "<group>";
+		};
 		08971F732BCFB89E00623026 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -852,6 +898,26 @@
 				08971F752BCFB8B700623026 /* HistoryCellCollectionViewCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		08B17C4F2C1BDC3300720894 /* PopupColoring */ = {
+			isa = PBXGroup;
+			children = (
+				08B17C502C1BDC7F00720894 /* PopupColoringViewController.swift */,
+				08B17C512C1BDC7F00720894 /* PopupColoringViewController.xib */,
+			);
+			path = PopupColoring;
+			sourceTree = "<group>";
+		};
+		08B349E82C16DD4300AFF5F7 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				083CA39C2BC67287006033EE /* DeleteColoringViewController.swift */,
+				084879FE2C079A3A0026F017 /* PopupSaveColoringViewController.swift */,
+				08D0EFD42BC65272003B000D /* SettingsController.swift */,
+				08B349E92C16DD7600AFF5F7 /* PopupShowAdsViewController.swift */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		08B5A0BB2BE32BB400BD55E1 /* music */ = {
@@ -891,14 +957,12 @@
 		08D0EFD92BC65272003B000D /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				083CA39C2BC67287006033EE /* DeleteColoringViewController.swift */,
+				08B349E82C16DD4300AFF5F7 /* view */,
 				08D0EFD32BC65272003B000D /* Settings.storyboard */,
-				08D0EFD42BC65272003B000D /* SettingsController.swift */,
 				08D0EFD52BC65272003B000D /* SettingsModel.swift */,
 				08D0EFD62BC65272003B000D /* SettingsRoute.swift */,
 				08D0EFD72BC65272003B000D /* SettingsService.swift */,
 				08D0EFD82BC65272003B000D /* SettingsVM.swift */,
-				084879FE2C079A3A0026F017 /* PopupSaveColoringViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1092,6 +1156,7 @@
 		570AF76D2A53CE560069B329 /* SubModules */ = {
 			isa = PBXGroup;
 			children = (
+				088333E72C1939CC00FC3901 /* ALProgressView */,
 				08FE33852C085EFE000DB950 /* ViewPagesController */,
 				08487A002C07AE630026F017 /* GridLayout */,
 				08E830F92C072C300042607A /* SOTabbar */,
@@ -1422,6 +1487,8 @@
 				57CAAC212B22372900C56E11 /* IAPController.swift */,
 				571B13522B231C1A0084F92B /* PremiumFloatingView.xib */,
 				571B13562B231C2A0084F92B /* PremiumFloatingView.swift */,
+				0878C9362C0D771300B48FD4 /* SubcriptionViewController.swift */,
+				0878C9372C0D771300B48FD4 /* SubcriptionViewController.xib */,
 			);
 			path = IAP;
 			sourceTree = "<group>";
@@ -1507,6 +1574,7 @@
 		ACEA23F7738694AD30AC2DF1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08B349EB2C17194700AFF5F7 /* StoreKit.framework */,
 				57F1B1A02AA7B7E300F554E7 /* AudioToolbox.framework */,
 				C27E66897122980C9C00C692 /* Pods_Doll_Coloring.framework */,
 			);
@@ -1607,6 +1675,7 @@
 				080ACD8A2BC3EA2800E00E2C /* Home.storyboard in Resources */,
 				570070D42A93C4BD00D7C1C6 /* AlertViewController.xib in Resources */,
 				08F5D1C72BFC88C9002DC669 /* animation_dissconnect.json in Resources */,
+				08B17C522C1BDC7F00720894 /* PopupColoringViewController.xib in Resources */,
 				08E830F82C06E9AE0042607A /* CategoryItemViewController.xib in Resources */,
 				085A06832BC69FD3002D5F1D /* ListThemeColoringViewController.xib in Resources */,
 				084396282BCD637400C8E213 /* ThemeCell.xib in Resources */,
@@ -1614,6 +1683,7 @@
 				570070DC2A93C4BD00D7C1C6 /* LaunchScreen.storyboard in Resources */,
 				570070DD2A93C4BD00D7C1C6 /* ButtonView.xib in Resources */,
 				5729F27E2B7469800059AB40 /* Localizable.strings in Resources */,
+				0878C9392C0D771300B48FD4 /* SubcriptionViewController.xib in Resources */,
 				570070E32A93C4BD00D7C1C6 /* ToastView.xib in Resources */,
 				080CB5892BECD6540036A471 /* animation_coloring.json in Resources */,
 				570070F02A93C4BD00D7C1C6 /* TopBarView.xib in Resources */,
@@ -1625,6 +1695,7 @@
 				085A067F2BC69FB5002D5F1D /* ListTopPicksColoringViewController.xib in Resources */,
 				08EC01E02BFEEB8B00E98627 /* TableColorIpad.storyboard in Resources */,
 				084396242BCD635000C8E213 /* FillterCell.xib in Resources */,
+				086D2FD12C12C8E500BF5373 /* animation_splash_new.json in Resources */,
 				08083FEE2BCDF877005091B0 /* CollectionCell.xib in Resources */,
 				083CA3A72BC672C5006033EE /* Collections.storyboard in Resources */,
 				083CA3E42BC672DA006033EE /* StartColoring.storyboard in Resources */,
@@ -1772,11 +1843,13 @@
 				570070392A93C4BD00D7C1C6 /* Swipeable.swift in Sources */,
 				5700703A2A93C4BD00D7C1C6 /* AlertViewController.swift in Sources */,
 				5700703C2A93C4BD00D7C1C6 /* EmptyView.swift in Sources */,
+				08B349EA2C16DD7600AFF5F7 /* PopupShowAdsViewController.swift in Sources */,
 				5700703D2A93C4BD00D7C1C6 /* FSPageControl.swift in Sources */,
 				080CB5872BECD1B20036A471 /* Vibration.swift in Sources */,
 				083CA3AB2BC672C5006033EE /* CollectionsService.swift in Sources */,
 				5700703E2A93C4BD00D7C1C6 /* Notification++.swift in Sources */,
 				57F1B1A82AA7B82E00F554E7 /* AudioTone.m in Sources */,
+				0878C9382C0D771300B48FD4 /* SubcriptionViewController.swift in Sources */,
 				08F5D1C92BFC8C86002DC669 /* NetworkDisconnectController.swift in Sources */,
 				5700703F2A93C4BD00D7C1C6 /* LanguageVM.swift in Sources */,
 				083CA4142BC67988006033EE /* MainColoringsRoute.swift in Sources */,
@@ -1797,6 +1870,8 @@
 				570070492A93C4BD00D7C1C6 /* SwipeActionButton.swift in Sources */,
 				0852B0EA2BD64D3100F95856 /* PaintImageView.swift in Sources */,
 				08EC01E12BFEEB8B00E98627 /* TableColorIpadController.swift in Sources */,
+				088333E82C1939CC00FC3901 /* ALTimingFunction.swift in Sources */,
+				088333E92C1939CC00FC3901 /* ALProgressBar.swift in Sources */,
 				08B9928D2BC7DA2C009951BB /* TableColor.swift in Sources */,
 				083CA3E02BC672DA006033EE /* SaveColoringModel.swift in Sources */,
 				084396342BCD86D000C8E213 /* DownloadManager.swift in Sources */,
@@ -1812,6 +1887,7 @@
 				0843962D2BCD7ADB00C8E213 /* SQLiteManager.swift in Sources */,
 				08F75CF42BE8DC84005ACDA9 /* FeatureHomeCell.swift in Sources */,
 				08D0EFDC2BC65273003B000D /* SettingsModel.swift in Sources */,
+				088333EA2C1939CC00FC3901 /* ALProgressRing.swift in Sources */,
 				5700704F2A93C4BD00D7C1C6 /* MyProgressView.swift in Sources */,
 				570070512A93C4BD00D7C1C6 /* SwipeTableViewCell.swift in Sources */,
 				08F75CEC2BE8D12A005ACDA9 /* DetailCollectionVM.swift in Sources */,
@@ -1832,7 +1908,6 @@
 				5700705E2A93C4BD00D7C1C6 /* Reachability.swift in Sources */,
 				5700705F2A93C4BD00D7C1C6 /* SwipeAccessibilityCustomAction.swift in Sources */,
 				083CA4132BC67988006033EE /* MainColoringsModel.swift in Sources */,
-				083CA3E52BC672DA006033EE /* StartColoringController.swift in Sources */,
 				570070612A93C4BD00D7C1C6 /* FSPagerViewLayoutAttributes.swift in Sources */,
 				570070622A93C4BD00D7C1C6 /* FSPagerViewCell.swift in Sources */,
 				085A06822BC69FD3002D5F1D /* ListThemeColoringViewController.swift in Sources */,
@@ -1845,6 +1920,7 @@
 				570070692A93C4BD00D7C1C6 /* Extensions.swift in Sources */,
 				08F75D022BE8EE8F005ACDA9 /* PinterestLayout.swift in Sources */,
 				080ACD8F2BC3EA2800E00E2C /* HomeVM.swift in Sources */,
+				08B17C532C1BDC7F00720894 /* PopupColoringViewController.swift in Sources */,
 				08F75CE92BE8D12A005ACDA9 /* DetailCollectionModel.swift in Sources */,
 				5700706C2A93C4BD00D7C1C6 /* RippleButton.swift in Sources */,
 				5700706D2A93C4BD00D7C1C6 /* BaseResponse.swift in Sources */,
@@ -2055,7 +2131,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2101,7 +2177,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

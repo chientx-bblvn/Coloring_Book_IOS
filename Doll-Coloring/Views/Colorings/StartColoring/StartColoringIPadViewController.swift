@@ -19,6 +19,10 @@ class StartColoringIPadViewController: BaseViewController {
     
     var viewModel: StartColoringVM!
     
+    @IBOutlet weak var progessRing: ALProgressRing!
+    
+    @IBOutlet weak var lbPercenColoring: UILabel!
+    
     @IBOutlet weak var btnBack: UIButton!
     
     @IBOutlet weak var btnUndo: UIButton!
@@ -53,6 +57,8 @@ class StartColoringIPadViewController: BaseViewController {
     
     @IBOutlet weak var viewAds: UIView!
     
+    @IBOutlet weak var heightViewAds: NSLayoutConstraint!
+    
     @IBOutlet weak var stackToolView: UIStackView!
     
     @IBOutlet weak var stackColorView: UIStackView!
@@ -69,22 +75,11 @@ class StartColoringIPadViewController: BaseViewController {
     
     @IBOutlet weak var viewColor: UIView!
     
-    private var currentConstraintColorView: CGFloat = 160 {
-        didSet {
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                currentConstraintColorView = 160
-            } else {
-                currentConstraintColorView = 120
-            }
-        }
-    }
-    
-    private var listColorIpad: [ListColorIpad] = []
+    private var currentConstraintColorView: CGFloat = 160
+    private var palettes: PalettesColor = .Plain
     private var colors: [ItemColor?] = []
     private var currentColor: UIColor?
-    private var sectionTable: Int? = 0
-    private var indexListColor: Int? = 0
-    private var indexItemColor: Int? = 0
+    private var nameColor: String?
     private var isEraser: Bool = false
     private var lineWidthPen: Float = 0.2
     private let startColor = UIColor.black
@@ -93,6 +88,10 @@ class StartColoringIPadViewController: BaseViewController {
     private let circleLayer = CAShapeLayer()
     private var panGesture: UIPanGestureRecognizer!
     let soundColoring =  AudioPlayer()
+    
+    private var indexListColor: Int? = 0
+    private var indexColorBling: Int? = 0
+    private var indexItemColor: Int? = 0
     
     override func setup() {
         super.setup()
@@ -133,27 +132,8 @@ class StartColoringIPadViewController: BaseViewController {
     }
     
     private func getListColorIpad() {
-        let colors = TableColor.allCases
-        DispatchQueue.global(qos: .background).sync {
-            self.listColorIpad = colors.map({ table in
-                switch table {
-                case .Pastel_Color, .Sweet_Color, .Mystical_Color:
-                    var itemColor: [[ItemColor]] = []
-                    table.lisTheme?.listColor.forEach({ theme in
-                        itemColor.append(theme.listColor.compactMap({ item in
-                            ItemColor(color: item.color, name: item.name)
-                        }))
-                    })
-                    return ListColorIpad(table_name: table.title, listColor: itemColor)
-                default :
-                    return ListColorIpad(table_name: table.title, listColor: [table.listColor])
-                }
-            })
-            DispatchQueue.main.async {
-                self.colors = self.listColorIpad.first?.listColor.first ?? []
-                self.updateColors()
-            }
-        }
+        self.colors = palettes.palettes.first?.listColor.first ?? []
+        self.updateColors()
     }
     
     private func updateColors() {
@@ -163,12 +143,18 @@ class StartColoringIPadViewController: BaseViewController {
             } else {
                 self.currentColor = color.color
             }
+            self.nameColor = color.name
         }
         self.listColor.reloadData()
         self.updateColor()
     }
     
     private func updateLayoutContent() {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            currentConstraintColorView = 140
+        } else {
+            currentConstraintColorView = 110
+        }
         let isLandscape = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation
         switch isLandscape {
         case .unknown:
@@ -207,6 +193,8 @@ class StartColoringIPadViewController: BaseViewController {
         default:
             break
         }
+        coloringBookView.transform = .identity
+        coloringBookView.transform = .identity.scaledBy(x: 1.2, y: 1.2)
     }
     
     @objc private func changePanGestureTemplate(_ gesture: UIPanGestureRecognizer) {
@@ -233,7 +221,7 @@ class StartColoringIPadViewController: BaseViewController {
                 .scaledBy(x: gesture.scale, y: gesture.scale)
                 .translatedBy(x: -pinchCenter.x, y: -pinchCenter.y)
             let minScale: CGFloat = 0.7
-            let maxScale: CGFloat = 10.0
+            let maxScale: CGFloat = 20.0
             if transform.a < minScale || transform.d < minScale {
                 return
             }
@@ -316,22 +304,25 @@ class StartColoringIPadViewController: BaseViewController {
             viewChangeLineWidth.isHidden = true
             coloringBookView.currentWidth = CGFloat(simd_mix(1.0, 40.0, 0.2))
             coloringBookView.currentColor = currentColor ?? .red
+            coloringBookView.nameColor = nameColor ?? ""
             panGesture.maximumNumberOfTouches = 2
             panGesture.minimumNumberOfTouches = 2
             coloringBookView.isPens = true
         case .Eraser:
-            let isPens = coloringBookView.isPens
-            panGesture.maximumNumberOfTouches = isPens ? 2 : 1
-            panGesture.minimumNumberOfTouches = isPens ? 2 : 1
-            coloringBookView.currentColor = .white
+            panGesture.maximumNumberOfTouches = 2
+            panGesture.minimumNumberOfTouches = 2
+            coloringBookView.currentColor = UIColor(hexString: "FFFFFE")
+            coloringBookView.nameColor = "FFFFFE"
             btnEraser.isSelected = true
         case .Bucket:
             btnFill.isSelected = true
             viewChangeLineWidth.isHidden = true
             coloringBookView.currentColor = currentColor ?? .red
+            coloringBookView.nameColor = nameColor ?? ""
         case .Brush:
             viewChangeLineWidth.isHidden = false
             coloringBookView.currentColor = currentColor ?? .red
+            coloringBookView.nameColor = nameColor ?? ""
             btnPen.isSelected = true
         }
         FirebaseEventManager.logEvent(with: RMBGEventTracking.tool_click, params: ["tool": tools.rawValue])
@@ -364,16 +355,43 @@ class StartColoringIPadViewController: BaseViewController {
     }
     
     @IBAction func actionBack(_ sender: Any) {
-        saveHistoryColoring()
-        switch self.viewModel.typeScreen {
-        case .home:
-            AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
-        case .coloring:
-            AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
-        case .detailColoring:
-            AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
-        case .collection:
-            AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+        let percent = coloringBookView.percentColoring
+        let percentColoring = Int((percent * 100).rounded())
+        if percentColoring < 100 {
+            PopupColoringViewController.show(in: self, _percent: percent, _title: LocalizableUtils.commonDescExit(), _titleOk: LocalizableUtils.commonOK(), _titleCancel: LocalizableUtils.commonNo()) {
+                ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) {[weak self] status in
+                    guard let self = self else {return}
+                    self.saveHistoryColoring()
+                    switch self.viewModel.typeScreen {
+                    case .home:
+                        AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+                    case .coloring:
+                        AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
+                    case .detailColoring:
+                        AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
+                    case .collection:
+                        AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+                    }
+                }
+            } actionCancel: {
+                
+            }
+            return
+        }
+    
+        ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) {[weak self] status in
+            guard let self = self else {return}
+            self.saveHistoryColoring()
+            switch self.viewModel.typeScreen {
+            case .home:
+                AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+            case .coloring:
+                AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
+            case .detailColoring:
+                AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
+            case .collection:
+                AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+            }
         }
     }
     
@@ -399,16 +417,19 @@ class StartColoringIPadViewController: BaseViewController {
     }
     
     @IBAction func actionEraser(_ sender: Any) {
+        changeStateColoring(true)
         changeStateTools(.Eraser)
     }
     
     @IBAction func actionPainPalette(_ sender: Any) {
-        TableColorIpadController.showView(in: self, sectionTable: sectionTable, indexListColor: indexListColor, listColorIpad: listColorIpad) { [weak self] colors, section, indexTable, indexColor  in
-            self?.sectionTable = section
-            self?.indexListColor = indexTable
-            self?.indexItemColor = indexColor ?? 0
-            self?.colors = colors
-            self?.updateColors()
+        TableColorIpadController.showView(in: self, indexListColor: indexListColor, indexColorBling: indexColorBling, palettes: palettes) { [weak self] colors, indexListColor, indexColorBling, palettes, indexColor in
+            guard let self = self else {return}
+            self.indexColorBling = indexColorBling
+            self.indexListColor = indexListColor
+            self.palettes = palettes
+            self.indexItemColor = indexColor ?? 0
+            self.colors = colors
+            self.updateColors()
         }
     }
     
@@ -419,10 +440,23 @@ class StartColoringIPadViewController: BaseViewController {
     }
     
     @IBAction func actionDone(_ sender: Any) {
-        saveHistoryColoring()
-        coloringBookView.layer.borderWidth = 0
-        AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: coloringBookView.asImage(), coloringLocal: viewModel.coloringLocal, history: viewModel.history, typeScreen: viewModel.typeScreen), with: .push)
-        coloringBookView.layer.borderWidth = 0.5
+        let percent = coloringBookView.percentColoring
+        let percentColoring = Int((percent * 100).rounded())
+        if percentColoring < 100 {
+            PopupColoringViewController.show(in: self, _percent: percent, _title: LocalizableUtils.commonSaveColoring(), _titleOk: LocalizableUtils.commonSave(), _titleCancel: LocalizableUtils.commonDiscard()) {
+                self.saveHistoryColoring()
+                self.coloringBookView.layer.borderWidth = 0
+                AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: self.coloringBookView.asImage(), coloringLocal: self.viewModel.coloringLocal, history: self.viewModel.history, typeScreen: self.viewModel.typeScreen), with: .push)
+                self.coloringBookView.layer.borderWidth = 0.5
+            } actionCancel: {
+                
+            }
+        } else {
+            saveHistoryColoring()
+            coloringBookView.layer.borderWidth = 0
+            AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: coloringBookView.asImage(), coloringLocal: viewModel.coloringLocal, history: viewModel.history, typeScreen: viewModel.typeScreen), with: .push)
+            coloringBookView.layer.borderWidth = 0.5
+        }
     }
     
     @IBAction func actionMinus(_ sender: Any) {
@@ -486,7 +520,8 @@ extension StartColoringIPadViewController: UICollectionViewDelegate, UICollectio
     func updateColor() {
         coloringBookView.currentColor = currentColor ?? .red
         coloringBookView.nameColor = colors[indexItemColor ?? 0]?.name ?? ""
-        FirebaseEventManager.logEvent(with: RMBGEventTracking.item_color, params: ["table_color": listColorIpad[sectionTable ?? 0].table_name ?? "",
+        nameColor = colors[indexItemColor ?? 0]?.name
+        FirebaseEventManager.logEvent(with: RMBGEventTracking.item_color, params: ["table_color": colors[indexItemColor ?? 0]?.tableName ?? "",
                                                                                    "color": colors[indexItemColor ?? 0]?.name ?? ""])
         listColor.scrollToItem(at: IndexPath(row: indexItemColor ?? 0, section: 0), at: .centeredHorizontally, animated: false)
     }
@@ -503,14 +538,16 @@ extension StartColoringIPadViewController {
         contentView.addSubview(coloringBookView)
         NSLayoutConstraint.activate([
             coloringBookView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            coloringBookView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            coloringBookView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 40)
         ])
         //Change the default color and width of the new coloring Book View
         coloringBookView.currentColor = currentColor ?? .red
         coloringBookView.nameColor = ""
         coloringBookView.currentWidth = CGFloat(simd_mix(1.0, 40.0, lineWidthPen))
         coloringBookView.delegate = self
-        coloringBookView.transform = .identity.scaledBy(x: 1.5, y: 1.5)
+        coloringBookView.transform = .identity.scaledBy(x: 1.2, y: 1.2)
+        progessRing.setProgress(Float(coloringBookView.percentColorImage), animated: true)
+        lbPercenColoring.text = "\(Int(((coloringBookView.percentColorImage) * 100).rounded()))%"
         getHistoryColoring()
     }
     
@@ -536,7 +573,7 @@ extension StartColoringIPadViewController {
         }
         coloringBookView.layer.borderWidth = 0.5
         // lưu các config và đường đãn của ảnh vừa vẽ vào DB
-        let newHistory = HistoryModel(imagePath: fileName, strokes: coloringBookView.strokes.map({ stroke in
+        let newHistory = HistoryModel(imagePath: fileName, percent_complete: coloringBookView.percentColoring, strokes: coloringBookView.strokes.map({ stroke in
             StrokeModel(lineWidth: stroke.lineWidth, color: stroke.color.toHexString(), id: 0, nameColor: stroke.nameColor, isPens: stroke.isPens, points: stroke.points.map({ point in
                 PointModel(x: point.x, y: point.y)
             }), strokeRect: StrokeRectMode(x: stroke.strokeRect.x, y: stroke.strokeRect.y, width: stroke.strokeRect.width, height: stroke.strokeRect.height))
@@ -551,7 +588,7 @@ extension StartColoringIPadViewController {
                 let historys = ColoringHistoryModel(id: coloring.id, filePath: coloring.filePath, fileLocal: coloring.fileLocal, historys: newHis)
                 if !SQLiteManager.shared.updateColorings(data: historys) {
                     self.coloringBookView?.reloadStrokes()
-                    let new = HistoryModel(imagePath: fileName, strokes: coloringBookView.strokes.map({ stroke in
+                    let new = HistoryModel(imagePath: fileName, percent_complete: newHistory.percent_complete, strokes: coloringBookView.strokes.map({ stroke in
                         StrokeModel(lineWidth: stroke.lineWidth, color: stroke.color.toHexString(), id: 0, nameColor: stroke.nameColor, points: stroke.points.map({ point in
                             PointModel(x: point.x, y: point.y)
                         }), strokeRect: StrokeRectMode(x: stroke.strokeRect.x, y: stroke.strokeRect.y, width: stroke.strokeRect.width, height: stroke.strokeRect.height))
@@ -567,7 +604,7 @@ extension StartColoringIPadViewController {
                 let historys = ColoringHistoryModel(id: coloring.id, filePath: coloring.filePath, fileLocal: coloring.fileLocal, historys: newHis)
                 if !SQLiteManager.shared.updateColorings(data: historys) {
                     self.coloringBookView?.reloadStrokes()
-                    let new = HistoryModel(imagePath: fileName, strokes: coloringBookView.strokes.map({ stroke in
+                    let new = HistoryModel(imagePath: fileName, percent_complete: newHistory.percent_complete, strokes: coloringBookView.strokes.map({ stroke in
                         StrokeModel(lineWidth: stroke.lineWidth, color: stroke.color.toHexString(), id: 0, nameColor: stroke.nameColor, points: stroke.points.map({ point in
                             PointModel(x: point.x, y: point.y)
                         }), strokeRect: StrokeRectMode(x: stroke.strokeRect.x, y: stroke.strokeRect.y, width: stroke.strokeRect.width, height: stroke.strokeRect.height))
@@ -582,6 +619,9 @@ extension StartColoringIPadViewController {
                 viewModel.coloringLocal = coloringModel
             }
             viewModel.history = newHistory
+            let percent =  Float(newHistory.percent_complete ?? 0)
+            progessRing.setProgress(percent, animated: true)
+            lbPercenColoring.text = "\(Int((percent * 100).rounded()))%"
         }
     }
     
@@ -593,18 +633,14 @@ extension StartColoringIPadViewController {
             SDImageCache.shared.removeImage(forKey: cacheKey, withCompletion: nil)
             let strokes = history.strokes
             strokes.forEach { detail in
-                var color: UIColor = .black
-                if let c = ItemThemeColor.allCases.first(where: {$0.name == detail.nameColor})?.color {
-                    color = c
-                } else if let name = TableColor.allCases.first(where: {$0.listColor.contains(where: {$0.name == detail.nameColor})}) {
-                    if let c = name.listColor.first(where: {$0.name?.contains(detail.nameColor) ?? true })?.color {
+                var color: UIColor = currentColor ?? UIColor(hexString: "FFFFFE")
+                if let name = ItemThemeColor.allCases.first(where: {$0.itemColors.contains(where: {$0.name == detail.nameColor})}) {
+                    if let c = name.itemColors.first(where: {$0.name?.contains(detail.nameColor) ?? true })?.color {
                         color = c
                     } else {
-                        let hex = name.listColor.first(where: {$0.name == detail.nameColor})?.name
+                        let hex = name.itemColors.first(where: {$0.name?.contains(detail.nameColor) ?? true})?.name
                         color = UIColor(hexString: hex ?? "")
                     }
-                } else {
-                    color = UIColor(hexString: detail.color.replacingOccurrences(of: "#", with: ""))
                 }
                 var item = Stroke(color: color, lineWidth: detail.lineWidth, nameColor: detail.nameColor, isPens: detail.isPens ?? true)
                 detail.points.forEach { point in
@@ -619,8 +655,18 @@ extension StartColoringIPadViewController {
     }
     
     func loadAdsView() {
+        if DeviceInfos.isIpad() {
+            heightViewAds.constant = 90
+        } else {
+            heightViewAds.constant = 56
+        }
+        viewAds.isHidden = false
         ADManager.shared.loadBanner(DollColoringAdID.banner_coloring, viewBanner: viewAds) {[weak self] success in
-            self?.viewAds.isHidden = !success
+            if DeviceInfos.isIpad() {
+                self?.heightViewAds.constant = success ? 90 : 0
+            } else {
+                self?.heightViewAds.constant = success ? 56 : 20
+            }
         }
     }
     

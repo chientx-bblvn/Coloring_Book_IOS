@@ -88,11 +88,11 @@ extension AppDelegate {
         
         reachability?.whenReachable = { _ in
             print("Network connected")
-            //            NetworkDisconnectController.shared?.close()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "network_connection"), object: true)
         }
         reachability?.whenUnreachable = { _ in
             print("Network disconnected")
-            //            NetworkDisconnectController.show()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "network_connection"), object: false)
         }
         
         startNotifier()

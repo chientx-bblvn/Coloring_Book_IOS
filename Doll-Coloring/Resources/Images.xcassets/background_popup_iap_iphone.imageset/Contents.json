@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "background_popup_iap_iphone.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -13,27 +13,37 @@ import Lottie
 class AllColoringCell: UICollectionViewCell, NibReusable {
 
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var adsViewAnimation: UIButton!
+    @IBOutlet weak var adsViewAnimation: UIImageView!
+    @IBOutlet weak var progessRing: ALProgressRing!
+    @IBOutlet weak var lbPercentColoring: UILabel!
+    @IBOutlet weak var viewWatchAds: UIButton!
     
    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        progessRing.lineWidth = 5
     }
     
     func setupView(image: String?, coloringLocal: [ColoringHistoryModel], filePath: String?) {
         if let coloring = coloringLocal.first(where: {$0.filePath.contains(filePath ?? "")}) {
             if let file = coloring.historys.last?.imagePath {
+                progessRing.isHidden = false
                 let imageUrlString = FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: file)
                 let cacheKey = SDWebImageManager.shared.cacheKey(for: imageUrlString)
                 SDImageCache.shared.removeImage(forKey: cacheKey, withCompletion: nil)
                 imageView.setLocalImage(with: imageUrlString.path, placeholder: nil)
+                let percent = Float(coloring.historys.last?.percent_complete ?? 0)
+                progessRing.setProgress(percent, animated: true)
+                lbPercentColoring.text = "\(Int((percent * 100).rounded()))%"
             } else {
+                progessRing.isHidden = true
                 SQLiteManager.shared.deleteColorings(id: coloring.id)
                 FileManagerLocal.shared.deleteFile(typeFile: .Coloring, fileName: coloring.fileLocal)
                 imageView.setImage(with: "/doll-coloring2/canvas/" + (image ?? ""), placeholder: nil)
             }
         } else {
+            progessRing.isHidden = true
             imageView.setImage(with: "/doll-coloring2/canvas/" + (image ?? ""), placeholder: nil)
         }
     }

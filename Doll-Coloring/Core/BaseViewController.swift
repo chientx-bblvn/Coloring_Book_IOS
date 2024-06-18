@@ -32,8 +32,10 @@ class BaseViewController: UIViewController {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(languageChange(_:)),
                                                name: .changeLanguage,
-                                               object: nil
-        )
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showViewDisconnect(_ :)),
+                                               name: NSNotification.Name(rawValue: "network_connection"),
+                                               object: nil)
         self.setup()
         
         self.bindingData()
@@ -187,6 +189,12 @@ class BaseViewController: UIViewController {
     
     @objc private func languageChange(_ note: Notification) {
         onLanguageChange()
+    }
+    
+    @objc private func showViewDisconnect(_ note: Notification) {
+        if let noti = note.object as? Bool, !noti {
+            NetworkDisconnectController.show()
+        }
     }
     
     @objc func onOpenKeyboard(_ height: CGFloat) {

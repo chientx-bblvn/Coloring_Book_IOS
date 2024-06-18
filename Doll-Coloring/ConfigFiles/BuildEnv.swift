@@ -13,12 +13,17 @@ import AdmobSDK
  * Check env config for base url request
  */
 let apiBaseUrl: String = "https://ico.binarybridge.dev"
+let privacyUrl: String = "https://sites.google.com/binarybridge.dev/suunguyen-privacy-policy/home"
+let termsUrl: String = "https://sites.google.com/binarybridge.dev/terms-conditions-binary-bridge/home"
 
 let isDev = false
 
+var isWarchAds: [String] = []
+
 enum IAPIdType: String, Decodable, CaseIterable, IAPType {
-    case weekly = "com.bblabs.rmvobj.weekly"
-    case yearly = "com.bblabs.rmvobj.yearly"
+    case weekly = "DollColoring_Weekly"
+    case monthly = "DollColoring_Monthly"
+    case yearly = "DollColoring_Yearly"
     
     var title: String {
         switch self {
@@ -26,6 +31,8 @@ enum IAPIdType: String, Decodable, CaseIterable, IAPType {
             return LocalizableUtils.iapWeekly()
         case .yearly:
             return LocalizableUtils.iapYearly()
+        case .monthly:
+            return LocalizableUtils.iapMonthly()
         }
     }
     
@@ -35,6 +42,8 @@ enum IAPIdType: String, Decodable, CaseIterable, IAPType {
             return 7
         case .yearly:
             return 365
+        case .monthly:
+            return 30
         }
     }
     
@@ -44,6 +53,8 @@ enum IAPIdType: String, Decodable, CaseIterable, IAPType {
             return LocalizableUtils.iapWeek()
         case .yearly:
             return LocalizableUtils.iapYear()
+        case .monthly:
+            return LocalizableUtils.iapMonth()
         }
     }
     
@@ -79,6 +90,10 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
     case native_result = "native_result"
     case reward_save = "reward_save"
     case banner_home = "banner_home"
+    case inter_back = "inter_back"
+    case reward_color = "reward_color"
+    case inter_color = "inter_color"
+    case inter_edit_collection = "inter_edit_collection"
     
     var name: String { return self.rawValue }
     
@@ -117,6 +132,14 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
             return .Reward
         case .banner_home:
             return .Banner
+        case .inter_back:
+            return .Interstitial
+        case .reward_color:
+            return .Reward
+        case .inter_color:
+            return .Interstitial
+        case .inter_edit_collection:
+            return .Interstitial
         }
     }
     
@@ -137,7 +160,7 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
         case .native_home:
             return "ca-app-pub-3850749456614322/1533513213"
         case .inter_alltopic:
-            return "ca-app-pub-3850749456614322/1334202669"
+            return "ca-app-pub-3850749456614322/7325952838"
         case .reward_alltopic:
             return "ca-app-pub-3850749456614322/2663095192"
         case .banner_coloring:
@@ -154,6 +177,15 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
             return "ca-app-pub-3850749456614322/1262025796"
         case .banner_home:
             return "ca-app-pub-3850749456614322/9959855034"
+        case .inter_back:
+            return "ca-app-pub-3850749456614322/9636453221"
+        case .reward_color:
+            return "ca-app-pub-3850749456614322/6174562817"
+        case .inter_color:
+            return "ca-app-pub-3850749456614322/1161909288"
+        case .inter_edit_collection:
+            return "ca-app-pub-3850749456614322/6375170531"
+            
         }
     }
     
@@ -220,6 +252,8 @@ enum RMBGEventTracking: String, EventTracking {
 enum KeyRemoteConfig: String, KeyRemote {
     case NumberClickItemAllTopic = "number_click_item_all_topic"
     case ABTestFillColoring = "ABTestFillColoring"
+    case StateShowIAP = "state_show_iap"
+    case is_free_trial_us = "is_free_trial_us"
     
     var key: String {return self.rawValue}
 }

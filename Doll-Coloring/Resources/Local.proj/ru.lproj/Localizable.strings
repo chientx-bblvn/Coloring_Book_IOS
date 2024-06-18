@@ -34,6 +34,15 @@ Common.Language                                 =       "Язык";
 Common.EmptyCollections                         =       "Пока нет изображений!";
 Content_delete_collection                       =       "Цвет будет удален \n Нажмите Удалить, чтобы продолжить.";
 Common.Continue = "Продолжить";
+Common.UnlockForFree                            =       "Разблокировать бесплатно";
+Common.UnlockColoring                           =       "Купить премиум: Разблокировать все рисунки";
+Common.WatchAShortVideo                         =       "Посмотреть короткое видео";
+Common.Yes                                      =       "Да";
+Common.No                                       =       "Нет";
+Common.discard                                  =       "Отменить";
+Common.SaveColoring                             =       "Вы хотите сохранить или отменить?";
+Common.DescExit                                 =       "Вы уверены, что хотите выйти?";
+Common.NoInternet                               =       "Упс! Потеряно интернет-соединение";
 
 // Splash
 Splash.Copyright                                =       "®Авторское право Binary Bridge Labs";
@@ -64,11 +73,23 @@ Language.germany                                =       "Немецкий";
 Language.rusia                                  =       "Русский";
 
 
+
 // IAP
-IAP.week                                        =       "неделя";
-IAP.year                                        =       "год";
-IAP.weekly                                      =       "ЕЖЕНЕДЕЛЬНЫЙ ДОСТУП";
-IAP.yearly                                      =       "ГОДОВОЙ ДОСТУП";
+IAP.week = "неделя";
+IAP.year = "год";
+IAP.month = "месяц";
+IAP.weekly                                      =       "ЕЖЕНЕДЕЛЬНО";
+IAP.yearly                                      =       "ЕЖЕГОДНО";
+IAP.monthly                                     =       "ЕЖЕМЕСЯЧНО";
+IAP.price_weekly                                =       "Всего %@/hеделю";
+IAP.price_package_weekly                        =       "Еженедельно %@";
+IAP.price_package_monthly                       =       "Ежемесячно %@";
+IAP.price_package_yearly                        =       "Ежегодно %@";
+IAP.TermOfUse                                   =       "Условия использования";
+IAP.PrivacyPolicy                               =       "Политика конфиденциальности";
+IAP.RestorePurchase                             =       "Восстановить покупку";
+
+
 
 // ForceUpdate
 ForceUpdate.Title                               =       "Доступна новая версия";
@@ -90,6 +111,8 @@ table.galaxy_color                              =       "Цвет галакти
 table.pastel_color                              =       "Пастельный цвет";
 table.sweet_color                               =       "Сладкий цвет";
 table.mystical_color                            =       "Мистический цвет";
+table.background_dark_color                     =       "Background Dark";
+table.background_light_color                    =       "Background Light";
 
 subtite_delete = "Цвет будет удален. Нажмите удалить, чтобы продолжить.";
 

@@ -31,6 +31,7 @@ struct ColoringHistoryModel: Codable {
 
 struct HistoryModel: Codable {
     var imagePath: String
+    var percent_complete: Double?
     var strokes: [StrokeModel]
 }
 

@@ -34,6 +34,15 @@ Common.Language                                 =       "언어";
 Common.EmptyCollections                         =       "아직 사진이 없습니다!";
 Content_delete_collection                       =       "색상이 삭제됩니다. \n 계속하려면 삭제를 클릭하십시오.";
 Common.Continue = "계속하다";
+Common.UnlockForFree                            =       "무료로 잠금 해제";
+Common.UnlockColoring                           =       "프리미엄 구매: 모든 그림 잠금 해제";
+Common.WatchAShortVideo                         =       "짧은 동영상을 시청하세요";
+Common.Yes                                      =       "네";
+Common.No                                       =       "아니요";
+Common.discard                                  =       "버리다";
+Common.SaveColoring                             =       "저장하시겠습니까 아니면 버리시겠습니까?";
+Common.DescExit                                 =       "정말로 종료하시겠습니까?";
+Common.NoInternet                               =       "이런! 인터넷 연결이 끊겼습니다";
 
 // Splash
 Splash.Copyright                                =       "®Binary Bridge Labs에 의한 저작권";
@@ -65,10 +74,20 @@ Language.rusia                                  =       "러시아어";
 
 
 // IAP
-IAP.week                                        =       "주";
-IAP.year                                        =       "년";
-IAP.weekly                                      =       "주간 액세스";
-IAP.yearly                                      =       "연간 액세스";
+IAP.week = "주";
+IAP.year = "년";
+IAP.month = "월";
+IAP.weekly                                      =       "주간";
+IAP.yearly                                      =       "연간";
+IAP.monthly                                     =       "월간";
+IAP.price_weekly                                =       "주당 %@/주";
+IAP.price_package_weekly                        =       "주간 %@";
+IAP.price_package_monthly                       =       "월간 %@";
+IAP.price_package_yearly                        =       "연간 %@";
+IAP.TermOfUse                                   =       "이용 약관";
+IAP.PrivacyPolicy                               =       "개인정보 보호정책";
+IAP.RestorePurchase                             =       "구매 복원";
+
 
 // ForceUpdate
 ForceUpdate.Title                               =       "새 버전 이용 가능";
@@ -90,6 +109,8 @@ table.galaxy_color                              =       "은하 색";
 table.pastel_color                              =       "파스텔 색";
 table.sweet_color                               =       "달콤한 색";
 table.mystical_color                            =       "신비한 색";
+table.background_dark_color                     =       "Background Dark";
+table.background_light_color                    =       "Background Light";
 
 subtite_delete = "색상이 삭제됩니다. 계속하려면 삭제를 클릭하십시오.";
 

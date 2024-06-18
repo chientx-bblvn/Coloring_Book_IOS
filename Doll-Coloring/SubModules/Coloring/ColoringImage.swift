@@ -14,7 +14,7 @@ struct ColoringImageBook {
     let isOptimized:Bool
     
     //CGImage of the drawing
-    let cgImage:CGImage
+    var cgImage:CGImage
     
     //Size in pixels
     let width:Int
@@ -131,7 +131,7 @@ struct ColoringImageBook {
             self.createMasks()
         }
     }
-    
+        
     private mutating func createMasks(){
         guard let data = self.cgImage.dataProvider?.data else {return}
         let dataLenght:Int = CFDataGetLength(data) as Int

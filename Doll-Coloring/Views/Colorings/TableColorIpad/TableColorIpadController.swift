@@ -3,7 +3,7 @@
 //  Doll-Coloring
 //
 //  Created by Việt Anh Nguyễn on 23/5/24.
-//  
+//
 //
 
 import Foundation
@@ -16,23 +16,46 @@ class TableColorIpadController: BaseViewController {
     
     @IBOutlet weak var viewContent: UIView!
     
+    @IBOutlet weak var viewListBling: UIView!
+    
+    @IBOutlet weak var viewTexture: UIView!
+    
+    @IBOutlet weak var imgTexture: UIImageView!
+    
+    @IBOutlet weak var lbTexture: UILabel!
+    
+    @IBOutlet weak var viewPlain: UIView!
+    
+    @IBOutlet weak var imgPlain: UIImageView!
+    
+    @IBOutlet weak var lbPlain: UILabel!
+    
+    @IBOutlet weak var listBlingColor: UICollectionView!
+    
     @IBOutlet weak var listItemColor: UITableView!
     
-    var listColorIpad: [ListColorIpad] = []
+    var selectColors: (([ItemColor?],_ indexListColor: Int?,_ indexColorBling: Int?,_ palettes: PalettesColor,_ indexColor: Int?) -> Void)?
     
-    var selectColors: (([ItemColor?], _ sectionTable: Int? , _ indexListColor: Int?,_ indexColor: Int?) -> Void)?
+    var indexListColor: Int? = 0
     
-    var sectionTable: Int? = 0, indexListColor: Int? = 0
+    var indexColorBling: Int?
     
-    class func showView(in parent: UIViewController, sectionTable: Int? = 0, indexListColor: Int? = 0, listColorIpad: [ListColorIpad], selectColors: (([ItemColor?], _ sectionTable: Int? , _ indexListColor: Int?, _ indexColor: Int? ) -> Void)? = nil) {
+    var palettes: PalettesColor = .Plain
+    
+    var itemColors: [[ItemColor]] = []
+    
+    class func showView(in parent: UIViewController,
+                        indexListColor: Int? = 0,
+                        indexColorBling: Int?,
+                        palettes: PalettesColor = .Texture, selectColors: (([ItemColor?],_ indexListColor: Int?,_ indexColorBling: Int?,_ palettes: PalettesColor,_ indexColor: Int?) -> Void)? = nil) {
         let mainStoryboard = UIStoryboard(name: "TableColorIpad", bundle: nil)
         guard let customView = mainStoryboard.instantiateViewController(withIdentifier: String(describing: self)) as? TableColorIpadController else {
             return
         }
         customView.selectColors = selectColors
-        customView.listColorIpad = listColorIpad
-        customView.sectionTable = sectionTable
         customView.indexListColor = indexListColor
+        customView.indexColorBling = indexColorBling
+        customView.palettes = palettes
         customView.providesPresentationContextTransitionStyle = true
         customView.definesPresentationContext = true
         customView.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
@@ -43,8 +66,9 @@ class TableColorIpadController: BaseViewController {
     override func setup() {
         super.setup()
         setupView()
+        ADManager.shared.preLoadReward(DollColoringAdID.reward_color)
     }
-
+    
     override func bindingData() {
         super.bindingData()
     }
@@ -53,49 +77,291 @@ class TableColorIpadController: BaseViewController {
         listItemColor.delegate = self
         listItemColor.dataSource = self
         listItemColor.register(cellType: TableColorCell.self)
+        listBlingColor.delegate = self
+        listBlingColor.dataSource = self
+        listBlingColor.register(cellType: FillterColorCell.self)
         viewContent.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(actionBack)))
-        
+        viewPlain.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(actionPlain)))
+        viewTexture.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(actionTexture)))
+        changePalettes(true)
+    }
+    
+    private func changePalettes(_ isNew: Bool = false) {
+        itemColors = []
+        viewPlain.backgroundColor = .clear
+        viewTexture.backgroundColor = .clear
+        lbPlain.textColor = R.color.colorTitle()
+        lbTexture.textColor = R.color.colorTitle()
+        lbPlain.font = .systemFont(ofSize: 14)
+        lbTexture.font = .systemFont(ofSize: 14)
+        imgPlain.isHidden = true
+        imgTexture.isHidden = true
+        if palettes == .Plain {
+            palettes.palettes.forEach { item in
+                itemColors.append(contentsOf: item.listColor)
+            }
+            viewListBling.isHidden = true
+            lbPlain.font = .boldSystemFont(ofSize: 14)
+            imgPlain.isHidden = false
+            viewPlain.backgroundColor = R.color.mainPrimary()
+            lbPlain.textColor = .white
+        } else {
+            viewListBling.isHidden = false
+            imgTexture.isHidden = false
+            viewTexture.backgroundColor = R.color.mainPrimary()
+            lbTexture.font = .boldSystemFont(ofSize: 14)
+            lbTexture.textColor = .white
+            updateThemeColor()
+        }
+        listItemColor.reloadData()
+        if isNew {
+            listItemColor.scrollToRow(at: IndexPath(row: indexListColor ?? 0, section: 0), at: .top, animated: false)
+        }
+    }
+    
+    func updateThemeColor() {
+        itemColors = palettes.palettes[indexColorBling ?? 0].listColor
+        listBlingColor.reloadData()
+        listItemColor.reloadData()
     }
     
     @objc private func actionBack() {
         removeAnimate()
     }
+    
+    @objc private func actionPlain() {
+        palettes = .Plain
+        indexListColor = -1
+        indexColorBling = nil
+        changePalettes()
+    }
+    
+    @objc private func actionTexture() {
+        palettes = .Texture
+        indexListColor = -1
+        indexColorBling = 0
+        changePalettes()
+    }
+    
+    @IBAction func actionClose(_ sender: Any) {
+        actionBack()
+    }
 }
 
 extension TableColorIpadController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return listColorIpad.count
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listColorIpad[section].listColor.count
+        return itemColors.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableColorCell") as? TableColorCell else {
             return UITableViewCell()
         }
-        cell.lblName.text = listColorIpad[indexPath.section].table_name
-        cell.setupData(data: listColorIpad[indexPath.section].listColor[indexPath.row], width: (350 / (8 * 7) / 5))
-        if indexPath.section == sectionTable && indexPath.row == indexListColor {
-            cell.viewContent.borderWidth = 1
+        cell.lblName.text = itemColors[indexPath.row].first?.tableName
+        // hiện icon premium ở những thị trường có IAP
+        if UserDefaultManager.ABShowIAPColoring {
+            /** check tier 1
+             - hiện icon premium ở bảng màu isPremium
+             - show Watch ADS ở bảng màu thường
+             - free_trial cho xem ads để mở khoá bảng màu
+             -
+             */
+            if UserDefaultManager.ABis_free_trial_us {
+                cell.btnWatchAds.isHidden = true
+                cell.viewWatchADS.isHidden = true
+                if !isWarchAds.contains(where: {$0.contains(itemColors[indexPath.row].first?.tableName ?? "")}) {
+                    cell.btnWatchAds.isHidden = false
+                }
+            } else {
+                cell.btnWatchAds.isHidden = true
+                cell.viewWatchADS.isHidden = true
+                if !isWarchAds.contains(where: {$0.contains(itemColors[indexPath.row].first?.tableName ?? "")}) {
+                    cell.btnWatchAds.isHidden = !(itemColors[indexPath.row].first?.isPremium ?? true)
+                }
+            }
         } else {
-            cell.viewContent.borderWidth = 0
+            // ẩn icon premium dành cho thị trường ko có IAP
+            cell.btnWatchAds.isHidden = true
+            if !isWarchAds.contains(where: {$0.contains(itemColors[indexPath.row].first?.tableName ?? "")})  {
+                cell.viewWatchADS.isHidden = !(itemColors[indexPath.row].first?.isPremium ?? true)
+            } else {
+                cell.viewWatchADS.isHidden = true
+            }
+        }
+        
+        // check đã mua IAP ẩn ic Premium và ic watch ADS
+        if IAPState.isUserVip {
+            cell.viewWatchADS.isHidden = true
+            cell.btnWatchAds.isHidden = true
+        }
+        
+        cell.setupData(data: itemColors[indexPath.row], width: (350 / (8 * 7) / 5))
+        if indexPath.row == indexListColor {
+            cell.viewColor.borderWidth = 2
+        } else {
+            cell.viewColor.borderWidth = 0
         }
         cell.selectColor = {[weak self] index in
-            self?.selectColors?(self?.listColorIpad[indexPath.section].listColor[indexPath.row] ?? [], indexPath.section, indexPath.row, index)
-            self?.removeAnimate()
+            guard let self = self else {return}
+            
+            // nếu đã mua IAP hoặc đã xem quảng cáo bỏ qua quảng cáo
+            if IAPState.isUserVip || isWarchAds.contains(where: {$0.contains(self.itemColors[indexPath.row].first?.tableName ?? "")}) {
+                selectTableColor(indexPath, index: index)
+                return
+            }
+             //Check có thị trường show IAP
+            guard UserDefaultManager.ABShowIAPColoring else {
+                if itemColors[indexPath.row].first?.isPremium ?? true {
+                    self.showRew(indexPath, index: index)
+                } else {
+                    selectTableColor(indexPath, index: index)
+                }
+                return
+            }
+            if UserDefaultManager.ABis_free_trial_us {
+                self.showRew(indexPath, index: index)
+            } else {
+                if itemColors[indexPath.row].first?.isPremium ?? true {
+                    self.showIAP(indexPath, index: index)
+                } else {
+                    selectTableColor(indexPath, index: index)
+                }
+            }
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectColors?(listColorIpad[indexPath.section].listColor[indexPath.row], indexPath.section, indexPath.row, 0)
-        removeAnimate()
+        if IAPState.isUserVip || isWarchAds.contains(where: {$0.contains(itemColors[indexPath.row].first?.tableName ?? "")}) {
+            selectTableColor(indexPath)
+            return
+        }
+         //Check có thị trường show IAP
+        guard UserDefaultManager.ABShowIAPColoring else {
+            if itemColors[indexPath.row].first?.isPremium ?? true {
+                showRew(indexPath)
+            } else {
+                selectTableColor(indexPath)
+            }
+            return
+        }
+        if UserDefaultManager.ABis_free_trial_us {
+            self.showRew(indexPath)
+        } else {
+            if itemColors[indexPath.row].first?.isPremium ?? true {
+                showIAP(indexPath)
+            } else {
+                showRew(indexPath)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return UITableView.automaticDimension
+    }
+}
+
+extension TableColorIpadController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return PalettesColor.Texture.palettes.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: FillterColorCell.self)
+        let index = indexPath.row
+        cell.setupData(index, isSelect: indexColorBling == index)
+        switch PalettesColor.Texture.palettes[index] {
+        case .Bling:
+            cell.imageView.image = R.image.ic_Bling()
+        case .Butterfly:
+            cell.imageView.image = R.image.ic_Butterfly()
+        case .BlingBling:
+            cell.imageView.image = R.image.ic_BlingBling()
+        case .SnowFlakes:
+            cell.imageView.image = R.image.ic_SnowFlakes()
+        case .Bling3:
+            cell.imageView.image = R.image.ic_Bling3()
+        case .Bubble:
+            cell.imageView.image = R.image.ic_Bubble()
+        case .Snow:
+            cell.imageView.image = R.image.ic_Snow()
+        default:
+            break
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        indexColorBling = indexPath.row
+        updateThemeColor()
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = collectionView.frame.height
+        return CGSize(width: height, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
+    
+    func showRew(_ indexPath: IndexPath, index: Int = 0) {
+        if IAPState.isUserVip || isWarchAds.contains(where: {$0.contains(self.itemColors[indexPath.row].first?.tableName ?? "")}) {
+            selectTableColor(indexPath, index: index)
+        } else {
+            PopupShowAdsViewController.show(in: self, colors: itemColors[indexPath.row], {
+                ADManager.shared.loadReward(DollColoringAdID.reward_color) {[weak self] status in
+                    guard let self = self else {return}
+                    switch status {
+                    case .closed:
+                        isWarchAds.append(self.itemColors[indexPath.row].first?.tableName ?? "")
+                        self.selectTableColor(indexPath, index: index)
+                    case .error:
+                        isWarchAds.removeAll(where: {$0.contains(self.itemColors[indexPath.row].first?.tableName ?? "")})
+                        self.showInter(indexPath, index: index)
+                    default:
+                        break
+                    }
+                }
+            }, {
+                self.showIAP(indexPath, index: index)
+            })
+        }
+    }
+    
+    func showInter(_ indexPath: IndexPath, index: Int = 0) {
+        ADManager.shared.loadFull(DollColoringAdID.inter_color, isSplash: true) {[weak self] state in
+            
+            switch state {
+            case .closed, .error:
+                self?.selectTableColor(indexPath, index: index)
+            default:
+                break
+            }
+        }
+    }
+    
+    func showIAP(_ indexPath: IndexPath, index: Int = 0) {
+        if IAPState.isUserVip ||  isWarchAds.contains(where: {$0.contains(self.itemColors[indexPath.row].first?.tableName ?? "")}) {
+            selectTableColor(indexPath, index: index)
+        } else {
+            SubcriptionViewController.show(checkTime: true) {
+                
+            } onClickCLose: {
+                self.showRew(indexPath, index: index)
+            }
+        }
+    }
+    
+    func selectTableColor(_ indexPath: IndexPath, index: Int = 0) {
+        selectColors?(self.itemColors[indexPath.row], indexPath.row, self.indexColorBling, self.palettes, index)
+        removeAnimate()
     }
 }
 

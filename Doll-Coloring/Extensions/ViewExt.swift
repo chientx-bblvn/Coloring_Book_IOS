@@ -165,6 +165,27 @@ extension UIView {
         layer.insertSublayer(gradient, at: 0)
         layer.cornerRadius = cornerRadius
     }
+    
+    func dropShadow(scale: Bool = true) {
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.layer.shadowRadius = 4
+        
+        // Optionally, you can add a corner radius
+        self.layer.cornerRadius = 10
+        
+        // To improve performance, you might want to set the shadow path
+        self.layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
+    }
+    
+    public func generateOuterShadow() {
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset =  CGSize.zero
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowRadius = 4
+    }
 }
 
 enum GradientDirection {

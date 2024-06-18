@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="HistoryCellCollectionViewCell" customModule="Remove_Object" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="HistoryCellCollectionViewCell" customModule="Doll_Coloring" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -32,17 +32,41 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eqh-Nl-C1W" customClass="ALProgressRing" customModule="Doll_Coloring" customModuleProvider="target">
+                        <rect key="frame" x="5" y="5" width="30" height="30"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mZ-PU-jpM">
+                                <rect key="frame" x="5" y="5" width="20" height="20"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="6"/>
+                                <color key="textColor" name="SystemRed"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="7hn-Xz-qzp"/>
+                            <constraint firstAttribute="bottom" secondItem="2mZ-PU-jpM" secondAttribute="bottom" constant="5" id="DV7-jw-Rqe"/>
+                            <constraint firstItem="2mZ-PU-jpM" firstAttribute="top" secondItem="Eqh-Nl-C1W" secondAttribute="top" constant="5" id="Wrf-39-WM4"/>
+                            <constraint firstAttribute="width" constant="30" id="hbj-cj-K0k"/>
+                            <constraint firstItem="2mZ-PU-jpM" firstAttribute="leading" secondItem="Eqh-Nl-C1W" secondAttribute="leading" constant="5" id="pt6-Sg-p8Y"/>
+                            <constraint firstAttribute="trailing" secondItem="2mZ-PU-jpM" secondAttribute="trailing" constant="5" id="tm1-kD-CII"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstItem="Eqh-Nl-C1W" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="1mw-F1-Gf1"/>
                 <constraint firstAttribute="bottom" secondItem="gY8-e0-Iqz" secondAttribute="bottom" id="Ek6-NE-jwp"/>
                 <constraint firstItem="gY8-e0-Iqz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="IWB-zs-Gf2"/>
                 <constraint firstAttribute="trailing" secondItem="gY8-e0-Iqz" secondAttribute="trailing" id="VQp-gt-sTD"/>
                 <constraint firstItem="gY8-e0-Iqz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="sgn-Y4-MDw"/>
+                <constraint firstItem="Eqh-Nl-C1W" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="y8X-ft-bRh"/>
             </constraints>
             <connections>
                 <outlet property="imageView" destination="gY8-e0-Iqz" id="jSx-cI-yZK"/>
+                <outlet property="lbPercent" destination="2mZ-PU-jpM" id="gmf-KI-QNC"/>
+                <outlet property="progressRing" destination="Eqh-Nl-C1W" id="UsF-nP-Wuj"/>
             </connections>
             <point key="canvasLocation" x="-32" y="-11"/>
         </collectionViewCell>
@@ -50,6 +74,9 @@
     <resources>
         <namedColor name="MainPrimary">
             <color red="0.76470588235294112" green="0.62745098039215685" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SystemRed">
+            <color red="0.87800002098083496" green="0.3059999942779541" blue="0.36100000143051147" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

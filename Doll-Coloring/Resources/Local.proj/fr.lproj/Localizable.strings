@@ -34,6 +34,16 @@ Common.Language                                 =       "Langue";
 Common.EmptyCollections                         =       "Pas encore d'images !";
 Content_delete_collection                       =       "La couleur sera supprimée \n Cliquez sur Supprimer pour continuer.";
 Common.Continue = "Continuer";
+Common.UnlockForFree                            =       "Déverrouiller gratuitement";
+Common.UnlockColoring                           =       "Achetez premium : Déverrouillez tous les dessins";
+Common.WatchAShortVideo                         =       "Regardez une courte vidéo";
+Common.Yes                                      =       "Oui";
+Common.No                                       =       "Non";
+Common.discard                                  =       "Jeter";
+Common.SaveColoring                             =       "Voulez-vous enregistrer ou jeter?";
+Common.DescExit                                 =       "Êtes-vous sûr de vouloir quitter";
+Common.NoInternet                               =       "Oups! Connexion Internet perdue";
+
 
 // Splash
 Splash.Copyright                                =       "®Droits d'auteur par Binary Bridge Labs 2024";
@@ -65,10 +75,20 @@ Language.rusia                                  =       "Russe";
 
 
 // IAP
-IAP.week                                        =       "semaine";
-IAP.year                                        =       "an";
-IAP.weekly                                      =       "ACCÈS HEBDOMADAIRE";
-IAP.yearly                                      =       "ACCÈS ANNUEL";
+IAP.week = "semaine";
+IAP.year = "année";
+IAP.month = "mois";
+IAP.weekly                                      =       "HEBDOMADAIRE";
+IAP.yearly                                      =       "ANNUEL";
+IAP.monthly                                     =       "MENSUEL";
+IAP.price_weekly                                =       "Seulement %@/semaine";
+IAP.price_package_weekly                        =       "Hebdomadaire %@";
+IAP.price_package_monthly                       =       "Mensuel %@";
+IAP.price_package_yearly                        =       "Annuel %@";
+IAP.TermOfUse                                   =       "Conditions d'utilisation";
+IAP.PrivacyPolicy                               =       "Politique de confidentialité";
+IAP.RestorePurchase                             =       "Restaurer l'achat";
+
 
 // ForceUpdate
 ForceUpdate.Title                               =       "Nouvelle version disponible";
@@ -90,6 +110,8 @@ table.galaxy_color                              =       "Couleur de la galaxie";
 table.pastel_color                              =       "Couleur pastel";
 table.sweet_color                               =       "Couleur douce";
 table.mystical_color                            =       "Couleur mystique";
+table.background_dark_color                     =       "Background Dark";
+table.background_light_color                    =       "Background Light";
 
 subtite_delete = "La couleur sera supprimée. Cliquez sur supprimer pour continuer.";
 

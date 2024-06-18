@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_choose_subcription.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

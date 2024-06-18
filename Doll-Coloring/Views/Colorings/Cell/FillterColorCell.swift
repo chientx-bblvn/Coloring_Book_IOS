@@ -47,8 +47,8 @@ class FillterColorCell: UICollectionViewCell, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        imageView.layer.cornerRadius = 15
-        viewContent.layer.cornerRadius = 22
+        imageView.layer.cornerRadius = 19
+        viewContent.layer.cornerRadius = 26
     }
     
     func setupData(_ index: Int, isSelect: Bool) {

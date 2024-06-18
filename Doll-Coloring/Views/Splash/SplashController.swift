@@ -29,10 +29,10 @@ class SplashController: BaseViewController {
         super.setup()
         
         setupView()
-        
+        configIAP()
         loadSavedLanguage()
         
-        self.requestNotification()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.loadConfigData()
         }
@@ -53,19 +53,14 @@ class SplashController: BaseViewController {
 // MARK: - Action view
 extension SplashController {
     
-    private func requestNotification() {
-        BBLLogging.d("Check:: requestNotification")
-        appDelegate?.requestNotificationPermission(completion: { success, error in
-            BBLLogging.d("Check:: requestNotificationPermission  --   success: \(success)  error: \(error?.localizedDescription ?? "error")")
-        })
-    }
-    
     private func loadConfigData() {
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
         fetchRemoteConfig {
             UserDefaultManager.currentAccessNumberClick = RemoteConfigManager.shared.number(forKey: KeyRemoteConfig.NumberClickItemAllTopic)
             UserDefaultManager.currentAccessABTestFillColoring = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.ABTestFillColoring)
+            UserDefaultManager.currentAccessABShowIAPColoring = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.StateShowIAP)
+            UserDefaultManager.currentAccessAB_is_free_trial_US = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.is_free_trial_us)
             dispatchGroup.leave()
         }
         dispatchGroup.notify(queue: .main) { [weak self] in
@@ -80,26 +75,23 @@ extension SplashController {
     }
     
     // MARK: - Check IAP config
-    private func configIAP(completion: @escaping (() -> Void)) {
+    private func configIAP() {
         BBLLogging.d("Check:: configIAP")
-        InappManager.share.productIdentifiers = Set(IAPIdType.allCases.compactMap({ $0.rawValue }))
-        InappManager.share.checkPurchaseProduct()
-        _ = InappManager.share.productInfo(id: InappManager.share.productIdentifiers, isShowLoading: false) { [weak self] listProduct in
+        let identitiesIAP = Set(IAPIdType.allCases.compactMap({ $0.id }))
+        InappManager.share.productIdentifiers = identitiesIAP
+        _ = InappManager.share.productInfo(id: identitiesIAP, isShowLoading: false) { [weak self] listProduct in
             BBLLogging.d("Check:: productInfo   ---   \(listProduct.count)")
-            if listProduct.isEmpty {
-                IAPState.iapState = .unload
-                completion()
-            } else {
-                _ = self?.checkIsUserVip(completion: completion)
+            if IAPState.isUserVip {
+                InappManager.share.checkPurchaseProduct()
+                _ = self?.checkIsUserVip()
             }
         }
     }
     
-    private func checkIsUserVip(completion: @escaping (() -> Void)) -> InAppRequest? {
+    private func checkIsUserVip() -> InAppRequest? {
         BBLLogging.d("Check:: checkIsUserVip")
         return InappManager.share.veryCheckRegisterPack {
             BBLLogging.d("Check:: veryCheckRegisterPack")
-            completion()
         }
     }
     
@@ -132,17 +124,7 @@ extension SplashController {
     }
     
     private func processScreen() {
-        if configLoaded {
-//            let subscriptions = RemoteConfigManager.shared.objectJson(forKey: DefaultRemoteKey.subscriptionList,
-//                                                                      type: [SubscriptionInfo].self) ?? []
-//            if subscriptions.isEmpty {
-//                IAPState.iapState = .unload
-//            }
-//            if IAPState.isUserVip {
-//                self.navigateScreen()
-//            } else {
-//
-//            }
+        if !IAPState.isUserVip {
             self.showAdvert()
         } else {
             self.navigateScreen()
@@ -153,10 +135,9 @@ extension SplashController {
         self.timer?.invalidate()
         self.timer = nil
         BBLLogging.d("Check:: showAdvert")
-        preloadAdsNative()
         if !DollColoringAdID.appopen_splash.isEnableAd {
-            self.preloadOpenResumeAd()
-            self.showFullAds()
+            preloadOpenResumeAd()
+            showFullAds()
             return
         }
         ADManager.shared.loadOpenAsync(DollColoringAdID.appopen_splash) { [weak self] showed in
@@ -174,22 +155,6 @@ extension SplashController {
     private func preloadOpenResumeAd() {
         if DollColoringAdID.appopen_resume.isEnableAd {
             ADManager.shared.loadOpen(DollColoringAdID.appopen_resume)
-        }
-    }
-    
-    private func preloadAdsNative() {
-        let showIntro = UserDefaults.standard.bool(forKey: UserDefault.showedIntro.rawValue)
-        
-        if !self.isSetLanguage {
-            ADManager.shared.preLoadNative(DollColoringAdID.native_language)
-            ADManager.shared.preLoadNative(DollColoringAdID.native_language_high)
-            return
-        }
-        if showIntro {
-            
-        } else {
-            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding)
-            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_high)
         }
     }
     
@@ -243,8 +208,8 @@ extension SplashController {
     
     private func setupView() {
         FirebaseEventManager.logEvent(with: RMBGEventTracking.splashScr)
-        animationView.loadAnimation(file: "animation_splash", loopMode: .loop, autoPlay: true)
-        animationColoring.loadAnimation(file: "animation_coloring", loopMode: .loop, autoPlay: true, animationSpeed: 2)
+//        animationView.loadAnimation(file: "animation_splash_new", loopMode: .loop, autoPlay: true)
+        animationColoring.loadAnimation(file: "animation_splash_new", loopMode: .loop, autoPlay: true, animationSpeed: 2)
         let style = ThemeStyleAds
             .custom(backgroundColor: UIColor.secondarySystemBackground.withAlphaComponent(0.8),
                     titleColor: R.color.textColor()!,
@@ -252,11 +217,9 @@ extension SplashController {
                     contenColor: R.color.textColor()!,
                     actionColor: R.color.textColor()!,
                     backgroundAction: [R.color.mainPrimary()!])
-        let testIds =         [
-                "c217aeaf40cf15ddbd0cad656cdc600e",
-                "8858f3244d30b77f284dd588ae0c2fe3",
-                "f56434cabf2e8e1b7974f9b0018649a7"
-                ]
+        let testIds =     [
+            "1999dafded8682859eeec95e2482fbe9"
+        ]
         ADManager.shared.startAds(style: style, testIds: testIds)
         
     }

@@ -14,9 +14,12 @@ final class TopBarView: BaseCustomXibView {
     @IBOutlet private weak var btnLeft: UIButton!
     @IBOutlet private weak var btnRight: UIButton!
     @IBOutlet private weak var lbTitle: UILabel!
+    @IBOutlet private weak var btnPremium: UIButton!
+    @IBOutlet private weak var viewPremium: UIView!
     
     var onRightClick: (() -> Void)?
     var onLeftClick: (() -> Void)?
+    var onClickPremium: (() -> Void)?
     
     // Set title for input
     @IBInspectable var title: String {
@@ -61,6 +64,18 @@ final class TopBarView: BaseCustomXibView {
         }
         set {
             btnLeft.setImage(newValue, for: .normal)
+        }
+    }
+    
+    @IBInspectable var showPremium: Bool = true {
+        didSet {
+            if IAPState.isUserVip {
+                btnPremium.isHidden = true
+                viewPremium.isHidden = true
+            } else {
+                btnPremium.isHidden = !showPremium
+                viewPremium.isHidden = !showPremium
+            }
         }
     }
     
@@ -125,5 +140,10 @@ final class TopBarView: BaseCustomXibView {
     @IBAction func clickLeftButton(_ sender: Any) {
         onLeftClick?()
     }
+    
+    @IBAction func actionPremium(_ sender: Any) {
+        onClickPremium?()
+    }
+    
     
 }

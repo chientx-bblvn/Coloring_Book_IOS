@@ -51,6 +51,9 @@ class DetailCollectionController: BaseViewController {
                 AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
             }
         }
+        if IAPState.isUserVip {
+            btnSave.setImage(nil, for: .normal)
+        }
         topBarView.titleFont = UIFont.systemFont(ofSize: 20, weight: .bold)
         imageView.setLocalImage(with: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: viewModel.history?.imagePath ?? "").path, placeholder: nil)
     }
@@ -69,7 +72,7 @@ class DetailCollectionController: BaseViewController {
     }
     
     @IBAction func actionEdit(_ sender: Any) {
-        editColoring()
+        loadInterADSEdit()
     }
     
     func deleteColoring() {
@@ -99,6 +102,11 @@ class DetailCollectionController: BaseViewController {
         } else {
             AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
         }
+        let local = FileManagerLocal.shared.getFileColoringlocalURL()
+        local.forEach { url in
+            let cacheKey = SDWebImageManager.shared.cacheKey(for: url)
+            SDImageCache.shared.removeImage(forKey: cacheKey, withCompletion: nil)
+        }
     }
     
     func checkPhotoLibraryPermission() {
@@ -107,12 +115,8 @@ class DetailCollectionController: BaseViewController {
         case .authorized:
             //handle authorized status
             DispatchQueue.main.async {
-                PopupSaveColoringViewController.show(in: self) {
-                    
-                } onclickDelete: {
-                    DispatchQueue.main.async {
-                        self.loadAdsView()
-                    }
+                DispatchQueue.main.async {
+                    self.checkVip()
                 }
             }
         case .denied, .restricted :
@@ -129,25 +133,15 @@ class DetailCollectionController: BaseViewController {
                 switch status {
                 case .authorized:
                     DispatchQueue.main.async {
-                        PopupSaveColoringViewController.show(in: self) {
-                            
-                        } onclickDelete: {
-                            DispatchQueue.main.async {
-                                self.loadAdsView()
-                            }
+                        DispatchQueue.main.async {
+                            self.checkVip()
                         }
-
                     }
                 case .limited:
                     DispatchQueue.main.async {
-                        PopupSaveColoringViewController.show(in: self) {
-                            
-                        } onclickDelete: {
-                            DispatchQueue.main.async {
-                                self.loadAdsView()
-                            }
+                        DispatchQueue.main.async {
+                            self.checkVip()
                         }
-
                     }
                 case .notDetermined:
                     break
@@ -161,14 +155,7 @@ class DetailCollectionController: BaseViewController {
             }
         case .limited:
             DispatchQueue.main.async {
-                PopupSaveColoringViewController.show(in: self) {
-                    
-                } onclickDelete: {
-                    DispatchQueue.main.async {
-                        self.loadAdsView()
-                    }
-                }
-
+                self.checkVip()
             }
         @unknown default:
             break
@@ -181,11 +168,36 @@ class DetailCollectionController: BaseViewController {
         UIApplication.shared.open(settingsUrl, options: [:])
     }
     
+    private func checkVip() {
+        if IAPState.isUserVip {
+            savePhotosAlbum()
+        } else {
+            PopupSaveColoringViewController.show(in: self) {
+                
+            } onclickDelete: {
+                DispatchQueue.main.async {
+                    self.loadAdsView()
+                }
+            }
+        }
+    }
+    
     func loadInterAds() {
-        ADManager.shared.loadFull(DollColoringAdID.inter_save) {[weak self] status in
+        ADManager.shared.loadFull(DollColoringAdID.inter_save, isSplash: true) {[weak self] status in
             switch status {
             case .closed, .error:
                 self?.savePhotosAlbum()
+            default:
+                break
+            }
+        }
+    }
+    
+    func loadInterADSEdit() {
+        ADManager.shared.loadFull(DollColoringAdID.inter_edit_collection, isSplash: true) {[weak self] status in
+            switch status {
+            case .closed, .error:
+                self?.editColoring()
             default:
                 break
             }

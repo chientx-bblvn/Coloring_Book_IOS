@@ -23,15 +23,15 @@ class IntroController: BaseViewController {
     private let listIntro: [IntroModel] = [
         IntroModel(name: LocalizableUtils.introIntroTitlePage1(),
                    desc: LocalizableUtils.introIntroContentPage1(),
-                   image: R.image.ic_item_onboading1(),
+                   image: R.image.intro_doll2(),
                    id: 0),
-        IntroModel(name: LocalizableUtils.introIntroTitlePage1(),
-                   desc: LocalizableUtils.introIntroContentPage1(),
-                   image: R.image.ic_item_onboading2(),
+        IntroModel(name: LocalizableUtils.introIntroTitlePage2(),
+                   desc: LocalizableUtils.introIntroContentPage2(),
+                   image: R.image.intro_doll0(),
                    id: 1),
-        IntroModel(name: LocalizableUtils.introIntroTitlePage1(),
-                   desc: LocalizableUtils.introIntroContentPage1(),
-                   image: R.image.ic_item_onboading3(),
+        IntroModel(name: LocalizableUtils.introIntroTitlePage3(),
+                   desc: LocalizableUtils.introIntroContentPage3(),
+                   image: R.image.intro_doll1(),
                    id: 2)
     ]
     
@@ -56,7 +56,7 @@ class IntroController: BaseViewController {
         sliderView.removeAllArrangedSubviews()
         for i in 0...numberOfPage {
             let view = UIView()
-            let isIndex = i == currentIndex
+            let isIndex = (i == currentIndex)
             view.backgroundColor = isIndex ? R.color.mainPrimary()! : R.color.mainPrimary()!.withAlphaComponent(0.5)
             view.layer.cornerRadius = 4
             sliderView.addArrangedSubview(view)
@@ -98,14 +98,13 @@ extension IntroController {
 extension IntroController {
     
     private func setupView() {
+        loadAdsHigh()
         fsPagerView.dataSource = self
         fsPagerView.delegate = self
         fsPagerView.isInfinite = false
         fsPagerView.decelerationDistance = 1
         fsPagerView.register(cellType: IntroductionCell.self)
         customPageControl()
-        loadAdsHigh()
-        preloadAdsNative()
     }
     
     private func loadAdsHigh() {
@@ -127,10 +126,6 @@ extension IntroController {
             self?.viewAds.isHidden = !success
         }
     }
-    
-    func preloadAdsNative() {
-    }
-    
 }
 
 extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {

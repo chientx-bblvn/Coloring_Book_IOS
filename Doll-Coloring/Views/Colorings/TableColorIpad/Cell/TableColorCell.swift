@@ -12,13 +12,21 @@ class TableColorCell: UITableViewCell, NibReusable {
     
     @IBOutlet weak var viewContent: UIView!
     
+    @IBOutlet weak var viewColor: UIView!
+    
     @IBOutlet weak var listColor: UICollectionView!
     
     @IBOutlet weak var lblName: UILabel!
     
+    @IBOutlet weak var btnWatchAds: UIImageView!
+    
+    @IBOutlet weak var viewWatchADS: UIButton!
+    
     private var colors: [ItemColor?] = []
     
     private var width: CGFloat = 0
+    
+    var isColoring: Bool = false
     
     var selectColor: ((Int) -> Void)?
     
@@ -28,11 +36,14 @@ class TableColorCell: UITableViewCell, NibReusable {
         listColor.delegate = self
         listColor.dataSource = self
         listColor.register(cellType: ColorCell.self)
+        viewContent.generateOuterShadow()
+        viewColor.layer.borderColor = R.color.colorTextTopBar()?.cgColor
     }
     
-    func setupData(data: [ItemColor?], width: CGFloat ) {
+    func setupData(data: [ItemColor?], width: CGFloat, isColoring: Bool = true ) {
         colors = data
         self.width = width
+        self.isColoring = isColoring
         listColor.reloadData()
     }
 
@@ -47,11 +58,13 @@ extension TableColorCell: UICollectionViewDelegate, UICollectionViewDataSource, 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCell", for: indexPath) as? ColorCell else {
             return UICollectionViewCell()
         }
+        
+        let width = isColoring ? (collectionView.frame.width - 56) / 8 : (collectionView.frame.width - 16) / 3
         let data = colors[indexPath.row]
         if let hex = data?.hex {
-            cell.setData(color: UIColor(hexString: hex), isSelect: false)
+            cell.setData(color: UIColor(hexString: hex), isSelect: false, width: Int(width))
         } else {
-            cell.setData(color: data?.color, isSelect: false)
+            cell.setData(color: data?.color, isSelect: false, width: Int(width))
         }
         return cell
         
@@ -62,7 +75,8 @@ extension TableColorCell: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 40, height: 40)
+        let width = isColoring ? (collectionView.frame.width - 56) / 8 : (collectionView.frame.width - 16) / 3
+        return CGSize(width: width, height: width)
     }
     
 }

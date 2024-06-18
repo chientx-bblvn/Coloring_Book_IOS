@@ -37,13 +37,6 @@ class CollectionsController: BaseViewController {
     
     private var listColoring: [ColoringHistoryModel] = []
     
-    lazy var collectionViewLayout: PinterestCollectionViewLayout = {
-        let layout = PinterestCollectionViewLayout()
-        layout.delegate = self
-        
-        return layout
-    }()
-    
     var navigate: Bool = false
     
     private var isLandscape: Bool = false
@@ -57,11 +50,20 @@ class CollectionsController: BaseViewController {
             topBarView.title = LocalizableUtils.commonCollections().uppercased()
             topBarView.leftIcon = R.image.ic_back()
             topBarView.textAlignmentCenter = true
+        } else {
+            settingIAP()
         }
         topBarView.onLeftClick = {
             self.topBarView.textAlignmentCenter = false
             AppRouter.shared.dismissDetail()
         }
+        
+        topBarView.onClickPremium = {
+            SubcriptionViewController.show(checkTime: true) {
+                
+            }
+        }
+        
         topBarView.onRightClick = {
             self.showSettingView()
         }
@@ -81,7 +83,16 @@ class CollectionsController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         reloadDataColection()
         updateLayoutContent()
+        if navigate {
+            loadColapBanner()
+        }
         
+    }
+    
+    private func settingIAP() {
+        InappManager.share.didPaymentSuccess.subscribe(onNext: { [weak self] _ in
+            self?.topBarView.showPremium = UserDefaultManager.ABShowIAPColoring
+        }).disposed(by: disposeBag)
     }
     
     override func updateMorePortrait() {
@@ -119,16 +130,10 @@ class CollectionsController: BaseViewController {
     
     @IBAction func actionStartColoring(_ sender: Any) {
         FirebaseEventManager.logEvent(with: RMBGEventTracking.collection_start_coloring)
-        AppRouter.shared.navigate(to: MainColoringsRoute.main, with: .push)
+        NotificationCenter.default.post(name: NSNotification.Name("GOTOHOME_TABBAR"), object: nil)
+//        AppRouter.shared.navigate(to: MainColoringsRoute.main, with: .push)
     }
     
-    func loadAdsNative() {
-        viewHeightAds.constant = 60
-        ADManager.shared.loadCollapsibleBannerAdaptive(DollColoringAdID.banner_collection, viewBanner: viewAds, isCollapsible: true) {[weak self] success in
-            self?.viewHeightAds.constant = success ? 60 : 0
-            self?.viewAds.isHidden = !success
-        }
-    }
 }
 
 extension CollectionsController {
@@ -139,17 +144,17 @@ extension CollectionsController {
     }
     
     func loadColapBanner() {
-        ADManager.shared.loadCollapsibleBannerAdaptive(DollColoringAdID.banner_collection, viewBanner: viewAds) {[weak self] success in
+        viewAds.isHidden = false
+        viewHeightAds.constant = DeviceInfos.isIpad() ? 90 : 56
+        ADManager.shared.loadBanner(DollColoringAdID.banner_collection, viewBanner: viewAds) {[weak self] success in
             self?.viewAds.isHidden = !success
-            self?.viewHeightAds.constant = success ? 56 : 0
+            if DeviceInfos.isIpad() {
+                self?.viewHeightAds.constant = success ? 90 : 0
+            } else {
+                self?.viewHeightAds.constant = success ? 56 : 0
+            }
+           
         }
-    }
-}
-
-extension CollectionsController: PinterestCollectionViewLayoutDelegate {
-    func heightForImage(at indexPath: IndexPath) -> CGFloat? {
-        let data = listCollection[indexPath.row]
-        return UIImage(contentsOfFile: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: data).path)?.size.height
     }
 }
 
@@ -172,7 +177,7 @@ extension CollectionsController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var width = (collectionView.frame.width - 32)
+        let width = (collectionView.frame.width - 32)
         if UIDevice.current.userInterfaceIdiom == .pad {
             if isLandscape {
                 return CGSize(width: (Int(width) - 42) / 5, height: Int(width / 5))
@@ -203,7 +208,6 @@ extension CollectionsController: UICollectionViewDelegate, UICollectionViewDataS
             let cacheKey = SDWebImageManager.shared.cacheKey(for: imageUrlString)
             SDImageCache.shared.removeImage(forKey: cacheKey, withCompletion: nil)
             AppRouter.shared.navigate(to: DetailCollectionRoute.main(coloringLocal: coloring, history: history, isCollection: true), with: .push)
-            
         }
     }
     

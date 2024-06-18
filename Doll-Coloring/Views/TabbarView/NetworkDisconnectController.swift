@@ -8,11 +8,16 @@
 import UIKit
 import Lottie
 
-class NetworkDisconnectController: UIViewController {
 
-    @IBOutlet weak var viewAnimation: LottieAnimationView!
+class NetworkDisconnectController: BaseViewController {
+
+    @IBOutlet weak var viewContent: UIView!
     
-    class func show(in parent: UIViewController) {
+    @IBOutlet weak var viewAnimation: LottieAnimationView!
+    @IBOutlet weak var lbDisconnected: UILabel!
+    
+    
+    class func show() {
         let mainStoryboard = UIStoryboard(name: "TabbarView", bundle: nil)
         guard let customView = mainStoryboard.instantiateViewController(withIdentifier: String(describing: self)) as? NetworkDisconnectController else {
             return
@@ -21,49 +26,55 @@ class NetworkDisconnectController: UIViewController {
         customView.definesPresentationContext = true
         customView.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
         customView.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        customView.showInView(parent: parent)
+        if let vc = UIApplication.shared.windows.first?.rootViewController?.presentedViewController {
+            vc.present(customView, animated: true)
+        } else if let vc = UIApplication.shared.windows.first?.rootViewController {
+            vc.present(customView, animated: true)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(removeView(_ :)), name: NSNotification.Name(rawValue: "network_connection"), object: nil)
         viewAnimation.loadAnimation(file: "animation_dissconnect", loopMode: .loop, autoPlay: true)
+        viewContent.generateOuterShadow()
+        showAnimate()
     }
     
-    func removeView() {
-        removeAnimate()
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+        viewAnimation.stop()
+    }
+    
+    @objc func removeView(_ notifi: Notification) {
+        if let noti = notifi.object as? Bool, noti {
+            removeAnimate {
+                self.dismiss(animated: true)
+            }
+        }
     }
 }
 
 extension NetworkDisconnectController {
     
-    func showInView(parent: UIViewController) {
-        self.view.translatesAutoresizingMaskIntoConstraints = false
-        parent.addChild(self)
-        parent.view.addSubview(self.view)
-        updateConstraints(parent.view)
-        self.didMove(toParent: parent.parent)
-        self.showAnimate()
-        
-    }
-    
     private func showAnimate() {
-        self.view.transform = .identity.scaledBy(x: 0, y: 0)
+        self.viewContent.transform = .identity.scaledBy(x: 0, y: 0)
         self.view.alpha = 0.0
-        UIView.animate(withDuration: 0.25,
+        UIView.animate(withDuration: 0.3,
                        delay: 0,
                        options: .curveEaseInOut,
                        animations: {
             self.view.alpha = 1.0
-            self.view.transform = .identity
+            self.viewContent.transform = .identity
         })
     }
     
     private func removeAnimate(completion: (() -> Void)? = nil) {
-        UIView.animate(withDuration: 0.25,
+        UIView.animate(withDuration: 0.3,
                        delay: 0,
                        options: .curveEaseInOut,
                        animations: {
-            self.view.transform = .identity.scaledBy(x: 0.1, y: 0.1)
+            self.viewContent.transform = .identity.scaledBy(x: 0.1, y: 0.1)
         }, completion: {(finished: Bool) in
             if finished {
                 completion?()

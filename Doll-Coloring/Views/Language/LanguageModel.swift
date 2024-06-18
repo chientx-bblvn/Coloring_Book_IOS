@@ -33,7 +33,7 @@ enum Language: Int, CaseIterable {
         case "ru": self = .rusia
         case "es": self = .spanish
         case "ko": self = .korean
-        case "vn": self = .vietnam
+        case "vi": self = .vietnam
         case "p": self = .portuguese
         default: self = .english
         }
@@ -58,7 +58,7 @@ enum Language: Int, CaseIterable {
         case .korean:
             return "ko"
         case .vietnam:
-            return "vn"
+            return "vi"
         case .german:
             return "de"
         case .rusia:

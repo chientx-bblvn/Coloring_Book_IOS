@@ -34,6 +34,15 @@ Common.Language = "Ngôn ngữ";
 Common.EmptyCollections = "Chưa có hình ảnh nào!";
 Content_delete_collection = "Màu sẽ bị xóa \n Nhấn Xóa để tiếp tục.";
 Common.Continue = "Tiếp tục";
+Common.UnlockForFree                            =       "Mở khóa miễn phí";
+Common.UnlockColoring                           =       "Mua cao cấp: Mở khóa tất cả các bản vẽ";
+Common.WatchAShortVideo                         =       "Xem một video ngắn";
+Common.Yes                                      =       "Có";
+Common.No                                       =       "Không";
+Common.discard                                  =       "Bỏ";
+Common.SaveColoring                             =       "Bạn muốn lưu hay bỏ?";
+Common.DescExit                                 =       "Bạn có chắc chắn muốn thoát không?";
+Common.NoInternet                               =       "Rất tiếc! Mất kết nối internet";
 
 // Splash
 Splash.Copyright = "®Bản quyền thuộc Binary Bridge Labs 2024";
@@ -66,8 +75,18 @@ Language.rusia = "Nga";
 // IAP
 IAP.week = "tuần";
 IAP.year = "năm";
-IAP.weekly = "TRUY CẬP HÀNG TUẦN";
-IAP.yearly = "TRUY CẬP HÀNG NĂM";
+IAP.month = "tháng";
+IAP.weekly = "GÓI TUẦN";
+IAP.yearly = "GÓI NĂM";
+IAP.monthly = "GÓI THÁNG";
+IAP.price_weekly                                =       "Chỉ %@/tuần";
+IAP.price_package_weekly                        =       "Tuần %@";
+IAP.price_package_monthly                       =       "Tháng %@";
+IAP.price_package_yearly                        =       "Năm %@";
+IAP.TermOfUse                                   =       "Điều khoản sử dụng";
+IAP.PrivacyPolicy                               =       "Chính sách bảo mật";
+IAP.RestorePurchase                             =       "Khôi phục mua hàng";
+
 
 // ForceUpdate
 ForceUpdate.Title = "Có phiên bản mới";
@@ -88,6 +107,8 @@ table.galaxy_color = "Màu thiên hà";
 table.pastel_color = "Màu pastel";
 table.sweet_color = "Màu ngọt ngào";
 table.mystical_color = "Màu huyền bí";
+table.background_dark_color                     =       "Background Dark";
+table.background_light_color                    =       "Background Light";
 
 subtite_delete = "Màu sẽ bị xóa. Nhấn vào xóa để tiếp tục.";
 

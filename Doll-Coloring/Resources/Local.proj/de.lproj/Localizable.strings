@@ -34,6 +34,16 @@ Common.Language = "Sprache";
 Common.EmptyCollections = "Keine Bilder vorhanden!";
 Content_delete_collection = "Die Farbe wird gelöscht \n Klicken Sie auf Löschen, um fortzufahren.";
 Common.Continue = "Weitermachen";
+Common.UnlockForFree                            =       "Kostenlos freischalten";
+Common.UnlockColoring                           =       "Premium kaufen: Alle Zeichnungen freischalten";
+Common.WatchAShortVideo                         =       "Ein kurzes Video ansehen";
+Common.Yes                                      =       "Ja";
+Common.No                                       =       "Nein";
+Common.discard                                  =       "Verwerfen";
+Common.SaveColoring                             =       "Möchten Sie speichern oder verwerfen?";
+Common.DescExit                                 =       "Sind Sie sicher, dass Sie beenden möchten?";
+Common.NoInternet                               =       "Hoppla! Internetverbindung verloren";
+
 
 // Splash
 Splash.Copyright = "®Urheberrecht von Binary Bridge Labs 2024";
@@ -66,8 +76,18 @@ Language.rusia = "Russisch";
 // IAP
 IAP.week = "Woche";
 IAP.year = "Jahr";
-IAP.weekly = "WÖCHENTLICHER ZUGANG";
-IAP.yearly = "JÄHRLICHER ZUGANG";
+IAP.month = "Monat";
+IAP.weekly                                      =       "WÖCHENTLICH";
+IAP.yearly                                      =       "JÄHRLICH";
+IAP.monthly                                     =       "MONATLICH";
+IAP.price_weekly                                =       "Nur %@/woche";
+IAP.price_package_weekly                        =       "Wöchentlich %@";
+IAP.price_package_monthly                       =       "Monatlich %@";
+IAP.price_package_yearly                        =       "Jährlich %@";
+IAP.TermOfUse                                   =       "Nutzungsbedingungen";
+IAP.PrivacyPolicy                               =       "Datenschutzbestimmungen";
+IAP.RestorePurchase                             =       "Kauf wiederherstellen";
+
 
 // ForceUpdate
 ForceUpdate.Title = "Neue Version verfügbar";
@@ -88,6 +108,8 @@ table.galaxy_color = "Galaxiefarbe";
 table.pastel_color = "Pastellfarbe";
 table.sweet_color = "Süße Farbe";
 table.mystical_color = "Mystische Farbe";
+table.background_dark_color                     =       "Background Dark";
+table.background_light_color                    =       "Background Light";
 
 subtite_delete = "Die Farbe wird gelöscht. Klicken Sie zum Fortfahren auf Löschen.";
 

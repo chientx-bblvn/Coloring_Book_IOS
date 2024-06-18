@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
@@ -14,14 +14,14 @@
             <objects>
                 <viewController storyboardIdentifier="CollectionsController" id="zIc-eW-6fX" customClass="CollectionsController" customModule="Doll_Coloring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Z2g-4m-atm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_collection" translatesAutoresizingMaskIntoConstraints="NO" id="ZgB-DA-vLf">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X5C-pH-vvG" customClass="TopBarView" customModule="Doll_Coloring" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="47" width="390" height="56"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="Rnh-Yp-o8L"/>
@@ -38,7 +38,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="16n-GJ-sg4">
-                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                                <rect key="frame" x="0.0" y="111" width="390" height="733"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="GDE-XN-bdd">
                                     <size key="itemSize" width="128" height="128"/>
@@ -49,23 +49,23 @@
                                 <cells/>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AXA-nQ-Ug4">
-                                <rect key="frame" x="40" y="116" width="295" height="399.5"/>
+                                <rect key="frame" x="40" y="221" width="310" height="415"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No pictures yet!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHH-yo-0Z7">
-                                        <rect key="frame" x="0.0" y="0.0" width="295" height="26.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="310" height="27"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <color key="textColor" name="ColorTitle"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgo-Tt-EsT" customClass="LottieAnimationView" customModule="Lottie">
-                                        <rect key="frame" x="20" y="58.5" width="255" height="255"/>
+                                        <rect key="frame" x="20" y="59" width="270" height="270"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="rgo-Tt-EsT" secondAttribute="height" id="Xdy-Pu-hua"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ow3-fa-Z0j">
-                                        <rect key="frame" x="67.5" y="329.5" width="160" height="70"/>
+                                        <rect key="frame" x="75" y="345" width="160" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="160" id="KS9-8f-vla"/>
                                             <constraint firstAttribute="height" constant="70" id="TiU-3Z-UKG"/>
@@ -86,15 +86,19 @@
                                     <constraint firstItem="lHH-yo-0Z7" firstAttribute="top" secondItem="AXA-nQ-Ug4" secondAttribute="top" id="2hi-hF-W9e"/>
                                     <constraint firstItem="Ow3-fa-Z0j" firstAttribute="top" secondItem="rgo-Tt-EsT" secondAttribute="bottom" constant="16" id="3O5-XL-2GK"/>
                                     <constraint firstAttribute="bottom" secondItem="Ow3-fa-Z0j" secondAttribute="bottom" id="7Pf-Jw-jQ9"/>
-                                    <constraint firstItem="rgo-Tt-EsT" firstAttribute="leading" secondItem="AXA-nQ-Ug4" secondAttribute="leading" constant="20" id="939-UV-Ly6"/>
+                                    <constraint firstItem="rgo-Tt-EsT" firstAttribute="leading" secondItem="AXA-nQ-Ug4" secondAttribute="leading" constant="20" id="939-UV-Ly6">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="300"/>
+                                    </constraint>
                                     <constraint firstItem="Ow3-fa-Z0j" firstAttribute="centerX" secondItem="AXA-nQ-Ug4" secondAttribute="centerX" id="F2j-NQ-Gwb"/>
                                     <constraint firstAttribute="trailing" secondItem="lHH-yo-0Z7" secondAttribute="trailing" id="Ika-Cy-xsG"/>
                                     <constraint firstItem="rgo-Tt-EsT" firstAttribute="top" secondItem="lHH-yo-0Z7" secondAttribute="bottom" constant="32" id="TTP-bH-i6f"/>
-                                    <constraint firstAttribute="trailing" secondItem="rgo-Tt-EsT" secondAttribute="trailing" constant="20" id="xsY-2l-70t"/>
+                                    <constraint firstAttribute="trailing" secondItem="rgo-Tt-EsT" secondAttribute="trailing" constant="20" id="xsY-2l-70t">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="300"/>
+                                    </constraint>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Y9-uA-akL">
-                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
+                                <rect key="frame" x="0.0" y="844" width="390" height="0.0"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="Dby-LU-mgt"/>
@@ -111,13 +115,14 @@
                             <constraint firstAttribute="trailing" secondItem="X5C-pH-vvG" secondAttribute="trailing" id="RKk-rv-h0c"/>
                             <constraint firstItem="6Y9-uA-akL" firstAttribute="leading" secondItem="Z2g-4m-atm" secondAttribute="leading" id="U1q-Ee-BfB"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="16n-GJ-sg4" secondAttribute="trailing" id="UGF-4E-hj9"/>
-                            <constraint firstItem="AXA-nQ-Ug4" firstAttribute="top" secondItem="X5C-pH-vvG" secondAttribute="bottom" constant="40" id="VWx-AE-WUM"/>
                             <constraint firstItem="16n-GJ-sg4" firstAttribute="top" secondItem="X5C-pH-vvG" secondAttribute="bottom" constant="8" id="Vfp-Zo-2fO"/>
                             <constraint firstItem="ZgB-DA-vLf" firstAttribute="top" secondItem="Z2g-4m-atm" secondAttribute="top" id="X0Y-hM-UTX"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="AXA-nQ-Ug4" secondAttribute="trailing" constant="40" id="be8-L0-X20"/>
                             <constraint firstItem="6Y9-uA-akL" firstAttribute="top" secondItem="16n-GJ-sg4" secondAttribute="bottom" id="dt8-Fo-jB1"/>
                             <constraint firstItem="ZgB-DA-vLf" firstAttribute="leading" secondItem="Z2g-4m-atm" secondAttribute="leading" id="fri-B9-U31"/>
+                            <constraint firstItem="AXA-nQ-Ug4" firstAttribute="centerX" secondItem="3pi-N7-nbV" secondAttribute="centerX" id="ho7-HV-eL0"/>
                             <constraint firstItem="AXA-nQ-Ug4" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" constant="40" id="pG0-9H-rjj"/>
+                            <constraint firstItem="AXA-nQ-Ug4" firstAttribute="centerY" secondItem="3pi-N7-nbV" secondAttribute="centerY" id="sKt-WQ-7hQ"/>
                             <constraint firstAttribute="trailing" secondItem="ZgB-DA-vLf" secondAttribute="trailing" id="trH-fw-MuL"/>
                             <constraint firstAttribute="bottom" secondItem="6Y9-uA-akL" secondAttribute="bottom" id="xGr-O1-9Yw"/>
                             <constraint firstItem="X5C-pH-vvG" firstAttribute="top" secondItem="3pi-N7-nbV" secondAttribute="top" id="zzb-NN-dix"/>

@@ -59,6 +59,18 @@ class FileManagerLocal {
         }
     }
     
+    func getFileColoringlocalURL() -> [URL] {
+        do {
+            let urls = try FileManager.default.contentsOfDirectory(at: getFileFoderFileUssing(typeFile: .ColoringSave),
+                                                                   includingPropertiesForKeys: [.contentModificationDateKey],
+                                                                   options:.skipsHiddenFiles)
+            return urls
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
+    
     func checkFileExits(typeFile: ArchiveFileLocal, fileName: String) -> Bool {
         let urlPath = getDocumentsDirectory().appendingPathComponent(typeFile.rawValue)
         let path = urlPath.appendingPathComponent(fileName).path
@@ -283,7 +295,6 @@ extension String {
         if let jsonData = self.data(using: .utf8) {
             do {
                 let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let jsonArray = try decoder.decode(A.self, from: jsonData)
                 return jsonArray
             } catch {

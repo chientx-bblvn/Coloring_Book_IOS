@@ -11,6 +11,8 @@ import RxSwift
 import UIKit
 import AdmobSDK
 import BmoViewPager
+import FBAudienceNetwork
+import SDWebImage
 
 class HomeController: BaseViewController {
     
@@ -24,7 +26,6 @@ class HomeController: BaseViewController {
             self.slidePages.itemSize = FSPagerView.automaticSize
             self.slidePages.automaticSlidingInterval = 2
             self.slidePages.isInfinite = true
-            self.slidePages.transformer = FSPagerViewTransformer(type: .crossFading)
             self.slidePages.decelerationDistance = 2
             self.slidePages.delegate = self
             self.slidePages.dataSource = self
@@ -65,11 +66,14 @@ class HomeController: BaseViewController {
     let collectionViewHeaderFooterReuseIdentifier = "HeaderHomeCell"
     private var coloringLocal: [ColoringHistoryModel] = []
     var isShowAds: Bool = true
-    var numberClick = 0
+    var numberClick = 4
     var indexCategory = 0
     private var typeHome = TypeHome.allCases
     private var bannerHome: BannerHome = .iphone
     private var isLandscape: Bool = false
+    
+    private var timeDistanceShowad: TimeInterval = 5
+    private var currentTime: TimeInterval = 0
     
     override func loadView() {
         super.loadView()
@@ -82,10 +86,14 @@ class HomeController: BaseViewController {
         topbarView.onRightClick = {
             self.showSettingView()
         }
+        topbarView.onClickPremium = {
+            SubcriptionViewController.show(checkTime: true)
+        }
         enableAudioBackground()
         loadLanguage()
         setupView()
-        
+        settingIAP()
+        requestNotification()
         let archiveFiles = ArchiveFileLocal.allCases
         
         for file in archiveFiles {
@@ -96,9 +104,24 @@ class HomeController: BaseViewController {
         ADManager.shared.preLoadReward(DollColoringAdID.reward_alltopic)
     }
     
+    override func setup() {
+        super.setup()
+        if UserDefaultManager.ABShowIAPColoring, !IAPState.isUserVip {
+            SubcriptionViewController.show(checkTime: true)
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         coloringLocal = SQLiteManager.shared.selectionColorings()
         collectionView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        let local = FileManagerLocal.shared.getFileColoringlocalURL()
+        local.forEach { url in
+            let cacheKey = SDWebImageManager.shared.cacheKey(for: url)
+            SDImageCache.shared.removeImage(forKey: cacheKey, withCompletion: nil)
+        }
     }
     
     override func onLanguageChange() {
@@ -123,6 +146,13 @@ class HomeController: BaseViewController {
         updateLayoutContent()
     }
     
+    private func settingIAP() {
+        InappManager.share.didPaymentSuccess.subscribe(onNext: { [weak self] _ in
+            self?.topbarView.showPremium = UserDefaultManager.ABShowIAPColoring
+            self?.collectionView.reloadData()
+        }).disposed(by: disposeBag)
+    }
+    
     func setupView() {
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -133,6 +163,15 @@ class HomeController: BaseViewController {
         listMenu.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         listMenu.register(cellType: CategoryMenuCell.self)
         updateLayoutContent()
+        timeDistanceShowad = TimeInterval(ADManager.shared.timeRemoteShowFull)
+        numberClick = UserDefaultManager.numberClickItemAllTopic
+    }
+    
+    private func requestNotification() {
+        BBLLogging.d("Check:: requestNotification")
+        appDelegate?.requestNotificationPermission(completion: { success, error in
+            BBLLogging.d("Check:: requestNotificationPermission  --   success: \(success)  error: \(error?.localizedDescription ?? "error")")
+        })
     }
     
     private func updateCategory() {
@@ -160,6 +199,23 @@ class HomeController: BaseViewController {
     
     func loadLanguage() {
         collectionView.reloadData()
+    }
+    
+    private func requestGDPRAndATT(completion: @escaping (() -> Void)) {
+        BBLLogging.d("Check:: requestGDPRAndATT")
+        appDelegate?.requestShowUMPForEEAMarket(idx: 1, completion: { accepted in
+            let needAcceptConsent = RemoteConfigManager.shared.getValue(by: RMBGRemoteConfig.needAcceptConsent)?.boolValue ?? true
+            BBLLogging.d("Check:: requestShowUMPForEEAMarket   ---  accepted: \(accepted)  needAcceptConsent: \(needAcceptConsent)")
+            if !needAcceptConsent {
+                FBAdSettings.setAdvertiserTrackingEnabled(true)
+                completion()
+                return
+            }
+            if accepted {
+                FBAdSettings.setAdvertiserTrackingEnabled(true)
+            }
+            completion()
+        })
     }
 }
 
@@ -214,88 +270,77 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource, 
             let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: AllColoringCell.self)
             let data = viewModel.itemColoring[indexPath.row]
             cell.setupView(image: data.filePreview, coloringLocal: coloringLocal, filePath: data.filePath)
-            if data.isPremium ?? false {
-                cell.adsViewAnimation.isHidden = false
-                cell.loadAnimationAds()
+            
+            if UserDefaultManager.ABShowIAPColoring {
+                if UserDefaultManager.ABis_free_trial_us {
+                    if data.isPremium ?? false {
+                        cell.viewWatchAds.isHidden = true
+                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                    } else {
+//                        cell.viewWatchAds.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+//                        cell.adsViewAnimation.isHidden = true
+                        cell.viewWatchAds.isHidden = true
+                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                    }
+                } else {
+                    cell.viewWatchAds.isHidden = true
+                    if data.isPremium ?? false {
+                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                    } else {
+                        cell.adsViewAnimation.isHidden = true
+                    }
+                }
+                if IAPState.isUserVip {
+                    cell.adsViewAnimation.isHidden = true
+                    cell.viewWatchAds.isHidden = true
+                }
             } else {
                 cell.adsViewAnimation.isHidden = true
+                
+                if data.isPremium ?? false {
+                    cell.viewWatchAds.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                } else {
+                    cell.viewWatchAds.isHidden = true
+                }
             }
             return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         if collectionView == listMenu {
             indexCategory = indexPath.row
             listMenu.reloadData()
             listMenu.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             updateCategory()
             FirebaseEventManager.logEvent(with: RMBGEventTracking.category_name, params: ["category": viewModel.colorings[indexPath.row].categoryName?.capitalized ?? ""])
-          return
-        }
-        
-        let data = viewModel.itemColoring[indexPath.row]
-        
-        FirebaseEventManager.logEvent(with: RMBGEventTracking.start_coloring, params: ["category": viewModel.colorings[indexCategory].categoryName?.capitalized ?? "",
-                                                                                       "image": data.filePath ?? "",
-                                                                                       "isPremium": data.isPremium ?? false])
-        guard (data.isPremium ?? false) else {
-            numberClick += 1
-            guard numberClick >= UserDefaultManager.numberClickItemAllTopic  else {
-                if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath == data.filePath}) {
-                    AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .home, coloringAPI: data), with: .modal)
+        } else {
+            let data = viewModel.itemColoring[indexPath.row]
+            FirebaseEventManager.logEvent(with: RMBGEventTracking.start_coloring, params: ["category": viewModel.colorings[indexCategory].categoryName?.capitalized ?? "",
+                                                                                           "image": data.filePath ?? "",
+                                                                                           
+                                                                                           "isPremium": data.isPremium ?? false])
+            
+            guard UserDefaultManager.ABShowIAPColoring else {
+                if (data.isPremium ?? false) {
+                    showRew(data)
                 } else {
-                    AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .home), with: .modal)
+                    showInter(data)
                 }
                 return
             }
-            ADManager.shared.loadFull(DollColoringAdID.inter_alltopic) {[weak self] status in
-                switch status {
-                case .closed, .error:
-                    self?.numberClick = 0
-                    if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath == data.filePath}) {
-                        AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .home, coloringAPI: data), with: .modal)
-                    } else {
-                        AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .home), with: .modal)
-                    }
-                default:
-                    break
-                }
-            }
-            return
-        }
-        
-        guard SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) == nil else {
-            if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath == data.filePath}) {
-                AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .home, coloringAPI: data), with: .modal)
+            
+            if UserDefaultManager.ABis_free_trial_us {
+                showRew(data)
             } else {
-                AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .home), with: .modal)
-            }
-            return
-        }
-        ADManager.shared.loadReward(DollColoringAdID.reward_alltopic) { status in
-            switch status {
-            case .closed:
-                SQLiteManager.shared.insertTableColoringRew(data: data)
-                if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath == data.filePath}) {
-                    
-                    AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .home, coloringAPI: data), with: .modal)
+                if (data.isPremium ?? false) {
+                    showIAP(data)
                 } else {
-                    AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .home), with: .modal)
+                    showInter(data)
                 }
-            case .error:
-                if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath == data.filePath}) {
-                    AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .home, coloringAPI: data), with: .modal)
-                } else {
-                    AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .home), with: .modal)
-                }
-            default:
-                break
             }
         }
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = UIScreen.main.bounds.width - 32
@@ -355,6 +400,102 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource, 
         
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
+        }
+    }
+    
+    
+    func showIAP(_ data: ColoringImage) {
+        guard IAPState.isUserVip else {
+            
+            if SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil {
+                navigateColoring(data)
+                return
+            }
+            
+            SubcriptionViewController.show(checkTime: true) {
+                
+            } onClickCLose: {
+                self.showRew(data)
+            }
+            return
+        }
+        navigateColoring(data)
+    }
+    
+    func showInter(_ data: ColoringImage) {
+        numberClick += 1
+        if numberClick >= UserDefaultManager.numberClickItemAllTopic {
+            if !UserDefaultManager.disableMusicBackground {
+                pauseAudioBackground()
+            }
+            ADManager.shared.loadFull(DollColoringAdID.inter_alltopic, isSplash: true) {[weak self] status in
+                switch status {
+                case .closed, .error:
+                    if !UserDefaultManager.disableMusicBackground {
+                        self?.playAudioBackground()
+                    }
+                    self?.numberClick = 0
+                    self?.navigateColoring(data)
+                default:
+                    break
+                }
+            }
+        } else {
+            navigateColoring(data)
+        }
+    }
+    
+    func showRew(_ data: ColoringImage) {
+        guard SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) == nil else {
+            navigateColoring(data)
+            return
+        }
+        if IAPState.isUserVip {
+            navigateColoring(data)
+            return
+        }
+        if !UserDefaultManager.disableMusicBackground {
+            pauseAudioBackground()
+        }
+        PopupShowAdsViewController.show(in: self, data: data, {
+            ADManager.shared.loadReward(DollColoringAdID.reward_alltopic) { status in
+                switch status {
+                case .closed:
+                    if !UserDefaultManager.disableMusicBackground {
+                        self.playAudioBackground()
+                    }
+                    SQLiteManager.shared.insertTableColoringRew(data: data)
+                    self.navigateColoring(data)
+                case .error:
+                    self.loadInter(data)
+                default:
+                    break
+                }
+            }
+        }, {
+            SubcriptionViewController.show(checkTime: true)
+        })
+    }
+    
+    func loadInter(_ data: ColoringImage) {
+        ADManager.shared.loadFull(DollColoringAdID.inter_alltopic, isSplash: true){[weak self] state in
+            switch state {
+            case .closed, .error :
+                if !UserDefaultManager.disableMusicBackground {
+                    self?.playAudioBackground()
+                }
+                self?.navigateColoring(data)
+            default:
+                break
+            }
+        }
+    }
+    
+    func navigateColoring(_ data: ColoringImage) {
+        if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath == data.filePath}) {
+            AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .home, coloringAPI: data), with: .modal)
+        } else {
+            AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .home), with: .modal)
         }
     }
 }

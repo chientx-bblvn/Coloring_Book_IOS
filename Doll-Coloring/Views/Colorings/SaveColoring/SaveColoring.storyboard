@@ -63,13 +63,13 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
-                                        <real key="value" value="8"/>
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                         <color key="value" name="ColorTitle"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="1"/>
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
@@ -153,11 +153,18 @@
                                     <constraint firstAttribute="height" constant="250" id="a8t-kT-Owy"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pZ-zV-Ixp">
+                                <rect key="frame" x="66" y="392" width="282" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3pi-N7-nbV"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="z7U-bH-z1u" firstAttribute="leading" secondItem="Z2g-4m-atm" secondAttribute="leading" id="1Ai-gu-JCT"/>
+                            <constraint firstItem="3pZ-zV-Ixp" firstAttribute="trailing" secondItem="LPr-oA-MIX" secondAttribute="trailing" id="3mP-ra-dUn"/>
                             <constraint firstItem="mVl-LC-kVe" firstAttribute="top" secondItem="LPr-oA-MIX" secondAttribute="bottom" constant="40" id="6UT-kE-gQu"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="dqO-CB-yH9" secondAttribute="trailing" id="DJF-Dr-kuR"/>
                             <constraint firstItem="LPr-oA-MIX" firstAttribute="top" secondItem="dqO-CB-yH9" secondAttribute="bottom" constant="24" id="Ff7-Qf-MIU"/>
@@ -165,10 +172,12 @@
                             <constraint firstItem="f8L-la-ezy" firstAttribute="top" secondItem="mVl-LC-kVe" secondAttribute="bottom" constant="10" id="LMc-jR-MuR"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="f8L-la-ezy" secondAttribute="trailing" id="Ra3-aA-Szr"/>
                             <constraint firstItem="LPr-oA-MIX" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" constant="66" id="SLW-5c-jnm"/>
+                            <constraint firstItem="3pZ-zV-Ixp" firstAttribute="bottom" secondItem="LPr-oA-MIX" secondAttribute="bottom" id="Sba-ia-isr"/>
                             <constraint firstAttribute="bottom" secondItem="f8L-la-ezy" secondAttribute="bottom" id="WX7-4A-6r9"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="mVl-LC-kVe" secondAttribute="trailing" constant="16" id="Yjc-Fk-Hd1"/>
                             <constraint firstAttribute="trailing" secondItem="z7U-bH-z1u" secondAttribute="trailing" id="a19-vR-wsd"/>
                             <constraint firstItem="dqO-CB-yH9" firstAttribute="top" secondItem="3pi-N7-nbV" secondAttribute="top" id="er8-oI-1wj"/>
+                            <constraint firstItem="3pZ-zV-Ixp" firstAttribute="leading" secondItem="LPr-oA-MIX" secondAttribute="leading" id="h8t-Tn-ew2"/>
                             <constraint firstItem="dqO-CB-yH9" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="jyT-fq-ixk"/>
                             <constraint firstItem="z7U-bH-z1u" firstAttribute="top" secondItem="Z2g-4m-atm" secondAttribute="top" id="mtf-8Z-Cgp"/>
                             <constraint firstItem="f8L-la-ezy" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="u1C-EN-73S"/>
@@ -183,6 +192,7 @@
                         <outlet property="btnSave" destination="6DJ-1e-DU3" id="9Kb-QR-cOs"/>
                         <outlet property="btnShare" destination="PcJ-M3-geh" id="6sd-Zj-Dv9"/>
                         <outlet property="imgView" destination="LPr-oA-MIX" id="9bM-we-eB9"/>
+                        <outlet property="lbNameApp" destination="3pZ-zV-Ixp" id="wrI-lh-FKs"/>
                         <outlet property="viewAds" destination="f8L-la-ezy" id="4em-Nf-RG7"/>
                     </connections>
                 </viewController>

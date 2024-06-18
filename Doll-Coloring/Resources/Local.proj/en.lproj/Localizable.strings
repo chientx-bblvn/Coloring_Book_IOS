@@ -33,6 +33,17 @@ Common.Save                                     =       "Save";
 Common.Delete                                   =       "Delete";
 Common.Language                                 =       "Language";
 Common.EmptyCollections                         =       "No pictures yet !";
+Common.UnlockForFree                            =       "Unlock for free";
+Common.UnlockColoring                           =       "Buy premium: Unlock all drawings";
+Common.WatchAShortVideo                         =       "Watch a short video";
+Common.Yes                                      =       "Yes";
+Common.No                                       =       "No";
+Common.discard                                  =       "Discard";
+Common.SaveColoring                             =       "Do you want to save or discard?";
+Common.DescExit                                 =       "Are you sure you want to exit";
+Common.NoInternet                               =       "Ops! Lost internet connection";
+
+
 Content_delete_collection                       =       "The color will be deleted \n Click delete to continue.";
 
 // Splash
@@ -67,8 +78,19 @@ Language.rusia                                  =       "Russian";
 // IAP
 IAP.week                                        =       "week";
 IAP.year                                        =       "year";
-IAP.weekly                                      =       "WEEKLY ACCESS";
-IAP.yearly                                      =       "YEARLY ACCESS";
+IAP.month                                       =       "month";
+IAP.weekly                                      =       "WEEKLY";
+IAP.yearly                                      =       "YEARLY";
+IAP.monthly                                     =       "MONTHLY";
+IAP.price_weekly                                =       "Only %@/week";
+IAP.price_package_weekly                        =       "Weekly %@";
+IAP.price_package_monthly                       =       "Monthly %@";
+IAP.price_package_yearly                        =       "Yearly %@";
+
+IAP.TermOfUse                                   =       "Terms of use";
+IAP.PrivacyPolicy                               =       "Privacy Policy";
+IAP.RestorePurchase                             =       "Restore Purchase";
+
 
 // ForceUpdate
 ForceUpdate.Title                               =       "New version available";
@@ -90,6 +112,8 @@ table.galaxy_color                              =       "Galaxy Color";
 table.pastel_color                              =       "Pastel Color";
 table.sweet_color                               =       "Sweet Color";
 table.mystical_color                            =       "Mystical Color";
+table.background_dark_color                     =       "Background Dark";
+table.background_light_color                    =       "Background Light";
 
 // Collection
 

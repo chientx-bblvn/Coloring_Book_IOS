@@ -26,6 +26,8 @@ enum UserDefault: String {
     case soundDisable = "SOUND_DISABLE"
     case NumberClickItemAllTopic = "number_click_item_all_topic"
     case fill_coloring = "fill_coloring"
+    case state_show_iap = "state_show_iap"
+    case is_free_trial_US = "is_free_trial_US"
 }
 
 enum KeyChainKey: String, CaseIterable {

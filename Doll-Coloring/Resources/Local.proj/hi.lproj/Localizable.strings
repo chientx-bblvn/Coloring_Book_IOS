@@ -34,6 +34,15 @@ Common.Language = "भाषा";
 Common.EmptyCollections = "अब तक कोई तस्वीरें नहीं!";
 Content_delete_collection = "रंग हटा दिया जाएगा। \n जारी रखने के लिए हटाएं पर क्लिक करें।";
 Common.Continue = "जारी रखें";
+Common.UnlockForFree                            =       "मुफ़्त में अनलॉक करें";
+Common.UnlockColoring                           =       "प्रीमियम खरीदें: सभी चित्र अनलॉक करें";
+Common.WatchAShortVideo                         =       "एक छोटा वीडियो देखें";
+Common.Yes                                      =       "हाँ";
+Common.No                                       =       "नहीं";
+Common.discard                                  =       "त्यागें";
+Common.SaveColoring                             =       "क्या आप सहेजना या त्यागना चाहते हैं?";
+Common.DescExit                                 =       "क्या आप वाकई बाहर निकलना चाहते हैं?";
+Common.NoInternet                               =       "ओह! इंटरनेट कनेक्शन खो गया";
 
 // Splash
 Splash.Copyright = "®कॉपीराइट बाइ बाइनरी ब्रिज लैब्स 2024";
@@ -65,9 +74,20 @@ Language.rusia = "रूसी";
 
 // IAP
 IAP.week = "सप्ताह";
-IAP.year = "साल";
-IAP.weekly = "साप्ताहिक पहुंच";
-IAP.yearly = "सालाना पहुंच";
+IAP.year = "वर्ष";
+IAP.month = "महीना";
+IAP.weekly                                      =       "साप्ताहिक";
+IAP.yearly                                      =       "वार्षिक";
+IAP.monthly                                     =       "मासिक";
+IAP.price_weekly                                =       "केवल %@/सप्ताह";
+IAP.price_package_weekly                        =       "साप्ताहिक %@";
+IAP.price_package_monthly                       =       "मासिक %@";
+IAP.price_package_yearly                        =       "वार्षिक %@";
+IAP.TermOfUse                                   =       "उपयोग की शर्तें";
+IAP.PrivacyPolicy                               =       "गोपनीयता नीति";
+IAP.RestorePurchase                             =       "खरीदारी बहाल करें";
+
+
 
 // ForceUpdate
 ForceUpdate.Title = "नई संस्करण उपलब्ध है";
@@ -88,6 +108,8 @@ table.galaxy_color = "गैलेक्सी का रंग";
 table.pastel_color = "पास्टेल रंग";
 table.sweet_color = "मिठाई का रंग";
 table.mystical_color = "रहस्यमय रंग";
+table.background_dark_color                     =       "Background Dark";
+table.background_light_color                    =       "Background Light";
 
 subtite_delete = "रंग हटा दिया जाएगा क्लिक करें जारी रखने के लिए।";
 
