@@ -201,6 +201,26 @@ extension UIView {
         })
     }
     
+    func blink(reverse: Bool = true) {
+        if reverse {
+            self.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+        } else {
+            transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+        UIView.animate(withDuration: 0.45,
+                       delay: 0,
+                       options: .curveEaseInOut,
+                       animations: { [weak self] in
+            if reverse {
+                self?.transform = CGAffineTransform(scaleX: 1, y: 1)
+            } else {
+                self?.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+            }
+        }, completion: { _ in
+            
+        })
+    }
+    
     func stopBlink() {
         transform = CGAffineTransform(scaleX: 1, y: 1)
     }

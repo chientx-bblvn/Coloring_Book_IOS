@@ -498,10 +498,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XSv-kc-Ek9">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOJ-lC-dpj">
                                 <rect key="frame" x="40" y="209.66666666666663" width="310" height="438"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_popup_iap_ipad" translatesAutoresizingMaskIntoConstraints="NO" id="3Do-Zn-sSO" userLabel="0">
+                                    <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_popup_iap_ipad" translatesAutoresizingMaskIntoConstraints="NO" id="3Do-Zn-sSO" userLabel="0">
                                         <rect key="frame" x="0.0" y="0.0" width="310" height="438"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="438" id="xfs-ZL-ygk">
@@ -700,6 +704,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="uOJ-lC-dpj" firstAttribute="centerX" secondItem="esa-nW-Bop" secondAttribute="centerX" id="Bhe-1a-qQV"/>
+                            <constraint firstItem="XSv-kc-Ek9" firstAttribute="top" secondItem="Tbm-Vr-lJc" secondAttribute="top" id="KhV-2K-rP5"/>
+                            <constraint firstItem="XSv-kc-Ek9" firstAttribute="leading" secondItem="Tbm-Vr-lJc" secondAttribute="leading" id="NEf-m5-YfP"/>
+                            <constraint firstAttribute="bottom" secondItem="XSv-kc-Ek9" secondAttribute="bottom" id="WUN-px-cM2"/>
+                            <constraint firstItem="XSv-kc-Ek9" firstAttribute="trailing" secondItem="esa-nW-Bop" secondAttribute="trailing" id="WVm-V1-Scl"/>
                             <constraint firstItem="uOJ-lC-dpj" firstAttribute="centerY" secondItem="esa-nW-Bop" secondAttribute="centerY" id="kEk-Lf-Cuo"/>
                         </constraints>
                     </view>
@@ -710,6 +718,7 @@
                         <outlet property="lbIAP" destination="8XH-Mn-enH" id="K7h-6m-2jo"/>
                         <outlet property="lbWatchAds" destination="7mn-Hs-RHD" id="e8k-Yz-HLQ"/>
                         <outlet property="listColor" destination="KZI-ci-cwM" id="ROK-Pm-Y2K"/>
+                        <outlet property="viewBound" destination="XSv-kc-Ek9" id="vfQ-go-fvA"/>
                         <outlet property="viewContent" destination="uOJ-lC-dpj" id="yyX-vF-Egh"/>
                         <outlet property="viewPlayAds" destination="7xc-My-3SC" id="7XZ-kX-NKm"/>
                         <outlet property="viewShowIAP" destination="9Nz-Gl-c6Q" id="xS8-AH-M87"/>

@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 import UIKit
 import Lottie
+import SVGKit
 
 class PreviewColoringController: BaseViewController {
     
@@ -53,13 +54,27 @@ class PreviewColoringController: BaseViewController {
         } else {
             preview = apiBaseUrl + "/data_dollcoloring/" + (viewModel.coloring?.filePath ?? "")
         }
-        if let coloring = viewModel.coloringLocal, let image = UIImage(contentsOfFile: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .Coloring, file:  coloring.fileLocal).path) {
-            if let img = UIImage(contentsOfFile: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file:  viewModel.history?.imagePath ?? "").path) {
-                imgView.image = img
-            } else {
-                imgView.setImage(with: preview, placeholder: nil)
+        
+        if let coloring = viewModel.coloringLocal {
+            if let image = UIImage(contentsOfFile: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .Coloring, file:  coloring.fileLocal).path) {
+                if let img = UIImage(contentsOfFile: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file:  viewModel.history?.imagePath ?? "").path) {
+                    imgView.image = img
+                } else if let img = SVGKImage(contentsOfFile: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .Coloring, file:  coloring.fileLocal).path){
+                    imgView.image = img.uiImage
+                } else {
+                    imgView.setImage(with: preview, placeholder: nil)
+                }
+                self.createColoringBookView(with: image)
+            } else if let img = SVGKImage(contentsOfFile: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .Coloring, file:  coloring.fileLocal).path) {
+                if let img = UIImage(contentsOfFile: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file:  viewModel.history?.imagePath ?? "").path) {
+                    imgView.image = img
+                } else if let img = SVGKImage(contentsOfFile: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .Coloring, file:  coloring.fileLocal).path){
+                    imgView.image = img.uiImage
+                } else {
+                    imgView.setImage(with: preview, placeholder: nil)
+                }
+                self.createColoringBookView(with: img.uiImage)
             }
-            self.createColoringBookView(with: image)
         } else {
             let path = apiBaseUrl + "/data_dollcoloring/" + (viewModel.coloring?.filePath ?? "")
             imgView.setImage(with: preview, placeholder: nil)
@@ -89,8 +104,14 @@ class PreviewColoringController: BaseViewController {
         downloadManager.coloringLocal = viewModel.coloringLocal
         downloadManager.isTheme = false
         let fileTo = FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .Coloring)
-        let indexName = FileManagerLocal.shared.getFileInDoucment(url: fileTo).sorted(by: {return ($0 as NSString).deletingPathExtension.compare(($1 as NSString).deletingPathExtension, options: .numeric) == .orderedAscending}).last?.replacingOccurrences(of: ".png", with: "")
-        let fileName = fileTo.lastPathComponent + "\((Int(String(indexName?.extractNumbers() ?? "0")) ?? 0) + 1).png"
+        let indexName = FileManagerLocal.shared.getFileInDoucment(url: fileTo).sorted(by: {return ($0 as NSString).deletingPathExtension.compare(($1 as NSString).deletingPathExtension, options: .numeric) == .orderedAscending}).last?.replacingOccurrences(of: ".png", with: "").replacingOccurrences(of: ".svg", with: "")
+        
+        var fileName = ""
+        if linkDowload.contains(".png") {
+            fileName = fileTo.lastPathComponent + "\((Int(String(indexName?.extractNumbers() ?? "0")) ?? 0) + 1).png"
+        } else {
+            fileName = fileTo.lastPathComponent + "\((Int(String(indexName?.extractNumbers() ?? "0")) ?? 0) + 1).svg"
+        }
         downloadManager.fileTo = fileTo.appendingPathComponent(fileName)
         let completion = BlockOperation {
             /// Do something here when all of the download is done
@@ -98,7 +119,12 @@ class PreviewColoringController: BaseViewController {
                 let file = SQLiteManager.shared.selectionColorings().first(where: {$0.fileLocal.contains(fileName)})
                 self.viewModel.coloringLocal = file
                 if let coloring = file, let img = UIImage(contentsOfFile: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .Coloring, file:  coloring.fileLocal).path) {
+                    
                     self.createColoringBookView(with: img)
+                } else {
+                    if let coloring = file, let img = SVGKImage(contentsOfFile: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .Coloring, file:  coloring.fileLocal).path) {
+                        self.createColoringBookView(with: img.uiImage)
+                    }
                 }
             }
         }

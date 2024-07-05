@@ -9,6 +9,9 @@ import UIKit
 
 class PopupShowAdsViewController: BaseViewController {
     
+    
+    @IBOutlet weak var viewBound: UIView!
+    
     @IBOutlet weak var viewContent: UIView!
     
     @IBOutlet weak var btnClose: UIButton!
@@ -80,12 +83,18 @@ extension PopupShowAdsViewController {
         viewShowIAP.isHidden = !UserDefaultManager.ABShowIAPColoring
         viewPlayAds.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickShowAds)))
         viewShowIAP.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickShowIAP)))
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickClose)))
+        viewBound.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickClose)))
         imageView.setImage(with: "/data_dollcoloring/" + (data?.filePath ?? ""))
         imageView.generateOuterShadow()
         listColor.delegate = self
         listColor.dataSource = self
         listColor.register(cellType: TableColorCell.self)
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(actionImage)))
+    }
+    
+    @objc func actionImage() {
+        viewPlayAds.blink()
     }
     
     func loadLanguage() {

@@ -359,26 +359,31 @@ class StartColoringIPadViewController: BaseViewController {
         let percentColoring = Int((percent * 100).rounded())
         if percentColoring < 100 {
             PopupColoringViewController.show(in: self, _percent: percent, _title: LocalizableUtils.commonDescExit(), _titleOk: LocalizableUtils.commonOK(), _titleCancel: LocalizableUtils.commonNo()) {
-                self.saveHistoryColoring()
-                switch self.viewModel.typeScreen {
-                case .home:
-                    AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
-                case .coloring:
-                    AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
-                case .detailColoring:
-                    AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
-                case .collection:
-                    AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
-                }
-                ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) {_ in
-                    
+                ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) {[weak self] state in
+                    switch state {
+                    case .closed, .error:
+                        self?.dissmissHistoryColoring()
+                    default:
+                        break
+                    }
                 }
             } actionCancel: {
                 
             }
             return
         }
+        ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) {[weak self] state in
+            switch state {
+            case .closed, .error:
+                self?.dissmissHistoryColoring()
+            default:
+                break
+            }
+        }
         
+    }
+    
+    func dissmissHistoryColoring(){
         self.saveHistoryColoring()
         switch self.viewModel.typeScreen {
         case .home:
@@ -389,10 +394,6 @@ class StartColoringIPadViewController: BaseViewController {
             AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
         case .collection:
             AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
-        }
-    
-        ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) {_ in
-
         }
     }
     

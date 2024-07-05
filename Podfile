@@ -30,6 +30,7 @@ def shared_pods
   ### pod for load image
   pod 'SDWebImage'
   pod 'lottie-ios'
+  pod 'SVGKit'
   pod 'SDWebImageSVGNativeCoder'
   
   # For firebase
@@ -40,7 +41,7 @@ def shared_pods
   
   ### Admobs
   pod 'AdmobSDK', :git => "https://github.com/Binary-Bridge-Labs/ADMobSDK", :tag => 'v0.0.16'
-#  pod 'AdmobSDK', :path => "../../SDK-Library/AdmobSDK"
+  #pod 'AdmobSDK', :path => "../ADSDK/AdmobSDK"
   
   ### SQLite DB
   pod 'SQLite.swift'

@@ -23,6 +23,9 @@ PODS:
   - Alamofire (5.9.1)
   - AppLovinSDK (12.5.0)
   - BmoViewPager (5.2.0)
+  - CocoaLumberjack (3.8.5):
+    - CocoaLumberjack/Core (= 3.8.5)
+  - CocoaLumberjack/Core (3.8.5)
   - FBAudienceNetwork (6.15.1)
   - Firebase/CoreOnly (10.23.1):
     - FirebaseCore (= 10.23.1)
@@ -203,6 +206,8 @@ PODS:
   - SQLite.swift (0.14.1):
     - SQLite.swift/standard (= 0.14.1)
   - SQLite.swift/standard (0.14.1)
+  - SVGKit (3.0.0):
+    - CocoaLumberjack (~> 3.0)
   - svgnative (0.1.0)
   - SVProgressHUD (2.3.1):
     - SVProgressHUD/Core (= 2.3.1)
@@ -224,6 +229,7 @@ DEPENDENCIES:
   - SDWebImage
   - SDWebImageSVGNativeCoder
   - SQLite.swift
+  - SVGKit
   - SwiftLint (~> 0.50.0)
 
 SPEC REPOS:
@@ -231,6 +237,7 @@ SPEC REPOS:
     - Adjust
     - Alamofire
     - AppLovinSDK
+    - CocoaLumberjack
     - FBAudienceNetwork
     - Firebase
     - FirebaseABTesting
@@ -270,6 +277,7 @@ SPEC REPOS:
     - SkeletonView
     - SnapKit
     - SQLite.swift
+    - SVGKit
     - svgnative
     - SVProgressHUD
     - SwiftLint
@@ -294,6 +302,7 @@ SPEC CHECKSUMS:
   Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
   AppLovinSDK: 626d2aea57ae1bf9280d2012e8e20c521c58ce28
   BmoViewPager: f06da0dd20d115e2ced117268465230d922624b7
+  CocoaLumberjack: 6a459bc897d6d80bd1b8c78482ec7ad05dffc3f0
   FBAudienceNetwork: 80871c3b3057e89ab36d9eb79344be20377e3994
   Firebase: cf09623f98ae25a3ad484e23c7e0e5f464152d80
   FirebaseABTesting: 589bc28c0ab3e5554336895a34aa262e24276665
@@ -333,12 +342,13 @@ SPEC CHECKSUMS:
   SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   SQLite.swift: 2992550ebf3c5b268bf4352603e3df87d2a4ed72
+  SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
   svgnative: 86a3d6bb4800904ce9aa3e48e1ae0b4d165cd0c0
   SVProgressHUD: 4837c74bdfe2e51e8821c397825996a8d7de6e22
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
   Toast-Swift: 7a03a532afe3a560d4044bc7c237e2864d295173
 
-PODFILE CHECKSUM: 288f7b28002149f6e4ed788b36f9738f20f6abd0
+PODFILE CHECKSUM: 28dc146fc8b4694bfa81dc531c5dc3039c39ccbf
 
 COCOAPODS: 1.15.2
