@@ -40,11 +40,11 @@ class AllColoringCell: UICollectionViewCell, NibReusable {
                 progessRing.isHidden = true
                 SQLiteManager.shared.deleteColorings(id: coloring.id)
                 FileManagerLocal.shared.deleteFile(typeFile: .Coloring, fileName: coloring.fileLocal)
-                imageView.setImage(with: "/doll-coloring2/canvas/" + (image ?? ""), placeholder: nil)
+                imageView.setImage(with: "/data_dollcoloring/" + (image ?? ""), placeholder: nil)
             }
         } else {
             progessRing.isHidden = true
-            imageView.setImage(with: "/doll-coloring2/canvas/" + (image ?? ""), placeholder: nil)
+            imageView.setImage(with: "/data_dollcoloring/" + (image ?? ""), placeholder: nil)
         }
     }
     

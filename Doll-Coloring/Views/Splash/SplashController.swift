@@ -64,6 +64,7 @@ extension SplashController {
             dispatchGroup.leave()
         }
         dispatchGroup.notify(queue: .main) { [weak self] in
+            
             self?.requestGDPRAndATT { [weak self] in
                 DispatchQueue.main.asyncSafety {
                     ADManager.shared.initialize(readConfig: self?.configLoaded ?? false) { [weak self] success in
@@ -135,11 +136,6 @@ extension SplashController {
         self.timer?.invalidate()
         self.timer = nil
         BBLLogging.d("Check:: showAdvert")
-        if !DollColoringAdID.appopen_splash.isEnableAd {
-            preloadOpenResumeAd()
-            showFullAds()
-            return
-        }
         ADManager.shared.loadOpenAsync(DollColoringAdID.appopen_splash) { [weak self] showed in
             self?.preloadOpenResumeAd()
             if showed {
@@ -188,7 +184,7 @@ extension SplashController {
             let showIntro = UserDefaults.standard.bool(forKey: UserDefault.showedIntro.rawValue)
             if !self.isSetLanguage {
                 BBLLogging.d("Check:: isSetLanguage")
-                AppRouter.shared.navigate(to: LanguageRoute.language(gofrom: .intro), with: .push)
+                AppRouter.shared.navigate(to: LanguageRoute.languageSecond, with: .push)
                 return
             }
             if !showIntro {

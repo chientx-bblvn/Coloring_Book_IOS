@@ -109,22 +109,22 @@ extension SaveColoringController {
         
         // Anything you want to exclude
         activityViewController.excludedActivityTypes = [
-            UIActivity.ActivityType.postToWeibo,
-            UIActivity.ActivityType.print,
-            UIActivity.ActivityType.assignToContact,
             UIActivity.ActivityType.saveToCameraRoll,
-            UIActivity.ActivityType.addToReadingList,
-            UIActivity.ActivityType.postToFlickr,
-            UIActivity.ActivityType.postToVimeo,
-            UIActivity.ActivityType.postToTencentWeibo,
-            UIActivity.ActivityType.postToFacebook,
-            UIActivity.ActivityType.copyToPasteboard,
             UIActivity.ActivityType.airDrop
             
         ]
+        
+        if DeviceInfos.isIpad() {
+            if let view = btnShare ?? self.view {
+                activityViewController.popoverPresentationController?.sourceView = view
+                activityViewController.popoverPresentationController?.sourceRect = view.bounds
+            }
+        }
         FirebaseEventManager.logEvent(with: RMBGEventTracking.share_coloring_screen)
         activityViewController.isModalInPresentation = true
-        self.present(activityViewController, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.present(activityViewController, animated: true, completion: nil)
+        }
     }
     
     func deleteColoring() {
@@ -259,7 +259,7 @@ extension SaveColoringController {
     
     func loadNativeAds() {
         viewAds.isHidden = false
-        ADManager.shared.loadNative(DollColoringAdID.native_result, to: viewAds, refreshAd: true) {[weak self] adId, success, nativeAdView in
+        ADManager.shared.loadNative(DollColoringAdID.native_result, to: viewAds, refreshAd: true, nativeAdType: .smallMedia) {[weak self] adId, success, nativeAdView in
             self?.viewAds.isHidden = !success
         }
     }
@@ -282,7 +282,7 @@ extension SaveColoringController {
     
     func showAlertWith(title: String, message: String){
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: {_ in
+        ac.addAction(UIAlertAction(title: LocalizableUtils.commonOK(), style: .default, handler: {_ in
             DispatchQueue.main.async {
                 switch self.viewModel.typeScreen {
                 case .home:

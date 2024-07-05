@@ -13,4 +13,5 @@ struct IntroModel {
     var desc: String?
     var image: UIImage?
     var id: Int?
+    var indicator: UIImage?
 }

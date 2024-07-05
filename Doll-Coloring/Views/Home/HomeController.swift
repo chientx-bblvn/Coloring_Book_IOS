@@ -63,6 +63,12 @@ class HomeController: BaseViewController {
         }
     }
     
+    private var nativeAdView: NativeAdProtocol? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
     let collectionViewHeaderFooterReuseIdentifier = "HeaderHomeCell"
     private var coloringLocal: [ColoringHistoryModel] = []
     var isShowAds: Bool = true
@@ -74,6 +80,7 @@ class HomeController: BaseViewController {
     
     private var timeDistanceShowad: TimeInterval = 5
     private var currentTime: TimeInterval = 0
+    private var hasAd = true
     
     override func loadView() {
         super.loadView()
@@ -113,6 +120,7 @@ class HomeController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         coloringLocal = SQLiteManager.shared.selectionColorings()
+        loadNativeAds()
         collectionView.reloadData()
     }
     
@@ -158,6 +166,7 @@ class HomeController: BaseViewController {
         collectionView.dataSource = self
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 20, right: 16)
         collectionView.register(cellType: AllColoringCell.self)
+        collectionView.register(cellType: HomeNativeAdsCell.self)
         listMenu.delegate = self
         listMenu.dataSource = self
         listMenu.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
@@ -165,6 +174,16 @@ class HomeController: BaseViewController {
         updateLayoutContent()
         timeDistanceShowad = TimeInterval(ADManager.shared.timeRemoteShowFull)
         numberClick = UserDefaultManager.numberClickItemAllTopic
+    }
+    
+    private func loadNativeAds() {
+        ADManager.shared.loadNativeWithoutView(DollColoringAdID.native_home,
+                                               nativeAdType: .customMediaFixedHeight,
+                                               ratio: .portrait,
+                                               { adId, success, nativeAdView in
+            self.hasAd = success
+            self.nativeAdView = nativeAdView
+        })
     }
     
     private func requestNotification() {
@@ -256,7 +275,15 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource, 
         if collectionView == listMenu {
             return viewModel.colorings.count
         } else {
-            return viewModel.itemColoring.count
+            if viewModel.itemColoring.count != 0 {
+                if hasAd {
+                    return viewModel.itemColoring.count + 1
+                } else {
+                    return viewModel.itemColoring.count
+                }
+            } else {
+                return 0
+            }
         }
     }
     
@@ -267,43 +294,98 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource, 
             cell.setupData(isSelect: indexCategory == indexPath.row, title: viewModel.colorings[indexPath.row].categoryName?.capitalized)
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: AllColoringCell.self)
-            let data = viewModel.itemColoring[indexPath.row]
-            cell.setupView(image: data.filePreview, coloringLocal: coloringLocal, filePath: data.filePath)
-            
-            if UserDefaultManager.ABShowIAPColoring {
-                if UserDefaultManager.ABis_free_trial_us {
-                    if data.isPremium ?? false {
-                        cell.viewWatchAds.isHidden = true
-                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
-                    } else {
-//                        cell.viewWatchAds.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
-//                        cell.adsViewAnimation.isHidden = true
-                        cell.viewWatchAds.isHidden = true
-                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
-                    }
+            guard hasAd else {
+                let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: AllColoringCell.self)
+                let data = viewModel.itemColoring[indexPath.row]
+                if let img = data.filePreview {
+                    cell.setupView(image: img, coloringLocal: coloringLocal, filePath: data.filePath)
                 } else {
-                    cell.viewWatchAds.isHidden = true
-                    if data.isPremium ?? false {
-                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                    cell.setupView(image: data.filePath, coloringLocal: coloringLocal, filePath: data.filePath)
+                }
+                if UserDefaultManager.ABShowIAPColoring {
+                    if UserDefaultManager.ABis_free_trial_us {
+                        if data.isPremium ?? false {
+                            cell.viewWatchAds.isHidden = true
+                            cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        } else {
+                            cell.viewWatchAds.isHidden = true
+                            cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        }
                     } else {
+                        cell.viewWatchAds.isHidden = true
+                        if data.isPremium ?? false {
+                            cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        } else {
+                            cell.adsViewAnimation.isHidden = true
+                        }
+                    }
+                    if IAPState.isUserVip {
                         cell.adsViewAnimation.isHidden = true
+                        cell.viewWatchAds.isHidden = true
+                    }
+                } else {
+                    cell.adsViewAnimation.isHidden = true
+                    
+                    if data.isPremium ?? false {
+                        cell.viewWatchAds.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                    } else {
+                        cell.viewWatchAds.isHidden = true
                     }
                 }
-                if IAPState.isUserVip {
-                    cell.adsViewAnimation.isHidden = true
-                    cell.viewWatchAds.isHidden = true
-                }
-            } else {
-                cell.adsViewAnimation.isHidden = true
-                
-                if data.isPremium ?? false {
-                    cell.viewWatchAds.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
-                } else {
-                    cell.viewWatchAds.isHidden = true
-                }
+                return cell
             }
-            return cell
+            if indexPath.row == 3 {
+                let nativeAdsCell = collectionView.dequeueReusableCell(for: indexPath, cellType: HomeNativeAdsCell.self)
+                if hasAd {
+                    nativeAdsCell.loadAds(nativeAd: nativeAdView)
+                }
+                return nativeAdsCell
+            } else {
+                
+                let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: AllColoringCell.self)
+                var data: ColoringImage
+                if indexPath.row <= 2 {
+                    data = viewModel.itemColoring[indexPath.row]
+                } else {
+                    data = viewModel.itemColoring[indexPath.row - 1]
+                }
+                if let img = data.filePreview {
+                    cell.setupView(image: img, coloringLocal: coloringLocal, filePath: data.filePath)
+                } else {
+                    cell.setupView(image: data.filePath, coloringLocal: coloringLocal, filePath: data.filePath)
+                }
+                if UserDefaultManager.ABShowIAPColoring {
+                    if UserDefaultManager.ABis_free_trial_us {
+                        if data.isPremium ?? false {
+                            cell.viewWatchAds.isHidden = true
+                            cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        } else {
+                            cell.viewWatchAds.isHidden = true
+                            cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        }
+                    } else {
+                        cell.viewWatchAds.isHidden = true
+                        if data.isPremium ?? false {
+                            cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        } else {
+                            cell.adsViewAnimation.isHidden = true
+                        }
+                    }
+                    if IAPState.isUserVip {
+                        cell.adsViewAnimation.isHidden = true
+                        cell.viewWatchAds.isHidden = true
+                    }
+                } else {
+                    cell.adsViewAnimation.isHidden = true
+                    
+                    if data.isPremium ?? false {
+                        cell.viewWatchAds.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                    } else {
+                        cell.viewWatchAds.isHidden = true
+                    }
+                }
+                return cell
+            }
         }
     }
     
@@ -315,7 +397,39 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource, 
             updateCategory()
             FirebaseEventManager.logEvent(with: RMBGEventTracking.category_name, params: ["category": viewModel.colorings[indexPath.row].categoryName?.capitalized ?? ""])
         } else {
-            let data = viewModel.itemColoring[indexPath.row]
+            guard hasAd else {
+                let data = viewModel.itemColoring[indexPath.row]
+                FirebaseEventManager.logEvent(with: RMBGEventTracking.start_coloring, params: ["category": viewModel.colorings[indexCategory].categoryName?.capitalized ?? "",
+                                                                                               "image": data.filePath ?? "",
+                                                                                               
+                                                                                               "isPremium": data.isPremium ?? false])
+                
+                guard UserDefaultManager.ABShowIAPColoring else {
+                    if (data.isPremium ?? false) {
+                        showRew(data)
+                    } else {
+                        showInter(data)
+                    }
+                    return
+                }
+                
+                if UserDefaultManager.ABis_free_trial_us {
+                    showRew(data)
+                } else {
+                    if (data.isPremium ?? false) {
+                        showIAP(data)
+                    } else {
+                        showInter(data)
+                    }
+                }
+               return
+            }
+            var data: ColoringImage
+            if indexPath.row <= 2 {
+                data = viewModel.itemColoring[indexPath.row]
+            } else if indexPath.row >= 4 {
+                data = viewModel.itemColoring[indexPath.row - 1]
+            } else {return}
             FirebaseEventManager.logEvent(with: RMBGEventTracking.start_coloring, params: ["category": viewModel.colorings[indexCategory].categoryName?.capitalized ?? "",
                                                                                            "image": data.filePath ?? "",
                                                                                            
@@ -357,7 +471,7 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 return CGSize(width: (Int(width) - 34) / 4, height: Int(width / 4))
             }
         }
-        return CGSize(width: (Int(width) - 8) / 2, height: Int(width / 2))
+        return CGSize(width: (Int(width) - 8) / 2, height: Int(width * 0.65))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

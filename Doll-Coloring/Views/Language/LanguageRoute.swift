@@ -8,16 +8,21 @@
 import UIKit
 
 enum LanguageRoute: Route {
-    case language(gofrom: LanguageGoFrom)
+    case language(gofrom: LanguageGoFrom, currentLanguage: Language? = nil)
+    case languageSecond
 }
 
 extension LanguageRoute {
     var screen: UIViewController {
         switch self {
-        case let .language(gofrom):
+        case let .language(gofrom, currentLanguage):
             let languageController = LanguageController.loadController()
             languageController.goFrom = gofrom
+            languageController.currentLanguage = currentLanguage
             return languageController
+        case .languageSecond:
+            let vc = LanguageSecondViewController.loadController()
+            return vc
         }
     }
 }

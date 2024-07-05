@@ -21,29 +21,18 @@ class LanguageController: BaseViewController {
     // MARK: - Variable and Outlet
 
     @IBOutlet weak var topBarView: TopBarView!
-    @IBOutlet weak var lbTitleSelectLanguage: UILabel!
-    @IBOutlet weak var tfSearchCountry: UITextField!
     @IBOutlet weak var tableviewListCountry: UITableView!
     @IBOutlet weak var viewAds: UIView!
     @IBOutlet weak var heightViewAds: NSLayoutConstraint!
     
-    private var currentLanguage: Language? = nil {
-        didSet {
-            if goFrom == .intro {
-                topBarView.rightTitleColor = R.color.colorTitle()
-            } else {
-                topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTitle() ?? .black)
-            }
-            
-            topBarView.rightEnable = currentLanguage != nil
-        }
-    }
+    internal var currentLanguage: Language? = nil
     var goFrom: LanguageGoFrom = .intro
     
     // MARK: - Setup controller and IBAction
     override func setup() {
         super.setup()
         setupView()
+        checkSelectLanguage()
     }
     
     override func bindingData() {
@@ -56,7 +45,16 @@ class LanguageController: BaseViewController {
         super.onLanguageChange()
         loadText()
     }
-   
+    
+    func checkSelectLanguage() {
+        if goFrom == .intro {
+            topBarView.rightTitleColor = R.color.colorTitle()
+        } else {
+            topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTitle() ?? .black)
+        }
+        
+        topBarView.rightEnable = currentLanguage != nil
+    }
 }
 
 // MARK: - Action view
@@ -117,8 +115,6 @@ extension LanguageController {
         tableviewListCountry.delegate = self
         tableviewListCountry.dataSource = self
         
-        tfSearchCountry.addTarget(self, action: #selector(updateSearchResults(_:)), for: .editingChanged)
-        
         setupListenChangeIAP()
     }
     
@@ -134,7 +130,7 @@ extension LanguageController {
         viewAds.isHidden = false
         heightViewAds.constant = 190
         ADManager.shared.loadNative(DollColoringAdID.native_language_high,
-                                    to: self.viewAds, refreshAd: true) { [weak self] idAds, success ,_  in
+                                    to: self.viewAds, refreshAd: true , nativeAdType: .smallMedia) { [weak self] idAds, success ,_  in
             guard idAds.contains(DollColoringAdID.native_language_high.adId) else {
                 return
             }
@@ -149,7 +145,7 @@ extension LanguageController {
     
     private func loadAds() {
         ADManager.shared.loadNative(DollColoringAdID.native_language,
-                                    to: self.viewAds, refreshAd: true) { [weak self] idAds, success ,_  in
+                                    to: self.viewAds, refreshAd: true, nativeAdType: .smallMedia) { [weak self] idAds, success ,_  in
             guard idAds.contains(DollColoringAdID.native_language.adId) else {
                 return
             }
@@ -170,8 +166,6 @@ extension LanguageController {
             topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.mainPrimary() ?? .black)
         }
         topBarView.title = LocalizableUtils.languageTitle()
-        tfSearchCountry.placeholder = LocalizableUtils.languagePlaceholderSearch()
-        lbTitleSelectLanguage.text = LocalizableUtils.languageSubTitle()
         tableviewListCountry.reloadData()
     }
     
@@ -180,13 +174,6 @@ extension LanguageController {
 extension LanguageController: UITableViewDelegate, UITableViewDataSource {
     
     private func getListCountry() -> [Language] {
-        if let contentSearch = tfSearchCountry.text?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased(),
-           !contentSearch.isEmpty {
-            return LanguageVM.shared.listCountryCode.filter({ item -> Bool in
-                return (item.name.lowercased().range(of: contentSearch) != nil)
-                || (item.key.lowercased().range(of: contentSearch) != nil)
-            })
-        }
         return LanguageVM.shared.listCountryCode
     }
     
@@ -209,6 +196,7 @@ extension LanguageController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         let country = getListCountry()[indexPath.row]
         self.currentLanguage = country
+        checkSelectLanguage()
         tableView.reloadData()
     }
     

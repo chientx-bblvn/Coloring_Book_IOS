@@ -543,12 +543,12 @@ struct _R {
       /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
       var languageBrazil: RswiftResources.StringResource { .init(key: "Language.brazil", tableName: "Localizable", source: source, developmentValue: "Brazil", comment: nil) }
 
-      /// en translation: United States
+      /// en translation: English
       ///
       /// Key: Language.english
       ///
       /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
-      var languageEnglish: RswiftResources.StringResource { .init(key: "Language.english", tableName: "Localizable", source: source, developmentValue: "United States", comment: nil) }
+      var languageEnglish: RswiftResources.StringResource { .init(key: "Language.english", tableName: "Localizable", source: source, developmentValue: "English", comment: nil) }
 
       /// en translation: French
       ///
@@ -808,7 +808,7 @@ struct _R {
     var textColor: RswiftResources.ColorResource { .init(name: "TextColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 723 images.
+  /// This `_R.image` struct is generated, and contains static references to 726 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -2957,6 +2957,15 @@ struct _R {
     /// Image `iccon_checkmark`.
     var iccon_checkmark: RswiftResources.ImageResource { .init(name: "iccon_checkmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `indicator_page1`.
+    var indicator_page1: RswiftResources.ImageResource { .init(name: "indicator_page1", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `indicator_page2`.
+    var indicator_page2: RswiftResources.ImageResource { .init(name: "indicator_page2", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `indicator_page3`.
+    var indicator_page3: RswiftResources.ImageResource { .init(name: "indicator_page3", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `intro_doll0`.
     var intro_doll0: RswiftResources.ImageResource { .init(name: "intro_doll0", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -3031,7 +3040,7 @@ struct _R {
     var musicBackgroundMp3: RswiftResources.FileResource { .init(name: "musicBackground", pathExtension: "mp3", bundle: bundle, locale: LocaleReference.none) }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 33 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 40 nibs.
   struct nib {
     let bundle: Foundation.Bundle
 
@@ -3062,6 +3071,15 @@ struct _R {
     /// Nib `ColorCell`.
     var colorCell: RswiftResources.NibReference<ColorCell> { .init(name: "ColorCell", bundle: bundle) }
 
+    /// Nib `CustomMediaNativeAdView`.
+    var customMediaNativeAdView: RswiftResources.NibReference<CustomMediaNativeAdView> { .init(name: "CustomMediaNativeAdView", bundle: bundle) }
+
+    /// Nib `CustomMediaNativeAdViewFixedHeight`.
+    var customMediaNativeAdViewFixedHeight: RswiftResources.NibReference<CustomMediaNativeAdViewFixedHeight> { .init(name: "CustomMediaNativeAdViewFixedHeight", bundle: bundle) }
+
+    /// Nib `CustomSmallNativeAdView`.
+    var customSmallNativeAdView: RswiftResources.NibReference<CustomSmallNativeAdView> { .init(name: "CustomSmallNativeAdView", bundle: bundle) }
+
     /// Nib `EmptyView`.
     var emptyView: RswiftResources.NibReference<EmptyView> { .init(name: "EmptyView", bundle: bundle) }
 
@@ -3083,8 +3101,17 @@ struct _R {
     /// Nib `HomeAdsCell`.
     var homeAdsCell: RswiftResources.NibReference<HomeAdsCell> { .init(name: "HomeAdsCell", bundle: bundle) }
 
+    /// Nib `HomeNativeAdsCell`.
+    var homeNativeAdsCell: RswiftResources.NibReference<HomeNativeAdsCell> { .init(name: "HomeNativeAdsCell", bundle: bundle) }
+
+    /// Nib `HorizontalNativeAdView`.
+    var horizontalNativeAdView: RswiftResources.NibReference<HorizontalNativeAdView> { .init(name: "HorizontalNativeAdView", bundle: bundle) }
+
     /// Nib `IAPController`.
     var iapController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "IAPController", bundle: bundle) }
+
+    /// Nib `InsightNativeAdView`.
+    var insightNativeAdView: RswiftResources.NibReference<InsightNativeAdView> { .init(name: "InsightNativeAdView", bundle: bundle) }
 
     /// Nib `IntroController`.
     var introController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "IntroController", bundle: bundle) }
@@ -3097,6 +3124,9 @@ struct _R {
 
     /// Nib `LanguageController`.
     var languageController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "LanguageController", bundle: bundle) }
+
+    /// Nib `LanguageSecondViewController`.
+    var languageSecondViewController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "LanguageSecondViewController", bundle: bundle) }
 
     /// Nib `ListThemeColoringViewController`.
     var listThemeColoringViewController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "ListThemeColoringViewController", bundle: bundle) }
@@ -3142,6 +3172,7 @@ struct _R {
       if UIKit.UIColor(named: "TextColorSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondary' is used in nib 'AlertViewController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "color_shadow_button", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'color_shadow_button' is used in nib 'AlertViewController', but couldn't be loaded.") }
       if UIKit.UIImage(named: "ic_iap_item", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_iap_item' is used in nib 'AllColoringCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "ic_pro", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_pro' is used in nib 'AllColoringCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'AllColoringCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "SystemRed", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SystemRed' is used in nib 'AllColoringCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'ButtonView', but couldn't be loaded.") }
@@ -3151,6 +3182,18 @@ struct _R {
       if UIKit.UIColor(named: "ColorTextTopBar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTextTopBar' is used in nib 'CategoryColoringCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'CategoryMenuCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'CollectionCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "ColorBGAds", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGAds' is used in nib 'CustomMediaNativeAdView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'CustomMediaNativeAdView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'CustomMediaNativeAdView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColorSecondaryV2", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondaryV2' is used in nib 'CustomMediaNativeAdView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "ColorBGAds", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGAds' is used in nib 'CustomMediaNativeAdViewFixedHeight', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'CustomMediaNativeAdViewFixedHeight', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'CustomMediaNativeAdViewFixedHeight', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColorSecondaryV2", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondaryV2' is used in nib 'CustomMediaNativeAdViewFixedHeight', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "ColorBGAds", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGAds' is used in nib 'CustomSmallNativeAdView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'CustomSmallNativeAdView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'CustomSmallNativeAdView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColorSecondaryV2", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondaryV2' is used in nib 'CustomSmallNativeAdView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColorSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondary' is used in nib 'EmptyView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "backgroud_home_collection", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'backgroud_home_collection' is used in nib 'FeatureHomeCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "backgroud_home_coloring", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'backgroud_home_coloring' is used in nib 'FeatureHomeCell', but couldn't be loaded.") }
@@ -3165,6 +3208,12 @@ struct _R {
       if UIKit.UIColor(named: "SystemRed", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SystemRed' is used in nib 'HeaderHomeCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'HistoryCellCollectionViewCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "SystemRed", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SystemRed' is used in nib 'HistoryCellCollectionViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "ColorBGAds", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGAds' is used in nib 'HomeNativeAdsCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'HomeNativeAdsCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "ColorBGAds", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGAds' is used in nib 'HorizontalNativeAdView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'HorizontalNativeAdView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'HorizontalNativeAdView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColorSecondaryV2", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondaryV2' is used in nib 'HorizontalNativeAdView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "bg_splash", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'bg_splash' is used in nib 'IAPController', but couldn't be loaded.") }
       if UIKit.UIImage(named: "ic_close", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_close' is used in nib 'IAPController', but couldn't be loaded.") }
       if UIKit.UIImage(named: "icon_verified_seller", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'icon_verified_seller' is used in nib 'IAPController', but couldn't be loaded.") }
@@ -3175,10 +3224,16 @@ struct _R {
       if UIKit.UIColor(named: "SystemOrange", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SystemOrange' is used in nib 'IAPController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'IAPController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColorSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondary' is used in nib 'IAPController', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "ColorBGAds", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGAds' is used in nib 'InsightNativeAdView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'InsightNativeAdView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'InsightNativeAdView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColorSecondaryV2", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondaryV2' is used in nib 'InsightNativeAdView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "background_intro", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'background_intro' is used in nib 'IntroController', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'IntroController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "NeutralBackground", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'NeutralBackground' is used in nib 'IntroController', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "indicator_page1", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'indicator_page1' is used in nib 'IntroductionCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "onboard_1", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'onboard_1' is used in nib 'IntroductionCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "ColorTextTopBar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTextTopBar' is used in nib 'IntroductionCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'IntroductionCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'IntroductionCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColorSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondary' is used in nib 'IntroductionCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "VN", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'VN' is used in nib 'LanguageCell', but couldn't be loaded.") }
@@ -3186,11 +3241,12 @@ struct _R {
       if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'LanguageCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "color_shadow_button", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'color_shadow_button' is used in nib 'LanguageCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "background_splash", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'background_splash' is used in nib 'LanguageController', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "ColorBGInput", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGInput' is used in nib 'LanguageController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "NeutralBackground", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'NeutralBackground' is used in nib 'LanguageController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'LanguageController', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TextColorSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondary' is used in nib 'LanguageController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "color_shadow_button", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'color_shadow_button' is used in nib 'LanguageController', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "background_splash", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'background_splash' is used in nib 'LanguageSecondViewController', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'LanguageSecondViewController', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "color_shadow_button", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'color_shadow_button' is used in nib 'LanguageSecondViewController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'MenuActionCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "color_bling3_pastel12", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'color_bling3_pastel12' is used in nib 'PopupColoringViewController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "ColorTitle", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTitle' is used in nib 'PopupColoringViewController', but couldn't be loaded.") }

@@ -21,7 +21,7 @@ extension HomeService: TargetType {
     public var path: String {
         switch self {
         case .list:
-            return "/doll-coloring2/doll_v3.json"
+            return "/data_dollcoloring/doll_v4.json"
         }
     }
     

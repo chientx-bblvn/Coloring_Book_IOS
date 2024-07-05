@@ -229,8 +229,6 @@ struct ColoringImageBook {
             self.fillFloodScanLine(x: x, y: y, bitmap: &bitmapPointer, mask: &maskBitmap)
         }
         
-        let dif = ProcessInfo.processInfo.systemUptime - start
-        
         let maskData:CFData = Data(bytes: &maskBitmap,
                                    count: maskBitmap.count * MemoryLayout<UInt8>.size) as CFData
         

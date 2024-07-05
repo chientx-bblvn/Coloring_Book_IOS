@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
@@ -15,25 +15,25 @@
             <objects>
                 <viewController storyboardIdentifier="TabbarViewController" id="zIc-eW-6fX" customClass="TabbarViewController" customModule="Doll_Coloring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Z2g-4m-atm">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="d5g-FY-6cu">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IN9-ab-tzX">
-                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1246"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="428" height="806"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="utE-dL-yNX">
-                                        <rect key="frame" x="0.0" y="1246" width="1024" height="60"/>
+                                        <rect key="frame" x="0.0" y="806" width="428" height="60"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="rlO-ag-OOr"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQW-Hd-auX">
-                                        <rect key="frame" x="0.0" y="1306" width="1024" height="60"/>
+                                        <rect key="frame" x="0.0" y="866" width="428" height="60"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="1M2-5C-Efb"/>
@@ -67,21 +67,21 @@
             <objects>
                 <viewController restorationIdentifier="NetworkDisconnectController" storyboardIdentifier="NetworkDisconnectController" id="QVo-ES-wd5" customClass="NetworkDisconnectController" customModule="Doll_Coloring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kQe-3l-GAC">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vqm-oV-38N">
-                                <rect key="frame" x="307" y="480" width="410" height="410"/>
+                                <rect key="frame" x="64" y="319.66666666666669" width="300" height="300.00000000000006"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l8y-ph-co1" customClass="LottieAnimationView" customModule="Lottie">
-                                        <rect key="frame" x="43" y="43" width="324" height="324"/>
+                                        <rect key="frame" x="43" y="43" width="214" height="214"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="l8y-ph-co1" secondAttribute="height" id="tgI-fK-Zjb"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disconnected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dn7-MA-4fc">
-                                        <rect key="frame" x="24" y="328.5" width="362" height="38.5"/>
+                                        <rect key="frame" x="24" y="218.33333333333331" width="252" height="38.666666666666686"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                         <color key="textColor" name="ColorTitle"/>
                                         <nil key="highlightedColor"/>

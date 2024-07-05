@@ -36,7 +36,7 @@ extension DownloadOperation {
     func trackDownloadByOperation(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL, fileTo: URL, isTheme: Bool, coloringLocal: ColoringHistoryModel?) {
         do {
             let manager = FileManager.default
-            let urlDownLoad = downloadTask.originalRequest?.url?.path.replacingOccurrences(of: "/doll-coloring2/canvas/", with: "") ?? ""
+            let urlDownLoad = downloadTask.originalRequest?.url?.path.replacingOccurrences(of: "/data_dollcoloring/", with: "") ?? ""
             let destinationURL = fileTo
             if manager.fileExists(atPath: destinationURL.path) {
                 try manager.removeItem(at: destinationURL)

@@ -14,25 +14,23 @@ class IntroController: BaseViewController {
     
     // MARK: - Variable and Outlet
     @IBOutlet private weak var fsPagerView: FSPagerView!
-    @IBOutlet private weak var viewAds: UIView!
-    
-    @IBOutlet weak var sliderView: UIStackView!
-    
-    @IBOutlet weak var btnNext: UIButton!
     
     private let listIntro: [IntroModel] = [
         IntroModel(name: LocalizableUtils.introIntroTitlePage1(),
                    desc: LocalizableUtils.introIntroContentPage1(),
                    image: R.image.intro_doll2(),
-                   id: 0),
+                   id: 0,
+                   indicator: R.image.indicator_page1()),
         IntroModel(name: LocalizableUtils.introIntroTitlePage2(),
                    desc: LocalizableUtils.introIntroContentPage2(),
                    image: R.image.intro_doll0(),
-                   id: 1),
+                   id: 1,
+                   indicator: R.image.indicator_page2()),
         IntroModel(name: LocalizableUtils.introIntroTitlePage3(),
                    desc: LocalizableUtils.introIntroContentPage3(),
                    image: R.image.intro_doll1(),
-                   id: 2)
+                   id: 2,
+                   indicator: R.image.indicator_page3())
     ]
     
     // MARK: - Setup controller and IBAction
@@ -49,29 +47,7 @@ class IntroController: BaseViewController {
     override func onLanguageChange() {
         super.onLanguageChange()
     }
-    
-    func customPageControl(currentIndex: Int = 0) {
-        let numberOfPage = listIntro.count - 1
-        guard numberOfPage > 0 else {return}
-        sliderView.removeAllArrangedSubviews()
-        for i in 0...numberOfPage {
-            let view = UIView()
-            let isIndex = (i == currentIndex)
-            view.backgroundColor = isIndex ? R.color.mainPrimary()! : R.color.mainPrimary()!.withAlphaComponent(0.5)
-            view.layer.cornerRadius = 4
-            sliderView.addArrangedSubview(view)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                view.heightAnchor.constraint(equalTo: sliderView.heightAnchor, multiplier: 1),
-                view.widthAnchor.constraint(equalToConstant: isIndex ? 20 : 8)
-            ])
-        }
-        if currentIndex == (listIntro.count - 1) {
-            btnNext.setTitle(LocalizableUtils.commonStart().uppercased(), for: .normal)
-        } else {
-            btnNext.setTitle(LocalizableUtils.commonNext().uppercased(), for: .normal)
-        }
-    }
+
 }
 
 // MARK: - Action view
@@ -85,7 +61,6 @@ extension IntroController {
         let currentPage = fsPagerView.currentIndex
         if currentPage < (listIntro.count - 1) {
             fsPagerView.scrollToItem(at: currentPage + 1, animated: true)
-            customPageControl(currentIndex: currentPage)
         } else {
             UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
             AppRouter.shared.navigate(to: TabbarViewRoute.main, with: .changeRoot)
@@ -98,34 +73,14 @@ extension IntroController {
 extension IntroController {
     
     private func setupView() {
-        loadAdsHigh()
         fsPagerView.dataSource = self
         fsPagerView.delegate = self
         fsPagerView.isInfinite = false
         fsPagerView.decelerationDistance = 1
         fsPagerView.register(cellType: IntroductionCell.self)
-        customPageControl()
     }
     
-    private func loadAdsHigh() {
-        self.viewAds.isHidden = false
-        ADManager.shared.loadNative(DollColoringAdID.native_onboarding_high,
-                                    to: viewAds, refreshAd: true) { [weak self] idAds, success, _  in
-            guard idAds.contains(DollColoringAdID.native_onboarding_high.adId) else {return}
-            if !success {
-                self?.loadAds()
-            }
-        }
-    }
     
-    private func loadAds() {
-        self.viewAds.isHidden = false
-        ADManager.shared.loadNative(DollColoringAdID.native_onboarding,
-                                    to: viewAds, refreshAd: true) { [weak self] idAds, success, _  in
-            guard idAds.contains(DollColoringAdID.native_onboarding.adId) else {return}
-            self?.viewAds.isHidden = !success
-        }
-    }
 }
 
 extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {
@@ -137,6 +92,17 @@ extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {
         let cell = pagerView.dequeueReusableCell(for: index, cellType: IntroductionCell.self)
         let intro = listIntro[index]
         cell.loadData(intro: intro)
+        cell.onNext = {
+            DispatchQueue.main.asyncSafety {
+                let currentPage = self.fsPagerView.currentIndex
+                if currentPage < (self.listIntro.count - 1) {
+                    self.fsPagerView.scrollToItem(at: currentPage + 1, animated: true)
+                } else {
+                    UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
+                    AppRouter.shared.navigate(to: TabbarViewRoute.main, with: .changeRoot)
+                }
+            }
+        }
         return cell
     }
     
@@ -151,7 +117,6 @@ extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {
             FirebaseEventManager.logEvent(with: RMBGEventTracking.scrOnboard3)
         default: break
         }
-        customPageControl(currentIndex: currentPage)
     }
     
 }

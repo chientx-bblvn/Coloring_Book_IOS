@@ -10,14 +10,14 @@ import UIKit
 
 enum Language: Int, CaseIterable {
     case english
-    case hindi
-    case spanish
-    case french
-    case portuguese
     case brazil
-    case japanese
-    case korean
+    case hindi
+    case french
     case german
+    case spanish
+    case japanese
+    case portuguese
+    case korean
     case rusia
     case vietnam
     

@@ -14,6 +14,8 @@ import UIKit
 import AppTrackingTransparency
 import AdmobSDK
 import FBAudienceNetwork
+import SDWebImageSVGNativeCoder
+import SDWebImage
 
 var appDelegate: AppDelegate? {
     return  UIApplication.shared.delegate as? AppDelegate
@@ -44,7 +46,7 @@ class AppDelegate: BaseAppDelegate {
         UITableView.appearance().showsHorizontalScrollIndicator = false
         
         SVProgressHUD.setDefaultMaskType(.black)
-        
+        configuarationSDWebImageSVG()
         setupReachability()
         
         return true
@@ -62,6 +64,11 @@ class AppDelegate: BaseAppDelegate {
     
     private func configurationFB() {
        
+    }
+    
+    private func configuarationSDWebImageSVG() {
+        let SVGCoder = SDImageSVGNativeCoder.shared
+        SDImageCodersManager.shared.addCoder(SVGCoder)
     }
     
     fileprivate func createAudioSession() {

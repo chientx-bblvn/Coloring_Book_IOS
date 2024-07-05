@@ -30,6 +30,7 @@ def shared_pods
   ### pod for load image
   pod 'SDWebImage'
   pod 'lottie-ios'
+  pod 'SDWebImageSVGNativeCoder'
   
   # For firebase
   #  # (Recommended) Pod for Google Analytics
@@ -38,7 +39,7 @@ def shared_pods
   pod 'BmoViewPager', :path => "./Submodules/BmoViewPager"
   
   ### Admobs
-  pod 'AdmobSDK', :git => "https://github.com/Binary-Bridge-Labs/ADMobSDK", :tag => 'v0.0.13'
+  pod 'AdmobSDK', :git => "https://github.com/Binary-Bridge-Labs/ADMobSDK", :tag => 'v0.0.16'
 #  pod 'AdmobSDK', :path => "../../SDK-Library/AdmobSDK"
   
   ### SQLite DB

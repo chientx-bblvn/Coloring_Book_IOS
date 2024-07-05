@@ -62,7 +62,7 @@ Language.Title                                  =       "Change language";
 Language.SubTitle                               =       "Select your language";
 Language.PlaceholderSearch                      =       "Enter: country name|code|dial code";
 
-Language.english                                =       "United States";
+Language.english                                =       "English";
 Language.hindi                                  =       "Hindi";
 Language.spanish                                =       "Español";
 Language.french                                 =       "French";

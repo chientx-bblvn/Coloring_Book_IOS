@@ -218,7 +218,7 @@ class DetailCollectionController: BaseViewController {
     }
     
     func loadNativeAds() {
-        ADManager.shared.loadNative(DollColoringAdID.native_result, to: viewAds) {[weak self] adId, success, nativeAdView in
+        ADManager.shared.loadNative(DollColoringAdID.native_result, to: viewAds, nativeAdType: .smallMedia) {[weak self] adId, success, nativeAdView in
             self?.viewAds.isHidden = !success
         }
     }

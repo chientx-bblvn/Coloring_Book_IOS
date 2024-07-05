@@ -359,39 +359,40 @@ class StartColoringIPadViewController: BaseViewController {
         let percentColoring = Int((percent * 100).rounded())
         if percentColoring < 100 {
             PopupColoringViewController.show(in: self, _percent: percent, _title: LocalizableUtils.commonDescExit(), _titleOk: LocalizableUtils.commonOK(), _titleCancel: LocalizableUtils.commonNo()) {
-                ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) {[weak self] status in
-                    guard let self = self else {return}
-                    self.saveHistoryColoring()
-                    switch self.viewModel.typeScreen {
-                    case .home:
-                        AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
-                    case .coloring:
-                        AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
-                    case .detailColoring:
-                        AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
-                    case .collection:
-                        AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
-                    }
+                self.saveHistoryColoring()
+                switch self.viewModel.typeScreen {
+                case .home:
+                    AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+                case .coloring:
+                    AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
+                case .detailColoring:
+                    AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
+                case .collection:
+                    AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+                }
+                ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) {_ in
+                    
                 }
             } actionCancel: {
                 
             }
             return
         }
+        
+        self.saveHistoryColoring()
+        switch self.viewModel.typeScreen {
+        case .home:
+            AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+        case .coloring:
+            AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
+        case .detailColoring:
+            AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
+        case .collection:
+            AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+        }
     
-        ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) {[weak self] status in
-            guard let self = self else {return}
-            self.saveHistoryColoring()
-            switch self.viewModel.typeScreen {
-            case .home:
-                AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
-            case .coloring:
-                AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
-            case .detailColoring:
-                AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
-            case .collection:
-                AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
-            }
+        ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) {_ in
+
         }
     }
     

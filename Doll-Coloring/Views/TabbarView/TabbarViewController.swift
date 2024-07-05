@@ -47,7 +47,6 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        loadAdsBanner()
     }
     
     override func loadView() {
@@ -76,6 +75,7 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         chatStoryboard.tabBarItem = UITabBarItem(title: LocalizableUtils.commonCollections(), image: UIImage(named: "ic_tabbar_collection"), selectedImage: UIImage(named: "ic_tabbar_collection_select"))
         viewControllers = [homeStoryboard, chatStoryboard]
         NotificationCenter.default.addObserver(self, selector: #selector(gotoHome), name: NSNotification.Name("GOTOHOME_TABBAR"), object: nil)
+        loadAdsBanner()
     }
     
     private func settingIAP() {

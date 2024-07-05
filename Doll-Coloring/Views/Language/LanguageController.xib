@@ -8,19 +8,12 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Rubik-Medium.ttf">
-            <string>Rubik-Medium</string>
-        </array>
-    </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LanguageController" customModule="Remove_Object" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LanguageController" customModule="Doll_Coloring" customModuleProvider="target">
             <connections>
                 <outlet property="heightViewAds" destination="gOP-TL-Bvc" id="d3q-Ml-a1o"/>
-                <outlet property="lbTitleSelectLanguage" destination="dw3-2p-Cnk" id="nu0-UN-5Nc"/>
                 <outlet property="tableviewListCountry" destination="cXk-5G-gB2" id="i3e-bs-PvJ"/>
-                <outlet property="tfSearchCountry" destination="Ri6-zW-60v" id="Akl-dj-nx3"/>
-                <outlet property="topBarView" destination="XYI-tL-0Ry" id="6Da-Tf-gXw"/>
+                <outlet property="topBarView" destination="XYI-tL-0Ry" id="wx3-DW-wKc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewAds" destination="6UV-lQ-gnv" id="hiQ-tj-ueg"/>
             </connections>
@@ -33,7 +26,7 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_splash" translatesAutoresizingMaskIntoConstraints="NO" id="edi-SM-YdA">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XYI-tL-0Ry" customClass="TopBarView" customModule="Remove_Object" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XYI-tL-0Ry" customClass="TopBarView" customModule="Doll_Coloring" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="59" width="393" height="56"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -52,32 +45,8 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter country" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Ri6-zW-60v">
-                    <rect key="frame" x="24" y="135" width="345" height="48"/>
-                    <color key="backgroundColor" name="ColorBGInput"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="48" id="gJy-Fs-nBD"/>
-                    </constraints>
-                    <color key="textColor" name="TextColor"/>
-                    <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
-                            <real key="value" value="20"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                            <color key="value" name="TextColorSecondary"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select your language" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dw3-2p-Cnk">
-                    <rect key="frame" x="24" y="193" width="345" height="23.666666666666657"/>
-                    <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="18"/>
-                    <color key="textColor" name="TextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cXk-5G-gB2">
-                    <rect key="frame" x="24" y="224.66666666666669" width="345" height="577.33333333333326"/>
+                    <rect key="frame" x="24" y="135" width="345" height="667"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6UV-lQ-gnv">
@@ -108,23 +77,17 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="NeutralBackground"/>
             <constraints>
-                <constraint firstItem="Ri6-zW-60v" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="0fP-BY-POQ"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dw3-2p-Cnk" secondAttribute="trailing" constant="24" id="18n-fh-UtX"/>
+                <constraint firstItem="cXk-5G-gB2" firstAttribute="top" secondItem="XYI-tL-0Ry" secondAttribute="bottom" constant="20" id="4ej-hS-pFb"/>
                 <constraint firstItem="edi-SM-YdA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5MK-gZ-JYQ"/>
                 <constraint firstAttribute="trailing" secondItem="edi-SM-YdA" secondAttribute="trailing" id="7cX-8G-7lU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="cXk-5G-gB2" secondAttribute="trailing" constant="24" id="DQ3-VJ-eY6"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ri6-zW-60v" secondAttribute="trailing" constant="24" id="DWM-ds-u04"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="XYI-tL-0Ry" secondAttribute="top" id="Gcq-11-yWc"/>
-                <constraint firstItem="dw3-2p-Cnk" firstAttribute="top" secondItem="Ri6-zW-60v" secondAttribute="bottom" constant="10" id="HPZ-ic-TUL"/>
                 <constraint firstItem="edi-SM-YdA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="IY9-tB-aAe"/>
                 <constraint firstItem="XYI-tL-0Ry" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Nvg-wp-6Ad"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XYI-tL-0Ry" secondAttribute="trailing" id="Nxs-KA-f2v"/>
-                <constraint firstItem="dw3-2p-Cnk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="PMj-Mc-Lya"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="6UV-lQ-gnv" secondAttribute="bottom" id="S50-KK-rmS"/>
-                <constraint firstItem="cXk-5G-gB2" firstAttribute="top" secondItem="dw3-2p-Cnk" secondAttribute="bottom" constant="8" id="WVv-pl-SUA"/>
                 <constraint firstItem="6UV-lQ-gnv" firstAttribute="top" secondItem="cXk-5G-gB2" secondAttribute="bottom" constant="16" id="Xva-17-ynS"/>
                 <constraint firstItem="6UV-lQ-gnv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Zfz-V4-cUz"/>
-                <constraint firstItem="Ri6-zW-60v" firstAttribute="top" secondItem="XYI-tL-0Ry" secondAttribute="bottom" constant="20" id="mYJ-kE-UPL"/>
                 <constraint firstItem="cXk-5G-gB2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="nXK-r0-f2b"/>
                 <constraint firstAttribute="bottom" secondItem="edi-SM-YdA" secondAttribute="bottom" id="rGH-jd-yqt"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6UV-lQ-gnv" secondAttribute="trailing" id="zMv-58-yYq"/>
@@ -134,17 +97,11 @@
     </objects>
     <resources>
         <image name="background_splash" width="393" height="852"/>
-        <namedColor name="ColorBGInput">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="NeutralBackground">
             <color red="0.9882352941176471" green="0.94901960784313721" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="TextColorSecondary">
-            <color red="0.41176470588235292" green="0.24705882352941178" blue="0.0" alpha="0.80000001192092896" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="color_shadow_button">
             <color red="0.24300000071525574" green="0.52499997615814209" blue="0.98000001907348633" alpha="0.23999999463558197" colorSpace="custom" customColorSpace="sRGB"/>

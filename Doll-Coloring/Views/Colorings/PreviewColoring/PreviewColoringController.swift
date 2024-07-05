@@ -34,6 +34,11 @@ class PreviewColoringController: BaseViewController {
         setupView()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        animationView.stop()
+        animationPreview.stop()
+    }
+    
     private func setupTopBarView() {
         topBarView.title = LocalizableUtils.commonStartColoring()
     }
@@ -42,7 +47,12 @@ class PreviewColoringController: BaseViewController {
         topBarView.titleFont = .systemFont(ofSize: 24, weight: .bold)
         animationView.loadAnimation(file: "animation_progess", loopMode: .loop)
         animationPreview.loadAnimation(file: "animation_loading_preview", loopMode: .loop, autoPlay: true, animationSpeed: 1.2)
-        let preview = apiBaseUrl + "/doll-coloring2/canvas/" + (viewModel.coloring?.filePreview ?? "")
+        var preview = apiBaseUrl + "/data_dollcoloring/" + (viewModel.coloring?.filePreview ?? "")
+        if let filePreview = viewModel.coloring?.filePreview, !filePreview.isEmpty {
+            preview = apiBaseUrl + "/data_dollcoloring/" + (filePreview)
+        } else {
+            preview = apiBaseUrl + "/data_dollcoloring/" + (viewModel.coloring?.filePath ?? "")
+        }
         if let coloring = viewModel.coloringLocal, let image = UIImage(contentsOfFile: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .Coloring, file:  coloring.fileLocal).path) {
             if let img = UIImage(contentsOfFile: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file:  viewModel.history?.imagePath ?? "").path) {
                 imgView.image = img
@@ -51,7 +61,7 @@ class PreviewColoringController: BaseViewController {
             }
             self.createColoringBookView(with: image)
         } else {
-            let path = apiBaseUrl + "/doll-coloring2/canvas/" + (viewModel.coloring?.filePath ?? "")
+            let path = apiBaseUrl + "/data_dollcoloring/" + (viewModel.coloring?.filePath ?? "")
             imgView.setImage(with: preview, placeholder: nil)
             downloadImageColor(linkDowload: path)
         }
