@@ -207,7 +207,7 @@ extension SplashController {
 //        animationView.loadAnimation(file: "animation_splash_new", loopMode: .loop, autoPlay: true)
         animationColoring.loadAnimation(file: "animation_splash_new", loopMode: .loop, autoPlay: true, animationSpeed: 2)
         let style = ThemeStyleAds
-            .custom(backgroundColor: UIColor.secondarySystemBackground.withAlphaComponent(0.8),
+            .custom(backgroundColor: UIColor.white.withAlphaComponent(0.8),
                     titleColor: R.color.textColor()!,
                     vertiserColor: .yellow,
                     contenColor: R.color.textColor()!,

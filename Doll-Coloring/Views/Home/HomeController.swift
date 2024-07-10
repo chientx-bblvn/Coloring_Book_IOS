@@ -40,10 +40,6 @@ class HomeController: BaseViewController {
         }
     }
     
-    @IBOutlet weak var listMenu: UICollectionView!
-    
-    @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var heightSlider: NSLayoutConstraint! {
         didSet {
             var height = UIScreen.main.bounds.width
@@ -63,17 +59,13 @@ class HomeController: BaseViewController {
         }
     }
     
-    private var nativeAdView: NativeAdProtocol? {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
+    @IBOutlet weak var bmoViewPagerNavigation: BmoViewPagerNavigationBar!
     
-    let collectionViewHeaderFooterReuseIdentifier = "HeaderHomeCell"
-    private var coloringLocal: [ColoringHistoryModel] = []
-    var isShowAds: Bool = true
-    var numberClick = 4
-    var indexCategory = 0
+    @IBOutlet weak var bmoViewPager: BmoViewPager!
+    
+    private var viewPageController: [PageViewSwirlViewController] = []
+  
+    private var numberClick = 4
     private var typeHome = TypeHome.allCases
     private var bannerHome: BannerHome = .iphone
     private var isLandscape: Bool = false
@@ -118,12 +110,6 @@ class HomeController: BaseViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        coloringLocal = SQLiteManager.shared.selectionColorings()
-        loadNativeAds()
-        collectionView.reloadData()
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         let local = FileManagerLocal.shared.getFileColoringlocalURL()
         local.forEach { url in
@@ -138,9 +124,40 @@ class HomeController: BaseViewController {
     
     override func bindingData() {
         super.bindingData()
-        viewModel.getColorings {
-            self.listMenu.reloadData()
-            self.collectionView.reloadData()
+        viewModel.getColorings {[weak self] in
+            guard let self = self else {return}
+            self.viewPageController.removeAll()
+            self.viewModel.colorings.forEach { model in
+                let vc = PageViewSwirlViewController.loadController()
+                vc.categoryName = model.categoryName
+                vc.itemColoring = model.imageUrls ?? []
+                vc.handleScrollView = { scroll in
+                    self.scrollView(scroll)
+                }
+                vc.onClickItem = { item in
+                    guard UserDefaultManager.ABShowIAPColoring else {
+                        if (item.isPremium ?? false) {
+                            self.showRew(item)
+                        } else {
+                            self.showInter(item)
+                        }
+                        return
+                    }
+                    
+                    if UserDefaultManager.ABis_free_trial_us {
+                        self.showRew(item)
+                    } else {
+                        if (item.isPremium ?? false) {
+                            self.showIAP(item)
+                        } else {
+                            self.showInter(item)
+                        }
+                    }
+                }
+                self.viewPageController.append(vc)
+                self.bmoViewPager.reloadData()
+                self.bmoViewPagerNavigation.reloadData()
+            }
         }
     }
     
@@ -157,33 +174,14 @@ class HomeController: BaseViewController {
     private func settingIAP() {
         InappManager.share.didPaymentSuccess.subscribe(onNext: { [weak self] _ in
             self?.topbarView.showPremium = UserDefaultManager.ABShowIAPColoring
-            self?.collectionView.reloadData()
         }).disposed(by: disposeBag)
     }
     
     func setupView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 20, right: 16)
-        collectionView.register(cellType: AllColoringCell.self)
-        collectionView.register(cellType: HomeNativeAdsCell.self)
-        listMenu.delegate = self
-        listMenu.dataSource = self
-        listMenu.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        listMenu.register(cellType: CategoryMenuCell.self)
+        setupPageView()
         updateLayoutContent()
         timeDistanceShowad = TimeInterval(ADManager.shared.timeRemoteShowFull)
         numberClick = UserDefaultManager.numberClickItemAllTopic
-    }
-    
-    private func loadNativeAds() {
-        ADManager.shared.loadNativeWithoutView(DollColoringAdID.native_home,
-                                               nativeAdType: .customMediaFixedHeight,
-                                               ratio: .portrait,
-                                               { adId, success, nativeAdView in
-            self.hasAd = success
-            self.nativeAdView = nativeAdView
-        })
     }
     
     private func requestNotification() {
@@ -191,11 +189,6 @@ class HomeController: BaseViewController {
         appDelegate?.requestNotificationPermission(completion: { success, error in
             BBLLogging.d("Check:: requestNotificationPermission  --   success: \(success)  error: \(error?.localizedDescription ?? "error")")
         })
-    }
-    
-    private func updateCategory() {
-        viewModel.itemColoring = viewModel.colorings[indexCategory].imageUrls ?? []
-        collectionView.reloadData()
     }
     
     private func updateLayoutContent() {
@@ -206,18 +199,16 @@ class HomeController: BaseViewController {
         case .portrait, .portraitUpsideDown:
             isLandscape = false
             slidePages.reloadData()
-            collectionView.reloadData()
         case .landscapeLeft, .landscapeRight:
             isLandscape = true
             slidePages.reloadData()
-            collectionView.reloadData()
         default:
             break
         }
     }
     
     func loadLanguage() {
-        collectionView.reloadData()
+        
     }
     
     private func requestGDPRAndATT(completion: @escaping (() -> Void)) {
@@ -235,6 +226,55 @@ class HomeController: BaseViewController {
             }
             completion()
         })
+    }
+    
+    private func setupPageView() {
+        bmoViewPagerNavigation.viewPager = bmoViewPager
+        bmoViewPager.scrollable = true
+        bmoViewPager.delegate = self
+        bmoViewPager.dataSource = self
+    }
+}
+
+extension HomeController: BmoViewPagerDelegate, BmoViewPagerDataSource {
+    func bmoViewPagerDataSourceNumberOfPage(in viewPager: BmoViewPager) -> Int {
+        return viewPageController.count
+    }
+    
+    func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController {
+        return viewPageController[page]
+    }
+}
+
+extension HomeController {
+    func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> String? {
+        return viewModel.colorings[page].categoryName?.capitalized
+    }
+    
+    func bmoViewPagerDataSourceNaviagtionBarItemNormalBackgroundView(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> UIView? {
+        return nil
+    }
+    
+    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> UIView? {
+        let viewBackground = UIView()
+        viewBackground.translatesAutoresizingMaskIntoConstraints = false
+        viewBackground.backgroundColor = R.color.mainPrimary()
+        viewBackground.layer.cornerRadius =  4
+        return viewBackground
+    }
+    
+    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedString.Key : Any]? {
+        return [
+            .font: UIFont.boldSystemFont(ofSize: 14),
+            .foregroundColor: UIColor.white
+        ]
+    }
+    
+    func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedString.Key : Any]? {
+        return [
+            .font: UIFont.boldSystemFont(ofSize: 14),
+            .foregroundColor: R.color.colorTitle()!
+        ]
     }
 }
 
@@ -269,226 +309,9 @@ extension HomeController: FSPagerViewDataSource,FSPagerViewDelegate {
     }
 }
 
-extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == listMenu {
-            return viewModel.colorings.count
-        } else {
-            if viewModel.itemColoring.count != 0 {
-                if hasAd {
-                    return viewModel.itemColoring.count + 1
-                } else {
-                    return viewModel.itemColoring.count
-                }
-            } else {
-                return 0
-            }
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+extension HomeController {
         
-        if collectionView == listMenu {
-            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: CategoryMenuCell.self)
-            cell.setupData(isSelect: indexCategory == indexPath.row, title: viewModel.colorings[indexPath.row].categoryName?.capitalized)
-            return cell
-        } else {
-            guard hasAd else {
-                let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: AllColoringCell.self)
-                let data = viewModel.itemColoring[indexPath.row]
-                if let img = data.filePreview {
-                    cell.setupView(image: img, coloringLocal: coloringLocal, filePath: data.filePath)
-                } else {
-                    cell.setupView(image: data.filePath, coloringLocal: coloringLocal, filePath: data.filePath)
-                }
-                if UserDefaultManager.ABShowIAPColoring {
-                    if UserDefaultManager.ABis_free_trial_us {
-                        if data.isPremium ?? false {
-                            cell.viewWatchAds.isHidden = true
-                            cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
-                        } else {
-                            cell.viewWatchAds.isHidden = true
-                            cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
-                        }
-                    } else {
-                        cell.viewWatchAds.isHidden = true
-                        if data.isPremium ?? false {
-                            cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
-                        } else {
-                            cell.adsViewAnimation.isHidden = true
-                        }
-                    }
-                    if IAPState.isUserVip {
-                        cell.adsViewAnimation.isHidden = true
-                        cell.viewWatchAds.isHidden = true
-                    }
-                } else {
-                    cell.adsViewAnimation.isHidden = true
-                    
-                    if data.isPremium ?? false {
-                        cell.viewWatchAds.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
-                    } else {
-                        cell.viewWatchAds.isHidden = true
-                    }
-                }
-                return cell
-            }
-            if indexPath.row == 3 {
-                let nativeAdsCell = collectionView.dequeueReusableCell(for: indexPath, cellType: HomeNativeAdsCell.self)
-                if hasAd {
-                    nativeAdsCell.loadAds(nativeAd: nativeAdView)
-                }
-                return nativeAdsCell
-            } else {
-                
-                let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: AllColoringCell.self)
-                var data: ColoringImage
-                if indexPath.row <= 2 {
-                    data = viewModel.itemColoring[indexPath.row]
-                } else {
-                    data = viewModel.itemColoring[indexPath.row - 1]
-                }
-                if let img = data.filePreview {
-                    cell.setupView(image: img, coloringLocal: coloringLocal, filePath: data.filePath)
-                } else {
-                    cell.setupView(image: data.filePath, coloringLocal: coloringLocal, filePath: data.filePath)
-                }
-                if UserDefaultManager.ABShowIAPColoring {
-                    if UserDefaultManager.ABis_free_trial_us {
-                        if data.isPremium ?? false {
-                            cell.viewWatchAds.isHidden = true
-                            cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
-                        } else {
-                            cell.viewWatchAds.isHidden = true
-                            cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
-                        }
-                    } else {
-                        cell.viewWatchAds.isHidden = true
-                        if data.isPremium ?? false {
-                            cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
-                        } else {
-                            cell.adsViewAnimation.isHidden = true
-                        }
-                    }
-                    if IAPState.isUserVip {
-                        cell.adsViewAnimation.isHidden = true
-                        cell.viewWatchAds.isHidden = true
-                    }
-                } else {
-                    cell.adsViewAnimation.isHidden = true
-                    
-                    if data.isPremium ?? false {
-                        cell.viewWatchAds.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
-                    } else {
-                        cell.viewWatchAds.isHidden = true
-                    }
-                }
-                return cell
-            }
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == listMenu {
-            indexCategory = indexPath.row
-            listMenu.reloadData()
-            listMenu.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            updateCategory()
-            FirebaseEventManager.logEvent(with: RMBGEventTracking.category_name, params: ["category": viewModel.colorings[indexPath.row].categoryName?.capitalized ?? ""])
-        } else {
-            guard hasAd else {
-                let data = viewModel.itemColoring[indexPath.row]
-                FirebaseEventManager.logEvent(with: RMBGEventTracking.start_coloring, params: ["category": viewModel.colorings[indexCategory].categoryName?.capitalized ?? "",
-                                                                                               "image": data.filePath ?? "",
-                                                                                               
-                                                                                               "isPremium": data.isPremium ?? false])
-                
-                guard UserDefaultManager.ABShowIAPColoring else {
-                    if (data.isPremium ?? false) {
-                        showRew(data)
-                    } else {
-                        showInter(data)
-                    }
-                    return
-                }
-                
-                if UserDefaultManager.ABis_free_trial_us {
-                    showRew(data)
-                } else {
-                    if (data.isPremium ?? false) {
-                        showIAP(data)
-                    } else {
-                        showInter(data)
-                    }
-                }
-               return
-            }
-            var data: ColoringImage
-            if indexPath.row <= 2 {
-                data = viewModel.itemColoring[indexPath.row]
-            } else if indexPath.row >= 4 {
-                data = viewModel.itemColoring[indexPath.row - 1]
-            } else {return}
-            FirebaseEventManager.logEvent(with: RMBGEventTracking.start_coloring, params: ["category": viewModel.colorings[indexCategory].categoryName?.capitalized ?? "",
-                                                                                           "image": data.filePath ?? "",
-                                                                                           
-                                                                                           "isPremium": data.isPremium ?? false])
-            
-            guard UserDefaultManager.ABShowIAPColoring else {
-                if (data.isPremium ?? false) {
-                    showRew(data)
-                } else {
-                    showInter(data)
-                }
-                return
-            }
-            
-            if UserDefaultManager.ABis_free_trial_us {
-                showRew(data)
-            } else {
-                if (data.isPremium ?? false) {
-                    showIAP(data)
-                } else {
-                    showInter(data)
-                }
-            }
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = UIScreen.main.bounds.width - 32
-        if collectionView == listMenu {
-            let index = indexPath.row
-            let item = viewModel.colorings[index].categoryName
-            let widthF = item?.trimmingCharacters(in: .whitespaces).width(withConstrainedHeight: 8, font: .systemFont(ofSize: 14, weight: .bold)) ?? 0
-            return CGSize(width: 32 + widthF, height: listMenu.frame.height)
-        }
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            if isLandscape {
-                return CGSize(width: (Int(width) - 42) / 5, height: Int(width / 5))
-            } else {
-                return CGSize(width: (Int(width) - 34) / 4, height: Int(width / 4))
-            }
-        }
-        return CGSize(width: (Int(width) - 8) / 2, height: Int(width * 0.65))
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        if collectionView == listMenu {
-            return 0
-        }
-        return 8
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        if collectionView == listMenu {
-            return 0
-        }
-        return 8
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollView(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         var height = UIScreen.main.bounds.width
         let headerHeightMin: CGFloat = 0

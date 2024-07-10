@@ -121,7 +121,7 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
             heightContraintAds.constant = 60
         }
         viewAds.isHidden = false
-        ADManager.shared.loadBanner(DollColoringAdID.banner_home, viewBanner: viewAds) {[weak self] success in
+        ADManager.shared.loadRefreshBanner(DollColoringAdID.banner_home, viewBanner: viewAds) {[weak self] success in
             self?.getCurrentHeightAds(isSuccess: success)
             self?.viewAds.isHidden = !success
         }

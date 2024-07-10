@@ -40,8 +40,8 @@ def shared_pods
   pod 'BmoViewPager', :path => "./Submodules/BmoViewPager"
   
   ### Admobs
-  pod 'AdmobSDK', :git => "https://github.com/Binary-Bridge-Labs/ADMobSDK", :tag => 'v0.0.16'
-  #pod 'AdmobSDK', :path => "../ADSDK/AdmobSDK"
+  pod 'AdmobSDK', :git => "https://AnhNVBBLabs@github.com/Binary-Bridge-Labs/ADMobSDK", :tag => 'v0.0.18'
+  #pod 'AdmobSDK', :path => "./Submodules/ADSDK"
   
   ### SQLite DB
   pod 'SQLite.swift'

@@ -93,6 +93,8 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
     case inter_back = "inter_back"
     case reward_color = "reward_color"
     case inter_color = "inter_color"
+    case native_dialog = "native_dialog"
+    case native_language_2nd = "native_language_2nd"
     case inter_edit_collection = "inter_edit_collection"
     
     var name: String { return self.rawValue }
@@ -140,6 +142,10 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
             return .Interstitial
         case .inter_edit_collection:
             return .Interstitial
+        case .native_dialog:
+            return .Native
+        case .native_language_2nd:
+            return .Native
         }
     }
     
@@ -185,7 +191,10 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
             return "ca-app-pub-3850749456614322/1161909288"
         case .inter_edit_collection:
             return "ca-app-pub-3850749456614322/6375170531"
-            
+        case .native_dialog:
+            return "ca-app-pub-3850749456614322/7845820837"
+        case .native_language_2nd:
+            return "ca-app-pub-3850749456614322/8443377784"
         }
     }
     

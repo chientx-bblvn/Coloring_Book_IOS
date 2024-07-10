@@ -94,6 +94,7 @@ class FileManagerLocal {
         
     }
     
+    
     func createFolderManager(fileName: String) {
         let pathFile = getDocumentsDirectory()
         let dataPath = pathFile.appendingPathComponent(fileName)

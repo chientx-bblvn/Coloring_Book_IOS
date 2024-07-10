@@ -663,12 +663,13 @@ extension StartColoringIPadViewController {
             heightViewAds.constant = 56
         }
         viewAds.isHidden = false
-        ADManager.shared.loadBanner(DollColoringAdID.banner_coloring, viewBanner: viewAds) {[weak self] success in
+        ADManager.shared.loadRefreshBanner(DollColoringAdID.banner_coloring, viewBanner: viewAds) {[weak self] success in
             if DeviceInfos.isIpad() {
                 self?.heightViewAds.constant = success ? 90 : 0
             } else {
                 self?.heightViewAds.constant = success ? 56 : 20
             }
+            self?.viewAds.isHidden = !success
         }
     }
     

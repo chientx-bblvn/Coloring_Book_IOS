@@ -23,7 +23,6 @@ class LanguageController: BaseViewController {
     @IBOutlet weak var topBarView: TopBarView!
     @IBOutlet weak var tableviewListCountry: UITableView!
     @IBOutlet weak var viewAds: UIView!
-    @IBOutlet weak var heightViewAds: NSLayoutConstraint!
     
     internal var currentLanguage: Language? = nil
     var goFrom: LanguageGoFrom = .intro
@@ -125,18 +124,14 @@ extension LanguageController {
     }
     
     private func loadAdsHigh() {
-        viewAds.isHidden = true
-        heightViewAds.constant = 0
         viewAds.isHidden = false
-        heightViewAds.constant = 190
         ADManager.shared.loadNative(DollColoringAdID.native_language_high,
                                     to: self.viewAds, refreshAd: true , nativeAdType: .smallMedia) { [weak self] idAds, success ,_  in
             guard idAds.contains(DollColoringAdID.native_language_high.adId) else {
                 return
             }
             if success {
-                self?.viewAds.isHidden = false
-                self?.heightViewAds.constant = 190
+                self?.viewAds.isHidden = !success
             } else {
                 self?.loadAds()
             }
@@ -151,10 +146,8 @@ extension LanguageController {
             }
             if success {
                 self?.viewAds.isHidden = false
-                self?.heightViewAds.constant = 190
             } else {
                 self?.viewAds.isHidden = true
-                self?.heightViewAds.constant = 0
             }
         }
     }
@@ -165,7 +158,7 @@ extension LanguageController {
         } else {
             topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.mainPrimary() ?? .black)
         }
-        topBarView.title = LocalizableUtils.languageTitle()
+        topBarView.title = LocalizableUtils.languageSubTitle()
         tableviewListCountry.reloadData()
     }
     

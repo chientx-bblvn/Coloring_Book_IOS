@@ -15,7 +15,6 @@ class LanguageSecondViewController: BaseViewController {
     @IBOutlet weak var topBarView: TopBarView!
     @IBOutlet weak var tableviewListCountry: UITableView!
     @IBOutlet weak var viewAds: UIView!
-    @IBOutlet weak var heightViewAds: NSLayoutConstraint!
     
     private var currentLanguage: Language? = nil {
         didSet {
@@ -113,35 +112,19 @@ extension LanguageSecondViewController {
     
     private func loadAdsHigh() {
         viewAds.isHidden = true
-        heightViewAds.constant = 0
         viewAds.isHidden = false
-        heightViewAds.constant = 190
-        ADManager.shared.loadNative(DollColoringAdID.native_language_high,
+        
+        ADManager.shared.loadNative(DollColoringAdID.native_language_2nd,
                                     to: self.viewAds, refreshAd: true , nativeAdType: .smallMedia) { [weak self] idAds, success ,_  in
             guard idAds.contains(DollColoringAdID.native_language_high.adId) else {
                 return
             }
             if success {
                 self?.viewAds.isHidden = false
-                self?.heightViewAds.constant = 190
-            } else {
-                self?.loadAds()
-            }
-        }
-    }
-    
-    private func loadAds() {
-        ADManager.shared.loadNative(DollColoringAdID.native_language,
-                                    to: self.viewAds, refreshAd: true, nativeAdType: .smallMedia) { [weak self] idAds, success ,_  in
-            guard idAds.contains(DollColoringAdID.native_language.adId) else {
-                return
-            }
-            if success {
-                self?.viewAds.isHidden = false
-                self?.heightViewAds.constant = 190
+                
             } else {
                 self?.viewAds.isHidden = true
-                self?.heightViewAds.constant = 0
+                
             }
         }
     }

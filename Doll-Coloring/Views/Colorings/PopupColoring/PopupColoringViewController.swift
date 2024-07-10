@@ -20,6 +20,10 @@ class PopupColoringViewController: UIViewController {
     
     @IBOutlet weak var btnCancel: UIButton!
     
+    @IBOutlet weak var viewAds: UIView!
+    
+    @IBOutlet weak var heightAdsView: NSLayoutConstraint!
+    
     var titlePopup: String = ""
     var titleOk: String = ""
     var titleCancel: String = ""
@@ -44,6 +48,7 @@ class PopupColoringViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadAds()
         viewContent.generateOuterShadow()
         lbTitle.text = titlePopup
         btnCancel.setTitle(titleCancel, for: .normal)
@@ -71,6 +76,14 @@ class PopupColoringViewController: UIViewController {
         }
     }
     
+    func loadAds() {
+        viewAds.isHidden = false
+        heightAdsView.constant = 190
+        ADManager.shared.loadNative(DollColoringAdID.native_dialog, to: viewAds, nativeAdType: .customMediaFixedHeight) {[weak self] adId, success, nativeAdView in
+            self?.viewAds.isHidden = !success
+            self?.heightAdsView.constant = success ? 190 : 0
+        }
+    }
 }
 
 extension PopupColoringViewController {

@@ -3040,7 +3040,7 @@ struct _R {
     var musicBackgroundMp3: RswiftResources.FileResource { .init(name: "musicBackground", pathExtension: "mp3", bundle: bundle, locale: LocaleReference.none) }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 40 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 41 nibs.
   struct nib {
     let bundle: Foundation.Bundle
 
@@ -3136,6 +3136,9 @@ struct _R {
 
     /// Nib `MenuActionCell`.
     var menuActionCell: RswiftResources.NibReferenceReuseIdentifier<MenuActionCell, MenuActionCell> { .init(name: "MenuActionCell", bundle: bundle, identifier: "MenuActionCell") }
+
+    /// Nib `PageViewSwirlViewController`.
+    var pageViewSwirlViewController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "PageViewSwirlViewController", bundle: bundle) }
 
     /// Nib `PopupColoringViewController`.
     var popupColoringViewController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "PopupColoringViewController", bundle: bundle) }
