@@ -9,7 +9,7 @@ import UIKit
 
 enum LanguageRoute: Route {
     case language(gofrom: LanguageGoFrom, currentLanguage: Language? = nil)
-    case languageSecond
+    case languageSecond(gofrom: LanguageGoFrom)
 }
 
 extension LanguageRoute {
@@ -20,8 +20,9 @@ extension LanguageRoute {
             languageController.goFrom = gofrom
             languageController.currentLanguage = currentLanguage
             return languageController
-        case .languageSecond:
+        case let .languageSecond(gofrom):
             let vc = LanguageSecondViewController.loadController()
+            vc.goFrom = gofrom
             return vc
         }
     }

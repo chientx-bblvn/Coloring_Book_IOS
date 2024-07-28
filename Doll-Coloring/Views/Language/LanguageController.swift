@@ -84,6 +84,7 @@ extension LanguageController {
             }
             self.currentLanguage = Constants.currentLanguage
         }
+        topBarView.titleFont = .systemFont(ofSize: 20, weight: .bold)
         topBarView.rightEnable = !language.isEmpty
         
         if goFrom == .setting {
@@ -106,14 +107,14 @@ extension LanguageController {
                     AppRouter.shared.navigate(to: IntroRoute.intro, with: .push)
                     return
                 }
-//                MainRoute.gotoHome()
+                //                MainRoute.gotoHome()
             }
         }
         
         tableviewListCountry.register(cellType: LanguageCell.self)
         tableviewListCountry.delegate = self
         tableviewListCountry.dataSource = self
-        
+        ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_high)
         setupListenChangeIAP()
     }
     
@@ -126,7 +127,7 @@ extension LanguageController {
     private func loadAdsHigh() {
         viewAds.isHidden = false
         ADManager.shared.loadNative(DollColoringAdID.native_language_high,
-                                    to: self.viewAds, refreshAd: true , nativeAdType: .smallMedia) { [weak self] idAds, success ,_  in
+                                    to: self.viewAds, refreshAd: true , nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success ,_  in
             guard idAds.contains(DollColoringAdID.native_language_high.adId) else {
                 return
             }
@@ -140,7 +141,7 @@ extension LanguageController {
     
     private func loadAds() {
         ADManager.shared.loadNative(DollColoringAdID.native_language,
-                                    to: self.viewAds, refreshAd: true, nativeAdType: .smallMedia) { [weak self] idAds, success ,_  in
+                                    to: self.viewAds, refreshAd: true, nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success ,_  in
             guard idAds.contains(DollColoringAdID.native_language.adId) else {
                 return
             }
@@ -154,9 +155,9 @@ extension LanguageController {
     
     private func loadText() {
         if goFrom == .intro {
-            topBarView.rightTitle = LocalizableUtils.commonNext()
+            topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTextTopBar() ?? .black)
         } else {
-            topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.mainPrimary() ?? .black)
+            topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTextTopBar() ?? .black)
         }
         topBarView.title = LocalizableUtils.languageSubTitle()
         tableviewListCountry.reloadData()

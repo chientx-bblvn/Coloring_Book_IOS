@@ -20,6 +20,7 @@ Common.Button.Disagree                          =       "Не согласен";
 Common.PhotoPicker.Gallery                      =       "Выбрать из библиотеки";
 Common.PhotoPicker.Camera                       =       "Сделать фото";
 Common.Home                                     =       "Главная";
+Common.CheckIn                                  =       "Check In";
 Common.StartColoring                            =       "Начать раскрашивать";
 Common.Collections                              =       "Коллекции";
 Common.Settings                                 =       "Настройки";

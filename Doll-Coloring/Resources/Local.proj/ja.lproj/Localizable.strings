@@ -20,6 +20,7 @@ Common.Button.Disagree                          =       "同意しない";
 Common.PhotoPicker.Gallery                      =       "ライブラリから選択";
 Common.PhotoPicker.Camera                       =       "写真を撮る";
 Common.Home                                     =       "ホーム";
+Common.CheckIn                                  =       "Check In";
 Common.StartColoring                            =       "塗り絵を開始";
 Common.Collections                              =       "コレクション";
 Common.Settings                                 =       "設定";

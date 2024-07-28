@@ -27,15 +27,17 @@ class SplashController: BaseViewController {
     // MARK: - Setup controller and IBAction
     override func setup() {
         super.setup()
-        
+        requestNotification {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.loadConfigData()
+            }
+        }
         setupView()
         configIAP()
         loadSavedLanguage()
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.loadConfigData()
-        }
+        
     }
     
     override func bindingData() {
@@ -57,10 +59,6 @@ extension SplashController {
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
         fetchRemoteConfig {
-            UserDefaultManager.currentAccessNumberClick = RemoteConfigManager.shared.number(forKey: KeyRemoteConfig.NumberClickItemAllTopic)
-            UserDefaultManager.currentAccessABTestFillColoring = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.ABTestFillColoring)
-            UserDefaultManager.currentAccessABShowIAPColoring = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.StateShowIAP)
-            UserDefaultManager.currentAccessAB_is_free_trial_US = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.is_free_trial_us)
             dispatchGroup.leave()
         }
         dispatchGroup.notify(queue: .main) { [weak self] in
@@ -118,6 +116,12 @@ extension SplashController {
         DispatchQueue.main.asyncSafety{ [weak self] in
             RemoteConfigManager.shared.fetchConfig(completion: { [weak self] isLoaded in
                 BBLLogging.d("Check:: fetchConfig \(isLoaded)")
+                UserDefaultManager.currentAccessNumberClick = RemoteConfigManager.shared.number(forKey: KeyRemoteConfig.NumberClickItemAllTopic)
+                UserDefaultManager.currentAccessABTestFillColoring = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.ABTestFillColoring)
+                UserDefaultManager.currentAccessABShowIAPColoring = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.StateShowIAP)
+                UserDefaultManager.currentAccessAB_is_free_trial_US = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.is_free_trial_us)
+                newApiBaseURL = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiBaseURL)
+                apiAccessKey = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.APIAccessKey)
                 self?.configLoaded = isLoaded
                 completion()
             })
@@ -137,9 +141,9 @@ extension SplashController {
         self.timer = nil
         BBLLogging.d("Check:: showAdvert")
         ADManager.shared.loadOpenAsync(DollColoringAdID.appopen_splash) { [weak self] showed in
-            self?.preloadOpenResumeAd()
             if showed {
                 DispatchQueue.main.asyncSafety { [weak self] in
+                    self?.preloadOpenResumeAd()
                     self?.navigateScreen()
                 }
             } else {
@@ -157,21 +161,14 @@ extension SplashController {
     private func showFullAds() {
         self.timer?.invalidate()
         self.timer = nil
-        if !DollColoringAdID.inter_splash.isEnableAd {
+        if !DollColoringAdID.appopen_allprice.isEnableAd {
             self.navigateScreen()
             return
         }
         BBLLogging.d("Check:: showFullAds")
-        ADManager.shared.loadFull(DollColoringAdID.inter_splash, isSplash: true) { [weak self] adResult in
-            BBLLogging.d("Check:: loaded: \(adResult)")
-            switch adResult {
-            case .closed, .error:
-                DispatchQueue.main.asyncSafety {
-                    self?.navigateScreen()
-                }
-            default:
-                break
-            }
+        ADManager.shared.loadOpenAsync(DollColoringAdID.appopen_allprice) {[weak self] showed in
+            self?.preloadOpenResumeAd()
+            self?.navigateScreen()
         }
     }
     
@@ -184,7 +181,7 @@ extension SplashController {
             let showIntro = UserDefaults.standard.bool(forKey: UserDefault.showedIntro.rawValue)
             if !self.isSetLanguage {
                 BBLLogging.d("Check:: isSetLanguage")
-                AppRouter.shared.navigate(to: LanguageRoute.languageSecond, with: .push)
+                AppRouter.shared.navigate(to: LanguageRoute.languageSecond(gofrom: .intro), with: .push)
                 return
             }
             if !showIntro {
@@ -212,9 +209,10 @@ extension SplashController {
                     vertiserColor: .yellow,
                     contenColor: R.color.textColor()!,
                     actionColor: R.color.textColor()!,
-                    backgroundAction: [R.color.mainPrimary()!])
+                    backgroundAction: [R.color.colorTextTopBar()!])
         let testIds =     [
-            "1999dafded8682859eeec95e2482fbe9"
+            "1999dafded8682859eeec95e2482fbe9",
+            "9b689f03a451ea6278b47db3210f81d8"
         ]
         ADManager.shared.startAds(style: style, testIds: testIds)
         
@@ -229,9 +227,18 @@ extension SplashController {
         if !currLang.isEmpty {
             Constants.currentLanguage = Language(key: currLang)
             isSetLanguage = true
+            ADManager.shared.preLoadNative(DollColoringAdID.native_language_high)
             return
         }
         Constants.currentLanguage = .english
         isSetLanguage = false
+    }
+    
+    private func requestNotification(complection: @escaping () -> Void) {
+        BBLLogging.d("Check:: requestNotification")
+        appDelegate?.requestNotificationPermission(completion: { success, error in
+            BBLLogging.d("Check:: requestNotificationPermission  --   success: \(success)  error: \(error?.localizedDescription ?? "error")")
+            complection()
+        })
     }
 }

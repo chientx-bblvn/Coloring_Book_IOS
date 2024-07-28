@@ -31,6 +31,7 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
     
     let homeStoryboard = HomeRoute.main.screen
     let chatStoryboard = CollectionsRoute.main(navigate: false).screen
+    let checkInStoryboard = CheckInRoute.main.screen
     
     public var viewControllers = [UIViewController]() {
         didSet {
@@ -57,7 +58,6 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         SOTabBarSetting.tabBarSizeImage = 40
         SOTabBarSetting.tabBarShadowColor = UIColor.clear.cgColor
         SOTabBarSetting.tabBarTintColor = .clear
-        
         settingIAP()
     }
     
@@ -73,6 +73,7 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         ])
         homeStoryboard.tabBarItem = UITabBarItem(title: LocalizableUtils.commonHome(), image: UIImage(named: "ic_home_tabbar"), selectedImage: UIImage(named: "ic_home_tabbar_select"))
         chatStoryboard.tabBarItem = UITabBarItem(title: LocalizableUtils.commonCollections(), image: UIImage(named: "ic_tabbar_collection"), selectedImage: UIImage(named: "ic_tabbar_collection_select"))
+//        checkInStoryboard.tabBarItem = UITabBarItem(title: <#T##String?#>, image: <#T##UIImage?#>, tag: <#T##Int#>)
         viewControllers = [homeStoryboard, chatStoryboard]
         NotificationCenter.default.addObserver(self, selector: #selector(gotoHome), name: NSNotification.Name("GOTOHOME_TABBAR"), object: nil)
         loadAdsBanner()
@@ -110,7 +111,7 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         if DeviceInfos.isIpad() {
             heightContraintAds.constant = 90
         } else {
-            heightContraintAds.constant = 60
+            heightContraintAds.constant = 70
         }
     }
     
@@ -118,10 +119,10 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         if DeviceInfos.isIpad() {
             heightContraintAds.constant = 90
         } else {
-            heightContraintAds.constant = 60
+            heightContraintAds.constant = 70
         }
         viewAds.isHidden = false
-        ADManager.shared.loadRefreshBanner(DollColoringAdID.banner_home, viewBanner: viewAds) {[weak self] success in
+        ADManager.shared.loadBanner(DollColoringAdID.banner_home, viewBanner: viewAds) {[weak self] success in
             self?.getCurrentHeightAds(isSuccess: success)
             self?.viewAds.isHidden = !success
         }

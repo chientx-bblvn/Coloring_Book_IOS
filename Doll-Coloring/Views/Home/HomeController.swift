@@ -64,7 +64,7 @@ class HomeController: BaseViewController {
     @IBOutlet weak var bmoViewPager: BmoViewPager!
     
     private var viewPageController: [PageViewSwirlViewController] = []
-  
+    
     private var numberClick = 4
     private var typeHome = TypeHome.allCases
     private var bannerHome: BannerHome = .iphone
@@ -231,6 +231,7 @@ class HomeController: BaseViewController {
     private func setupPageView() {
         bmoViewPagerNavigation.viewPager = bmoViewPager
         bmoViewPager.scrollable = true
+        bmoViewPager.infinitScroll = false
         bmoViewPager.delegate = self
         bmoViewPager.dataSource = self
     }
@@ -259,7 +260,7 @@ extension HomeController {
         let viewBackground = UIView()
         viewBackground.translatesAutoresizingMaskIntoConstraints = false
         viewBackground.backgroundColor = R.color.mainPrimary()
-        viewBackground.layer.cornerRadius =  4
+        viewBackground.layer.cornerRadius = 8
         return viewBackground
     }
     
@@ -310,7 +311,7 @@ extension HomeController: FSPagerViewDataSource,FSPagerViewDelegate {
 }
 
 extension HomeController {
-        
+    
     func scrollView(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         var height = UIScreen.main.bounds.width

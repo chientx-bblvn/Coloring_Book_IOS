@@ -15,7 +15,7 @@ class IntroductionCell: FSPagerViewCell, NibReusable {
     @IBOutlet private weak var lbSubTitle: UILabel!
     @IBOutlet weak var indicatorImg: UIImageView!
     @IBOutlet weak var viewAds: UIView!
-    
+    @IBOutlet weak var imgTitle: UIImageView!
     @IBOutlet weak var btnNext: UIButton!
     
     var onNext: (() -> Void)?
@@ -27,19 +27,22 @@ class IntroductionCell: FSPagerViewCell, NibReusable {
         switch intro.id {
         case 0:
             changeButtonNext(LocalizableUtils.commonNext())
+            imgTitle.image = R.image.ic_title_intro_0()
             viewAds.isHidden = true
         case 1:
             changeButtonNext(LocalizableUtils.commonStart())
+            imgTitle.image = R.image.ic_title_intro_1()
             viewAds.isHidden = false
             loadAdsHigh()
         case 2:
             changeButtonNext(LocalizableUtils.commonNext())
+            imgTitle.image = R.image.ic_title_intro_2()
             viewAds.isHidden = true
         default:
             break
         }
         imageviewIntro.image = intro.image
-        lbTitle.text = intro.name
+        lbTitle.text = ""
         lbSubTitle.text = intro.desc
         indicatorImg.image = intro.indicator
     }

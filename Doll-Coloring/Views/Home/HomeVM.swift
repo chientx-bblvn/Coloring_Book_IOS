@@ -17,6 +17,7 @@ class HomeVM {
     var colorings: [ColoringModel] = []
     
     var itemColoring: [ColoringImage] = []
+    var categoryColoring: [ImageColoring] = []
     
     init() {
     }
@@ -27,6 +28,30 @@ class HomeVM {
             SVProgressHUD.dismiss()
             self?.colorings = response
             self?.itemColoring = response.first?.imageUrls ?? []
+            complection()
+        } onFailed: { error in
+            complection()
+            SVProgressHUD.dismiss()
+        }
+    }
+    
+    func getCategoryColoring(complection: @escaping () -> Void) {
+        SVProgressHUD.show()
+        serviceManager.requestAPI(.list, type: [ImageColoring].self) {[weak self] isSuccess, response in
+            SVProgressHUD.dismiss()
+            self?.categoryColoring = response
+            complection()
+        } onFailed: { error in
+            complection()
+            SVProgressHUD.dismiss()
+        }
+    }
+    
+    func getImageColorings(complection: @escaping () -> Void) {
+        SVProgressHUD.show()
+        serviceManager.requestAPI(.list, type: [ImageColoring].self) {[weak self] isSuccess, response in
+            SVProgressHUD.dismiss()
+            self?.categoryColoring = response
             complection()
         } onFailed: { error in
             complection()

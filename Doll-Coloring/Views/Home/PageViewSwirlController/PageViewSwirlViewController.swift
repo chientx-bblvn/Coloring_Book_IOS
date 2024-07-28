@@ -94,7 +94,10 @@ class PageViewSwirlViewController: BaseViewController {
 
 extension PageViewSwirlViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemColoring.count
+        guard hasAd else {
+            return itemColoring.count
+        }
+        return itemColoring.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

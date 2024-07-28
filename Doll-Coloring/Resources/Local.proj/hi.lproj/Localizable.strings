@@ -20,6 +20,7 @@ Common.Button.Disagree = "असहमत";
 Common.PhotoPicker.Gallery = "लाइब्रेरी से चुनें";
 Common.PhotoPicker.Camera = "फोटो लें";
 Common.Home = "होम";
+Common.CheckIn = "Check In";
 Common.StartColoring = "रंग भरना शुरू करें";
 Common.Collections = "संग्रह";
 Common.Settings = "सेटिंग्स";

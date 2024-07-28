@@ -19,19 +19,18 @@ class LanguageSecondViewController: BaseViewController {
     private var currentLanguage: Language? = nil {
         didSet {
             if goFrom == .intro {
-                topBarView.rightTitleColor = R.color.colorTitle()
+                topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTitle() ?? .black)
             } else {
                 topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTitle() ?? .black)
             }
             
-            topBarView.rightEnable = currentLanguage != nil
+            topBarView.rightEnable = true
         }
     }
     var goFrom: LanguageGoFrom = .intro
-
-    // MARK: - Setup controller and IBAction
-    override func setup() {
-        super.setup()
+   
+    override func viewDidLoad() {
+        super.viewDidLoad()
         setupView()
     }
     
@@ -52,26 +51,27 @@ class LanguageSecondViewController: BaseViewController {
 extension LanguageSecondViewController {
     
     private func setupView() {
+        tableviewListCountry.register(cellType: LanguageCell.self)
+        tableviewListCountry.delegate = self
+        tableviewListCountry.dataSource = self
         let language = UserDefaults.standard.string(forKey: UserDefault.languageKey.rawValue) ?? ""
         if language.isEmpty {
             FirebaseEventManager.logEvent(with: RMBGEventTracking.languageScr)
-            let alpha = CGFloat(RemoteConfigManager.shared
-                .getValue(by: RMBGRemoteConfig.alphaLanguageColor)?
-                .numberValue.floatValue ?? 0.0)
             if goFrom == .intro {
-                topBarView.rightTitleColor = R.color.mainPrimary()?.withAlphaComponent(alpha)
+                topBarView.rightTitleColor = R.color.mainPrimary()
+                topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor((R.color.colorTextTopBar() ?? .black))
             } else {
-                topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor((R.color.mainPrimary() ?? .black).withAlphaComponent(alpha))
+                topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor((R.color.colorTextTopBar() ?? .black))
             }
         } else {
             if goFrom == .intro {
-                topBarView.rightTitleColor = R.color.mainPrimary()
+                topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor((R.color.colorTextTopBar() ?? .black))
             } else {
-                topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.mainPrimary() ?? .black)
+                topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTextTopBar() ?? .black)
             }
             self.currentLanguage = Constants.currentLanguage
         }
-        topBarView.rightEnable = !language.isEmpty
+        topBarView.rightEnable = true
         
         if goFrom == .setting {
             topBarView.leftIcon = R.image.chevronBack()
@@ -79,6 +79,7 @@ extension LanguageSecondViewController {
                 AppRouter.shared.dismissDetail()
             }
         }
+        topBarView.titleFont = .systemFont(ofSize: 20, weight: .bold)
         topBarView.onRightClick = { [weak self] in
             guard let language = self?.currentLanguage else {
                 return
@@ -93,49 +94,41 @@ extension LanguageSecondViewController {
                     AppRouter.shared.navigate(to: IntroRoute.intro, with: .push)
                     return
                 }
-//                MainRoute.gotoHome()
             }
         }
         
-        tableviewListCountry.register(cellType: LanguageCell.self)
-        tableviewListCountry.delegate = self
-        tableviewListCountry.dataSource = self
+        ADManager.shared.preLoadNative(DollColoringAdID.native_language_2nd)
         
         setupListenChangeIAP()
     }
     
     private func setupListenChangeIAP() {
-        InappManager.share.didPaymentSuccess.asObservable().subscribe(onNext: { [weak self] _ in
-            self?.loadAdsHigh()
-        }).disposed(by: disposeBag)
+        loadAdsHigh()
     }
     
     private func loadAdsHigh() {
-        viewAds.isHidden = true
         viewAds.isHidden = false
         
         ADManager.shared.loadNative(DollColoringAdID.native_language_2nd,
-                                    to: self.viewAds, refreshAd: true , nativeAdType: .smallMedia) { [weak self] idAds, success ,_  in
-            guard idAds.contains(DollColoringAdID.native_language_high.adId) else {
+                                    to: self.viewAds, refreshAd: true , nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success ,_  in
+            guard idAds.contains(DollColoringAdID.native_language_2nd.adId) else {
                 return
             }
             if success {
                 self?.viewAds.isHidden = false
-                
             } else {
                 self?.viewAds.isHidden = true
-                
             }
         }
     }
     
     private func loadText() {
         if goFrom == .intro {
-            topBarView.rightTitle = LocalizableUtils.commonNext()
+            topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTextTopBar() ?? .black)
         } else {
-            topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.mainPrimary() ?? .black)
+            topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTextTopBar() ?? .black)
         }
-        topBarView.title = LocalizableUtils.languageTitle()
+        topBarView.title = LocalizableUtils.languageSubTitle()
         tableviewListCountry.reloadData()
     }
     

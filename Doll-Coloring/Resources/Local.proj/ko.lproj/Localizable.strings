@@ -20,6 +20,7 @@ Common.Button.Disagree                          =       "거부";
 Common.PhotoPicker.Gallery                      =       "라이브러리에서 선택";
 Common.PhotoPicker.Camera                       =       "사진 촬영";
 Common.Home                                     =       "홈";
+Common.CheckIn                                  =       "Check In";
 Common.StartColoring                            =       "색칠 시작";
 Common.Collections                              =       "컬렉션";
 Common.Settings                                 =       "설정";

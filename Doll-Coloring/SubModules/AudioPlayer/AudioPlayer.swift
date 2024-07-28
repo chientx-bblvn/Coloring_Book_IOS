@@ -12,6 +12,7 @@ import AVFoundation
 enum AudioType {
     case Background
     case Sound
+    case fillColor
     
     var path: String {
         switch self {
@@ -20,6 +21,9 @@ enum AudioType {
             return path
         case .Sound:
             let path = Bundle.main.path(forResource: "asrmColoring.mp3", ofType:nil)!
+            return path
+        case .fillColor:
+            let path = Bundle.main.path(forResource: "soundFillColor.mp3", ofType:nil)!
             return path
         }
     }
@@ -35,6 +39,8 @@ class AudioPlayer {
         case .Background:
             audio = type.path
         case .Sound:
+            audio = type.path
+        case .fillColor:
             audio = type.path
         }
         let url = URL(fileURLWithPath: audio)

@@ -20,6 +20,7 @@ Common.Button.Disagree = "Không đồng ý";
 Common.PhotoPicker.Gallery = "Chọn từ thư viện";
 Common.PhotoPicker.Camera = "Chụp ảnh";
 Common.Home = "Trang chủ";
+Common.CheckIn                                  =       "Check In";
 Common.StartColoring = "Bắt đầu tô màu";
 Common.Collections = "Bộ sưu tập";
 Common.Settings = "Cài đặt";

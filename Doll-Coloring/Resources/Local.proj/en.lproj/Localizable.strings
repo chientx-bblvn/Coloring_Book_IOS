@@ -8,7 +8,7 @@ message_open_camera = "Open the camera to capture a photo";
 title_open_library = "Open library";
 message_open_libary = "Open the library and select a photo";
 
-Common.OK                                       =       "OK";
+Common.OK                                       =       "Ok";
 Common.Cancel                                   =       "Cancel";
 Common.Done                                     =       "Done";
 Common.Complete                                 =       "Complete";
@@ -20,6 +20,7 @@ Common.Button.Disagree                          =       "Disagree";
 Common.PhotoPicker.Gallery                      =       "Select from library";
 Common.PhotoPicker.Camera                       =       "Take photo";
 Common.Home                                     =       "Home";
+Common.CheckIn                                  =       "Check In";
 Common.StartColoring                            =       "Start Coloring";
 Common.Collections                              =       "Collections";
 Common.Settings                                 =       "Settings";

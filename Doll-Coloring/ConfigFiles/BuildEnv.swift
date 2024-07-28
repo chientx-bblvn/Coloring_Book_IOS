@@ -15,6 +15,9 @@ import AdmobSDK
 let apiBaseUrl: String = "https://ico.binarybridge.dev"
 let privacyUrl: String = "https://sites.google.com/binarybridge.dev/suunguyen-privacy-policy/home"
 let termsUrl: String = "https://sites.google.com/binarybridge.dev/terms-conditions-binary-bridge/home"
+var newApiBaseURL: String = ""
+let baseURLImage: String = "https://storage.bunnycdn.com"
+var apiAccessKey: String = ""
 
 let isDev = false
 
@@ -96,6 +99,7 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
     case native_dialog = "native_dialog"
     case native_language_2nd = "native_language_2nd"
     case inter_edit_collection = "inter_edit_collection"
+    case appopen_allprice = "appopen_allprice"
     
     var name: String { return self.rawValue }
     
@@ -146,6 +150,8 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
             return .Native
         case .native_language_2nd:
             return .Native
+        case .appopen_allprice:
+            return .OpenApp
         }
     }
     
@@ -170,7 +176,7 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
         case .reward_alltopic:
             return "ca-app-pub-3850749456614322/2663095192"
         case .banner_coloring:
-            return "ca-app-pub-3850749456614322/4878711910"
+            return "ca-app-pub-3850749456614322/9214838285"
         case .inter_save:
             return "ca-app-pub-3850749456614322/8973019537"
         case .banner_collection:
@@ -195,6 +201,8 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
             return "ca-app-pub-3850749456614322/7845820837"
         case .native_language_2nd:
             return "ca-app-pub-3850749456614322/8443377784"
+        case .appopen_allprice:
+            return "ca-app-pub-3850749456614322/5998498061"
         }
     }
     
@@ -263,6 +271,8 @@ enum KeyRemoteConfig: String, KeyRemote {
     case ABTestFillColoring = "ABTestFillColoring"
     case StateShowIAP = "state_show_iap"
     case is_free_trial_us = "is_free_trial_us"
+    case APIAccessKey = "Api_Access_Key"
+    case ApiBaseURL = "Api_Base_URL"
     
     var key: String {return self.rawValue}
 }

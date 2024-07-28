@@ -259,7 +259,7 @@ extension SaveColoringController {
     
     func loadNativeAds() {
         viewAds.isHidden = false
-        ADManager.shared.loadNative(DollColoringAdID.native_result, to: viewAds, refreshAd: true, nativeAdType: .smallMedia) {[weak self] adId, success, nativeAdView in
+        ADManager.shared.loadNative(DollColoringAdID.native_result, to: viewAds, refreshAd: true, nativeAdType: .customMediaFixedHeight) {[weak self] adId, success, nativeAdView in
             self?.viewAds.isHidden = !success
         }
     }

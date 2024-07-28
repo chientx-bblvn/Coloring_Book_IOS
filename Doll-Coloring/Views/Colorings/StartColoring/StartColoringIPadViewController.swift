@@ -246,7 +246,7 @@ class StartColoringIPadViewController: BaseViewController {
     }
     
     func updateLineWidthPen() {
-        addDashedCircle(size: lineWidthPen * 100)
+        addDashedCircle(size: simd_mix(1.0, 40.0, lineWidthPen))
         coloringBookView.currentWidth = CGFloat(simd_mix(1.0, 40.0, lineWidthPen))
     }
     
@@ -660,14 +660,14 @@ extension StartColoringIPadViewController {
         if DeviceInfos.isIpad() {
             heightViewAds.constant = 90
         } else {
-            heightViewAds.constant = 56
+            heightViewAds.constant = 70
         }
         viewAds.isHidden = false
-        ADManager.shared.loadRefreshBanner(DollColoringAdID.banner_coloring, viewBanner: viewAds) {[weak self] success in
+        ADManager.shared.loadBanner(DollColoringAdID.banner_coloring, viewBanner: viewAds) {[weak self] success in
             if DeviceInfos.isIpad() {
-                self?.heightViewAds.constant = success ? 90 : 0
+                self?.heightViewAds.constant = success ? 90 : 90
             } else {
-                self?.heightViewAds.constant = success ? 56 : 20
+                self?.heightViewAds.constant = success ? 70 : 70
             }
             self?.viewAds.isHidden = !success
         }
@@ -680,6 +680,8 @@ extension StartColoringIPadViewController: ColoringBookViewDelegate {
         circleLayer.removeFromSuperlayer()
         if !UserDefaultManager.disableSound, coloringBookView.isPens{
             soundColoring.loadAudio(type: .Sound)
+        } else if !UserDefaultManager.disableSound, !coloringBookView.isPens {
+            soundColoring.loadAudio(type: .fillColor)
         }
     }
     

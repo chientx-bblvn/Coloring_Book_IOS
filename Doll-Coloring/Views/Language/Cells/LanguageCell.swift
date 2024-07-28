@@ -19,7 +19,7 @@ class LanguageCell: UITableViewCell, NibReusable {
         imageViewFlag.image = country.icon
         lbName.text = country.name
         if selected {
-            viewContainer.backgroundColor = R.color.mainPrimary()
+            viewContainer.backgroundColor = R.color.colorTextTopBar()
         } else {
             viewContainer.backgroundColor = R.color.colorBGAds()
         }

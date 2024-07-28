@@ -103,9 +103,6 @@ struct ColoringImageBook {
         filter.setValue(1.0, forKey: kCIInputScaleKey)
         filter.setValue(1.0, forKey: kCIInputAspectRatioKey)
         
-        blurFilter.setValue(secondColorInvert.outputImage!, forKey: kCIInputImageKey)
-        blurFilter.setValue(2.0, forKey: kCIInputRadiusKey)
-        
         sharpenFilter.setValue(filter.outputImage!, forKey: kCIInputImageKey)
         sharpenFilter.setValue(2.5, forKey: kCIInputRadiusKey) // Bán kính làm nét
         sharpenFilter.setValue(0.5, forKey: kCIInputIntensityKey) // Độ sắc nét

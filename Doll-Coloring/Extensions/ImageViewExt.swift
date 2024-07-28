@@ -37,7 +37,7 @@ extension UIImageView {
         }
     }
     
-    func setImage(with url: String?, placeholder: UIImage? = nil, size: CGSize = CGSize(width: 250, height: 250)) {
+    func setImage(with url: String?, placeholder: UIImage? = nil) {
         var link = url ?? ""
         if !link.starts(with: "http://") && !link.starts(with: "https://") {
             link = "\(apiBaseUrl)\(link)"
@@ -49,6 +49,28 @@ extension UIImageView {
             if error != nil {
                 self?.image = placeholder
             }
+        }
+    }
+    
+    func setImageAccessKey(with url: String? = "https://storage.bunnycdn.com/bblprivate/doll-coloring%5Cdoll%202024-07-24%5CPrincess/princess%20(10).png", placeholder: UIImage? = nil) {
+        var link = url ?? ""
+        if !link.starts(with: "http://") && !link.starts(with: "https://") {
+            link = "\(baseURLImage)\(link)"
+        }
+        if let url = URL(string: link) {
+            let manager = SDWebImageDownloader()
+            manager.setValue(apiAccessKey, forHTTPHeaderField: "AccessKey")
+            _ = manager.downloadImage(with: url, completed: { image, data, error, success in
+                DispatchQueue.main.async {
+                    if let image = image {
+                        self.image = image
+                    } else {
+                        self.image = placeholder
+                    }
+                }
+            })
+        } else {
+            self.image = placeholder
         }
     }
     

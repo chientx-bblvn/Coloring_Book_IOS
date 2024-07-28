@@ -11,23 +11,41 @@ import Moya
 
 enum HomeService {
     case list
+    case category
+    case detailCategory(path: String)
 }
 extension HomeService: TargetType {
     
     public var baseURL: URL {
-        return URL(string: apiBaseUrl)!
+        switch self {
+        case .list:
+            return URL(string: apiBaseUrl)!
+        case .category:
+            return URL(string: newApiBaseURL)!
+        case .detailCategory:
+            return URL(string: baseURLImage)!
+        }
+        
     }
     
     public var path: String {
         switch self {
         case .list:
             return "/data_dollcoloring/doll_v4.json"
+        case .category:
+            return ""
+        case let .detailCategory(path):
+            return "\(path)/"
         }
     }
     
     public var method: Moya.Method {
         switch self {
         case .list:
+            return .get
+        case .category:
+            return .get
+        case .detailCategory:
             return .get
         }
     }
@@ -36,6 +54,10 @@ extension HomeService: TargetType {
         switch self {
             
         case .list:
+            return .requestPlain
+        case .category:
+            return .requestPlain
+        case .detailCategory:
             return .requestPlain
         }
     }
@@ -46,8 +68,9 @@ extension HomeService: TargetType {
     
     public var headers: [String: String]? {
         switch self {
-        case .list:
+        case .list, .category, .detailCategory:
             return [
+                "AccessKey": apiAccessKey,
                 "Content-type": "application/json"
             ]
         }

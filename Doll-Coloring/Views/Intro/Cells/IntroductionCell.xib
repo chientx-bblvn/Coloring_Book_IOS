@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,7 +29,10 @@
                         <rect key="frame" x="24" y="40" width="299" height="623"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboard_1" translatesAutoresizingMaskIntoConstraints="NO" id="L5v-Qk-UW2">
-                                <rect key="frame" x="0.0" y="0.0" width="299" height="533.33333333333337"/>
+                                <rect key="frame" x="0.0" y="0.0" width="299" height="529.33333333333337"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HVB-tL-90h">
+                                <rect key="frame" x="0.0" y="533.33333333333337" width="299" height="0.0"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TcQ-Ud-U4M">
                                 <rect key="frame" x="0.0" y="537.33333333333337" width="299" height="33.666666666666629"/>
@@ -67,7 +70,7 @@
                                     </imageView>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XoK-FJ-nxQ">
                                         <rect key="frame" x="186" y="0.0" width="113" height="44"/>
-                                        <color key="backgroundColor" name="ColorTextTopBar"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="rGP-iZ-I9h"/>
                                         </constraints>
@@ -75,7 +78,7 @@
                                         <inset key="contentEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="EASY, next!">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" name="ColorTextTopBar"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
@@ -115,6 +118,7 @@
             <connections>
                 <outlet property="btnNext" destination="XoK-FJ-nxQ" id="ou9-bV-kmg"/>
                 <outlet property="imageviewIntro" destination="L5v-Qk-UW2" id="dJN-Kl-Iex"/>
+                <outlet property="imgTitle" destination="HVB-tL-90h" id="gPK-im-Drc"/>
                 <outlet property="indicatorImg" destination="Qiv-bV-eRk" id="aTG-W1-zNr"/>
                 <outlet property="lbSubTitle" destination="O72-ru-f4V" id="hMN-pD-jBY"/>
                 <outlet property="lbTitle" destination="Fvm-er-beo" id="Ihd-I4-joG"/>

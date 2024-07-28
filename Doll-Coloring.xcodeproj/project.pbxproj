@@ -69,12 +69,8 @@
 		0847C9E32BD162780007FC00 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847C9E12BD162780007FC00 /* ColorCell.swift */; };
 		0847C9E42BD162780007FC00 /* ColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0847C9E22BD162780007FC00 /* ColorCell.xib */; };
 		084879FF2C079A3A0026F017 /* PopupSaveColoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084879FE2C079A3A0026F017 /* PopupSaveColoringViewController.swift */; };
-		08487A022C07AE810026F017 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08487A012C07AE810026F017 /* GridLayout.swift */; };
-		08487A042C07AEA90026F017 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08487A032C07AEA90026F017 /* Grid.swift */; };
 		084A8B262BC4DC7600C8D045 /* animation_splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 084A8B252BC4DC7600C8D045 /* animation_splash.json */; };
 		0852B0D52BD63DB400F95856 /* animationView_StartColoring.json in Resources */ = {isa = PBXBuildFile; fileRef = 0852B0D42BD63DB400F95856 /* animationView_StartColoring.json */; };
-		0852B0EA2BD64D3100F95856 /* PaintImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852B0E72BD64D3000F95856 /* PaintImageView.swift */; };
-		0852B0EB2BD64D3100F95856 /* StackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852B0E82BD64D3000F95856 /* StackList.swift */; };
 		0857E4CF2BD0C941000ABB76 /* CategoryColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0857E4CE2BD0C941000ABB76 /* CategoryColorCell.xib */; };
 		0857E4D02BD0C941000ABB76 /* CategoryColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857E4CD2BD0C941000ABB76 /* CategoryColorCell.swift */; };
 		0857E4D72BD0C977000ABB76 /* FillterColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0857E4D62BD0C977000ABB76 /* FillterColorCell.xib */; };
@@ -87,8 +83,6 @@
 		086D2FD12C12C8E500BF5373 /* animation_splash_new.json in Resources */ = {isa = PBXBuildFile; fileRef = 086D2FD02C12C8E400BF5373 /* animation_splash_new.json */; };
 		0878C9382C0D771300B48FD4 /* SubcriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878C9362C0D771300B48FD4 /* SubcriptionViewController.swift */; };
 		0878C9392C0D771300B48FD4 /* SubcriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0878C9372C0D771300B48FD4 /* SubcriptionViewController.xib */; };
-		087929752C3E2219001E7F57 /* PageViewSwirlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087929742C3E2219001E7F57 /* PageViewSwirlViewController.xib */; };
-		087929762C3E2219001E7F57 /* PageViewSwirlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087929732C3E2219001E7F57 /* PageViewSwirlViewController.swift */; };
 		088333E82C1939CC00FC3901 /* ALTimingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088333E22C1939CC00FC3901 /* ALTimingFunction.swift */; };
 		088333E92C1939CC00FC3901 /* ALProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088333E42C1939CC00FC3901 /* ALProgressBar.swift */; };
 		088333EA2C1939CC00FC3901 /* ALProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088333E52C1939CC00FC3901 /* ALProgressRing.swift */; };
@@ -319,6 +313,12 @@
 		57FE22042AA8C41E0060606F /* FloatingPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE21FD2AA8C41E0060606F /* FloatingPoint+Extension.swift */; };
 		57FE22072AA8C41E0060606F /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE21FE2AA8C41E0060606F /* CircularProgressView.swift */; };
 		6887E08AF4A7883B4B7FFB7E /* Pods_Doll_Coloring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C404DB90499F9B71148AEB8 /* Pods_Doll_Coloring.framework */; };
+		970BF0952C3F7F15002B445F /* soundFillColor.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 970BF0942C3F7F15002B445F /* soundFillColor.mp3 */; };
+		9750F6562C51E3BA00371ED1 /* PageViewSwirlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9750F6542C51E3BA00371ED1 /* PageViewSwirlViewController.xib */; };
+		9750F6572C51E3BA00371ED1 /* PageViewSwirlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750F6552C51E3BA00371ED1 /* PageViewSwirlViewController.swift */; };
+		9750F65B2C51E4A000371ED1 /* CheckInRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750F6582C51E4A000371ED1 /* CheckInRoute.swift */; };
+		9750F65C2C51E4A000371ED1 /* CheckIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9750F6592C51E4A000371ED1 /* CheckIn.storyboard */; };
+		9750F65D2C51E4A000371ED1 /* CheckInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750F65A2C51E4A000371ED1 /* CheckInController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -384,12 +384,8 @@
 		0847C9E12BD162780007FC00 /* ColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
 		0847C9E22BD162780007FC00 /* ColorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorCell.xib; sourceTree = "<group>"; };
 		084879FE2C079A3A0026F017 /* PopupSaveColoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupSaveColoringViewController.swift; sourceTree = "<group>"; };
-		08487A012C07AE810026F017 /* GridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
-		08487A032C07AEA90026F017 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		084A8B252BC4DC7600C8D045 /* animation_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_splash.json; sourceTree = "<group>"; };
 		0852B0D42BD63DB400F95856 /* animationView_StartColoring.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animationView_StartColoring.json; sourceTree = "<group>"; };
-		0852B0E72BD64D3000F95856 /* PaintImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintImageView.swift; sourceTree = "<group>"; };
-		0852B0E82BD64D3000F95856 /* StackList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackList.swift; sourceTree = "<group>"; };
 		0857E4CD2BD0C941000ABB76 /* CategoryColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColorCell.swift; sourceTree = "<group>"; };
 		0857E4CE2BD0C941000ABB76 /* CategoryColorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryColorCell.xib; sourceTree = "<group>"; };
 		0857E4D52BD0C977000ABB76 /* FillterColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillterColorCell.swift; sourceTree = "<group>"; };
@@ -402,8 +398,6 @@
 		086D2FD02C12C8E400BF5373 /* animation_splash_new.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_splash_new.json; sourceTree = "<group>"; };
 		0878C9362C0D771300B48FD4 /* SubcriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcriptionViewController.swift; sourceTree = "<group>"; };
 		0878C9372C0D771300B48FD4 /* SubcriptionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubcriptionViewController.xib; sourceTree = "<group>"; };
-		087929732C3E2219001E7F57 /* PageViewSwirlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewSwirlViewController.swift; sourceTree = "<group>"; };
-		087929742C3E2219001E7F57 /* PageViewSwirlViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PageViewSwirlViewController.xib; sourceTree = "<group>"; };
 		088333E22C1939CC00FC3901 /* ALTimingFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALTimingFunction.swift; sourceTree = "<group>"; };
 		088333E42C1939CC00FC3901 /* ALProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALProgressBar.swift; sourceTree = "<group>"; };
 		088333E52C1939CC00FC3901 /* ALProgressRing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALProgressRing.swift; sourceTree = "<group>"; };
@@ -664,6 +658,12 @@
 		57FE3EE62A87F26700ACF272 /* LanguageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageVM.swift; sourceTree = "<group>"; };
 		57FFC3EA2A8E7636004F6E45 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		7C404DB90499F9B71148AEB8 /* Pods_Doll_Coloring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Doll_Coloring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		970BF0942C3F7F15002B445F /* soundFillColor.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soundFillColor.mp3; sourceTree = "<group>"; };
+		9750F6542C51E3BA00371ED1 /* PageViewSwirlViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageViewSwirlViewController.xib; sourceTree = "<group>"; };
+		9750F6552C51E3BA00371ED1 /* PageViewSwirlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewSwirlViewController.swift; sourceTree = "<group>"; };
+		9750F6582C51E4A000371ED1 /* CheckInRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInRoute.swift; sourceTree = "<group>"; };
+		9750F6592C51E4A000371ED1 /* CheckIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CheckIn.storyboard; sourceTree = "<group>"; };
+		9750F65A2C51E4A000371ED1 /* CheckInController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInController.swift; sourceTree = "<group>"; };
 		C03131B72AA3762400A29FC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -861,15 +861,6 @@
 			path = DownloadManager;
 			sourceTree = "<group>";
 		};
-		08487A002C07AE630026F017 /* GridLayout */ = {
-			isa = PBXGroup;
-			children = (
-				08487A012C07AE810026F017 /* GridLayout.swift */,
-				08487A032C07AEA90026F017 /* Grid.swift */,
-			);
-			path = GridLayout;
-			sourceTree = "<group>";
-		};
 		084A8B242BC4DC4800C8D045 /* Lottie_Json */ = {
 			isa = PBXGroup;
 			children = (
@@ -886,20 +877,11 @@
 			path = Lottie_Json;
 			sourceTree = "<group>";
 		};
-		0852B0E92BD64D3000F95856 /* FillColor */ = {
-			isa = PBXGroup;
-			children = (
-				0852B0E72BD64D3000F95856 /* PaintImageView.swift */,
-				0852B0E82BD64D3000F95856 /* StackList.swift */,
-			);
-			path = FillColor;
-			sourceTree = "<group>";
-		};
 		087929722C3E20A4001E7F57 /* PageViewSwirlController */ = {
 			isa = PBXGroup;
 			children = (
-				087929732C3E2219001E7F57 /* PageViewSwirlViewController.swift */,
-				087929742C3E2219001E7F57 /* PageViewSwirlViewController.xib */,
+				9750F6552C51E3BA00371ED1 /* PageViewSwirlViewController.swift */,
+				9750F6542C51E3BA00371ED1 /* PageViewSwirlViewController.xib */,
 			);
 			path = PageViewSwirlController;
 			sourceTree = "<group>";
@@ -962,6 +944,7 @@
 		08B5A0BB2BE32BB400BD55E1 /* music */ = {
 			isa = PBXGroup;
 			children = (
+				970BF0942C3F7F15002B445F /* soundFillColor.mp3 */,
 				08A0C29D2BE490AA00C6E42D /* asrmColoring.mp3 */,
 				08E3AEEB2BE346C100B22163 /* musicBackground.mp3 */,
 			);
@@ -1225,12 +1208,10 @@
 			children = (
 				088333E72C1939CC00FC3901 /* ALProgressView */,
 				08FE33852C085EFE000DB950 /* ViewPagesController */,
-				08487A002C07AE630026F017 /* GridLayout */,
 				08E830F92C072C300042607A /* SOTabbar */,
 				08F5D1C42BFC5857002DC669 /* PinterestCollectionViewLayout */,
 				08E3AEF02BE347E300B22163 /* UserDefaultManager */,
 				08E3AEED2BE3471600B22163 /* AudioPlayer */,
-				0852B0E92BD64D3000F95856 /* FillColor */,
 				084396312BCD86D000C8E213 /* DownloadManager */,
 				0843962B2BCD7A8800C8E213 /* SQLiteManager */,
 				08B9928B2BC7DA0C009951BB /* Coloring */,
@@ -1488,6 +1469,7 @@
 		570AF8132A53CE580069B329 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9750F64F2C51E27B00371ED1 /* CheckIn */,
 				083CA3A62BC672C5006033EE /* Collections */,
 				083CA3882BC670A8006033EE /* Colorings */,
 				08D0EFD92BC65272003B000D /* Settings */,
@@ -1640,6 +1622,16 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		9750F64F2C51E27B00371ED1 /* CheckIn */ = {
+			isa = PBXGroup;
+			children = (
+				9750F6592C51E4A000371ED1 /* CheckIn.storyboard */,
+				9750F65A2C51E4A000371ED1 /* CheckInController.swift */,
+				9750F6582C51E4A000371ED1 /* CheckInRoute.swift */,
+			);
+			path = CheckIn;
+			sourceTree = "<group>";
+		};
 		ACEA23F7738694AD30AC2DF1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1741,9 +1733,9 @@
 				080ACD802BC3E84E00E00E2C /* GoogleService-Info.plist in Resources */,
 				570070C72A93C4BD00D7C1C6 /* WebViewController.xib in Resources */,
 				570070C82A93C4BD00D7C1C6 /* LanguageCell.xib in Resources */,
-				087929752C3E2219001E7F57 /* PageViewSwirlViewController.xib in Resources */,
 				570070CF2A93C4BD00D7C1C6 /* PickerPhoto.storyboard in Resources */,
 				570070D12A93C4BD00D7C1C6 /* DropDownMenu.storyboard in Resources */,
+				970BF0952C3F7F15002B445F /* soundFillColor.mp3 in Resources */,
 				080ACD8A2BC3EA2800E00E2C /* Home.storyboard in Resources */,
 				570070D42A93C4BD00D7C1C6 /* AlertViewController.xib in Resources */,
 				08F5D1C72BFC88C9002DC669 /* animation_dissconnect.json in Resources */,
@@ -1773,9 +1765,11 @@
 				08083FEE2BCDF877005091B0 /* CollectionCell.xib in Resources */,
 				083CA3A72BC672C5006033EE /* Collections.storyboard in Resources */,
 				083CA3E42BC672DA006033EE /* StartColoring.storyboard in Resources */,
+				9750F6562C51E3BA00371ED1 /* PageViewSwirlViewController.xib in Resources */,
 				08F75CF92BE8E1AD005ACDA9 /* HeaderHomeCell.xib in Resources */,
 				570070F32A93C4BD00D7C1C6 /* MenuActionCell.xib in Resources */,
 				57CAAC242B22372900C56E11 /* IAPController.xib in Resources */,
+				9750F65C2C51E4A000371ED1 /* CheckIn.storyboard in Resources */,
 				083CA3DE2BC672DA006033EE /* SaveColoring.storyboard in Resources */,
 				084A8B262BC4DC7600C8D045 /* animation_splash.json in Resources */,
 				088448B02BEA053B00636C36 /* CategoryColoringCell.xib in Resources */,
@@ -1938,6 +1932,7 @@
 				570070422A93C4BD00D7C1C6 /* BindableType.swift in Sources */,
 				570070442A93C4BD00D7C1C6 /* PickerController.swift in Sources */,
 				571B13592B231C2A0084F92B /* PremiumFloatingView.swift in Sources */,
+				9750F6572C51E3BA00371ED1 /* PageViewSwirlViewController.swift in Sources */,
 				083CA3F32BC672DA006033EE /* HistoryColoringRoute.swift in Sources */,
 				08F5D1BB2BF74905002DC669 /* TabbarViewRoute.swift in Sources */,
 				570070452A93C4BD00D7C1C6 /* MenuAction.swift in Sources */,
@@ -1945,12 +1940,12 @@
 				085A067E2BC69FB5002D5F1D /* ListTopPicksColoringViewController.swift in Sources */,
 				570070472A93C4BD00D7C1C6 /* BaseAppDelegate.swift in Sources */,
 				570070492A93C4BD00D7C1C6 /* SwipeActionButton.swift in Sources */,
-				0852B0EA2BD64D3100F95856 /* PaintImageView.swift in Sources */,
 				08EC01E12BFEEB8B00E98627 /* TableColorIpadController.swift in Sources */,
 				088333E82C1939CC00FC3901 /* ALTimingFunction.swift in Sources */,
 				088333E92C1939CC00FC3901 /* ALProgressBar.swift in Sources */,
 				08B9928D2BC7DA2C009951BB /* TableColor.swift in Sources */,
 				083CA3E02BC672DA006033EE /* SaveColoringModel.swift in Sources */,
+				9750F65B2C51E4A000371ED1 /* CheckInRoute.swift in Sources */,
 				084396342BCD86D000C8E213 /* DownloadManager.swift in Sources */,
 				08FCC5D42BD2122B004085C5 /* Stroke.swift in Sources */,
 				5700704A2A93C4BD00D7C1C6 /* SwipeFeedback.swift in Sources */,
@@ -1973,7 +1968,6 @@
 				080ACD8B2BC3EA2800E00E2C /* HomeController.swift in Sources */,
 				570070552A93C4BD00D7C1C6 /* R.generated.swift in Sources */,
 				083CA3E32BC672DA006033EE /* SaveColoringVM.swift in Sources */,
-				08487A022C07AE810026F017 /* GridLayout.swift in Sources */,
 				08F5D1C02BFB366A002DC669 /* CategoryMenuCell.swift in Sources */,
 				570070562A93C4BD00D7C1C6 /* SwipeTableViewCell+Display.swift in Sources */,
 				570070582A93C4BD00D7C1C6 /* PickDateTimeController.swift in Sources */,
@@ -2026,7 +2020,6 @@
 				08D0EFDE2BC65273003B000D /* SettingsService.swift in Sources */,
 				570070772A93C4BD00D7C1C6 /* SplashController.swift in Sources */,
 				08F5D1C52BFC5857002DC669 /* PinterestCollectionViewLayout.swift in Sources */,
-				087929762C3E2219001E7F57 /* PageViewSwirlViewController.swift in Sources */,
 				083CA3E72BC672DA006033EE /* StartColoringRoute.swift in Sources */,
 				08FCC5CE2BD2122B004085C5 /* ColoringImage.swift in Sources */,
 				083CA4162BC67988006033EE /* MainColoringsVM.swift in Sources */,
@@ -2043,8 +2036,8 @@
 				083CA3AA2BC672C5006033EE /* CollectionsRoute.swift in Sources */,
 				080ACD8D2BC3EA2800E00E2C /* HomeRoute.swift in Sources */,
 				083CA3E82BC672DA006033EE /* StartColoringService.swift in Sources */,
-				0852B0EB2BD64D3100F95856 /* StackList.swift in Sources */,
 				5700707C2A93C4BD00D7C1C6 /* DeviceInfos.swift in Sources */,
+				9750F65D2C51E4A000371ED1 /* CheckInController.swift in Sources */,
 				5718A2092BAC2D4C00EEC39A /* BaseManager.swift in Sources */,
 				5700707F2A93C4BD00D7C1C6 /* AppDelegate.swift in Sources */,
 				570070802A93C4BD00D7C1C6 /* ButtonView.swift in Sources */,
@@ -2097,7 +2090,6 @@
 				570070952A93C4BD00D7C1C6 /* UIViewController++.swift in Sources */,
 				08FE33942C085FA1000DB950 /* PagerTabMenuView.swift in Sources */,
 				570070982A93C4BD00D7C1C6 /* UILabelExt.swift in Sources */,
-				08487A042C07AEA90026F017 /* Grid.swift in Sources */,
 				083CA3F52BC672DA006033EE /* HistoryColoringVM.swift in Sources */,
 				570070992A93C4BD00D7C1C6 /* LanguageRoute.swift in Sources */,
 				5700709A2A93C4BD00D7C1C6 /* UIKit++.swift in Sources */,
@@ -2215,7 +2207,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2261,7 +2253,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -19,7 +19,7 @@ class HomeAdsCell: UICollectionViewCell, NibReusable {
     }
     
     func loadAds() {
-        ADManager.shared.loadNative(DollColoringAdID.native_home, to: adsView, nativeAdType: .smallMedia) {[weak self] adId, success, nativeAdView in
+        ADManager.shared.loadNative(DollColoringAdID.native_home, to: adsView, nativeAdType: .customMediaFixedHeight) {[weak self] adId, success, nativeAdView in
             if adId.contains(DollColoringAdID.native_home.adId) {
                 self?.adsView.isHidden = !success
                 self?.actionAds?(success)

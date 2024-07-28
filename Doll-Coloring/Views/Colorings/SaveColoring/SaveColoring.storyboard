@@ -3,7 +3,7 @@
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,7 +43,7 @@
                                             <constraint firstAttribute="height" constant="32" id="jcJ-EY-dck"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="ic_dismiss"/>
+                                        <state key="normal" image="ic_home"/>
                                         <connections>
                                             <action selector="actionDismis:" destination="zIc-eW-6fX" eventType="touchUpInside" id="yBQ-7I-JIo"/>
                                         </connections>
@@ -74,13 +74,13 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8L-la-ezy">
-                                <rect key="frame" x="0.0" y="426" width="414" height="250"/>
+                                <rect key="frame" x="16" y="426" width="382" height="250"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="a8t-kT-Owy"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pZ-zV-Ixp">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pZ-zV-Ixp">
                                 <rect key="frame" x="66" y="410" width="282" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -91,9 +91,10 @@
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJH-3t-CFA">
                                         <rect key="frame" x="0.0" y="0.0" width="102" height="44"/>
+                                        <color key="backgroundColor" name="ColorTextTopBar"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
-                                        <state key="normal" title="Delete" image="ic_delete_photo" backgroundImage="color_bling3_pastel12"/>
+                                        <state key="normal" title="Delete" image="ic_delete_photo"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
                                                 <real key="value" value="8"/>
@@ -111,9 +112,10 @@
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6DJ-1e-DU3">
                                         <rect key="frame" x="118" y="0.0" width="102.33333333333331" height="44"/>
+                                        <color key="backgroundColor" name="ColorTextTopBar"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
-                                        <state key="normal" title="Save" image="ic_ads_video" backgroundImage="color_bling3_pastel12">
+                                        <state key="normal" title="Save" image="ic_ads_video">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -133,9 +135,10 @@
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICc-d7-Igo">
                                         <rect key="frame" x="236.33333333333337" y="0.0" width="145.66666666666663" height="44"/>
+                                        <color key="backgroundColor" name="ColorTextTopBar"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
-                                        <state key="normal" title="Collections" image="ic_collection_photo" backgroundImage="color_bling3_pastel12"/>
+                                        <state key="normal" title="Collections" image="ic_collection_photo"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
                                                 <real key="value" value="8"/>
@@ -168,12 +171,9 @@
                             <constraint firstItem="f8L-la-ezy" firstAttribute="top" secondItem="LPr-oA-MIX" secondAttribute="bottom" constant="16" id="Cgh-te-y5S"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="dqO-CB-yH9" secondAttribute="trailing" id="DJF-Dr-kuR"/>
                             <constraint firstItem="LPr-oA-MIX" firstAttribute="top" secondItem="dqO-CB-yH9" secondAttribute="bottom" constant="24" id="Ff7-Qf-MIU"/>
-                            <constraint firstItem="f8L-la-ezy" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="I14-Iq-cgo"/>
-                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="mVl-LC-kVe" secondAttribute="trailing" constant="16" id="IkK-BG-RUE"/>
-                            <constraint firstItem="mVl-LC-kVe" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" constant="16" id="K7X-71-qn5"/>
+                            <constraint firstItem="f8L-la-ezy" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" constant="16" id="I14-Iq-cgo"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="bottom" secondItem="mVl-LC-kVe" secondAttribute="bottom" constant="8" id="LHt-tq-tST"/>
                             <constraint firstItem="mVl-LC-kVe" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" constant="16" id="PYS-EG-1xw"/>
-                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="f8L-la-ezy" secondAttribute="trailing" id="Ra3-aA-Szr"/>
                             <constraint firstItem="LPr-oA-MIX" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" constant="66" id="SLW-5c-jnm"/>
                             <constraint firstItem="3pZ-zV-Ixp" firstAttribute="bottom" secondItem="LPr-oA-MIX" secondAttribute="bottom" id="Sba-ia-isr"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="mVl-LC-kVe" secondAttribute="trailing" constant="16" id="Yjc-Fk-Hd1"/>
@@ -183,8 +183,7 @@
                             <constraint firstItem="3pZ-zV-Ixp" firstAttribute="leading" secondItem="LPr-oA-MIX" secondAttribute="leading" id="h8t-Tn-ew2"/>
                             <constraint firstItem="dqO-CB-yH9" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="jyT-fq-ixk"/>
                             <constraint firstItem="z7U-bH-z1u" firstAttribute="top" secondItem="Z2g-4m-atm" secondAttribute="top" id="mtf-8Z-Cgp"/>
-                            <constraint firstItem="f8L-la-ezy" firstAttribute="trailing" secondItem="3pi-N7-nbV" secondAttribute="trailing" id="r0l-fh-9wu"/>
-                            <constraint firstItem="f8L-la-ezy" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="u1C-EN-73S"/>
+                            <constraint firstItem="f8L-la-ezy" firstAttribute="trailing" secondItem="3pi-N7-nbV" secondAttribute="trailing" constant="-16" id="r0l-fh-9wu"/>
                             <constraint firstAttribute="bottom" secondItem="z7U-bH-z1u" secondAttribute="bottom" id="wLk-Xl-pwS"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="LPr-oA-MIX" secondAttribute="trailing" constant="66" id="xGt-yD-s7m"/>
                         </constraints>
@@ -207,11 +206,10 @@
     </scenes>
     <resources>
         <image name="backgroundSave" width="392" height="852"/>
-        <image name="color_bling3_pastel12" width="215" height="215"/>
         <image name="ic_ads_video" width="24" height="24"/>
         <image name="ic_collection_photo" width="24.333333969116211" height="24"/>
         <image name="ic_delete_photo" width="24" height="24"/>
-        <image name="ic_dismiss" width="24" height="24"/>
+        <image name="ic_home" width="24" height="24"/>
         <image name="ic_share" width="32" height="32"/>
         <namedColor name="ColorTextTopBar">
             <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

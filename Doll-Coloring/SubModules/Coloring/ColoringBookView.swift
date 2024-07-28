@@ -119,8 +119,6 @@ class ColoringBookView: UIView {
                                      size: CGSize(width: pixelSize.width / UIScreen.main.scale,
                                                   height: pixelSize.height / UIScreen.main.scale))
         coloringLayer.contents = self.coloringImage.cgImage
-        percentColorImage = calculateColorCoverageLayer()
-        percentColoring = percentColorImage
         self.layer.addSublayer(coloringLayer)
     }
     
@@ -242,8 +240,13 @@ class ColoringBookView: UIView {
         resetVariables()
     }
     
+    public func calculateColorView() {
+        percentColorImage = self.calculateColorCoverageView()
+        percentColoring = percentColorImage
+    }
+    
     private func resetVariables() {
-        percentColoring = calculateColorCoverage()
+        percentColoring = self.calculateColorCoverageView()
         activeStroke = nil
         frozenContext.resetClip()
         pointAccumulator = []
@@ -472,69 +475,21 @@ class ColoringBookView: UIView {
             let (clipRect, mask) = self.coloringImage.getFillMaskAt(x: Int(location.x), y: Int(location.y))
             if let mask = mask {
                 DispatchQueue.main.async {
-                    UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear) {
-                        self.setClip(clipRect, maskImage: mask)
-                        self.frozenContext.setFillColor(colorFill.cgColor)
-                        self.frozenContext.fill(clipRect)
-                        self.activeStroke?.drawInContext(self.frozenContext)
-                        self.setNeedsDisplay()
-                    }
+                    self.setClip(clipRect, maskImage: mask)
+                    self.frozenContext.setFillColor(colorFill.cgColor)
+                    self.frozenContext.fill(clipRect)
+                    self.activeStroke?.drawInContext(self.frozenContext)
                     self.resetVariablesHistory()
                     complete?()
                 }
             }
         }
     }
-    
-    public func calculateColorCoverage() -> Double {
-        guard let image = frozenContext.makeImage() else { return 0.0 }
-        
-        let width = image.width
-        let height = image.height
-        let totalPixelCount = width * height
-        var coloredPixelCount = 0
-        
-        // Tạo một buffer dành cho dữ liệu pixel
-        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: totalPixelCount * 4)
-        
-        // Lấy dữ liệu pixel từ ảnh
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
-        let context = CGContext(data: buffer,
-                                width: width,
-                                height: height,
-                                bitsPerComponent: 8,
-                                bytesPerRow: width * 4,
-                                space: colorSpace,
-                                bitmapInfo: bitmapInfo.rawValue)
-        
-        context?.draw(image, in: CGRect(x: 0, y: 0, width: width, height: height))
-        
-        // Đếm số lượng pixel đã được tô màu
-        for i in 0..<totalPixelCount {
-            let alpha = buffer[i * 4 + 3]
-            let red = buffer[i * 4]
-            let green = buffer[i * 4 + 1]
-            let blue = buffer[i * 4 + 2]
-            
-            // Bỏ qua màu trong suốt và màu FFFFFE RGB(255, 255, 254)
-            if alpha > 0 && !(red == 255 && green == 255 && blue == 254) {
-                coloredPixelCount += 1
-            }
-        }
-        
-        // Giải phóng bộ nhớ của buffer
-        buffer.deallocate()
-        
-        // Tính phần trăm phủ màu
-        var per = Double(coloredPixelCount) / Double(totalPixelCount)
-        per = percentColorImage + per
-        
-        return per
-    }
-    
-    public func calculateColorCoverageLayer() -> Double {
-        let image = coloringImage.cgImage
+}
+
+extension UIView {
+    public func calculateColorCoverageView() -> Double {
+        guard let image = self.asImage().cgImage else {return 0.0}
         
         let width = image.width
         let height = image.height

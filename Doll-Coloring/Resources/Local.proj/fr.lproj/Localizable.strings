@@ -20,6 +20,7 @@ Common.Button.Disagree                          =       "Refuser";
 Common.PhotoPicker.Gallery                      =       "Sélectionner dans la bibliothèque";
 Common.PhotoPicker.Camera                       =       "Prendre une photo";
 Common.Home                                     =       "Accueil";
+Common.CheckIn                                  =       "Check In";
 Common.StartColoring                            =       "Commencer à colorier";
 Common.Collections                              =       "Collections";
 Common.Settings                                 =       "Paramètres";

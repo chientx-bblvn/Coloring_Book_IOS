@@ -3,7 +3,7 @@
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -22,14 +22,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="844"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wv1-xe-6wJ">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="784"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="766"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZnH-AW-w9n">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="664"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="646"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vt4-j3-rvz">
-                                        <rect key="frame" x="0.0" y="664" width="393" height="120"/>
+                                        <rect key="frame" x="0.0" y="646" width="393" height="120"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="KVL-TA-a3n">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="120"/>
@@ -127,7 +127,7 @@
                                                             <constraint firstItem="dhz-L2-xNZ" firstAttribute="centerY" secondItem="41a-GY-gcH" secondAttribute="centerY" id="vaa-O8-Xiz"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LMr-mC-0cd">
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LMr-mC-0cd">
                                                         <rect key="frame" x="0.0" y="60" width="393" height="60"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Skb-Wz-719">
@@ -279,7 +279,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gFY-TU-5Ll">
-                                <rect key="frame" x="20" y="600" width="353" height="44"/>
+                                <rect key="frame" x="20" y="582" width="353" height="44"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="FbG-Cw-x2O">
                                         <rect key="frame" x="77" y="10" width="199" height="25"/>
@@ -342,11 +342,11 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dM6-BS-1MB">
-                                <rect key="frame" x="0.0" y="784" width="393" height="60"/>
+                                <rect key="frame" x="0.0" y="774" width="393" height="70"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="lbr-Hd-c3R">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="60"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="70"/>
                                     </constraint>
                                 </constraints>
                             </view>
@@ -364,7 +364,7 @@
                             <constraint firstItem="gFY-TU-5Ll" firstAttribute="leading" secondItem="ZnH-AW-w9n" secondAttribute="leading" constant="20" id="HtR-Lb-tNq"/>
                             <constraint firstItem="ZFH-eY-phq" firstAttribute="top" secondItem="fl9-fs-GwU" secondAttribute="top" id="SmZ-64-oua"/>
                             <constraint firstItem="gFY-TU-5Ll" firstAttribute="bottom" secondItem="ZnH-AW-w9n" secondAttribute="bottom" constant="-20" id="SuI-S9-Pau"/>
-                            <constraint firstItem="dM6-BS-1MB" firstAttribute="top" secondItem="wv1-xe-6wJ" secondAttribute="bottom" id="UgG-Qb-UKp"/>
+                            <constraint firstItem="dM6-BS-1MB" firstAttribute="top" secondItem="wv1-xe-6wJ" secondAttribute="bottom" constant="8" id="UgG-Qb-UKp"/>
                             <constraint firstItem="wv1-xe-6wJ" firstAttribute="leading" secondItem="fl9-fs-GwU" secondAttribute="leading" id="iPl-JC-K9g"/>
                             <constraint firstAttribute="trailing" secondItem="ZFH-eY-phq" secondAttribute="trailing" id="jz9-Iu-CJ1"/>
                             <constraint firstItem="gFY-TU-5Ll" firstAttribute="trailing" secondItem="ZnH-AW-w9n" secondAttribute="trailing" constant="-20" id="m93-M0-kKq"/>

@@ -16,7 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB" customClass="CustomMediaNativeAdViewFixedHeight" customModule="DIY_Flower_Language" customModuleProvider="target">
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB" customClass="CustomMediaNativeAdViewFixedHeight" customModule="Doll_Coloring" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="365" height="312"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -127,11 +127,11 @@
                 </stackView>
                 <button opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5w-YA-UY8">
                     <rect key="frame" x="16" y="252" width="333" height="44"/>
-                    <color key="backgroundColor" name="MainPrimary"/>
+                    <color key="backgroundColor" name="ColorTextTopBar"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="gPf-P5-dVO"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                     <state key="normal">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -181,10 +181,10 @@
     </objects>
     <resources>
         <namedColor name="ColorBGAds">
-            <color red="0.99607843137254903" green="0.98039215686274506" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="MainPrimary">
-            <color red="0.72156862745098038" green="0.56862745098039214" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="ColorTextTopBar">
+            <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
