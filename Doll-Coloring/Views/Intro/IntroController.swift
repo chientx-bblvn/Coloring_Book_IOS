@@ -99,6 +99,7 @@ extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {
                     self.fsPagerView.scrollToItem(at: currentPage + 1, animated: true)
                 } else {
                     UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
+                    UserDefaultManager.currentDateFirstOpenApp = Date().toMyString(format: "dd/MM/yyyy")
                     AppRouter.shared.navigate(to: TabbarViewRoute.main, with: .changeRoot)
                 }
             }

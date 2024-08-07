@@ -319,6 +319,30 @@
 		9750F65B2C51E4A000371ED1 /* CheckInRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750F6582C51E4A000371ED1 /* CheckInRoute.swift */; };
 		9750F65C2C51E4A000371ED1 /* CheckIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9750F6592C51E4A000371ED1 /* CheckIn.storyboard */; };
 		9750F65D2C51E4A000371ED1 /* CheckInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750F65A2C51E4A000371ED1 /* CheckInController.swift */; };
+		97DBEA222C6365FB00D6715D /* PopupTomorrowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBEA202C6365FB00D6715D /* PopupTomorrowViewController.swift */; };
+		97DBEA232C6365FB00D6715D /* PopupTomorrowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DBEA212C6365FB00D6715D /* PopupTomorrowViewController.xib */; };
+		97DF85032C60AAE800FA19EF /* ChooseDateBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF84F62C60AAE800FA19EF /* ChooseDateBlock.swift */; };
+		97DF85042C60AAE800FA19EF /* ChooseDateBlock.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DF84F72C60AAE800FA19EF /* ChooseDateBlock.xib */; };
+		97DF85052C60AAE800FA19EF /* ChooseDateVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF84F82C60AAE800FA19EF /* ChooseDateVM.swift */; };
+		97DF85062C60AAE800FA19EF /* CalendarDateRangePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF84FA2C60AAE800FA19EF /* CalendarDateRangePickerCell.swift */; };
+		97DF85072C60AAE800FA19EF /* CalendarDateRangePickerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF84FB2C60AAE800FA19EF /* CalendarDateRangePickerHeaderView.swift */; };
+		97DF85082C60AAE800FA19EF /* PopupDate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97DF84FD2C60AAE800FA19EF /* PopupDate.storyboard */; };
+		97DF85092C60AAE800FA19EF /* PopupDateRangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF84FE2C60AAE800FA19EF /* PopupDateRangeController.swift */; };
+		97DF850A2C60AAE800FA19EF /* PopupDateRangeRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF84FF2C60AAE800FA19EF /* PopupDateRangeRoute.swift */; };
+		97DF850B2C60AAE800FA19EF /* PopupDateRangeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF85002C60AAE800FA19EF /* PopupDateRangeVM.swift */; };
+		97DF850D2C60B00400FA19EF /* BaseDragViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF850C2C60B00400FA19EF /* BaseDragViewController.swift */; };
+		97DF85102C60B99100FA19EF /* CalendarMonthCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DF850F2C60B99100FA19EF /* CalendarMonthCell.xib */; };
+		97DF85112C60B99100FA19EF /* CalendarMonthCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF850E2C60B99100FA19EF /* CalendarMonthCell.swift */; };
+		97DF85152C61C24900FA19EF /* GitDaylyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DF85142C61C24900FA19EF /* GitDaylyCell.xib */; };
+		97DF85162C61C24900FA19EF /* GitDaylyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF85132C61C24900FA19EF /* GitDaylyCell.swift */; };
+		97DF85212C61C72400FA19EF /* ItemGitDalyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DF85202C61C72400FA19EF /* ItemGitDalyCell.xib */; };
+		97DF85222C61C72400FA19EF /* ItemGitDalyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF851F2C61C72400FA19EF /* ItemGitDalyCell.swift */; };
+		97DF85242C61CC8500FA19EF /* AnimationGitDaly.json in Resources */ = {isa = PBXBuildFile; fileRef = 97DF85232C61CC8500FA19EF /* AnimationGitDaly.json */; };
+		97DF85262C61D92E00FA19EF /* CheckInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF85252C61D92E00FA19EF /* CheckInModel.swift */; };
+		97DF85292C62046700FA19EF /* HeaderDalyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DF85282C62046700FA19EF /* HeaderDalyView.xib */; };
+		97DF852A2C62046700FA19EF /* HeaderDalyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF85272C62046700FA19EF /* HeaderDalyView.swift */; };
+		97DF852E2C62299D00FA19EF /* GitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DF852D2C62299D00FA19EF /* GitViewController.xib */; };
+		97DF852F2C62299D00FA19EF /* GitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF852C2C62299D00FA19EF /* GitViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -664,6 +688,30 @@
 		9750F6582C51E4A000371ED1 /* CheckInRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInRoute.swift; sourceTree = "<group>"; };
 		9750F6592C51E4A000371ED1 /* CheckIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CheckIn.storyboard; sourceTree = "<group>"; };
 		9750F65A2C51E4A000371ED1 /* CheckInController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInController.swift; sourceTree = "<group>"; };
+		97DBEA202C6365FB00D6715D /* PopupTomorrowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupTomorrowViewController.swift; sourceTree = "<group>"; };
+		97DBEA212C6365FB00D6715D /* PopupTomorrowViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupTomorrowViewController.xib; sourceTree = "<group>"; };
+		97DF84F62C60AAE800FA19EF /* ChooseDateBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseDateBlock.swift; sourceTree = "<group>"; };
+		97DF84F72C60AAE800FA19EF /* ChooseDateBlock.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseDateBlock.xib; sourceTree = "<group>"; };
+		97DF84F82C60AAE800FA19EF /* ChooseDateVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseDateVM.swift; sourceTree = "<group>"; };
+		97DF84FA2C60AAE800FA19EF /* CalendarDateRangePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDateRangePickerCell.swift; sourceTree = "<group>"; };
+		97DF84FB2C60AAE800FA19EF /* CalendarDateRangePickerHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDateRangePickerHeaderView.swift; sourceTree = "<group>"; };
+		97DF84FD2C60AAE800FA19EF /* PopupDate.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PopupDate.storyboard; sourceTree = "<group>"; };
+		97DF84FE2C60AAE800FA19EF /* PopupDateRangeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupDateRangeController.swift; sourceTree = "<group>"; };
+		97DF84FF2C60AAE800FA19EF /* PopupDateRangeRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupDateRangeRoute.swift; sourceTree = "<group>"; };
+		97DF85002C60AAE800FA19EF /* PopupDateRangeVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupDateRangeVM.swift; sourceTree = "<group>"; };
+		97DF850C2C60B00400FA19EF /* BaseDragViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDragViewController.swift; sourceTree = "<group>"; };
+		97DF850E2C60B99100FA19EF /* CalendarMonthCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthCell.swift; sourceTree = "<group>"; };
+		97DF850F2C60B99100FA19EF /* CalendarMonthCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarMonthCell.xib; sourceTree = "<group>"; };
+		97DF85132C61C24900FA19EF /* GitDaylyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitDaylyCell.swift; sourceTree = "<group>"; };
+		97DF85142C61C24900FA19EF /* GitDaylyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GitDaylyCell.xib; sourceTree = "<group>"; };
+		97DF851F2C61C72400FA19EF /* ItemGitDalyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemGitDalyCell.swift; sourceTree = "<group>"; };
+		97DF85202C61C72400FA19EF /* ItemGitDalyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemGitDalyCell.xib; sourceTree = "<group>"; };
+		97DF85232C61CC8500FA19EF /* AnimationGitDaly.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AnimationGitDaly.json; sourceTree = "<group>"; };
+		97DF85252C61D92E00FA19EF /* CheckInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInModel.swift; sourceTree = "<group>"; };
+		97DF85272C62046700FA19EF /* HeaderDalyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderDalyView.swift; sourceTree = "<group>"; };
+		97DF85282C62046700FA19EF /* HeaderDalyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderDalyView.xib; sourceTree = "<group>"; };
+		97DF852C2C62299D00FA19EF /* GitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitViewController.swift; sourceTree = "<group>"; };
+		97DF852D2C62299D00FA19EF /* GitViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GitViewController.xib; sourceTree = "<group>"; };
 		C03131B72AA3762400A29FC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -708,6 +756,7 @@
 		083CA3882BC670A8006033EE /* Colorings */ = {
 			isa = PBXGroup;
 			children = (
+				97DBEA1F2C6365BE00D6715D /* PopupTomorrow */,
 				08B17C4F2C1BDC3300720894 /* PopupColoring */,
 				08EC01DF2BFEEB8B00E98627 /* TableColorIpad */,
 				0843961D2BCD630D00C8E213 /* Cell */,
@@ -871,6 +920,7 @@
 				080CB5802BEBDFEE0036A471 /* animation_progess.json */,
 				0852B0D42BD63DB400F95856 /* animationView_StartColoring.json */,
 				085A06842BC6A7E0002D5F1D /* animation_collection.json */,
+				97DF85232C61CC8500FA19EF /* AnimationGitDaly.json */,
 				084A8B252BC4DC7600C8D045 /* animation_splash.json */,
 				08F5D1C62BFC88C9002DC669 /* animation_dissconnect.json */,
 			);
@@ -1206,6 +1256,7 @@
 		570AF76D2A53CE560069B329 /* SubModules */ = {
 			isa = PBXGroup;
 			children = (
+				97DF85022C60AAE800FA19EF /* Calendar */,
 				088333E72C1939CC00FC3901 /* ALProgressView */,
 				08FE33852C085EFE000DB950 /* ViewPagesController */,
 				08E830F92C072C300042607A /* SOTabbar */,
@@ -1390,6 +1441,7 @@
 				570AF7EB2A53CE580069B329 /* View */,
 				570AF7F22A53CE580069B329 /* Routing.swift */,
 				570AF7F32A53CE580069B329 /* BaseAppDelegate.swift */,
+				97DF850C2C60B00400FA19EF /* BaseDragViewController.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1469,6 +1521,7 @@
 		570AF8132A53CE580069B329 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				97DF852B2C62297200FA19EF /* GitView */,
 				9750F64F2C51E27B00371ED1 /* CheckIn */,
 				083CA3A62BC672C5006033EE /* Collections */,
 				083CA3882BC670A8006033EE /* Colorings */,
@@ -1625,11 +1678,86 @@
 		9750F64F2C51E27B00371ED1 /* CheckIn */ = {
 			isa = PBXGroup;
 			children = (
+				97DF85122C61C22B00FA19EF /* Cell */,
 				9750F6592C51E4A000371ED1 /* CheckIn.storyboard */,
 				9750F65A2C51E4A000371ED1 /* CheckInController.swift */,
 				9750F6582C51E4A000371ED1 /* CheckInRoute.swift */,
+				97DF85252C61D92E00FA19EF /* CheckInModel.swift */,
 			);
 			path = CheckIn;
+			sourceTree = "<group>";
+		};
+		97DBEA1F2C6365BE00D6715D /* PopupTomorrow */ = {
+			isa = PBXGroup;
+			children = (
+				97DBEA202C6365FB00D6715D /* PopupTomorrowViewController.swift */,
+				97DBEA212C6365FB00D6715D /* PopupTomorrowViewController.xib */,
+			);
+			path = PopupTomorrow;
+			sourceTree = "<group>";
+		};
+		97DF84F92C60AAE800FA19EF /* ChooseDateView */ = {
+			isa = PBXGroup;
+			children = (
+				97DF84F62C60AAE800FA19EF /* ChooseDateBlock.swift */,
+				97DF84F72C60AAE800FA19EF /* ChooseDateBlock.xib */,
+				97DF84F82C60AAE800FA19EF /* ChooseDateVM.swift */,
+			);
+			path = ChooseDateView;
+			sourceTree = "<group>";
+		};
+		97DF84FC2C60AAE800FA19EF /* CustomDateRangePicker */ = {
+			isa = PBXGroup;
+			children = (
+				97DF84FA2C60AAE800FA19EF /* CalendarDateRangePickerCell.swift */,
+				97DF84FB2C60AAE800FA19EF /* CalendarDateRangePickerHeaderView.swift */,
+				97DF850E2C60B99100FA19EF /* CalendarMonthCell.swift */,
+				97DF850F2C60B99100FA19EF /* CalendarMonthCell.xib */,
+			);
+			path = CustomDateRangePicker;
+			sourceTree = "<group>";
+		};
+		97DF85012C60AAE800FA19EF /* PopupDateRange */ = {
+			isa = PBXGroup;
+			children = (
+				97DF84F92C60AAE800FA19EF /* ChooseDateView */,
+				97DF84FC2C60AAE800FA19EF /* CustomDateRangePicker */,
+				97DF84FD2C60AAE800FA19EF /* PopupDate.storyboard */,
+				97DF84FE2C60AAE800FA19EF /* PopupDateRangeController.swift */,
+				97DF84FF2C60AAE800FA19EF /* PopupDateRangeRoute.swift */,
+				97DF85002C60AAE800FA19EF /* PopupDateRangeVM.swift */,
+			);
+			path = PopupDateRange;
+			sourceTree = "<group>";
+		};
+		97DF85022C60AAE800FA19EF /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				97DF85012C60AAE800FA19EF /* PopupDateRange */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		97DF85122C61C22B00FA19EF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				97DF85132C61C24900FA19EF /* GitDaylyCell.swift */,
+				97DF85142C61C24900FA19EF /* GitDaylyCell.xib */,
+				97DF851F2C61C72400FA19EF /* ItemGitDalyCell.swift */,
+				97DF85202C61C72400FA19EF /* ItemGitDalyCell.xib */,
+				97DF85272C62046700FA19EF /* HeaderDalyView.swift */,
+				97DF85282C62046700FA19EF /* HeaderDalyView.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		97DF852B2C62297200FA19EF /* GitView */ = {
+			isa = PBXGroup;
+			children = (
+				97DF852C2C62299D00FA19EF /* GitViewController.swift */,
+				97DF852D2C62299D00FA19EF /* GitViewController.xib */,
+			);
+			path = GitView;
 			sourceTree = "<group>";
 		};
 		ACEA23F7738694AD30AC2DF1 /* Frameworks */ = {
@@ -1712,6 +1840,7 @@
 				0847C9E42BD162780007FC00 /* ColorCell.xib in Resources */,
 				080CB5852BECBD9C0036A471 /* animation_loading_preview.json in Resources */,
 				08F75CF12BE8DC65005ACDA9 /* HomeAdsCell.xib in Resources */,
+				97DF85042C60AAE800FA19EF /* ChooseDateBlock.xib in Resources */,
 				570070B32A93C4BD00D7C1C6 /* Images.xcassets in Resources */,
 				570070B52A93C4BD00D7C1C6 /* EmptyView.xib in Resources */,
 				084396202BCD633800C8E213 /* AllColoringCell.xib in Resources */,
@@ -1725,16 +1854,20 @@
 				08DBCB982C352F62004F80FC /* CustomMediaNativeAdView.xib in Resources */,
 				570070BE2A93C4BD00D7C1C6 /* IntroductionCell.xib in Resources */,
 				08F75CF52BE8DC84005ACDA9 /* FeatureHomeCell.xib in Resources */,
+				97DF85152C61C24900FA19EF /* GitDaylyCell.xib in Resources */,
 				570070C32A93C4BD00D7C1C6 /* FlagKit.xcassets in Resources */,
 				570070C62A93C4BD00D7C1C6 /* SplashController.xib in Resources */,
+				97DF85292C62046700FA19EF /* HeaderDalyView.xib in Resources */,
 				08DBCB972C352F62004F80FC /* InsightNativeAdView.xib in Resources */,
 				083CA4112BC67988006033EE /* MainColorings.storyboard in Resources */,
 				08E3AEEC2BE346C100B22163 /* musicBackground.mp3 in Resources */,
+				97DF85082C60AAE800FA19EF /* PopupDate.storyboard in Resources */,
 				080ACD802BC3E84E00E00E2C /* GoogleService-Info.plist in Resources */,
 				570070C72A93C4BD00D7C1C6 /* WebViewController.xib in Resources */,
 				570070C82A93C4BD00D7C1C6 /* LanguageCell.xib in Resources */,
 				570070CF2A93C4BD00D7C1C6 /* PickerPhoto.storyboard in Resources */,
 				570070D12A93C4BD00D7C1C6 /* DropDownMenu.storyboard in Resources */,
+				97DF85212C61C72400FA19EF /* ItemGitDalyCell.xib in Resources */,
 				970BF0952C3F7F15002B445F /* soundFillColor.mp3 in Resources */,
 				080ACD8A2BC3EA2800E00E2C /* Home.storyboard in Resources */,
 				570070D42A93C4BD00D7C1C6 /* AlertViewController.xib in Resources */,
@@ -1760,6 +1893,7 @@
 				08F75CE72BE8D12A005ACDA9 /* DetailCollection.storyboard in Resources */,
 				085A067F2BC69FB5002D5F1D /* ListTopPicksColoringViewController.xib in Resources */,
 				08EC01E02BFEEB8B00E98627 /* TableColorIpad.storyboard in Resources */,
+				97DF85102C60B99100FA19EF /* CalendarMonthCell.xib in Resources */,
 				084396242BCD635000C8E213 /* FillterCell.xib in Resources */,
 				086D2FD12C12C8E500BF5373 /* animation_splash_new.json in Resources */,
 				08083FEE2BCDF877005091B0 /* CollectionCell.xib in Resources */,
@@ -1773,6 +1907,8 @@
 				083CA3DE2BC672DA006033EE /* SaveColoring.storyboard in Resources */,
 				084A8B262BC4DC7600C8D045 /* animation_splash.json in Resources */,
 				088448B02BEA053B00636C36 /* CategoryColoringCell.xib in Resources */,
+				97DF852E2C62299D00FA19EF /* GitViewController.xib in Resources */,
+				97DBEA232C6365FB00D6715D /* PopupTomorrowViewController.xib in Resources */,
 				08DBCB852C34FC28004F80FC /* CustomMediaNativeAdViewFixedHeight.xib in Resources */,
 				0857E4D72BD0C977000ABB76 /* FillterColorCell.xib in Resources */,
 				08971F762BCFB8B700623026 /* HistoryCellCollectionViewCell.xib in Resources */,
@@ -1785,6 +1921,7 @@
 				083CA3FC2BC672DA006033EE /* PreviewColoring.storyboard in Resources */,
 				085A06852BC6A7E0002D5F1D /* animation_collection.json in Resources */,
 				570070FE2A93C4BD00D7C1C6 /* IntroController.xib in Resources */,
+				97DF85242C61CC8500FA19EF /* AnimationGitDaly.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1904,6 +2041,7 @@
 				570070302A93C4BD00D7C1C6 /* GradientView.swift in Sources */,
 				570070322A93C4BD00D7C1C6 /* SwipeAnimator.swift in Sources */,
 				08DBCB912C352F62004F80FC /* CustomMediaNativeAdView.swift in Sources */,
+				97DF85032C60AAE800FA19EF /* ChooseDateBlock.swift in Sources */,
 				570070332A93C4BD00D7C1C6 /* BaseCustomXibView.swift in Sources */,
 				08083FEF2BCDF877005091B0 /* CollectionCell.swift in Sources */,
 				083CA3F12BC672DA006033EE /* HistoryColoringController.swift in Sources */,
@@ -1952,6 +2090,7 @@
 				08FCC5D02BD2122B004085C5 /* ColoringBookView.swift in Sources */,
 				5700704B2A93C4BD00D7C1C6 /* IntroRoute.swift in Sources */,
 				5700704D2A93C4BD00D7C1C6 /* ViewExt.swift in Sources */,
+				97DF850D2C60B00400FA19EF /* BaseDragViewController.swift in Sources */,
 				57CAAC272B22372900C56E11 /* IAPController.swift in Sources */,
 				578A5EE22B8219D000827ADA /* DBHelpers.swift in Sources */,
 				0847C9E32BD162780007FC00 /* ColorCell.swift in Sources */,
@@ -1962,6 +2101,7 @@
 				088333EA2C1939CC00FC3901 /* ALProgressRing.swift in Sources */,
 				5700704F2A93C4BD00D7C1C6 /* MyProgressView.swift in Sources */,
 				570070512A93C4BD00D7C1C6 /* SwipeTableViewCell.swift in Sources */,
+				97DF850B2C60AAE800FA19EF /* PopupDateRangeVM.swift in Sources */,
 				08F75CEC2BE8D12A005ACDA9 /* DetailCollectionVM.swift in Sources */,
 				570070522A93C4BD00D7C1C6 /* SwipeActionTransitioning.swift in Sources */,
 				570070542A93C4BD00D7C1C6 /* UIView+Tranforms.swift in Sources */,
@@ -1972,6 +2112,7 @@
 				570070562A93C4BD00D7C1C6 /* SwipeTableViewCell+Display.swift in Sources */,
 				570070582A93C4BD00D7C1C6 /* PickDateTimeController.swift in Sources */,
 				08DBCB942C352F62004F80FC /* InsightNativeAdView.swift in Sources */,
+				97DF85262C61D92E00FA19EF /* CheckInModel.swift in Sources */,
 				570070592A93C4BD00D7C1C6 /* DropDownMenu.swift in Sources */,
 				5700705A2A93C4BD00D7C1C6 /* SwipeOptions.swift in Sources */,
 				5700705B2A93C4BD00D7C1C6 /* SwipeExpansionStyle.swift in Sources */,
@@ -1981,6 +2122,7 @@
 				5700705E2A93C4BD00D7C1C6 /* Reachability.swift in Sources */,
 				5700705F2A93C4BD00D7C1C6 /* SwipeAccessibilityCustomAction.swift in Sources */,
 				083CA4132BC67988006033EE /* MainColoringsModel.swift in Sources */,
+				97DF852A2C62046700FA19EF /* HeaderDalyView.swift in Sources */,
 				570070612A93C4BD00D7C1C6 /* FSPagerViewLayoutAttributes.swift in Sources */,
 				570070622A93C4BD00D7C1C6 /* FSPagerViewCell.swift in Sources */,
 				085A06822BC69FD3002D5F1D /* ListThemeColoringViewController.swift in Sources */,
@@ -1996,6 +2138,7 @@
 				08B17C532C1BDC7F00720894 /* PopupColoringViewController.swift in Sources */,
 				08F75CE92BE8D12A005ACDA9 /* DetailCollectionModel.swift in Sources */,
 				5700706C2A93C4BD00D7C1C6 /* RippleButton.swift in Sources */,
+				97DF85222C61C72400FA19EF /* ItemGitDalyCell.swift in Sources */,
 				5700706D2A93C4BD00D7C1C6 /* BaseResponse.swift in Sources */,
 				08FE33902C085FA1000DB950 /* ViewPagerControllerAppearance.swift in Sources */,
 				5700706E2A93C4BD00D7C1C6 /* BaseViewController.swift in Sources */,
@@ -2004,6 +2147,7 @@
 				5700706F2A93C4BD00D7C1C6 /* Routing.swift in Sources */,
 				570070712A93C4BD00D7C1C6 /* SwipeTransitionLayout.swift in Sources */,
 				570070722A93C4BD00D7C1C6 /* NSLayoutConstraint+Helpers.swift in Sources */,
+				97DF85052C60AAE800FA19EF /* ChooseDateVM.swift in Sources */,
 				08E830FF2C072C470042607A /* SOTabBarSetting.swift in Sources */,
 				08D0EFDF2BC65273003B000D /* SettingsVM.swift in Sources */,
 				08DBCB932C352F62004F80FC /* CustomSmallNativeAdView.swift in Sources */,
@@ -2019,6 +2163,7 @@
 				57FE22072AA8C41E0060606F /* CircularProgressView.swift in Sources */,
 				08D0EFDE2BC65273003B000D /* SettingsService.swift in Sources */,
 				570070772A93C4BD00D7C1C6 /* SplashController.swift in Sources */,
+				97DF85062C60AAE800FA19EF /* CalendarDateRangePickerCell.swift in Sources */,
 				08F5D1C52BFC5857002DC669 /* PinterestCollectionViewLayout.swift in Sources */,
 				083CA3E72BC672DA006033EE /* StartColoringRoute.swift in Sources */,
 				08FCC5CE2BD2122B004085C5 /* ColoringImage.swift in Sources */,
@@ -2056,6 +2201,7 @@
 				08FE33962C085FA1000DB950 /* InfiniteScrollView.swift in Sources */,
 				08FCC5D32BD2122B004085C5 /* Queue.swift in Sources */,
 				570070852A93C4BD00D7C1C6 /* SwipeAction.swift in Sources */,
+				97DF85162C61C24900FA19EF /* GitDaylyCell.swift in Sources */,
 				570070862A93C4BD00D7C1C6 /* UIView+ConstraintsHelpers.swift in Sources */,
 				08FCC5CD2BD2122B004085C5 /* Stack.swift in Sources */,
 				083CA4152BC67988006033EE /* MainColoringsService.swift in Sources */,
@@ -2065,6 +2211,7 @@
 				5700708C2A93C4BD00D7C1C6 /* SwipeController.swift in Sources */,
 				08C688B02C0499340091882F /* TableColorCell.swift in Sources */,
 				083CA3DF2BC672DA006033EE /* SaveColoringController.swift in Sources */,
+				97DF85112C60B99100FA19EF /* CalendarMonthCell.swift in Sources */,
 				083CA3AC2BC672C5006033EE /* CollectionsVM.swift in Sources */,
 				08971F772BCFB8B700623026 /* HistoryCellCollectionViewCell.swift in Sources */,
 				083CA3F42BC672DA006033EE /* HistoryColoringService.swift in Sources */,
@@ -2086,11 +2233,14 @@
 				570070942A93C4BD00D7C1C6 /* IntroModel.swift in Sources */,
 				084396322BCD86D000C8E213 /* AsynchronousOperation.swift in Sources */,
 				0857E4D02BD0C941000ABB76 /* CategoryColorCell.swift in Sources */,
+				97DBEA222C6365FB00D6715D /* PopupTomorrowViewController.swift in Sources */,
 				08E830FE2C072C470042607A /* SOTabBar.swift in Sources */,
 				570070952A93C4BD00D7C1C6 /* UIViewController++.swift in Sources */,
 				08FE33942C085FA1000DB950 /* PagerTabMenuView.swift in Sources */,
+				97DF850A2C60AAE800FA19EF /* PopupDateRangeRoute.swift in Sources */,
 				570070982A93C4BD00D7C1C6 /* UILabelExt.swift in Sources */,
 				083CA3F52BC672DA006033EE /* HistoryColoringVM.swift in Sources */,
+				97DF85092C60AAE800FA19EF /* PopupDateRangeController.swift in Sources */,
 				570070992A93C4BD00D7C1C6 /* LanguageRoute.swift in Sources */,
 				5700709A2A93C4BD00D7C1C6 /* UIKit++.swift in Sources */,
 				08F75CF82BE8E1AD005ACDA9 /* HeaderHomeCell.swift in Sources */,
@@ -2098,6 +2248,7 @@
 				5700709B2A93C4BD00D7C1C6 /* UITableView++.swift in Sources */,
 				084396332BCD86D000C8E213 /* DowloadOperation.swift in Sources */,
 				5700709D2A93C4BD00D7C1C6 /* String++.swift in Sources */,
+				97DF852F2C62299D00FA19EF /* GitViewController.swift in Sources */,
 				5700709E2A93C4BD00D7C1C6 /* SwipeRightToPopViewController.swift in Sources */,
 				084396212BCD633800C8E213 /* AllColoringCell.swift in Sources */,
 				57FE22012AA8C41E0060606F /* CGFloat+Extension.swift in Sources */,
@@ -2108,6 +2259,7 @@
 				08F75CEA2BE8D12A005ACDA9 /* DetailCollectionRoute.swift in Sources */,
 				570070A42A93C4BD00D7C1C6 /* Array++.swift in Sources */,
 				083CA3E62BC672DA006033EE /* StartColoringModel.swift in Sources */,
+				97DF85072C60AAE800FA19EF /* CalendarDateRangePickerHeaderView.swift in Sources */,
 				083CA3F22BC672DA006033EE /* HistoryColoringModel.swift in Sources */,
 				57AC39A22AA8707D0062ADF1 /* CameraManager.swift in Sources */,
 				570070A52A93C4BD00D7C1C6 /* AppRouter.swift in Sources */,
@@ -2207,7 +2359,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.7;
+				MARKETING_VERSION = 1.1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2253,7 +2405,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.7;
+				MARKETING_VERSION = 1.1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

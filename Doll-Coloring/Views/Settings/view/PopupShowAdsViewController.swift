@@ -84,7 +84,7 @@ extension PopupShowAdsViewController {
         viewPlayAds.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickShowAds)))
         viewShowIAP.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickShowIAP)))
         viewBound.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickClose)))
-        imageView.setImage(with: "/data_dollcoloring/" + (data?.filePath ?? ""))
+        imageView.setImage(with: data?.filePath ?? "")
         imageView.generateOuterShadow()
         listColor.delegate = self
         listColor.dataSource = self

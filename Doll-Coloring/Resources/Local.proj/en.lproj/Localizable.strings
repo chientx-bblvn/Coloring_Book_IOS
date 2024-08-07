@@ -43,7 +43,7 @@ Common.discard                                  =       "Discard";
 Common.SaveColoring                             =       "Do you want to save or discard?";
 Common.DescExit                                 =       "Are you sure you want to exit";
 Common.NoInternet                               =       "Ops! Lost internet connection";
-
+Common.CombackTomorrow                          =       "Please come back tomorrow to receive your gift 🎁!";
 
 Content_delete_collection                       =       "The color will be deleted \n Click delete to continue.";
 

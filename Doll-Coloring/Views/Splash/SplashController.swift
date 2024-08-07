@@ -14,6 +14,7 @@ import GoogleMobileAds
 import FBAudienceNetwork
 import AdmobSDK
 import SwiftyStoreKit
+import SDWebImage
 
 class SplashController: BaseViewController {
     @IBOutlet private weak var lbCopyright: UILabel!
@@ -122,6 +123,9 @@ extension SplashController {
                 UserDefaultManager.currentAccessAB_is_free_trial_US = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.is_free_trial_us)
                 newApiBaseURL = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiBaseURL)
                 apiAccessKey = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.APIAccessKey)
+                baseURLImage = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiURLImage)
+                let manager = SDWebImageDownloader.shared
+                manager.setValue(apiAccessKey, forHTTPHeaderField: "AccessKey")
                 self?.configLoaded = isLoaded
                 completion()
             })

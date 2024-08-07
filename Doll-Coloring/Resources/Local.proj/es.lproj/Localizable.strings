@@ -44,6 +44,7 @@ Common.discard                                  =       "Descartar";
 Common.SaveColoring                             =       "¿Quieres guardar o descartar?";
 Common.DescExit                                 =       "¿Estás seguro de que quieres salir?";
 Common.NoInternet                               =       "¡Vaya! Conexión a Internet perdida";
+Common.CombackTomorrow                          =       "¡Por favor, vuelve mañana para recibir tu regalo 🎁!";
 
 // Splash
 Splash.Copyright                                =       "®Derechos de autor por Binary Bridge Labs";

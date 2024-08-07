@@ -28,6 +28,7 @@ enum UserDefault: String {
     case fill_coloring = "fill_coloring"
     case state_show_iap = "state_show_iap"
     case is_free_trial_US = "is_free_trial_US"
+    case date_first_open_app = "date_first_open_app"
 }
 
 enum KeyChainKey: String, CaseIterable {

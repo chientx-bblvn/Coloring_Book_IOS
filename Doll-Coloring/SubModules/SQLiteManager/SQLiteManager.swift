@@ -151,6 +151,7 @@ class SQLiteManager {
     let tableColoring = Table("Coloring")
     let tableTheme = Table("ThemeAlbum")
     let tableColoringRew = Table("TableColoringRew")
+    let tableGitColoring = Table("TableGitColoring")
     
     func connectionDatabase() {
         if let foder =  path {
@@ -158,6 +159,8 @@ class SQLiteManager {
                 db = try Connection("\(foder)\(dbName)")
                 tablesColoringExists()
                 tablesColoringRewExists()
+                createTableGitColoring()
+                tablesGitColoringExists()
             } catch {
                 print("Connect DB fail")
             }
@@ -177,6 +180,14 @@ class SQLiteManager {
             return
         }
     }
+    
+    func tablesGitColoringExists() {
+        guard let itExists = try? db?.scalar(tableGitColoring.exists), itExists else {
+            createTableGitColoring()
+            return
+        }
+    }
+    
     
     func createTableColoringRew() {
         let filePath = Expression<String>("filePath")
@@ -203,6 +214,31 @@ class SQLiteManager {
             })
         } catch {
             print("Create table coloring fail", error.localizedDescription)
+        }
+    }
+    
+    func createTableGitColoring() {
+        let id = Expression<Int>("id")
+        let name = Expression<String>("name")
+        do {
+            try db?.run(tableGitColoring.create(ifNotExists: true, block: { column in
+                column.column(id, primaryKey: true)
+                column.column(name)
+            }))
+        } catch {
+            print("Create table daily coloring fail", error.localizedDescription)
+        }
+    }
+    
+    func insertTableGitColoring(_id: Int, _name: String) {
+        let id = Expression<Int>("id")
+        let name = Expression<String>("name")
+        let insert = tableGitColoring.insert(id <-  _id,
+                                          name <- _name)
+        do {
+            try db?.run(insert)
+        } catch {
+            print("Insert fail", error.localizedDescription)
         }
     }
     
@@ -262,6 +298,20 @@ class SQLiteManager {
         }
     }
     
+    func selectionGitColorings() -> [GitDailyColoring] {
+        let id = Expression<Int>("id")
+        let name = Expression<String>("name")
+        do {
+            let collections = try db?.prepare(tableGitColoring)
+            return collections?.map({ color in
+                GitDailyColoring(id: color[id], filePath: color[name])
+            }) ?? []
+        } catch {
+            print("select TableColoring fail: ", error.localizedDescription)
+            return []
+        }
+    }
+    
     func updateColorings(data: ColoringHistoryModel) -> Bool {
         let id = Expression<Int>("id")
         let historys = Expression<String>("historys")
@@ -273,7 +323,6 @@ class SQLiteManager {
             try db?.run(coloring.update(historys <- history))
             return true
         } catch {
-            
             print("updateColorings error", error.localizedDescription)
             return false
         }
@@ -323,4 +372,9 @@ struct ColoringLocalModel: Codable {
     var id: Int
     var url: String
     var filePath: [String]
+}
+
+struct GitDailyColoring {
+    var id: Int
+    var filePath: String
 }

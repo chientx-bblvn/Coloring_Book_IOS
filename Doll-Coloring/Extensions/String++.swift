@@ -69,6 +69,14 @@ extension String {
         index(startIndex, offsetBy: offset)
     }
     
+    func getDate(dateFormat: String,
+                 timeZone: TimeZone? = TimeZone.init(abbreviation: "UTC")) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        dateFormatter.timeZone = timeZone
+        return dateFormatter.date(from: self)
+    }
+    
 }
 
 extension String? {

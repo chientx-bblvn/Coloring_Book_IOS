@@ -44,6 +44,7 @@ Common.discard                                  =       "Bỏ";
 Common.SaveColoring                             =       "Bạn muốn lưu hay bỏ?";
 Common.DescExit                                 =       "Bạn có chắc chắn muốn thoát không?";
 Common.NoInternet                               =       "Rất tiếc! Mất kết nối internet";
+Common.CombackTomorrow                          =       "Hãy quay lại vào ngày mai để nhận quà của bạn 🎁!";
 
 // Splash
 Splash.Copyright = "®Bản quyền thuộc Binary Bridge Labs 2024";

@@ -11,6 +11,7 @@ import UIKit
 
 enum HomeRoute: Route {
     case main
+    case showCombackTomorrow
 
     var screen: UIViewController {
         switch self {
@@ -20,6 +21,9 @@ enum HomeRoute: Route {
             }
             main.viewModel = HomeVM()
             return main
+        case .showCombackTomorrow:
+            let vc = PopupTomorrowViewController.loadController()
+            return vc
         }
     }
 }

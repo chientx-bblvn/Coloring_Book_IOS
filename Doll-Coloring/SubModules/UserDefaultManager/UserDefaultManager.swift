@@ -130,4 +130,24 @@ class UserDefaultManager {
             UserDefaults.standard.synchronize()
         }
     }
+    
+    static var dateFirstOpenApp: String {
+        if let isDate = currentDateFirstOpenApp {
+            return isDate
+        } else {
+            return Date().toMyString(format: "dd/MM/yyyy")
+        }
+    }
+    
+    static var currentDateFirstOpenApp: String? {
+        get {
+            let isDate = UserDefaults.standard.string(forKey: UserDefault.date_first_open_app.rawValue)
+            return isDate
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefault.date_first_open_app.rawValue)
+            UserDefaults.standard.synchronize()
+        }
+    }
 }

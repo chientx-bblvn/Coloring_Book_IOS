@@ -44,6 +44,7 @@ Common.discard                                  =       "버리다";
 Common.SaveColoring                             =       "저장하시겠습니까 아니면 버리시겠습니까?";
 Common.DescExit                                 =       "정말로 종료하시겠습니까?";
 Common.NoInternet                               =       "이런! 인터넷 연결이 끊겼습니다";
+Common.CombackTomorrow                          =       "내일 선물을 받으러 다시 와주세요 🎁!";
 
 // Splash
 Splash.Copyright                                =       "®Binary Bridge Labs에 의한 저작권";

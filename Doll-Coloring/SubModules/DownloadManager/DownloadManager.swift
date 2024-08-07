@@ -50,6 +50,9 @@ enum DownloadError: Error {
     /// Delegate-based NSURLSession for DownloadManager
     lazy var session: URLSession = {
         let configuration = URLSessionConfiguration.default
+        var header = configuration.httpAdditionalHeaders ?? [:]
+        header["AccessKey"] = apiAccessKey
+        configuration.httpAdditionalHeaders = header
         return URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
     }()
     

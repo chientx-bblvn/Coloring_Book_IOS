@@ -112,7 +112,7 @@ struct _R {
       var default_title: RswiftResources.StringResource { .init(key: "default_title", tableName: "ErrorCode", source: source, developmentValue: "Error", comment: nil) }
     }
 
-    /// This `_R.string.localizable` struct is generated, and contains static references to 95 localization keys.
+    /// This `_R.string.localizable` struct is generated, and contains static references to 96 localization keys.
     struct localizable {
       let source: RswiftResources.StringResource.Source
 
@@ -150,6 +150,13 @@ struct _R {
       ///
       /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
       var commonCollections: RswiftResources.StringResource { .init(key: "Common.Collections", tableName: "Localizable", source: source, developmentValue: "Collections", comment: nil) }
+
+      /// en translation: Please come back tomorrow to receive your gift 🎁!
+      ///
+      /// Key: Common.CombackTomorrow
+      ///
+      /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
+      var commonCombackTomorrow: RswiftResources.StringResource { .init(key: "Common.CombackTomorrow", tableName: "Localizable", source: source, developmentValue: "Please come back tomorrow to receive your gift 🎁!", comment: nil) }
 
       /// en translation: Complete
       ///
@@ -815,7 +822,7 @@ struct _R {
     var textColor: RswiftResources.ColorResource { .init(name: "TextColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 730 images.
+  /// This `_R.image` struct is generated, and contains static references to 733 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -2778,6 +2785,9 @@ struct _R {
     /// Image `ic_back_right`.
     var ic_back_right: RswiftResources.ImageResource { .init(name: "ic_back_right", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `ic_back_right_calendar`.
+    var ic_back_right_calendar: RswiftResources.ImageResource { .init(name: "ic_back_right_calendar", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `ic_choose_subcription`.
     var ic_choose_subcription: RswiftResources.ImageResource { .init(name: "ic_choose_subcription", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -2822,6 +2832,9 @@ struct _R {
 
     /// Image `ic_fill_color_select`.
     var ic_fill_color_select: RswiftResources.ImageResource { .init(name: "ic_fill_color_select", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ic_git_lock`.
+    var ic_git_lock: RswiftResources.ImageResource { .init(name: "ic_git_lock", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_home`.
     var ic_home: RswiftResources.ImageResource { .init(name: "ic_home", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -2943,6 +2956,9 @@ struct _R {
     /// Image `ic_share`.
     var ic_share: RswiftResources.ImageResource { .init(name: "ic_share", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `ic_tabbar_calendar`.
+    var ic_tabbar_calendar: RswiftResources.ImageResource { .init(name: "ic_tabbar_calendar", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `ic_tabbar_collection`.
     var ic_tabbar_collection: RswiftResources.ImageResource { .init(name: "ic_tabbar_collection", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -3015,9 +3031,12 @@ struct _R {
     let apsEnvironment: String = "development"
   }
 
-  /// This `_R.file` struct is generated, and contains static references to 14 resource files.
+  /// This `_R.file` struct is generated, and contains static references to 15 resource files.
   struct file {
     let bundle: Foundation.Bundle
+
+    /// Resource file `AnimationGitDaly.json`.
+    var animationGitDalyJson: RswiftResources.FileResource { .init(name: "AnimationGitDaly", pathExtension: "json", bundle: bundle, locale: LocaleReference.none) }
 
     /// Resource file `GoogleService-Info.plist`.
     var googleServiceInfoPlist: RswiftResources.FileResource { .init(name: "GoogleService-Info", pathExtension: "plist", bundle: bundle, locale: LocaleReference.none) }
@@ -3062,7 +3081,7 @@ struct _R {
     var soundFillColorMp3: RswiftResources.FileResource { .init(name: "soundFillColor", pathExtension: "mp3", bundle: bundle, locale: LocaleReference.none) }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 41 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 48 nibs.
   struct nib {
     let bundle: Foundation.Bundle
 
@@ -3075,6 +3094,9 @@ struct _R {
     /// Nib `ButtonView`.
     var buttonView: RswiftResources.NibReference<UIKit.UIView> { .init(name: "ButtonView", bundle: bundle) }
 
+    /// Nib `CalendarMonthCell`.
+    var calendarMonthCell: RswiftResources.NibReference<CalendarMonthCell> { .init(name: "CalendarMonthCell", bundle: bundle) }
+
     /// Nib `CategoryColorCell`.
     var categoryColorCell: RswiftResources.NibReference<CategoryColorCell> { .init(name: "CategoryColorCell", bundle: bundle) }
 
@@ -3086,6 +3108,9 @@ struct _R {
 
     /// Nib `CategoryMenuCell`.
     var categoryMenuCell: RswiftResources.NibReference<CategoryMenuCell> { .init(name: "CategoryMenuCell", bundle: bundle) }
+
+    /// Nib `ChooseDateBlock`.
+    var chooseDateBlock: RswiftResources.NibReference<UIKit.UIView> { .init(name: "ChooseDateBlock", bundle: bundle) }
 
     /// Nib `CollectionCell`.
     var collectionCell: RswiftResources.NibReference<CollectionCell> { .init(name: "CollectionCell", bundle: bundle) }
@@ -3114,6 +3139,15 @@ struct _R {
     /// Nib `FillterColorCell`.
     var fillterColorCell: RswiftResources.NibReference<FillterColorCell> { .init(name: "FillterColorCell", bundle: bundle) }
 
+    /// Nib `GitDaylyCell`.
+    var gitDaylyCell: RswiftResources.NibReference<GitDaylyCell> { .init(name: "GitDaylyCell", bundle: bundle) }
+
+    /// Nib `GitViewController`.
+    var gitViewController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "GitViewController", bundle: bundle) }
+
+    /// Nib `HeaderDalyView`.
+    var headerDalyView: RswiftResources.NibReference<HeaderDalyView> { .init(name: "HeaderDalyView", bundle: bundle) }
+
     /// Nib `HeaderHomeCell`.
     var headerHomeCell: RswiftResources.NibReference<HeaderHomeCell> { .init(name: "HeaderHomeCell", bundle: bundle) }
 
@@ -3141,6 +3175,9 @@ struct _R {
     /// Nib `IntroductionCell`.
     var introductionCell: RswiftResources.NibReference<IntroductionCell> { .init(name: "IntroductionCell", bundle: bundle) }
 
+    /// Nib `ItemGitDalyCell`.
+    var itemGitDalyCell: RswiftResources.NibReference<ItemGitDalyCell> { .init(name: "ItemGitDalyCell", bundle: bundle) }
+
     /// Nib `LanguageCell`.
     var languageCell: RswiftResources.NibReference<LanguageCell> { .init(name: "LanguageCell", bundle: bundle) }
 
@@ -3164,6 +3201,9 @@ struct _R {
 
     /// Nib `PopupColoringViewController`.
     var popupColoringViewController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "PopupColoringViewController", bundle: bundle) }
+
+    /// Nib `PopupTomorrowViewController`.
+    var popupTomorrowViewController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "PopupTomorrowViewController", bundle: bundle) }
 
     /// Nib `PremiumFloatingView`.
     var premiumFloatingView: RswiftResources.NibReference<UIKit.UIView> { .init(name: "PremiumFloatingView", bundle: bundle) }
@@ -3197,6 +3237,7 @@ struct _R {
       if UIKit.UIColor(named: "TextColorSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondary' is used in nib 'AlertViewController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "color_shadow_button", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'color_shadow_button' is used in nib 'AlertViewController', but couldn't be loaded.") }
       if UIKit.UIImage(named: "ic_iap_item", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_iap_item' is used in nib 'AllColoringCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "ic_play_ads", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_play_ads' is used in nib 'AllColoringCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "ic_pro", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_pro' is used in nib 'AllColoringCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'AllColoringCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "SystemRed", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SystemRed' is used in nib 'AllColoringCell', but couldn't be loaded.") }
@@ -3206,6 +3247,10 @@ struct _R {
       if UIKit.UIColor(named: "color_shadow_button", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'color_shadow_button' is used in nib 'ButtonView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "ColorTextTopBar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTextTopBar' is used in nib 'CategoryColoringCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'CategoryMenuCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "chevron-back", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'chevron-back' is used in nib 'ChooseDateBlock', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "chevron-next", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'chevron-next' is used in nib 'ChooseDateBlock', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "ic_back_right_calendar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_back_right_calendar' is used in nib 'ChooseDateBlock', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "ColorTextTopBar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTextTopBar' is used in nib 'ChooseDateBlock', but couldn't be loaded.") }
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'CollectionCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "ColorBGAds", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGAds' is used in nib 'CustomMediaNativeAdView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'CustomMediaNativeAdView', but couldn't be loaded.") }
@@ -3261,6 +3306,8 @@ struct _R {
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'IntroductionCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'IntroductionCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColorSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondary' is used in nib 'IntroductionCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "ic_play_ads", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_play_ads' is used in nib 'ItemGitDalyCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "ColorTextTopBar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTextTopBar' is used in nib 'ItemGitDalyCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "VN", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'VN' is used in nib 'LanguageCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "ColorBGGray", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGGray' is used in nib 'LanguageCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'LanguageCell', but couldn't be loaded.") }
@@ -3279,6 +3326,8 @@ struct _R {
       if UIKit.UIColor(named: "ColorTitle", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTitle' is used in nib 'PopupColoringViewController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'PopupColoringViewController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "SystemRed", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SystemRed' is used in nib 'PopupColoringViewController', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "ColorTitle", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTitle' is used in nib 'PopupTomorrowViewController', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'PopupTomorrowViewController', but couldn't be loaded.") }
       if UIKit.UIImage(named: "floating_premium", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'floating_premium' is used in nib 'PremiumFloatingView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "icon_close_floating", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'icon_close_floating' is used in nib 'PremiumFloatingView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "background_splash", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'background_splash' is used in nib 'SplashController', but couldn't be loaded.") }
@@ -3322,7 +3371,7 @@ struct _R {
     let menuActionCell: RswiftResources.ReuseIdentifier<MenuActionCell> = .init(identifier: "MenuActionCell")
   }
 
-  /// This `_R.storyboard` struct is generated, and contains static references to 17 storyboards.
+  /// This `_R.storyboard` struct is generated, and contains static references to 18 storyboards.
   struct storyboard {
     let bundle: Foundation.Bundle
     var checkIn: checkIn { .init(bundle: bundle) }
@@ -3336,6 +3385,7 @@ struct _R {
     var mainColorings: mainColorings { .init(bundle: bundle) }
     var picker: picker { .init(bundle: bundle) }
     var pickerPhoto: pickerPhoto { .init(bundle: bundle) }
+    var popupDate: popupDate { .init(bundle: bundle) }
     var previewColoring: previewColoring { .init(bundle: bundle) }
     var saveColoring: saveColoring { .init(bundle: bundle) }
     var settings: settings { .init(bundle: bundle) }
@@ -3376,6 +3426,9 @@ struct _R {
     func pickerPhoto(bundle: Foundation.Bundle) -> pickerPhoto {
       .init(bundle: bundle)
     }
+    func popupDate(bundle: Foundation.Bundle) -> popupDate {
+      .init(bundle: bundle)
+    }
     func previewColoring(bundle: Foundation.Bundle) -> previewColoring {
       .init(bundle: bundle)
     }
@@ -3406,6 +3459,7 @@ struct _R {
       try self.mainColorings.validate()
       try self.picker.validate()
       try self.pickerPhoto.validate()
+      try self.popupDate.validate()
       try self.previewColoring.validate()
       try self.saveColoring.validate()
       try self.settings.validate()
@@ -3421,12 +3475,12 @@ struct _R {
 
       let name = "CheckIn"
 
-      var homeController: RswiftResources.StoryboardViewControllerIdentifier<CheckInController> { .init(identifier: "HomeController", storyboard: name, bundle: bundle) }
+      var checkInController: RswiftResources.StoryboardViewControllerIdentifier<CheckInController> { .init(identifier: "CheckInController", storyboard: name, bundle: bundle) }
 
       func validate() throws {
         if UIKit.UIImage(named: "ic_setting", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_setting' is used in storyboard 'CheckIn', but couldn't be loaded.") }
         if UIKit.UIColor(named: "ColorTextTopBar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTextTopBar' is used in storyboard 'CheckIn', but couldn't be loaded.") }
-        if homeController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'homeController' could not be loaded from storyboard 'CheckIn' as 'CheckInController'.") }
+        if checkInController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'checkInController' could not be loaded from storyboard 'CheckIn' as 'CheckInController'.") }
       }
     }
 
@@ -3589,6 +3643,24 @@ struct _R {
         if UIKit.UIImage(named: "pick_photo", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'pick_photo' is used in storyboard 'PickerPhoto', but couldn't be loaded.") }
         if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in storyboard 'PickerPhoto', but couldn't be loaded.") }
         if pickerPhotoController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'pickerPhotoController' could not be loaded from storyboard 'PickerPhoto' as 'PickerPhotoController'.") }
+      }
+    }
+
+    /// Storyboard `PopupDate`.
+    struct popupDate: RswiftResources.StoryboardReference {
+      let bundle: Foundation.Bundle
+
+      let name = "PopupDate"
+
+      var popupDateRangeController: RswiftResources.StoryboardViewControllerIdentifier<PopupDateRangeController> { .init(identifier: "PopupDateRangeController", storyboard: name, bundle: bundle) }
+
+      func validate() throws {
+        if UIKit.UIColor(named: "ColorBlack30", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBlack30' is used in storyboard 'PopupDate', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "ColorWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorWhite' is used in storyboard 'PopupDate', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "MainBackground", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainBackground' is used in storyboard 'PopupDate', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in storyboard 'PopupDate', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in storyboard 'PopupDate', but couldn't be loaded.") }
+        if popupDateRangeController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'popupDateRangeController' could not be loaded from storyboard 'PopupDate' as 'PopupDateRangeController'.") }
       }
     }
 

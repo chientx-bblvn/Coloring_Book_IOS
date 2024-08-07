@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GitViewController" customModule="Doll_Coloring" customModuleProvider="target">
+            <connections>
+                <outlet property="animationView" destination="mSu-GB-u9X" id="2VN-mb-YHP"/>
+                <outlet property="imageView" destination="ZN3-DZ-3YO" id="r0O-rz-cwc"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G45-ui-uwn">
+                    <rect key="frame" x="46.666666666666657" y="288.66666666666669" width="300" height="300.00000000000006"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZN3-DZ-3YO">
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                        </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mSu-GB-u9X" customClass="LottieAnimationView" customModule="Lottie">
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="B4j-mb-0bk"/>
+                        <constraint firstItem="ZN3-DZ-3YO" firstAttribute="top" secondItem="G45-ui-uwn" secondAttribute="top" id="FRy-cQ-puF"/>
+                        <constraint firstAttribute="bottom" secondItem="mSu-GB-u9X" secondAttribute="bottom" id="HPq-VO-Ibs"/>
+                        <constraint firstAttribute="bottom" secondItem="ZN3-DZ-3YO" secondAttribute="bottom" id="Tyn-Ey-Fzg"/>
+                        <constraint firstItem="mSu-GB-u9X" firstAttribute="top" secondItem="G45-ui-uwn" secondAttribute="top" id="UXs-mX-IGJ"/>
+                        <constraint firstAttribute="height" constant="300" id="cuL-t2-Tet"/>
+                        <constraint firstAttribute="trailing" secondItem="ZN3-DZ-3YO" secondAttribute="trailing" id="l5H-iZ-e2R"/>
+                        <constraint firstItem="mSu-GB-u9X" firstAttribute="leading" secondItem="G45-ui-uwn" secondAttribute="leading" id="rcs-yj-50m"/>
+                        <constraint firstAttribute="trailing" secondItem="mSu-GB-u9X" secondAttribute="trailing" id="shJ-pG-0AB"/>
+                        <constraint firstItem="ZN3-DZ-3YO" firstAttribute="leading" secondItem="G45-ui-uwn" secondAttribute="leading" id="wPE-sg-PCM"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
+                            <real key="value" value="16"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="G45-ui-uwn" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="FhH-75-BXo"/>
+                <constraint firstItem="G45-ui-uwn" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="q9n-Dr-0cu"/>
+            </constraints>
+            <point key="canvasLocation" x="138" y="21"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

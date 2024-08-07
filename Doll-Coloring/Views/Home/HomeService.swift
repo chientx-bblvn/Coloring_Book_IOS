@@ -13,6 +13,7 @@ enum HomeService {
     case list
     case category
     case detailCategory(path: String)
+    case newList
 }
 extension HomeService: TargetType {
     
@@ -24,6 +25,8 @@ extension HomeService: TargetType {
             return URL(string: newApiBaseURL)!
         case .detailCategory:
             return URL(string: baseURLImage)!
+        case .newList:
+            return URL(string: newApiBaseURL)!
         }
         
     }
@@ -36,6 +39,8 @@ extension HomeService: TargetType {
             return ""
         case let .detailCategory(path):
             return "\(path)/"
+        case .newList:
+            return ""
         }
     }
     
@@ -46,6 +51,8 @@ extension HomeService: TargetType {
         case .category:
             return .get
         case .detailCategory:
+            return .get
+        case .newList:
             return .get
         }
     }
@@ -59,6 +66,8 @@ extension HomeService: TargetType {
             return .requestPlain
         case .detailCategory:
             return .requestPlain
+        case .newList:
+            return .requestPlain
         }
     }
     
@@ -68,7 +77,11 @@ extension HomeService: TargetType {
     
     public var headers: [String: String]? {
         switch self {
-        case .list, .category, .detailCategory:
+        case .list:
+            return [
+                "Content-type": "application/json"
+            ]
+        case .category, .detailCategory, .newList:
             return [
                 "AccessKey": apiAccessKey,
                 "Content-type": "application/json"

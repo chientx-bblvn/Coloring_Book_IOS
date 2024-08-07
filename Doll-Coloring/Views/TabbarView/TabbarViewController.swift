@@ -32,7 +32,7 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
     let homeStoryboard = HomeRoute.main.screen
     let chatStoryboard = CollectionsRoute.main(navigate: false).screen
     let checkInStoryboard = CheckInRoute.main.screen
-    
+    private var indexScreen: Int = 0
     public var viewControllers = [UIViewController]() {
         didSet {
             tabBar.viewControllers = viewControllers
@@ -48,6 +48,7 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        loadAdsBanner()
     }
     
     override func loadView() {
@@ -73,10 +74,20 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         ])
         homeStoryboard.tabBarItem = UITabBarItem(title: LocalizableUtils.commonHome(), image: UIImage(named: "ic_home_tabbar"), selectedImage: UIImage(named: "ic_home_tabbar_select"))
         chatStoryboard.tabBarItem = UITabBarItem(title: LocalizableUtils.commonCollections(), image: UIImage(named: "ic_tabbar_collection"), selectedImage: UIImage(named: "ic_tabbar_collection_select"))
-//        checkInStoryboard.tabBarItem = UITabBarItem(title: <#T##String?#>, image: <#T##UIImage?#>, tag: <#T##Int#>)
-        viewControllers = [homeStoryboard, chatStoryboard]
+        checkInStoryboard.tabBarItem = UITabBarItem(title: LocalizableUtils.commonCheckIn(), image: UIImage(named: "ic_tabbar_calendar"), selectedImage: UIImage(named: "ic_tabbar_calendar"))
+        viewControllers = [homeStoryboard, chatStoryboard, checkInStoryboard]
         NotificationCenter.default.addObserver(self, selector: #selector(gotoHome), name: NSNotification.Name("GOTOHOME_TABBAR"), object: nil)
-        loadAdsBanner()
+        NotificationCenter.default.addObserver(self, selector: #selector(gotoDaily), name: NSNotification.Name("GOTODAILY_TABBAR"), object: nil)
+//        loadAdsBanner()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { (_) -> Void in
+            self.tabBar.updateRotationTabbar(index: self.indexScreen)
+        }, completion: { (_) -> Void in
+            print("rotation completed")
+        })
+        super.viewWillTransition(to: size, with: coordinator)
     }
     
     private func settingIAP() {
@@ -94,6 +105,7 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         let vc = viewControllers[index]
         addChild(vc)
         selectedIndex = index + 1
+        indexScreen = index
         vc.view.frame = viewContent.bounds
         viewContent.addSubview(vc.view)
         vc.didMove(toParent: self)
@@ -101,6 +113,10 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
     
     @objc private func gotoHome() {
         tabBar.didSelectTab(index: 0)
+    }
+    
+    @objc private func gotoDaily() {
+        tabBar.didSelectTab(index: 2)
     }
     
     private func getCurrentHeightAds(isSuccess: Bool = true) {
@@ -111,7 +127,7 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         if DeviceInfos.isIpad() {
             heightContraintAds.constant = 90
         } else {
-            heightContraintAds.constant = 70
+            heightContraintAds.constant = 60
         }
     }
     
@@ -119,7 +135,7 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         if DeviceInfos.isIpad() {
             heightContraintAds.constant = 90
         } else {
-            heightContraintAds.constant = 70
+            heightContraintAds.constant = 60
         }
         viewAds.isHidden = false
         ADManager.shared.loadBanner(DollColoringAdID.banner_home, viewBanner: viewAds) {[weak self] success in

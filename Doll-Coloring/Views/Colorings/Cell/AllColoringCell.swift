@@ -17,15 +17,17 @@ class AllColoringCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var progessRing: ALProgressRing!
     @IBOutlet weak var lbPercentColoring: UILabel!
     @IBOutlet weak var viewWatchAds: UIButton!
+    @IBOutlet weak var showAdsDaily: UIImageView!
     
-   
+    var days: Int = 0
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         progessRing.lineWidth = 5
     }
     
-    func setupView(image: String?, coloringLocal: [ColoringHistoryModel], filePath: String?) {
+    func setupView(image: String?, coloringLocal: [ColoringHistoryModel], filePath: String?, isDaily: Bool = false, index: Int) {
+        showAdsDaily.isHidden = true
         if let coloring = coloringLocal.first(where: {$0.filePath.contains(filePath ?? "")}) {
             if let file = coloring.historys.last?.imagePath {
                 progessRing.isHidden = false
@@ -40,11 +42,30 @@ class AllColoringCell: UICollectionViewCell, NibReusable {
                 progessRing.isHidden = true
                 SQLiteManager.shared.deleteColorings(id: coloring.id)
                 FileManagerLocal.shared.deleteFile(typeFile: .Coloring, fileName: coloring.fileLocal)
-                imageView.setImage(with: "/data_dollcoloring/" + (image ?? ""), placeholder: nil)
+                if isDaily {
+                    if SQLiteManager.shared.selectionGitColorings().contains(where: {$0.filePath.contains(image ?? "")}) {
+                        imageView.setImage(with: image, placeholder: nil)
+                    } else {
+                        imageView.image = R.image.ic_git_lock()
+                    }
+                } else {
+                    imageView.setImage(with: image, placeholder: nil)
+                }
             }
         } else {
             progessRing.isHidden = true
-            imageView.setImage(with: "/data_dollcoloring/" + (image ?? ""), placeholder: nil)
+            if isDaily {
+                if SQLiteManager.shared.selectionGitColorings().contains(where: {$0.filePath.contains(image ?? "")}) {
+                    imageView.setImage(with: image, placeholder: nil)
+                } else if index <= days {
+                    showAdsDaily.isHidden = false
+                    imageView.setImage(with: image, placeholder: nil)
+                } else {
+                    imageView.image = R.image.ic_git_lock()
+                }
+            } else {
+                imageView.setImage(with: image, placeholder: nil)
+            }
         }
     }
     

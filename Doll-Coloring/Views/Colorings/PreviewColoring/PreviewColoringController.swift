@@ -48,11 +48,11 @@ class PreviewColoringController: BaseViewController {
         topBarView.titleFont = .systemFont(ofSize: 24, weight: .bold)
         animationView.loadAnimation(file: "animation_progess", loopMode: .loop)
         animationPreview.loadAnimation(file: "animation_loading_preview", loopMode: .loop, autoPlay: true, animationSpeed: 1.2)
-        var preview = apiBaseUrl + "/data_dollcoloring/" + (viewModel.coloring?.filePreview ?? "")
+        var preview = ""
         if let filePreview = viewModel.coloring?.filePreview, !filePreview.isEmpty {
-            preview = apiBaseUrl + "/data_dollcoloring/" + (filePreview)
+            preview = filePreview
         } else {
-            preview = apiBaseUrl + "/data_dollcoloring/" + (viewModel.coloring?.filePath ?? "")
+            preview = (viewModel.coloring?.filePath ?? "")
         }
         
         if let coloring = viewModel.coloringLocal {
@@ -76,7 +76,7 @@ class PreviewColoringController: BaseViewController {
                 self.createColoringBookView(with: img.uiImage)
             }
         } else {
-            let path = apiBaseUrl + "/data_dollcoloring/" + (viewModel.coloring?.filePath ?? "")
+            let path = baseURLImage + (viewModel.coloring?.filePath ?? "")
             imgView.setImage(with: preview, placeholder: nil)
             downloadImageColor(linkDowload: path)
         }
@@ -138,6 +138,7 @@ class PreviewColoringController: BaseViewController {
     func createColoringBookView(with image:UIImage, optimized:Bool = true) {
         DispatchQueue.global(qos: .background).async{
             //Create the coloring image struct in a background thread
+            
             let coloringImage = ColoringImageBook(from: image, optimized: optimized)
             //Once done return to the main thread
             DispatchQueue.main.async{

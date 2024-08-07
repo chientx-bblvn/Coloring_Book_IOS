@@ -16,7 +16,7 @@ import SDWebImage
 
 class CheckInController: BaseViewController {
     
-    var viewModel: HomeVM!
+    var viewModel: DalyMonthVM!
     
     @IBOutlet weak var topbarView: TopBarView!
     
@@ -47,67 +47,28 @@ class CheckInController: BaseViewController {
                 height = height * (220 / 768)
             } else {
                 height = height * (200 / 393)
-                
             }
             heightSlider.constant = height
         }
     }
     
-    @IBOutlet weak var widthSlider: NSLayoutConstraint! {
-        didSet {
-            widthSlider.constant =  UIScreen.main.bounds.width
-        }
-    }
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var bmoViewPagerNavigation: BmoViewPagerNavigationBar!
-    
-    @IBOutlet weak var bmoViewPager: BmoViewPager!
-    
-    private var viewPageController: [PageViewSwirlViewController] = []
-    
-    private var numberClick = 4
     private var typeHome = TypeHome.allCases
     private var bannerHome: BannerHome = .iphone
     private var isLandscape: Bool = false
-    
-    private var timeDistanceShowad: TimeInterval = 5
-    private var currentTime: TimeInterval = 0
-    private var hasAd = true
-    
-    override func loadView() {
-        super.loadView()
-        
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            bannerHome = .ipad
-        }
-        topbarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
-        topbarView.title = ""
-        topbarView.onRightClick = {
-            self.showSettingView()
-        }
-        topbarView.onClickPremium = {
-            SubcriptionViewController.show(checkTime: true)
-        }
-        enableAudioBackground()
-        loadLanguage()
-        setupView()
-        settingIAP()
-        requestNotification()
-        let archiveFiles = ArchiveFileLocal.allCases
-        
-        for file in archiveFiles {
-            if !FileManagerLocal.shared.checkFileExits(typeFile: file, fileName: "") {
-                FileManagerLocal.shared.createFolderManager(fileName: file.rawValue)
-            }
-        }
-        ADManager.shared.preLoadReward(DollColoringAdID.reward_alltopic)
-    }
+    private var coloringLocal = SQLiteManager.shared.selectionColorings()
+    private var currentDay: Int = 0
     
     override func setup() {
         super.setup()
-        if UserDefaultManager.ABShowIAPColoring, !IAPState.isUserVip {
-            SubcriptionViewController.show(checkTime: true)
-        }
+        setupView()
+        ADManager.shared.preLoadReward(DollColoringAdID.reward_dailygift)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        coloringLocal = SQLiteManager.shared.selectionColorings()
+        collectionView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -122,45 +83,6 @@ class CheckInController: BaseViewController {
         loadLanguage()
     }
     
-    override func bindingData() {
-        super.bindingData()
-        viewModel.getColorings {[weak self] in
-            guard let self = self else {return}
-            self.viewPageController.removeAll()
-            self.viewModel.colorings.forEach { model in
-                let vc = PageViewSwirlViewController.loadController()
-                vc.categoryName = model.categoryName
-                vc.itemColoring = model.imageUrls ?? []
-                vc.handleScrollView = { scroll in
-                    self.scrollView(scroll)
-                }
-                vc.onClickItem = { item in
-                    guard UserDefaultManager.ABShowIAPColoring else {
-                        if (item.isPremium ?? false) {
-                            self.showRew(item)
-                        } else {
-                            self.showInter(item)
-                        }
-                        return
-                    }
-                    
-                    if UserDefaultManager.ABis_free_trial_us {
-                        self.showRew(item)
-                    } else {
-                        if (item.isPremium ?? false) {
-                            self.showIAP(item)
-                        } else {
-                            self.showInter(item)
-                        }
-                    }
-                }
-                self.viewPageController.append(vc)
-                self.bmoViewPager.reloadData()
-                self.bmoViewPagerNavigation.reloadData()
-            }
-        }
-    }
-    
     override func updateMorePortrait() {
         super.updateMorePortrait()
         updateLayoutContent()
@@ -171,24 +93,28 @@ class CheckInController: BaseViewController {
         updateLayoutContent()
     }
     
-    private func settingIAP() {
-        InappManager.share.didPaymentSuccess.subscribe(onNext: { [weak self] _ in
-            self?.topbarView.showPremium = UserDefaultManager.ABShowIAPColoring
-        }).disposed(by: disposeBag)
-    }
-    
     func setupView() {
-        setupPageView()
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            bannerHome = .ipad
+        }
+        topbarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
+        topbarView.title = ""
+        topbarView.onRightClick = {
+            self.showSettingView()
+        }
         updateLayoutContent()
-        timeDistanceShowad = TimeInterval(ADManager.shared.timeRemoteShowFull)
-        numberClick = UserDefaultManager.numberClickItemAllTopic
+        loadLanguage()
+        setupCollectionView()
     }
     
-    private func requestNotification() {
-        BBLLogging.d("Check:: requestNotification")
-        appDelegate?.requestNotificationPermission(completion: { success, error in
-            BBLLogging.d("Check:: requestNotificationPermission  --   success: \(success)  error: \(error?.localizedDescription ?? "error")")
-        })
+    private func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(cellType: ItemGitDalyCell.self)
+        collectionView.register(cellType: GitDaylyCell.self)
+        collectionView.register(UINib(nibName: "HeaderDalyView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderDalyView")
+        collectionView.register(UINib(nibName: "HeaderDalyView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "HeaderDalyView")
+        collectionView.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
     
     private func updateLayoutContent() {
@@ -211,72 +137,6 @@ class CheckInController: BaseViewController {
         
     }
     
-    private func requestGDPRAndATT(completion: @escaping (() -> Void)) {
-        BBLLogging.d("Check:: requestGDPRAndATT")
-        appDelegate?.requestShowUMPForEEAMarket(idx: 1, completion: { accepted in
-            let needAcceptConsent = RemoteConfigManager.shared.getValue(by: RMBGRemoteConfig.needAcceptConsent)?.boolValue ?? true
-            BBLLogging.d("Check:: requestShowUMPForEEAMarket   ---  accepted: \(accepted)  needAcceptConsent: \(needAcceptConsent)")
-            if !needAcceptConsent {
-                FBAdSettings.setAdvertiserTrackingEnabled(true)
-                completion()
-                return
-            }
-            if accepted {
-                FBAdSettings.setAdvertiserTrackingEnabled(true)
-            }
-            completion()
-        })
-    }
-    
-    private func setupPageView() {
-        bmoViewPagerNavigation.viewPager = bmoViewPager
-        bmoViewPager.scrollable = true
-        bmoViewPager.infinitScroll = false
-        bmoViewPager.delegate = self
-        bmoViewPager.dataSource = self
-    }
-}
-
-extension CheckInController: BmoViewPagerDelegate, BmoViewPagerDataSource {
-    func bmoViewPagerDataSourceNumberOfPage(in viewPager: BmoViewPager) -> Int {
-        return viewPageController.count
-    }
-    
-    func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController {
-        return viewPageController[page]
-    }
-}
-
-extension CheckInController {
-    func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> String? {
-        return viewModel.colorings[page].categoryName?.capitalized
-    }
-    
-    func bmoViewPagerDataSourceNaviagtionBarItemNormalBackgroundView(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> UIView? {
-        return nil
-    }
-    
-    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> UIView? {
-        let viewBackground = UIView()
-        viewBackground.translatesAutoresizingMaskIntoConstraints = false
-        viewBackground.backgroundColor = R.color.mainPrimary()
-        viewBackground.layer.cornerRadius = 8
-        return viewBackground
-    }
-    
-    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedString.Key : Any]? {
-        return [
-            .font: UIFont.boldSystemFont(ofSize: 14),
-            .foregroundColor: UIColor.white
-        ]
-    }
-    
-    func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedString.Key : Any]? {
-        return [
-            .font: UIFont.boldSystemFont(ofSize: 14),
-            .foregroundColor: R.color.colorTitle()!
-        ]
-    }
 }
 
 extension CheckInController: FSPagerViewDataSource,FSPagerViewDelegate {
@@ -310,76 +170,72 @@ extension CheckInController: FSPagerViewDataSource,FSPagerViewDelegate {
     }
 }
 
-extension CheckInController {
+extension CheckInController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    func scrollView(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        var height = UIScreen.main.bounds.width
-        let headerHeightMin: CGFloat = 0
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            height = height * (220 / 768)
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return viewModel.monthsData.count + 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
         } else {
-            height = height * (200 / 393)
-            
-        }
-        let newHeaderHeight = max(headerHeightMin, height - offsetY)
-        
-        heightSlider.constant = newHeaderHeight
-        
-        if (height / 2) >= newHeaderHeight {
-            UIView.animate(withDuration: 0.2) {
-                self.topbarView.isHidden = true
-            }
-        } else {
-            UIView.animate(withDuration: 0.2) {
-                self.topbarView.isHidden = false
-            }
-        }
-        
-        UIView.animate(withDuration: 0.2) {
-            self.view.layoutIfNeeded()
+           return viewModel.monthsData[section - 1].day.count
         }
     }
     
-    
-    func showIAP(_ data: ColoringImage) {
-        guard IAPState.isUserVip else {
-            
-            if SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil {
-                navigateColoring(data)
-                return
-            }
-            
-            SubcriptionViewController.show(checkTime: true) {
-                
-            } onClickCLose: {
-                self.showRew(data)
-            }
-            return
-        }
-        navigateColoring(data)
-    }
-    
-    func showInter(_ data: ColoringImage) {
-        numberClick += 1
-        if numberClick >= UserDefaultManager.numberClickItemAllTopic {
-            if !UserDefaultManager.disableMusicBackground {
-                pauseAudioBackground()
-            }
-            ADManager.shared.loadFull(DollColoringAdID.inter_alltopic, isSplash: true) {[weak self] status in
-                switch status {
-                case .closed, .error:
-                    if !UserDefaultManager.disableMusicBackground {
-                        self?.playAudioBackground()
-                    }
-                    self?.numberClick = 0
-                    self?.navigateColoring(data)
-                default:
-                    break
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.section == 0 {
+            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: GitDaylyCell.self)
+            if viewModel.totalGitDaly == 0 {
+                cell.loadImage(image: viewModel.itemDaly.first?.filePath ?? "")
+            } else {
+                if viewModel.itemDaly.count > viewModel.totalGitDaly {
+                    cell.loadImage(image: viewModel.itemDaly[viewModel.totalGitDaly].filePath ?? "")
+                } else {
+                    cell.loadImage(image: viewModel.itemDaly.first?.filePath ?? "")
                 }
             }
+            cell.coloringLocal = coloringLocal
+            cell.onclickImage = {[weak self] name in
+                if let data = self?.viewModel.itemDaly.first(where: {$0.filePath?.contains(name) ?? false}) {
+                    self?.navigateColoring(data)
+                }
+            }
+            return cell
         } else {
-            navigateColoring(data)
+            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: ItemGitDalyCell.self)
+            let image = viewModel.monthsData[indexPath.section - 1].image.reversed()[indexPath.row]
+            if let coloring = coloringLocal.first(where: {$0.filePath.contains(image)}) {
+                if let file = coloring.historys.last?.imagePath {
+                    let imageUrlString = FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: file)
+                    let cacheKey = SDWebImageManager.shared.cacheKey(for: imageUrlString)
+                    SDImageCache.shared.removeImage(forKey: cacheKey, withCompletion: nil)
+                    cell.imageItem.setLocalImage(with: imageUrlString.path, placeholder: nil)
+                } else {
+                    cell.imageItem.setImage(with: image)
+                }
+            } else {
+                cell.imageItem.setImage(with: image)
+            }
+            cell.imageAds.isHidden = SQLiteManager.shared.selectionGitColorings().contains(where: {$0.filePath.contains(image)})
+            cell.lbDate.text = "\(viewModel.monthsData[indexPath.section - 1].day.reversed()[indexPath.row])"
+            return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section != 0 {
+            let image  = viewModel.monthsData[indexPath.section - 1].image.reversed()[indexPath.row]
+            if SQLiteManager.shared.selectionGitColorings().contains(where: {$0.filePath.contains(image)}) {
+                if let data = viewModel.itemDaly.first(where: {$0.filePath?.contains(image) ?? false}) {
+                    navigateColoring(data)
+                }
+            } else {
+                if let data = viewModel.itemDaly.first(where: {$0.filePath?.contains(image) ?? false}) {
+                    showRew(data)
+                }
+            }
         }
     }
     
@@ -396,13 +252,14 @@ extension CheckInController {
             pauseAudioBackground()
         }
         PopupShowAdsViewController.show(in: self, data: data, {
-            ADManager.shared.loadReward(DollColoringAdID.reward_alltopic) { status in
+            ADManager.shared.loadReward(DollColoringAdID.reward_dailygift) { status in
                 switch status {
                 case .closed:
                     if !UserDefaultManager.disableMusicBackground {
                         self.playAudioBackground()
                     }
                     SQLiteManager.shared.insertTableColoringRew(data: data)
+                    SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
                     self.navigateColoring(data)
                 case .error:
                     self.loadInter(data)
@@ -416,12 +273,13 @@ extension CheckInController {
     }
     
     func loadInter(_ data: ColoringImage) {
-        ADManager.shared.loadFull(DollColoringAdID.inter_alltopic, isSplash: true){[weak self] state in
+        ADManager.shared.loadFull(DollColoringAdID.inter_dailygift, isSplash: true){[weak self] state in
             switch state {
             case .closed, .error :
                 if !UserDefaultManager.disableMusicBackground {
                     self?.playAudioBackground()
                 }
+                SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
                 self?.navigateColoring(data)
             default:
                 break
@@ -430,10 +288,48 @@ extension CheckInController {
     }
     
     func navigateColoring(_ data: ColoringImage) {
-        if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath == data.filePath}) {
+        if let path = data.filePath?.components(separatedBy: "/").last, let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath.contains(path)}) {
             AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .home, coloringAPI: data), with: .modal)
         } else {
             AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .home), with: .modal)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            guard let cell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderDalyView", for: indexPath) as? HeaderDalyView else {return UICollectionReusableView()}
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMMM"
+            if indexPath.section == 0 {
+                cell.lbTitle.text = "Gift Today"
+            } else {
+                let month = dateFormatter.string(from: viewModel.monthsData.reversed()[indexPath.section - 1].month)
+                cell.lbTitle.text = month.capitalized
+            }
+            return cell
+        case UICollectionView.elementKindSectionFooter:
+            guard let cell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "HeaderDalyView", for: indexPath) as? HeaderDalyView else {return UICollectionReusableView()}
+            return cell
+        default:
+            fatalError("Unexpected element kind")
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 32, height: 0.001)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 32, height: 30)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.section == 0 {
+            return CGSize (width: collectionView.frame.width - 32, height: collectionView.frame.height * 0.5)
+        } else {
+            let width = (collectionView.frame.width - 32 - (16 * 3)) / 3
+            return CGSize(width: width, height: width)
         }
     }
 }

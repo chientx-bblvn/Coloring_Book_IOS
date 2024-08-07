@@ -16,7 +16,7 @@ let apiBaseUrl: String = "https://ico.binarybridge.dev"
 let privacyUrl: String = "https://sites.google.com/binarybridge.dev/suunguyen-privacy-policy/home"
 let termsUrl: String = "https://sites.google.com/binarybridge.dev/terms-conditions-binary-bridge/home"
 var newApiBaseURL: String = ""
-let baseURLImage: String = "https://storage.bunnycdn.com"
+var baseURLImage: String = ""
 var apiAccessKey: String = ""
 
 let isDev = false
@@ -100,6 +100,8 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
     case native_language_2nd = "native_language_2nd"
     case inter_edit_collection = "inter_edit_collection"
     case appopen_allprice = "appopen_allprice"
+    case reward_dailygift = "reward_dailygift"
+    case inter_dailygift = "inter_dailygift"
     
     var name: String { return self.rawValue }
     
@@ -152,6 +154,10 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
             return .Native
         case .appopen_allprice:
             return .OpenApp
+        case .reward_dailygift:
+            return .Reward
+        case .inter_dailygift:
+            return .Interstitial
         }
     }
     
@@ -203,6 +209,10 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
             return "ca-app-pub-3850749456614322/8443377784"
         case .appopen_allprice:
             return "ca-app-pub-3850749456614322/5998498061"
+        case .reward_dailygift:
+            return "ca-app-pub-3850749456614322/3958607753"
+        case .inter_dailygift:
+            return "ca-app-pub-3850749456614322/2525535769"
         }
     }
     
@@ -273,6 +283,7 @@ enum KeyRemoteConfig: String, KeyRemote {
     case is_free_trial_us = "is_free_trial_us"
     case APIAccessKey = "Api_Access_Key"
     case ApiBaseURL = "Api_Base_URL"
+    case ApiURLImage = "URlImageKey"
     
     var key: String {return self.rawValue}
 }

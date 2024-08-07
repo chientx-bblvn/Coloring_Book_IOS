@@ -18,6 +18,7 @@ class HomeVM {
     
     var itemColoring: [ColoringImage] = []
     var categoryColoring: [ImageColoring] = []
+    var itemDaly: [ColoringImage] = []
     
     init() {
     }
@@ -35,11 +36,13 @@ class HomeVM {
         }
     }
     
-    func getCategoryColoring(complection: @escaping () -> Void) {
+    func getNewColorings(complection: @escaping () -> Void) {
         SVProgressHUD.show()
-        serviceManager.requestAPI(.list, type: [ImageColoring].self) {[weak self] isSuccess, response in
+        serviceManager.requestAPI(.newList, type: [ColoringModel].self) {[weak self] isSuccess, response in
             SVProgressHUD.dismiss()
-            self?.categoryColoring = response
+            self?.colorings = response
+            self?.itemColoring = response.first?.imageUrls ?? []
+            self?.itemDaly = response.first(where: {$0.categoryName?.contains("Daily") ?? false})?.imageUrls ?? []
             complection()
         } onFailed: { error in
             complection()
@@ -47,17 +50,7 @@ class HomeVM {
         }
     }
     
-    func getImageColorings(complection: @escaping () -> Void) {
-        SVProgressHUD.show()
-        serviceManager.requestAPI(.list, type: [ImageColoring].self) {[weak self] isSuccess, response in
-            SVProgressHUD.dismiss()
-            self?.categoryColoring = response
-            complection()
-        } onFailed: { error in
-            complection()
-            SVProgressHUD.dismiss()
-        }
-    }
+    
 }
 
 extension HomeVM {

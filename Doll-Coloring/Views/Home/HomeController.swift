@@ -124,17 +124,29 @@ class HomeController: BaseViewController {
     
     override func bindingData() {
         super.bindingData()
-        viewModel.getColorings {[weak self] in
+        viewModel.getNewColorings {[weak self] in
             guard let self = self else {return}
             self.viewPageController.removeAll()
+            let day = calculatorDays()
             self.viewModel.colorings.forEach { model in
                 let vc = PageViewSwirlViewController.loadController()
                 vc.categoryName = model.categoryName
                 vc.itemColoring = model.imageUrls ?? []
+                vc.totalDays = day
                 vc.handleScrollView = { scroll in
                     self.scrollView(scroll)
                 }
-                vc.onClickItem = { item in
+                vc.onClickItem = { item, categoty, index in
+                    guard !(categoty.contains("Daily")) else {
+                        if SQLiteManager.shared.selectionGitColorings().contains(where: {$0.filePath.contains(item.filePath ?? "")}) {
+                            self.navigateColoring(item)
+                        } else if index <= day {
+                            self.showRewDaily(item)
+                        } else {
+                            AppRouter.shared.navigate(to: HomeRoute.showCombackTomorrow, with: .modal, animated: false)
+                        }
+                        return
+                    }
                     guard UserDefaultManager.ABShowIAPColoring else {
                         if (item.isPremium ?? false) {
                             self.showRew(item)
@@ -158,6 +170,8 @@ class HomeController: BaseViewController {
                 self.bmoViewPager.reloadData()
                 self.bmoViewPagerNavigation.reloadData()
             }
+            self.bmoViewPager.presentedPageIndex = 1
+            self.calculatorDay()
         }
     }
     
@@ -429,11 +443,105 @@ extension HomeController {
         }
     }
     
+    func showRewDaily(_ data: ColoringImage) {
+        guard SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) == nil else {
+            navigateColoring(data)
+            return
+        }
+        if IAPState.isUserVip {
+            navigateColoring(data)
+            return
+        }
+        if !UserDefaultManager.disableMusicBackground {
+            pauseAudioBackground()
+        }
+        PopupShowAdsViewController.show(in: self, data: data, {
+            ADManager.shared.loadReward(DollColoringAdID.reward_dailygift) { status in
+                switch status {
+                case .closed:
+                    if !UserDefaultManager.disableMusicBackground {
+                        self.playAudioBackground()
+                    }
+                    SQLiteManager.shared.insertTableColoringRew(data: data)
+                    SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
+                    self.navigateColoring(data)
+                case .error:
+                    self.loadInterDaily(data)
+                default:
+                    break
+                }
+            }
+        }, {
+            SubcriptionViewController.show(checkTime: true)
+        })
+    }
+    
+    func loadInterDaily(_ data: ColoringImage) {
+        ADManager.shared.loadFull(DollColoringAdID.inter_dailygift, isSplash: true){[weak self] state in
+            switch state {
+            case .closed, .error :
+                if !UserDefaultManager.disableMusicBackground {
+                    self?.playAudioBackground()
+                }
+                SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
+                self?.navigateColoring(data)
+            default:
+                break
+            }
+        }
+    }
+    
     func navigateColoring(_ data: ColoringImage) {
-        if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath == data.filePath}) {
+        if let path = data.filePath?.components(separatedBy: "/").last, let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath.contains(path)}) {
             AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .home, coloringAPI: data), with: .modal)
         } else {
             AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .home), with: .modal)
         }
+    }
+    
+    func calculatorDay() {
+        let sqliteData = SQLiteManager.shared.selectionGitColorings()
+        guard sqliteData.count < viewModel.itemDaly.count else {return}
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        
+        guard let pastDate = dateFormatter.date(from: UserDefaultManager.dateFirstOpenApp) else {
+           return
+        }
+        let components = calendar.dateComponents([.day], from: pastDate, to: currentDate)
+        
+        if let totalDays = components.day {
+            if totalDays >= viewModel.itemDaly.count {
+                if let name = viewModel.itemDaly[(viewModel.itemDaly.count - 1)].filePath, !sqliteData.contains(where: {$0.filePath.contains(name)}){
+                    AppRouter.shared.navigate(to: CheckInRoute.gitPopup(name: name), with: .modal)
+                }
+            } else {
+                if let name = viewModel.itemDaly[totalDays].filePath, !sqliteData.contains(where: {$0.filePath.contains(name)}){
+                    AppRouter.shared.navigate(to: CheckInRoute.gitPopup(name: name), with: .modal)
+                }
+            }
+            
+        }
+    }
+    
+    func calculatorDays() -> Int {
+        let sqliteData = SQLiteManager.shared.selectionGitColorings()
+        guard sqliteData.count < viewModel.itemDaly.count else {return 0}
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        
+        guard let pastDate = dateFormatter.date(from: UserDefaultManager.dateFirstOpenApp) else {
+           return 0
+        }
+        let components = calendar.dateComponents([.day], from: pastDate, to: currentDate)
+        
+        if let totalDays = components.day {
+           return totalDays
+        }
+        return 0
     }
 }

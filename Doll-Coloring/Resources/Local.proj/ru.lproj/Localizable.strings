@@ -44,6 +44,7 @@ Common.discard                                  =       "Отменить";
 Common.SaveColoring                             =       "Вы хотите сохранить или отменить?";
 Common.DescExit                                 =       "Вы уверены, что хотите выйти?";
 Common.NoInternet                               =       "Упс! Потеряно интернет-соединение";
+Common.CombackTomorrow                          =       "Пожалуйста, вернитесь завтра, чтобы получить свой подарок 🎁!";
 
 // Splash
 Splash.Copyright                                =       "®Авторское право Binary Bridge Labs";

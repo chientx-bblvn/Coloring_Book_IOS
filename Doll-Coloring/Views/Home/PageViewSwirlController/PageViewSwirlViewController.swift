@@ -15,6 +15,7 @@ class PageViewSwirlViewController: BaseViewController {
     
     var itemColoring: [ColoringImage] = []
     var categoryName: String?
+    var totalDays: Int = 0
     
     private var nativeAdView: NativeAdProtocol? {
         didSet {
@@ -30,7 +31,7 @@ class PageViewSwirlViewController: BaseViewController {
     
     private var hasAd = true
     
-    var onClickItem: ((ColoringImage) -> Void)?
+    var onClickItem: ((ColoringImage, String, Int) -> Void)?
     var handleScrollView: ((UIScrollView) -> Void)?
     
     private var isLandscape: Bool = false
@@ -103,11 +104,12 @@ extension PageViewSwirlViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard hasAd else {
             let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: AllColoringCell.self)
+            cell.days = totalDays
             let data = itemColoring[indexPath.row]
             if let img = data.filePreview {
-                cell.setupView(image: img, coloringLocal: coloringLocal, filePath: data.filePath)
+                cell.setupView(image: img, coloringLocal: coloringLocal, filePath: data.filePath, isDaily: categoryName?.contains("Daily") ?? false, index: indexPath.row)
             } else {
-                cell.setupView(image: data.filePath, coloringLocal: coloringLocal, filePath: data.filePath)
+                cell.setupView(image: data.filePath, coloringLocal: coloringLocal, filePath: data.filePath, isDaily: categoryName?.contains("Daily") ?? false, index: indexPath.row)
             }
             if UserDefaultManager.ABShowIAPColoring {
                 if UserDefaultManager.ABis_free_trial_us {
@@ -150,6 +152,7 @@ extension PageViewSwirlViewController: UICollectionViewDelegate, UICollectionVie
         } else {
             
             let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: AllColoringCell.self)
+            cell.days = totalDays
             var data: ColoringImage
             if indexPath.row <= 2 {
                 data = itemColoring[indexPath.row]
@@ -157,9 +160,9 @@ extension PageViewSwirlViewController: UICollectionViewDelegate, UICollectionVie
                 data = itemColoring[indexPath.row - 1]
             }
             if let img = data.filePreview {
-                cell.setupView(image: img, coloringLocal: coloringLocal, filePath: data.filePath)
+                cell.setupView(image: img, coloringLocal: coloringLocal, filePath: data.filePath, isDaily: categoryName?.contains("Daily") ?? false, index: indexPath.row)
             } else {
-                cell.setupView(image: data.filePath, coloringLocal: coloringLocal, filePath: data.filePath)
+                cell.setupView(image: data.filePath, coloringLocal: coloringLocal, filePath: data.filePath, isDaily: categoryName?.contains("Daily") ?? false, index: indexPath.row)
             }
             if UserDefaultManager.ABShowIAPColoring {
                 if UserDefaultManager.ABis_free_trial_us {
@@ -203,7 +206,7 @@ extension PageViewSwirlViewController: UICollectionViewDelegate, UICollectionVie
                                                                                            
                                                                                            "isPremium": data.isPremium ?? false])
             
-            onClickItem?(data)
+            onClickItem?(data, categoryName ?? "", indexPath.row)
             return
         }
         var data: ColoringImage
@@ -217,7 +220,7 @@ extension PageViewSwirlViewController: UICollectionViewDelegate, UICollectionVie
                                                                                        
                                                                                        "isPremium": data.isPremium ?? false])
         
-        onClickItem?(data)
+        onClickItem?(data, categoryName ?? "", indexPath.row)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

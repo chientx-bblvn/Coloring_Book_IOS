@@ -44,7 +44,7 @@ Common.discard                                  =       "Jeter";
 Common.SaveColoring                             =       "Voulez-vous enregistrer ou jeter?";
 Common.DescExit                                 =       "Êtes-vous sûr de vouloir quitter";
 Common.NoInternet                               =       "Oups! Connexion Internet perdue";
-
+Common.CombackTomorrow                          =       "Veuillez revenir demain pour recevoir votre cadeau 🎁 !";
 
 // Splash
 Splash.Copyright                                =       "®Droits d'auteur par Binary Bridge Labs 2024";

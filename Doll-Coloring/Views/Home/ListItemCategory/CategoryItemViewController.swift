@@ -93,7 +93,7 @@ extension CategoryItemViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: AllColoringCell.self)
         let data = coloring?.imageUrls?[indexPath.row]
-        cell.setupView(image: data?.filePreview, coloringLocal: coloringLocal, filePath: data?.filePath)
+        cell.setupView(image: data?.filePreview, coloringLocal: coloringLocal, filePath: data?.filePath, index: indexPath.row)
         if data?.isPremium ?? false {
             cell.adsViewAnimation.isHidden = false
             cell.loadAnimationAds()

@@ -68,7 +68,7 @@ extension CategoryColoringCell: UICollectionViewDelegate, UICollectionViewDataSo
         } else {
             cell.adsViewAnimation.isHidden = true
         }
-        cell.setupView(image: coloring[indexPath.row].filePreview, coloringLocal: coloringLocal, filePath: coloring[indexPath.row].filePath)
+        cell.setupView(image: coloring[indexPath.row].filePreview, coloringLocal: coloringLocal, filePath: coloring[indexPath.row].filePath, index: indexPath.row)
         return cell
     }
     

@@ -44,6 +44,7 @@ Common.discard                                  =       "त्यागें";
 Common.SaveColoring                             =       "क्या आप सहेजना या त्यागना चाहते हैं?";
 Common.DescExit                                 =       "क्या आप वाकई बाहर निकलना चाहते हैं?";
 Common.NoInternet                               =       "ओह! इंटरनेट कनेक्शन खो गया";
+Common.CombackTomorrow                          =       "कृपया कल वापस आएं अपना उपहार प्राप्त करने के लिए 🎁!";
 
 // Splash
 Splash.Copyright = "®कॉपीराइट बाइ बाइनरी ब्रिज लैब्स 2024";

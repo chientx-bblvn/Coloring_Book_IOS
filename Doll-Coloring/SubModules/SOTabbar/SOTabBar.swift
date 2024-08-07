@@ -173,6 +173,12 @@ public class SOTabBar: UIView {
         caframeAnimation.isRemovedOnCompletion = false
         innerCircleView.layer.add(caframeAnimation, forKey: "circleLayerAnimationKey")
     }
+    
+    func updateRotationTabbar(index: Int) {
+        animateTitle(index: index)
+        animateCircle(with: circlePath)
+        animateImage()
+    }
 }
 
 @available(iOS 10.0, *)

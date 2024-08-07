@@ -79,7 +79,7 @@ extension DetailColoringController: UICollectionViewDelegate, UICollectionViewDa
         } else {
             cell.adsViewAnimation.isHidden = true
         }
-        cell.setupView(image: data?.filePreview, coloringLocal: coloringLocal, filePath: data?.filePath)
+        cell.setupView(image: data?.filePreview, coloringLocal: coloringLocal, filePath: data?.filePath, index: indexPath.row)
         return cell
     }
     
