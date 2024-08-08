@@ -121,9 +121,19 @@ extension SplashController {
                 UserDefaultManager.currentAccessABTestFillColoring = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.ABTestFillColoring)
                 UserDefaultManager.currentAccessABShowIAPColoring = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.StateShowIAP)
                 UserDefaultManager.currentAccessAB_is_free_trial_US = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.is_free_trial_us)
-//                newApiBaseURL = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiBaseURL)
-//                apiAccessKey = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.APIAccessKey)
-//                baseURLImage = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiURLImage)
+                
+                if !RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiBaseURL).isEmpty {
+                    newApiBaseURL = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiBaseURL)
+                }
+                
+                if !RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.APIAccessKey).isEmpty {
+                    apiAccessKey = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.APIAccessKey)
+                }
+                
+                if !RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiURLImage).isEmpty {
+                    baseURLImage = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiURLImage)
+                }
+
                 let manager = SDWebImageDownloader.shared
                 manager.setValue(apiAccessKey, forHTTPHeaderField: "AccessKey")
                 self?.configLoaded = isLoaded
