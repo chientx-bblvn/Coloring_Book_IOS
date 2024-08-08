@@ -15,9 +15,9 @@ import AdmobSDK
 let apiBaseUrl: String = "https://ico.binarybridge.dev"
 let privacyUrl: String = "https://sites.google.com/binarybridge.dev/suunguyen-privacy-policy/home"
 let termsUrl: String = "https://sites.google.com/binarybridge.dev/terms-conditions-binary-bridge/home"
-var newApiBaseURL: String = ""
-var baseURLImage: String = ""
-var apiAccessKey: String = ""
+var newApiBaseURL: String = "https://storage.bunnycdn.com/bblprivate%5Cdoll-coloring%5Cjson/output.json"
+var baseURLImage: String = "https://storage.bunnycdn.com/bblprivate/doll-coloring/doll-data/"
+var apiAccessKey: String = "03d01bc4-2cec-4d16-92ca5d0d2ca5-3eae-4cb8"
 
 let isDev = false
 

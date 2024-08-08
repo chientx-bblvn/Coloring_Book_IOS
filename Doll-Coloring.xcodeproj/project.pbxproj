@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		08083FEE2BCDF877005091B0 /* CollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08083FED2BCDF877005091B0 /* CollectionCell.xib */; };
 		08083FEF2BCDF877005091B0 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08083FEC2BCDF877005091B0 /* CollectionCell.swift */; };
-		080ACD802BC3E84E00E00E2C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 080ACD7F2BC3E84E00E00E2C /* GoogleService-Info.plist */; };
 		080ACD8A2BC3EA2800E00E2C /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 080ACD832BC3EA2800E00E2C /* Home.storyboard */; };
 		080ACD8B2BC3EA2800E00E2C /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACD842BC3EA2800E00E2C /* HomeController.swift */; };
 		080ACD8C2BC3EA2800E00E2C /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACD852BC3EA2800E00E2C /* HomeModel.swift */; };
@@ -313,6 +312,7 @@
 		57FE22042AA8C41E0060606F /* FloatingPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE21FD2AA8C41E0060606F /* FloatingPoint+Extension.swift */; };
 		57FE22072AA8C41E0060606F /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE21FE2AA8C41E0060606F /* CircularProgressView.swift */; };
 		6887E08AF4A7883B4B7FFB7E /* Pods_Doll_Coloring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C404DB90499F9B71148AEB8 /* Pods_Doll_Coloring.framework */; };
+		970B94892C6486100024CFD6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 970B94882C6486100024CFD6 /* GoogleService-Info.plist */; };
 		970BF0952C3F7F15002B445F /* soundFillColor.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 970BF0942C3F7F15002B445F /* soundFillColor.mp3 */; };
 		9750F6562C51E3BA00371ED1 /* PageViewSwirlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9750F6542C51E3BA00371ED1 /* PageViewSwirlViewController.xib */; };
 		9750F6572C51E3BA00371ED1 /* PageViewSwirlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750F6552C51E3BA00371ED1 /* PageViewSwirlViewController.swift */; };
@@ -348,7 +348,6 @@
 /* Begin PBXFileReference section */
 		08083FEC2BCDF877005091B0 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		08083FED2BCDF877005091B0 /* CollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionCell.xib; sourceTree = "<group>"; };
-		080ACD7F2BC3E84E00E00E2C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		080ACD832BC3EA2800E00E2C /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		080ACD842BC3EA2800E00E2C /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		080ACD852BC3EA2800E00E2C /* HomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
@@ -682,6 +681,7 @@
 		57FE3EE62A87F26700ACF272 /* LanguageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageVM.swift; sourceTree = "<group>"; };
 		57FFC3EA2A8E7636004F6E45 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		7C404DB90499F9B71148AEB8 /* Pods_Doll_Coloring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Doll_Coloring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		970B94882C6486100024CFD6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		970BF0942C3F7F15002B445F /* soundFillColor.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soundFillColor.mp3; sourceTree = "<group>"; };
 		9750F6542C51E3BA00371ED1 /* PageViewSwirlViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageViewSwirlViewController.xib; sourceTree = "<group>"; };
 		9750F6552C51E3BA00371ED1 /* PageViewSwirlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewSwirlViewController.swift; sourceTree = "<group>"; };
@@ -1248,7 +1248,7 @@
 			children = (
 				570AF76A2A53CE560069B329 /* BuildEnv.swift */,
 				C03131B72AA3762400A29FC1 /* Info.plist */,
-				080ACD7F2BC3E84E00E00E2C /* GoogleService-Info.plist */,
+				970B94882C6486100024CFD6 /* GoogleService-Info.plist */,
 			);
 			path = ConfigFiles;
 			sourceTree = "<group>";
@@ -1862,7 +1862,6 @@
 				083CA4112BC67988006033EE /* MainColorings.storyboard in Resources */,
 				08E3AEEC2BE346C100B22163 /* musicBackground.mp3 in Resources */,
 				97DF85082C60AAE800FA19EF /* PopupDate.storyboard in Resources */,
-				080ACD802BC3E84E00E00E2C /* GoogleService-Info.plist in Resources */,
 				570070C72A93C4BD00D7C1C6 /* WebViewController.xib in Resources */,
 				570070C82A93C4BD00D7C1C6 /* LanguageCell.xib in Resources */,
 				570070CF2A93C4BD00D7C1C6 /* PickerPhoto.storyboard in Resources */,
@@ -1890,6 +1889,7 @@
 				08A0C29E2BE490AA00C6E42D /* asrmColoring.mp3 in Resources */,
 				08F5D1C12BFB366A002DC669 /* CategoryMenuCell.xib in Resources */,
 				5729F27F2B7469800059AB40 /* ErrorCode.strings in Resources */,
+				970B94892C6486100024CFD6 /* GoogleService-Info.plist in Resources */,
 				08F75CE72BE8D12A005ACDA9 /* DetailCollection.storyboard in Resources */,
 				085A067F2BC69FB5002D5F1D /* ListTopPicksColoringViewController.xib in Resources */,
 				08EC01E02BFEEB8B00E98627 /* TableColorIpad.storyboard in Resources */,
