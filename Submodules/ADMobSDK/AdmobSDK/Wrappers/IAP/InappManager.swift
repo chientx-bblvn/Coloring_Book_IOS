@@ -1,0 +1,456 @@
+//
+//  InappManager.swift
+//  EasyPhone
+//
+// Created by BBLabs on 11/01/2022.
+//
+
+import Foundation
+import StoreKit
+import SwiftyStoreKit
+import AVFoundation
+import RxSwift
+
+public enum IAPState: String {
+    case purchased = "purchased"
+    case expired = "expired"
+    case notPurchased = "notPurchased"
+    case unload = "unload"
+    
+    public static var isDev = false
+    private static let keyIAPState = "KEY_IAP_STATE"
+    
+    public static var iapState: IAPState {
+        get {
+            if let state = UserDefaults.standard.string(forKey: keyIAPState) {
+                return IAPState(rawValue: state) ?? .notPurchased
+            }
+            return .notPurchased
+        }
+        set {
+            if iapState != newValue {
+                UserDefaults.standard.setValue(newValue.rawValue, forKey: keyIAPState)
+                UserDefaults.standard.synchronize()
+                
+                print("--> send didPaymentSuccess")
+                InappManager.share.didPaymentSuccess.onNext(newValue)
+                
+            }
+        }
+    }
+    
+    public static var isUserVip: Bool {
+        return iapState == .purchased
+    }
+    
+}
+
+public typealias ProductIdentifier = String
+
+public protocol InappManagerDelegate: AnyObject {
+    func purchaseSuccess(id: String)
+}
+
+public class InappManager: NSObject {
+    
+    public static let share = InappManager()
+    private let iapPaymentObserver = IAPPaymentTransactionObserver()
+    private override init() {
+        super.init()
+        iapPaymentObserver.onPaymentUpdatedTX = { [weak self] queue, transactions in
+            self?.paymentQueue(queue, updatedTransactions: transactions)
+        }
+        iapPaymentObserver.onPaymentRestoreTxFailed = { [weak self] queue, error in
+            self?.paymentQueue(queue, restoreCompletedTransactionsFailedWithError: error)
+        }
+        iapPaymentObserver.onPaymentRestoreTxFinished = { [weak self] queue in
+            self?.paymentQueueRestoreCompletedTransactionsFinished(queue)
+        }
+        SKPaymentQueue.default().add(iapPaymentObserver)
+        SwiftyStoreKit.shouldAddStorePaymentHandler = { (payment: SKPayment, product: SKProduct) in
+            return true
+        }
+    }
+    
+    public var sharedSecret: String = ""
+    public var productIdentifiers: Set<ProductIdentifier> = Set()
+    public var listProduct = Set<SKProduct>()
+    public var didPaymentSuccess = BehaviorSubject<IAPState>(value: .unload)
+    public var productsInfo = BehaviorSubject<[SKProduct]>(value: [])
+    public var purchasedProduct: ProductIdentifier?
+    public var infoPurchaseProduct: ReceiptItem?
+    private var needShowRestoreError = false
+    public weak var delegate: InappManagerDelegate?
+    
+    public func getFreedaysTrial(id: String) -> Int {
+        var freeDay = 0
+        if let subcription = InappManager.share.listProduct.first(where: {$0.productIdentifier == id})?.introductoryPrice?.subscriptionPeriod {
+            switch subcription.unit {
+            case .day:
+                freeDay = subcription.numberOfUnits
+            case .week:
+                freeDay = subcription.numberOfUnits * 7
+            default:
+                freeDay = 3
+            }
+        }
+        return freeDay
+    }
+    
+    public func getPrice(id: String) -> String {
+        if let subscription = InappManager.share.listProduct.first(where: {
+            $0.productIdentifier == id
+        }) {
+            return subscription.regularPrice ?? ""
+        }
+        return ""
+    }
+    
+    public func getPriceLocale(id: String) -> Locale {
+        if let subscription = InappManager.share.listProduct.first(where: {
+            $0.productIdentifier == id
+        }) {
+            return subscription.priceLocale
+        }
+        return Locale.current
+    }
+    
+    public func getPriceNumb(id: String) -> NSDecimalNumber {
+        if let subscription = InappManager.share.listProduct.first(where: {
+            $0.productIdentifier == id
+        }) {
+            return subscription.price
+        }
+        return 0
+    }
+    
+    public func getDiscountPrice(id: String) -> String {
+        if let subscription = InappManager.share.listProduct.first(where: {
+            $0.productIdentifier == id
+        }) {
+            return subscription.discounts.first?.regularPrice ?? ""
+        }
+        return ""
+    }
+    
+    public func getDiscountPriceLocale(id: String) -> Locale {
+        if let subscription = InappManager.share.listProduct.first(where: {
+            $0.productIdentifier == id
+        }) {
+            return subscription.discounts.first?.priceLocale ?? Locale.current
+        }
+        return Locale.current
+    }
+    
+    public func getDiscountPriceNumb(id: String) -> NSDecimalNumber {
+        if let subscription = InappManager.share.listProduct.first(where: {
+            $0.productIdentifier == id
+        }) {
+            return subscription.discounts.first?.price ?? 0
+        }
+        return 0
+    }
+    
+    public func getIntroductoryPriceNumb(id: String) -> NSDecimalNumber {
+        if let subscription = InappManager.share.listProduct.first(where: {
+            $0.productIdentifier == id
+        }) {
+            return subscription.introductoryPrice?.price ?? 0
+        }
+        return 0
+    }
+    
+    public func getDiscountPeriod(id: String) -> TimeInterval {
+        if let subscription = InappManager.share.listProduct.first(where: {
+            $0.productIdentifier == id
+        }) {
+            let firstDiscount = subscription.discounts.first
+            let periodTime = firstDiscount?.subscriptionPeriod.numberOfUnits ?? 0
+            let periodUnit = firstDiscount?.subscriptionPeriod.unit
+            var duration: TimeInterval = 0 // 0s
+            switch periodUnit {
+            case .day:
+                duration = TimeInterval(periodTime * 24 * 60 * 60)
+            case .week:
+                duration = TimeInterval(7 * periodTime * 24 * 60 * 60)
+            case .month:
+                duration = TimeInterval(30 * periodTime * 24 * 60 * 60)
+            case .year:
+                duration = TimeInterval(365 * periodTime * 24 * 60 * 60)
+            default: break
+            }
+            return duration
+        }
+        return 0
+    }
+    
+    public func checkPurchaseProduct() {
+        SwiftyStoreKit.completeTransactions(atomically: true) { [weak self] purchases in
+            for purchase in purchases {
+                switch purchase.transaction.transactionState {
+                case .purchased, .restored:
+                    self?.purchasedProduct = purchase.productId
+                    if purchase.needsFinishTransaction {
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
+                case .failed, .purchasing, .deferred:
+                    break
+                default:
+                    break
+                }
+            }
+        }
+    }
+    
+    public func purchaseProduct(withId id: String) {
+        guard let product = listProduct.first(where: { $0.productIdentifier == id }) else { return }
+        if SKPaymentQueue.canMakePayments() {
+            LoadingProgressHUD.show()
+            let payment = SKPayment(product: product)
+            SKPaymentQueue.default().add(payment)
+        }
+    }
+    
+    public func productInfo(id: Set<String>, isShowLoading: Bool = true,
+                            completed: @escaping(Set<SKProduct>) -> () = {_ in}) -> InAppRequest {
+        if isShowLoading {
+            LoadingProgressHUD.show()
+        }
+        return SwiftyStoreKit.retrieveProductsInfo(id) { [weak self] result in
+            LoadingProgressHUD.dismiss()
+            if !result.retrievedProducts.isEmpty {
+                self?.listProduct = result.retrievedProducts
+                self?.productsInfo.onNext(result.retrievedProducts.map { $0 })
+                DispatchQueue.main.async {
+                    completed(result.retrievedProducts)
+                }
+            }
+            else if let invalidProductId = result.invalidProductIDs.first {
+                print("Invalid product identifier: \(invalidProductId) with error: \(result.error)")
+                IAPState.iapState = .unload
+                DispatchQueue.main.async {
+                    completed([])
+                }
+            }
+            else {
+                IAPState.iapState = .unload
+                print("Error: \(result.error)")
+                DispatchQueue.main.async {
+                    completed([])
+                }
+            }
+        }
+    }
+    
+    // MARK: Restore
+    public func restorePurchases(isShowLoading: Bool = true) {
+        if (SKPaymentQueue.canMakePayments()) {
+            if isShowLoading {
+                LoadingProgressHUD.show()
+            }
+            needShowRestoreError = isShowLoading
+            SKPaymentQueue.default().restoreCompletedTransactions()
+        }
+    }
+    
+    // MARK: Tự động Gia hạn
+    public func veryCheckRegisterPack(completed: @escaping() -> ()) -> InAppRequest? {
+        let appleValidator = AppleReceiptValidator(service: IAPState.isDev ? .sandbox : .production , sharedSecret: self.sharedSecret)
+        return SwiftyStoreKit.verifyReceipt(using: appleValidator, forceRefresh: true) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let receipt):
+                let purchaseResult = SwiftyStoreKit.verifySubscriptions(ofType: .autoRenewable, productIds: self.productIdentifiers, inReceipt: receipt)
+                switch purchaseResult {
+                case .purchased( let expireddate, let items):
+                    print("==> purchased expireddate \(expireddate)")
+                    self.infoPurchaseProduct = items.first
+                    self.purchasedProduct = items.first?.productId
+                    if let productId = self.purchasedProduct {
+                        if let firstProduct = self.listProduct.first(where: { item in
+                            item.productIdentifier == productId
+                        }) {
+                            logCostAnalytic(value: firstProduct.price.doubleValue,
+                                            currency: firstProduct.priceLocale.currencySymbol,
+                                            productId: productId,
+                                            renew: true)
+                        }
+                    }
+                    IAPState.iapState = .purchased
+                case .expired(let expireddate,_):
+                    print("==> expireddate \(expireddate)")
+                    IAPState.iapState = .expired
+                case .notPurchased:
+                    IAPState.iapState = .notPurchased
+                }
+                completed()
+            case .error:
+                IAPState.iapState = .notPurchased
+                completed()
+            }
+            
+        }
+    }
+    
+    public func getInfoPurchasedProduct() {
+        let appleValidator = AppleReceiptValidator(service: IAPState.isDev ? .sandbox : .production, sharedSecret: sharedSecret)
+        SwiftyStoreKit.verifyReceipt(using: appleValidator, forceRefresh: true) { result in
+            switch result {
+            case .success(let receipt):
+                let purchaseResult = SwiftyStoreKit.verifySubscriptions(ofType: .autoRenewable, productIds: self.productIdentifiers, inReceipt: receipt)
+                switch purchaseResult {
+                case .purchased(_, let items):
+                    self.infoPurchaseProduct = items.first
+                default:
+                    break
+                }
+            case .error(let error):
+                print("Verify receipt failed: \(error)")
+            }
+        }
+    }
+    
+    public func updateConversionValue(value: Int) {
+//        if value < 0 || value > 63 { return }
+//        if #available(iOS 16.1, *) {
+//            SKAdNetwork.updatePostbackConversionValue(value) { error in
+//                if let `error` = error {
+//                    print("Update conversion value error \(error)")
+//                }
+//            }
+//        } else if #available(iOS 15.4, *) {
+//            SKAdNetwork.updatePostbackConversionValue(value) { error in
+//                if let `error` = error {
+//                    print("Update conversion value error \(error)")
+//                }
+//            }
+//        } else
+        if #available(iOS 14.0, *) {
+            SKAdNetwork.updateConversionValue(value)
+        } else {
+            // Fallback on earlier versions
+            print("Not support iOS version below iOS 14")
+        }
+    }
+    
+    private func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        for transaction in transactions {
+            switch transaction.transactionState {
+            case .purchased:
+                LoadingProgressHUD.dismiss()
+                purchasedProduct = transaction.payment.productIdentifier
+                IAPState.iapState = .purchased
+                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+            case .failed:
+                print("Purchased Failed")
+                LoadingProgressHUD.dismiss()
+                SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+            default:
+                break
+            }
+        }
+    }
+    
+    private func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
+        if needShowRestoreError {
+            Utils.showToast(error.localizedDescription)
+        }
+        LoadingProgressHUD.dismiss()
+    }
+    
+    private func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+        let appleValidator = AppleReceiptValidator(service: IAPState.isDev ? .sandbox : .production, sharedSecret: sharedSecret)
+        SwiftyStoreKit.verifyReceipt(using: appleValidator) { [weak self] result in
+            LoadingProgressHUD.dismiss()
+            guard let self = self else { return }
+            switch result {
+            case .success(let receipt):
+                let purchaseResult = SwiftyStoreKit.verifySubscriptions(ofType: .autoRenewable, productIds: self.productIdentifiers, inReceipt: receipt)
+                switch purchaseResult {
+                case .purchased( _, let items):
+                    self.infoPurchaseProduct = items.first
+                    self.purchasedProduct = items.first?.productId
+                    if let productId = self.purchasedProduct {
+                        if let firstProduct = self.listProduct.first(where: { item in
+                            item.productIdentifier == productId
+                        }) {
+                            logCostAnalytic(value: firstProduct.price.doubleValue,
+                                            currency: firstProduct.priceLocale.currencySymbol,
+                                            productId: productId,
+                                            renew: true)
+                        }
+                    }
+                    IAPState.iapState = .purchased
+                    self.delegate?.purchaseSuccess(id: self.purchasedProduct ?? "")
+                case .expired(_,_):
+                    IAPState.iapState = .expired
+                case .notPurchased:
+                    IAPState.iapState = .notPurchased
+                    break
+                }
+            case .error(let error):
+                print("verify faild \(error.localizedDescription)")
+            }
+        }
+        for transaction in queue.transactions {
+            SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+        }
+    }
+    
+    private func logCostAnalytic(value: Double, currency: String?, productId: String, renew: Bool) {
+        FirebaseEventManager.logEvent(with: "iap_sdk",
+                                      params: ["value" : "\(value)",
+                                               "currency" : "\(currency ?? "")",
+                                               "product_id" : productId,
+                                               "renew" : "\(renew)"
+                                              ])
+    }
+}
+
+// MARK: - SKPaymentTransactionObserver
+private class IAPPaymentTransactionObserver: NSObject, SKPaymentTransactionObserver {
+    var onPaymentUpdatedTX: ((_ queue: SKPaymentQueue,
+                          _ transactions: [SKPaymentTransaction]) -> Void)?
+    
+    var onPaymentRestoreTxFailed: ((_ queue: SKPaymentQueue,
+                          _ error: Error) -> Void)?
+    
+    var onPaymentRestoreTxFinished: ((_ queue: SKPaymentQueue)  -> Void)?
+    
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        onPaymentUpdatedTX?(queue, transactions)
+    }
+    
+    func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
+        onPaymentRestoreTxFailed?(queue, error)
+    }
+    
+    func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+        onPaymentRestoreTxFinished?(queue)
+    }
+    
+}
+
+extension SKProduct {
+    
+    /// - returns: The cost of the product formatted in the local currency.
+    var regularPrice: String? {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = self.priceLocale
+        return formatter.string(from: self.price)
+    }
+    
+}
+
+extension SKProductDiscount {
+    
+    /// - returns: The cost of the product formatted in the local currency.
+    var regularPrice: String? {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = self.priceLocale
+        return formatter.string(from: self.price)
+    }
+    
+}
