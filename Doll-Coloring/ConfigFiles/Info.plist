@@ -276,5 +276,35 @@
 	</array>
 	<key>UIRequiresPersistentWiFi</key>
 	<true/>
+	<key>CFBundleAlternateIcons</key>
+	<dict>
+		<key>AppIcon</key>
+		<dict>
+			<key>UIPrerenderedIcon</key>
+			<false/>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>AppIcon</string>
+			</array>
+		</dict>
+		<key>AppIcon1</key>
+		<dict>
+			<key>UIPrerenderedIcon</key>
+			<false/>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>AppIcon1</string>
+			</array>
+		</dict>
+		<key>AppIcon2</key>
+		<dict>
+			<key>UIPrerenderedIcon</key>
+			<false/>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>AppIcon2</string>
+			</array>
+		</dict>
+	</dict>
 </dict>
 </plist>

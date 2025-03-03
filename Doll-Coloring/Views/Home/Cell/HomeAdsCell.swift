@@ -15,16 +15,18 @@ class HomeAdsCell: UICollectionViewCell, NibReusable {
     var actionAds: ((Bool) -> Void)?
     override func awakeFromNib() {
         super.awakeFromNib()
+        adsView.layer.borderWidth = 0
+        adsView.generateOuterShadow()
+        adsView.layer.cornerRadius = 16
         loadAds()
     }
     
     func loadAds() {
-        ADManager.shared.loadNative(DollColoringAdID.native_home, to: adsView, nativeAdType: .customMediaFixedHeight) {[weak self] adId, success, nativeAdView in
+        ADManager.shared.loadNative(DollColoringAdID.native_home, to: adsView, nativeAdType: .customNativeMediaHorizontal) {[weak self] adId, success, nativeAdView in
             if adId.contains(DollColoringAdID.native_home.adId) {
                 self?.adsView.isHidden = !success
                 self?.actionAds?(success)
             }
         }
     }
-
 }

@@ -91,7 +91,7 @@ class CollectionsController: BaseViewController {
     
     private func settingIAP() {
         InappManager.share.didPaymentSuccess.subscribe(onNext: { [weak self] _ in
-            self?.topBarView.showPremium = UserDefaultManager.ABShowIAPColoring
+            self?.topBarView.showPremium = IAPState.isUserVip
         }).disposed(by: disposeBag)
     }
     

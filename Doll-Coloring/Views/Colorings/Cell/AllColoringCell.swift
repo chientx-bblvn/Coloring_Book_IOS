@@ -12,6 +12,7 @@ import Lottie
 
 class AllColoringCell: UICollectionViewCell, NibReusable {
 
+    @IBOutlet weak var viewContent: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var adsViewAnimation: UIImageView!
     @IBOutlet weak var progessRing: ALProgressRing!
@@ -24,6 +25,9 @@ class AllColoringCell: UICollectionViewCell, NibReusable {
         super.awakeFromNib()
         // Initialization code
         progessRing.lineWidth = 5
+        viewContent.layer.borderWidth = 0
+        viewContent.generateOuterShadow()
+        viewContent.layer.cornerRadius = 16
     }
     
     func setupView(image: String?, coloringLocal: [ColoringHistoryModel], filePath: String?, isDaily: Bool = false, index: Int) {

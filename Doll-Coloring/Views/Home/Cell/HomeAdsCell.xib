@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,17 +18,17 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xUK-Ty-FZr">
-                        <rect key="frame" x="0.0" y="0.0" width="642" height="492"/>
+                        <rect key="frame" x="3" y="3" width="636" height="486"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="xUK-Ty-FZr" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Imw-4g-FAY"/>
-                <constraint firstAttribute="trailing" secondItem="xUK-Ty-FZr" secondAttribute="trailing" id="J1L-bt-EdI"/>
-                <constraint firstAttribute="bottom" secondItem="xUK-Ty-FZr" secondAttribute="bottom" id="c0G-r2-Y7D"/>
-                <constraint firstItem="xUK-Ty-FZr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="hoS-CN-5fT"/>
+                <constraint firstItem="xUK-Ty-FZr" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="3" id="Imw-4g-FAY"/>
+                <constraint firstAttribute="trailing" secondItem="xUK-Ty-FZr" secondAttribute="trailing" constant="3" id="J1L-bt-EdI"/>
+                <constraint firstAttribute="bottom" secondItem="xUK-Ty-FZr" secondAttribute="bottom" constant="3" id="c0G-r2-Y7D"/>
+                <constraint firstItem="xUK-Ty-FZr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="3" id="hoS-CN-5fT"/>
             </constraints>
             <size key="customSize" width="642" height="492"/>
             <connections>

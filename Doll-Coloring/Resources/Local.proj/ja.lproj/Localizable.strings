@@ -89,6 +89,11 @@ IAP.price_package_yearly                        =       "毎年 %@";
 IAP.TermOfUse                                   =       "利用規約";
 IAP.PrivacyPolicy                               =       "プライバシーポリシー";
 IAP.RestorePurchase                             =       "購入を復元";
+IAP.OffSale                                     =       "特別オファー - 50％%オフ！";
+IAP.getSale                                     =       "急いで！今すぐプレミアムを半額で手に入れましょう！";
+IAP.ClamNow                                     =       "今すぐ取得";
+IAP.timeLeft                                    =       "%d %@";
+IAP.left                                        =       "残り";
 
 
 // ForceUpdate

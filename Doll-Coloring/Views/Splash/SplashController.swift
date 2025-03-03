@@ -34,7 +34,6 @@ class SplashController: BaseViewController {
             }
         }
         setupView()
-        configIAP()
         loadSavedLanguage()
         
         
@@ -60,38 +59,44 @@ extension SplashController {
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
         fetchRemoteConfig {
-            dispatchGroup.leave()
-        }
-        dispatchGroup.notify(queue: .main) { [weak self] in
-            
-            self?.requestGDPRAndATT { [weak self] in
-                DispatchQueue.main.asyncSafety {
-                    ADManager.shared.initialize(readConfig: self?.configLoaded ?? false) { [weak self] success in
-                        self?.processScreen()
+            self.configIAP(completion: {
+                self.requestGDPRAndATT { [weak self] in
+                    DispatchQueue.main.asyncSafety {
+                        ADManager.shared.initialize(readConfig: self?.configLoaded ?? false) { [weak self] success in
+                            self?.processScreen()
+                        }
                     }
+                }
+            })
+        }
+    }
+    
+    // MARK: - Check IAP config
+    private func configIAP(completion: @escaping (() -> Void)) {
+        BBLLogging.d("Check:: configIAP")
+        InappManager.share.productIdentifiers = Set(IAPIdType.allCases.compactMap({ $0.rawValue }))
+        InappManager.share.checkPurchaseProduct()
+        _ = InappManager.share.productInfo(id: InappManager.share.productIdentifiers, isShowLoading: false) { [weak self] listProduct in
+            BBLLogging.d("Check:: productInfo   ---   \(listProduct.count)")
+            if listProduct.isEmpty {
+                IAPState.iapState = .unload
+                completion()
+            } else {
+                InappManager.share.checkPurchaseProduct()
+                if IAPState.isUserVip {
+                    _ = self?.checkIsUserVip(completion: completion)
+                } else {
+                    completion()
                 }
             }
         }
     }
     
-    // MARK: - Check IAP config
-    private func configIAP() {
-        BBLLogging.d("Check:: configIAP")
-        let identitiesIAP = Set(IAPIdType.allCases.compactMap({ $0.id }))
-        InappManager.share.productIdentifiers = identitiesIAP
-        _ = InappManager.share.productInfo(id: identitiesIAP, isShowLoading: false) { [weak self] listProduct in
-            BBLLogging.d("Check:: productInfo   ---   \(listProduct.count)")
-            if IAPState.isUserVip {
-                InappManager.share.checkPurchaseProduct()
-                _ = self?.checkIsUserVip()
-            }
-        }
-    }
-    
-    private func checkIsUserVip() -> InAppRequest? {
+    private func checkIsUserVip(completion: @escaping (() -> Void)) -> InAppRequest? {
         BBLLogging.d("Check:: checkIsUserVip")
         return InappManager.share.veryCheckRegisterPack {
             BBLLogging.d("Check:: veryCheckRegisterPack")
+            completion()
         }
     }
     
@@ -119,8 +124,8 @@ extension SplashController {
                 BBLLogging.d("Check:: fetchConfig \(isLoaded)")
                 UserDefaultManager.currentAccessNumberClick = RemoteConfigManager.shared.number(forKey: KeyRemoteConfig.NumberClickItemAllTopic)
                 UserDefaultManager.currentAccessABTestFillColoring = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.ABTestFillColoring)
-                UserDefaultManager.currentAccessABShowIAPColoring = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.StateShowIAP)
-                UserDefaultManager.currentAccessAB_is_free_trial_US = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.is_free_trial_us)
+                UserDefaultManager.currentAccessABShowIAPColoring = true
+                UserDefaultManager.currentAccessAB_is_free_trial_US = false
                 
                 if !RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiBaseURL).isEmpty {
                     newApiBaseURL = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiBaseURL)
@@ -133,6 +138,9 @@ extension SplashController {
                 if !RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiURLImage).isEmpty {
                     baseURLImage = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiURLImage)
                 }
+                UserDefaultManager.currentTimeCountdown = RemoteConfigManager.shared.number(forKey: KeyRemoteConfig.TimeCountdowntSale)
+                UserDefaultManager.currentAccessDisableSale = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.IsDisableSale)
+                
 
                 let manager = SDWebImageDownloader.shared
                 manager.setValue(apiAccessKey, forHTTPHeaderField: "AccessKey")
@@ -214,9 +222,9 @@ extension SplashController {
 extension SplashController {
     
     private func setupView() {
+        InappManager.share.sharedSecret = sharedSecret
         FirebaseEventManager.logEvent(with: RMBGEventTracking.splashScr)
-//        animationView.loadAnimation(file: "animation_splash_new", loopMode: .loop, autoPlay: true)
-        animationColoring.loadAnimation(file: "animation_splash_new", loopMode: .loop, autoPlay: true, animationSpeed: 2)
+        animationColoring.loadAnimation(file: "animation_splash", loopMode: .loop, autoPlay: true)
         let style = ThemeStyleAds
             .custom(backgroundColor: UIColor.white.withAlphaComponent(0.8),
                     titleColor: R.color.textColor()!,
@@ -238,11 +246,24 @@ extension SplashController {
     
     private func loadSavedLanguage() {
         let currLang = UserDefaults.standard.string(forKey: UserDefault.languageKey.rawValue) ?? ""
+        let showIntro = UserDefaults.standard.bool(forKey: UserDefault.showedIntro.rawValue)
         if !currLang.isEmpty {
             Constants.currentLanguage = Language(key: currLang)
             isSetLanguage = true
-            ADManager.shared.preLoadNative(DollColoringAdID.native_language_high)
+            ADManager.shared.preLoadNative(DollColoringAdID.native_language_2nd, nativeAdType: .customMediaFixedHeight)
             return
+        } else {
+            if !showIntro {
+                ADManager.shared.preLoadNative(DollColoringAdID.naitve_fullscreen_onboarding, nativeAdType: .customFullScreenNative)
+                ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_high, nativeAdType: .customMediaFixedHeight) { adId, success in
+                    if ADManager.shared.isTestMode {
+                        return
+                    }
+                    if adId == DollColoringAdID.native_onboarding_high.adId, !success {
+                        ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding, nativeAdType: .customMediaFixedHeight)
+                    }
+                }
+            }
         }
         Constants.currentLanguage = .english
         isSetLanguage = false

@@ -190,7 +190,7 @@ class SQLiteManager {
     
     
     func createTableColoringRew() {
-        let filePath = Expression<String>("filePath")
+        let filePath = SQLite.Expression<String>("filePath")
         do {
             try db?.run(tableColoringRew.create(ifNotExists: true){ column in
                 column.column(filePath, primaryKey: true)
@@ -201,10 +201,10 @@ class SQLiteManager {
     }
     
     func createTableColoring() {
-        let id = Expression<Int>("id")
-        let filePath = Expression<String>("filePath")
-        let fileLocal = Expression<String>("fileLocal")
-        let historys = Expression<String>("historys")
+        let id = SQLite.Expression<Int>("id")
+        let filePath = SQLite.Expression<String>("filePath")
+        let fileLocal = SQLite.Expression<String>("fileLocal")
+        let historys = SQLite.Expression<String>("historys")
         do {
             try db?.run(tableColoring.create(ifNotExists: true){ column in
                 column.column(id, primaryKey: true)
@@ -218,8 +218,8 @@ class SQLiteManager {
     }
     
     func createTableGitColoring() {
-        let id = Expression<Int>("id")
-        let name = Expression<String>("name")
+        let id = SQLite.Expression<Int>("id")
+        let name = SQLite.Expression<String>("name")
         do {
             try db?.run(tableGitColoring.create(ifNotExists: true, block: { column in
                 column.column(id, primaryKey: true)
@@ -231,8 +231,8 @@ class SQLiteManager {
     }
     
     func insertTableGitColoring(_id: Int, _name: String) {
-        let id = Expression<Int>("id")
-        let name = Expression<String>("name")
+        let id = SQLite.Expression<Int>("id")
+        let name = SQLite.Expression<String>("name")
         let insert = tableGitColoring.insert(id <-  _id,
                                           name <- _name)
         do {
@@ -243,10 +243,10 @@ class SQLiteManager {
     }
     
     func insertTableColoring(data: ColoringHistoryModel) {
-        let id = Expression<Int>("id")
-        let filePath = Expression<String>("filePath")
-        let fileLocal = Expression<String>("fileLocal")
-        let historys = Expression<String>("historys")
+        let id = SQLite.Expression<Int>("id")
+        let filePath = SQLite.Expression<String>("filePath")
+        let fileLocal = SQLite.Expression<String>("fileLocal")
+        let historys = SQLite.Expression<String>("historys")
         let history = convertModelToString(model: data.historys) ?? ""
         let insert = tableColoring.insert(id <-  data.id,
                                           filePath <- data.filePath,
@@ -260,7 +260,7 @@ class SQLiteManager {
     }
     
     func insertTableColoringRew(data: ColoringImage) {
-        let filePath = Expression<String>("filePath")
+        let filePath = SQLite.Expression<String>("filePath")
         let insert = tableColoringRew.insert(filePath <- data.filePath ?? "")
         do {
             try db?.run(insert)
@@ -270,10 +270,10 @@ class SQLiteManager {
     }
     
     func selectionColorings() -> [ColoringHistoryModel] {
-        let id = Expression<Int>("id")
-        let filePath = Expression<String>("filePath")
-        let fileLocal = Expression<String>("fileLocal")
-        let historys = Expression<String>("historys")
+        let id = SQLite.Expression<Int>("id")
+        let filePath = SQLite.Expression<String>("filePath")
+        let fileLocal = SQLite.Expression<String>("fileLocal")
+        let historys = SQLite.Expression<String>("historys")
         do {
             let collections = try db?.prepare(tableColoring)
             return collections?.map({ color in
@@ -286,7 +286,7 @@ class SQLiteManager {
     }
     
     func selectionColoringsRew() -> [ColoringImage] {
-        let filePath = Expression<String>("filePath")
+        let filePath = SQLite.Expression<String>("filePath")
         do {
             let collections = try db?.prepare(tableColoringRew)
             return collections?.map({ color in
@@ -299,8 +299,8 @@ class SQLiteManager {
     }
     
     func selectionGitColorings() -> [GitDailyColoring] {
-        let id = Expression<Int>("id")
-        let name = Expression<String>("name")
+        let id = SQLite.Expression<Int>("id")
+        let name = SQLite.Expression<String>("name")
         do {
             let collections = try db?.prepare(tableGitColoring)
             return collections?.map({ color in
@@ -313,8 +313,8 @@ class SQLiteManager {
     }
     
     func updateColorings(data: ColoringHistoryModel) -> Bool {
-        let id = Expression<Int>("id")
-        let historys = Expression<String>("historys")
+        let id = SQLite.Expression<Int>("id")
+        let historys = SQLite.Expression<String>("historys")
         guard let history = convertModelToString(model: data.historys) else {
             return false
         }
@@ -329,8 +329,8 @@ class SQLiteManager {
     }
     
     func deleteColorings(id: Int) {
-        let fieldId = Expression<Int>("id")
-        let coloringFieldValueID = Expression<Int>(value: id)
+        let fieldId = SQLite.Expression<Int>("id")
+        let coloringFieldValueID = SQLite.Expression<Int>(value: id)
         do {
             let collection = tableColoring.filter(fieldId == coloringFieldValueID)
             try db?.run(collection.delete())

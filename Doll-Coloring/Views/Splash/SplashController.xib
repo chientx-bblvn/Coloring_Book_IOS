@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -51,8 +51,12 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2cy-Tt-e4J" customClass="LottieAnimationView" customModule="Lottie">
-                    <rect key="frame" x="0.0" y="48" width="414" height="800"/>
+                    <rect key="frame" x="57" y="298" width="300" height="300"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="0nh-6Y-D3g"/>
+                        <constraint firstAttribute="height" constant="300" id="UIh-DW-ve2"/>
+                    </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="®2024 Power by Binary Bridge Labs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wxy-10-aHC">
                     <rect key="frame" x="24" y="824" width="366" height="14"/>
@@ -71,9 +75,6 @@
                 <constraint firstItem="4ji-dl-tk0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Cuf-d1-TJc"/>
                 <constraint firstAttribute="trailing" secondItem="0ip-ou-XSG" secondAttribute="trailing" id="Htn-tp-gOL"/>
                 <constraint firstItem="0ip-ou-XSG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="I2Q-Lg-QQe"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2cy-Tt-e4J" secondAttribute="trailing" id="JPt-xX-tMO"/>
-                <constraint firstItem="2cy-Tt-e4J" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="LBW-b7-T1e"/>
-                <constraint firstItem="2cy-Tt-e4J" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="LXQ-U4-fEJ"/>
                 <constraint firstItem="2cy-Tt-e4J" firstAttribute="centerX" secondItem="0ip-ou-XSG" secondAttribute="centerX" id="MTb-Is-Ibe"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4ji-dl-tk0" secondAttribute="trailing" constant="24" id="Wtb-n6-egs"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Wxy-10-aHC" secondAttribute="bottom" constant="24" id="gF2-he-z6d"/>
@@ -85,7 +86,7 @@
         </view>
     </objects>
     <resources>
-        <image name="background_splash" width="393" height="852"/>
+        <image name="background_splash" width="412" height="917"/>
         <image name="ic_app_intro" width="165" height="165"/>
         <namedColor name="ColorBGAds">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

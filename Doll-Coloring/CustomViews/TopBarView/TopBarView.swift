@@ -73,8 +73,8 @@ final class TopBarView: BaseCustomXibView {
                 btnPremium.isHidden = true
                 viewPremium.isHidden = true
             } else {
-                btnPremium.isHidden = !showPremium
-                viewPremium.isHidden = !showPremium
+                btnPremium.isHidden = showPremium
+                viewPremium.isHidden = showPremium
             }
         }
     }

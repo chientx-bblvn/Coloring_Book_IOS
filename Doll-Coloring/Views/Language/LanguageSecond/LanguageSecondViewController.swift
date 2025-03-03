@@ -97,7 +97,7 @@ extension LanguageSecondViewController {
             }
         }
         
-        ADManager.shared.preLoadNative(DollColoringAdID.native_language_2nd)
+        ADManager.shared.preLoadNative(DollColoringAdID.native_language, nativeAdType: .customMediaFixedHeight)
         
         setupListenChangeIAP()
     }

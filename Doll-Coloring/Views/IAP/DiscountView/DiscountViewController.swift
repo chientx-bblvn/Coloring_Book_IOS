@@ -1,0 +1,166 @@
+//
+//  DiscountViewController.swift
+//  Doll-Coloring
+//
+//  Created by Nguyễn Việt Anh on 6/1/25.
+//
+
+import UIKit
+import Lottie
+import AdmobSDK
+
+class DiscountViewController: BaseViewController {
+
+    @IBOutlet weak var videoView: LottieAnimationView!
+    
+    @IBOutlet weak var btnClose: UIButton!
+    
+    @IBOutlet weak var btnClamItNow: UIButton!
+    
+    @IBOutlet weak var viewCountdown: UIView!
+    
+    @IBOutlet weak var lbCountdown: UILabel!
+    
+    
+    @IBOutlet weak var lbTitle: UILabel!
+    
+    @IBOutlet weak var lbPrice: UILabel!
+    
+    @IBOutlet weak var lbDescription: UILabel!
+    
+    private var iapId: IAPIdType = .weeklySale
+    private var iapIds: [IAPIdType] = []
+    
+    private var currentTime: Int = 3600
+    
+    private var timer: Timer?
+    
+    var onCloseScreen:(() -> Void)?
+    
+    class func show(onCloseScreen:(() -> Void)? = nil) {
+        let controller = DiscountViewController.loadController()
+        controller.onCloseScreen = onCloseScreen
+        controller.modalPresentationStyle = .overFullScreen
+        if let vc = UIApplication.shared.windows.first?.rootViewController?.presentedViewController {
+            vc.present(controller, animated: true)
+        } else if let vc = UIApplication.shared.windows.first?.rootViewController {
+            vc.present(controller, animated: true)
+        }
+    }
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getInfoIAP()
+    }
+    
+    
+    override func setup() {
+        super.setup()
+        viewCountdown.cornerRadiusView = 8
+        viewCountdown.layer.borderColor = UIColor.white.cgColor
+        viewCountdown.layer.borderWidth = 1
+        videoView.loadAnimation(file: "flower", loopMode: .loop, contentMode: .scaleAspectFill)
+        btnClamItNow.cornerRadiusView = 28
+        btnClamItNow.backgroundColor = UIColor(hexString: "E6E653")
+        currentTime = UserDefaultManager.timeCountdown
+        getInfoIAP()
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(onTimer), userInfo: nil, repeats: true)
+        lbCountdown.text = formatTime(seconds: currentTime)
+        lbDescription.text = LocalizableUtils.iapGetSale()
+        lbTitle.text = LocalizableUtils.iapOffSale()
+    }
+    
+    override func bindingData() {
+        super.bindingData()
+        InappManager.share.didPaymentSuccess.asObserver().subscribe {_ in
+            if IAPState.isUserVip {
+                FirebaseEventManager.logEvent(with: RMBGEventTracking.iapScreenPurchase_made,
+                                              params: [
+                                                "iap_name": self.iapId.unit
+                                              ])
+                self.dismiss(animated: true)
+            }
+        }.disposed(by: disposeBag)
+    }
+    
+    private func getInfoIAP() {
+        loadData()
+        iapIds = IAPIdType.getOption()
+        if InappManager.share.listProduct.isEmpty {
+            LoadingProgressHUD.show()
+            _ = InappManager.share.productInfo(id: InappManager.share.productIdentifiers) {[weak self]_ in
+                self?.iapIds = IAPIdType.getOption()
+                self?.loadData()
+                LoadingProgressHUD.dismiss()
+            }
+        } else {
+            iapIds = IAPIdType.getOption()
+            loadData()
+        }
+     }
+    
+    private func loadData() {
+        iapId = .weeklySale
+        iapIds.forEach { iap in
+            if iap == .weeklySale {
+                let text = "\(IAPIdType.weeklySale.price)/\(LocalizableUtils.iapWeek())"
+                let attrString = NSAttributedString(
+                    string: text,
+                    attributes: [
+                        NSAttributedString.Key.strokeColor: UIColor(hexString: "F6B259"),
+                        NSAttributedString.Key.strokeWidth: -2.0,
+                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24.0, weight: .bold)
+                    ]
+                )
+                lbPrice.attributedText = attrString
+            }
+        }
+    }
+    
+    func formatTime(seconds: Int) -> String {
+        let hours = seconds / 3600
+        let minutes = (seconds % 3600) / 60
+        let seconds = seconds % 60
+        if hours > 0 {
+            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        }
+        if minutes > 0 {
+            return String(format: "%02d:%02d", minutes, seconds)
+        }
+        return String(format: ":%02d", seconds)
+    }
+    
+    @objc func onTimer() {
+        currentTime -= 1
+        UserDefaultManager.currentTimeCountdown = currentTime
+        lbCountdown.text = formatTime(seconds: currentTime)
+        if currentTime <= 0 {
+            timer?.invalidate()
+            timer = nil
+            PremiumFloatingView.hide()
+        }
+    }
+    
+    
+    @IBAction func actionClose(_ sender: Any) {
+        self.dismiss(animated: false) {
+            ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) { state in
+                switch state {
+                case .closed, .error:
+                    if let handler = self.onCloseScreen {
+                        handler()
+                    }
+                    
+                default: break
+                }
+            }
+        }
+    }
+    
+    @IBAction func actionClamitNow(_ sender: Any) {
+        InappManager.share.purchaseProduct(withId: iapId.id)
+    }
+    
+}

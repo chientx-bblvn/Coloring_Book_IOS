@@ -90,7 +90,11 @@ IAP.price_package_yearly                        =       "Ежегодно %@";
 IAP.TermOfUse                                   =       "Условия использования";
 IAP.PrivacyPolicy                               =       "Политика конфиденциальности";
 IAP.RestorePurchase                             =       "Восстановить покупку";
-
+IAP.OffSale                                     =       "Специальное предложение - Скидка 50%%!";
+IAP.getSale                                     =       "Поторопитесь! Получите Premium сейчас за полцены!";
+IAP.ClamNow                                     =       "Получить сейчас";
+IAP.timeLeft                                    =       "%d %@";
+IAP.left                                        =       "Осталось";
 
 
 // ForceUpdate

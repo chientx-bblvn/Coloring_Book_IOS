@@ -150,4 +150,42 @@ class UserDefaultManager {
             UserDefaults.standard.synchronize()
         }
     }
+    
+    static var disableSale: Bool {
+        if let isDisable = UserDefaultManager.currentAccessDisableSale {
+            return isDisable
+        } else {
+            return false
+        }
+    }
+    
+    static var currentAccessDisableSale: Bool? {
+        get {
+            let isOn = UserDefaults.standard.bool(forKey: UserDefault.is_disable_sale.rawValue)
+                return isOn
+            
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefault.is_disable_sale.rawValue)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    static var timeCountdown: Int {
+        let isDisable = UserDefaultManager.currentTimeCountdown
+            return isDisable
+    }
+    
+    static var currentTimeCountdown: Int {
+        get {
+            let isOn = UserDefaults.standard.integer(forKey: UserDefault.time_countdownt_sale.rawValue)
+                return isOn
+            
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefault.time_countdownt_sale.rawValue)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
 }

@@ -80,6 +80,11 @@ IAP.price_package_yearly                        =       "Anual %@";
 IAP.TermOfUse                                   =       "Termos de uso";
 IAP.PrivacyPolicy                               =       "Política de Privacidade";
 IAP.RestorePurchase                             =       "Restaurar compra";
+IAP.OffSale                                     =       "Oferta Especial - 50%% de desconto!";
+IAP.getSale                                     =       "Apresse-se! Obtenha Premium agora por metade do preço!";
+IAP.ClamNow                                     =       "Obtenha já";
+IAP.timeLeft                                    =       "%d %@";
+IAP.left                                        =       "Restante";
 
 
 

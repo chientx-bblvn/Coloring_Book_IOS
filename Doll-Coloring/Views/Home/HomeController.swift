@@ -44,9 +44,9 @@ class HomeController: BaseViewController {
         didSet {
             var height = UIScreen.main.bounds.width
             if UIDevice.current.userInterfaceIdiom == .pad {
-                height = height * (220 / 768)
+                height = height * (250 / 768)
             } else {
-                height = height * (200 / 393)
+                height = height * (250 / 412)
                 
             }
             heightSlider.constant = height
@@ -100,13 +100,34 @@ class HomeController: BaseViewController {
                 FileManagerLocal.shared.createFolderManager(fileName: file.rawValue)
             }
         }
-        ADManager.shared.preLoadReward(DollColoringAdID.reward_alltopic)
     }
     
     override func setup() {
         super.setup()
         if UserDefaultManager.ABShowIAPColoring, !IAPState.isUserVip {
-            SubcriptionViewController.show(checkTime: true)
+            SubcriptionViewController.show(checkTime: false,handler: {
+                if UserDefaultManager.disableSale {
+                    ADManager.shared.loadFull(DollColoringAdID.inter_back)
+                    return
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    PremiumFloatingView.show()
+                    DiscountViewController.show {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            self.calculatorDay()
+                        }
+                        
+                    }
+                }
+            }, onClickCLose:  {
+                
+            })
+            
+        }
+        NotificationCenter.default.addObserver(self, selector: #selector(gotoDaily), name: NSNotification.Name("GOTODAILY_TABBAR"), object: nil)
+        if !IAPState.isUserVip {
+            ADManager.shared.preLoadReward(DollColoringAdID.reward_alltopic)
+            ADManager.shared.preLoadReward(DollColoringAdID.reward_dailygift)
         }
     }
     
@@ -171,7 +192,6 @@ class HomeController: BaseViewController {
                 self.bmoViewPagerNavigation.reloadData()
             }
             self.bmoViewPager.presentedPageIndex = 1
-            self.calculatorDay()
         }
     }
     
@@ -187,7 +207,10 @@ class HomeController: BaseViewController {
     
     private func settingIAP() {
         InappManager.share.didPaymentSuccess.subscribe(onNext: { [weak self] _ in
-            self?.topbarView.showPremium = UserDefaultManager.ABShowIAPColoring
+            self?.topbarView.showPremium = IAPState.isUserVip
+            if IAPState.isUserVip {
+                PremiumFloatingView.hide()
+            }
         }).disposed(by: disposeBag)
     }
     
@@ -331,9 +354,9 @@ extension HomeController {
         var height = UIScreen.main.bounds.width
         let headerHeightMin: CGFloat = 0
         if UIDevice.current.userInterfaceIdiom == .pad {
-            height = height * (220 / 768)
+            height = height * (250 / 768)
         } else {
-            height = height * (200 / 393)
+            height = height * (250 / 412)
             
         }
         let newHeaderHeight = max(headerHeightMin, height - offsetY)
@@ -375,19 +398,30 @@ extension HomeController {
     }
     
     func showInter(_ data: ColoringImage) {
+        if IAPState.isUserVip {
+            navigateColoring(data)
+            return
+        }
         numberClick += 1
         if numberClick >= UserDefaultManager.numberClickItemAllTopic {
             if !UserDefaultManager.disableMusicBackground {
                 pauseAudioBackground()
             }
-            ADManager.shared.loadFull(DollColoringAdID.inter_alltopic, isSplash: true) {[weak self] status in
+            ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
+            AdLoadingView.show()
+            ADManager.shared.loadFull(DollColoringAdID.inter_alltopic, isSplash: true) { status in
+                AdLoadingView.dismiss()
                 switch status {
                 case .closed, .error:
-                    if !UserDefaultManager.disableMusicBackground {
-                        self?.playAudioBackground()
+                    DispatchQueue.main.async {
+                        NativeFullScreenController.show() {
+                            if !UserDefaultManager.disableMusicBackground {
+                                self.playAudioBackground()
+                            }
+                            self.numberClick = 0
+                            self.navigateColoring(data)
+                        }
                     }
-                    self?.numberClick = 0
-                    self?.navigateColoring(data)
                 default:
                     break
                 }
@@ -412,7 +446,7 @@ extension HomeController {
         PopupShowAdsViewController.show(in: self, data: data, {
             ADManager.shared.loadReward(DollColoringAdID.reward_alltopic) { status in
                 switch status {
-                case .closed:
+                case .closed, .success:
                     if !UserDefaultManager.disableMusicBackground {
                         self.playAudioBackground()
                     }
@@ -420,7 +454,9 @@ extension HomeController {
                     self.navigateColoring(data)
                 case .error:
                     self.loadInter(data)
-                default:
+                case .showed:
+                    break
+                case .loaded:
                     break
                 }
             }
@@ -430,13 +466,20 @@ extension HomeController {
     }
     
     func loadInter(_ data: ColoringImage) {
-        ADManager.shared.loadFull(DollColoringAdID.inter_alltopic, isSplash: true){[weak self] state in
+        ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
+        AdLoadingView.show()
+        ADManager.shared.loadFull(DollColoringAdID.inter_alltopic, isSplash: true){ state in
+            AdLoadingView.dismiss()
             switch state {
             case .closed, .error :
-                if !UserDefaultManager.disableMusicBackground {
-                    self?.playAudioBackground()
+                DispatchQueue.main.async {
+                    NativeFullScreenController.show() {
+                        if !UserDefaultManager.disableMusicBackground {
+                            self.playAudioBackground()
+                        }
+                        self.navigateColoring(data)
+                    }
                 }
-                self?.navigateColoring(data)
             default:
                 break
             }
@@ -458,7 +501,7 @@ extension HomeController {
         PopupShowAdsViewController.show(in: self, data: data, {
             ADManager.shared.loadReward(DollColoringAdID.reward_dailygift) { status in
                 switch status {
-                case .closed:
+                case .closed, .success:
                     if !UserDefaultManager.disableMusicBackground {
                         self.playAudioBackground()
                     }
@@ -477,16 +520,47 @@ extension HomeController {
     }
     
     func loadInterDaily(_ data: ColoringImage) {
-        ADManager.shared.loadFull(DollColoringAdID.inter_dailygift, isSplash: true){[weak self] state in
+        ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
+        AdLoadingView.show()
+        ADManager.shared.loadFull(DollColoringAdID.inter_dailygift, isSplash: true){ state in
+            AdLoadingView.dismiss()
             switch state {
             case .closed, .error :
-                if !UserDefaultManager.disableMusicBackground {
-                    self?.playAudioBackground()
+                DispatchQueue.main.async {
+                    NativeFullScreenController.show() {
+                        if !UserDefaultManager.disableMusicBackground {
+                            self.playAudioBackground()
+                        }
+                        SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
+                        self.navigateColoring(data)
+                    }
                 }
-                SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
-                self?.navigateColoring(data)
             default:
                 break
+            }
+        }
+    }
+    
+    @objc private func gotoDaily() {
+        let sqliteData = SQLiteManager.shared.selectionGitColorings()
+        guard sqliteData.count < viewModel.itemDaly.count else {return}
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        
+        guard let pastDate = dateFormatter.date(from: UserDefaultManager.dateFirstOpenApp) else {
+            return
+        }
+        
+        let components = calendar.dateComponents([.day], from: pastDate, to: currentDate)
+        if let totalDays = components.day {
+            if totalDays >= viewModel.itemDaly.count {
+                let name = viewModel.itemDaly[(viewModel.itemDaly.count - 1)]
+                navigateColoring(name)
+            } else {
+                let name = viewModel.itemDaly[totalDays]
+                navigateColoring(name)
             }
         }
     }
@@ -508,7 +582,7 @@ extension HomeController {
         dateFormatter.dateFormat = "dd/MM/yyyy"
         
         guard let pastDate = dateFormatter.date(from: UserDefaultManager.dateFirstOpenApp) else {
-           return
+            return
         }
         let components = calendar.dateComponents([.day], from: pastDate, to: currentDate)
         
@@ -522,7 +596,6 @@ extension HomeController {
                     AppRouter.shared.navigate(to: CheckInRoute.gitPopup(name: name), with: .modal)
                 }
             }
-            
         }
     }
     
@@ -535,12 +608,12 @@ extension HomeController {
         dateFormatter.dateFormat = "dd/MM/yyyy"
         
         guard let pastDate = dateFormatter.date(from: UserDefaultManager.dateFirstOpenApp) else {
-           return 0
+            return 0
         }
         let components = calendar.dateComponents([.day], from: pastDate, to: currentDate)
         
         if let totalDays = components.day {
-           return totalDays
+            return totalDays
         }
         return 0
     }

@@ -14,9 +14,11 @@ class GitViewController: BaseViewController {
     
     @IBOutlet weak var animationView: LottieAnimationView!
     
+    @IBOutlet weak var viewButton: UIStackView!
     var name: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewButton.isHidden = true
         self.view.isUserInteractionEnabled =  true
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickCloseView)))
         animationView.loadAnimation(file: "AnimationGitDaly", loopMode: .autoReverse)
@@ -32,11 +34,8 @@ class GitViewController: BaseViewController {
         let toView = animationView.isHidden ? animationView : imageView
         
         UIView.transition(from: fromView ?? UIView(), to: toView ?? UIView(), duration: 0.6, options: [.transitionFlipFromLeft, .showHideTransitionViews], completion: { _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                DispatchQueue.main.async {
-                    AppRouter.shared.dismiss()
-                    NotificationCenter.default.post(name: NSNotification.Name("GOTODAILY_TABBAR"), object: nil)
-                }
+            DispatchQueue.main.async {
+                self.viewButton.isHidden = false
             }
         })
         
@@ -49,5 +48,17 @@ class GitViewController: BaseViewController {
     @objc private func onClickShowGit(_ gesture: UIGestureRecognizer) {
         anmationShowItem()
         SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: name)
+    }
+    
+    @IBAction func actionClose(_ sender: Any) {
+        onClickCloseView()
+    }
+    
+    @IBAction func actionColoring(_ sender: Any) {
+        AppRouter.shared.dismiss {
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: NSNotification.Name("GOTODAILY_TABBAR"), object: nil)
+            }
+        }
     }
 }

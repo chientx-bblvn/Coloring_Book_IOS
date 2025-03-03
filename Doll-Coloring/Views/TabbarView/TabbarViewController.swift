@@ -66,6 +66,7 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         super.viewDidLoad()
         getCurrentHeightAds()
         tabbarView.addSubview(tabBar)
+        tabbarView.generateOuterShadow()
         NSLayoutConstraint.activate([
             tabBar.topAnchor.constraint(equalTo: tabbarView.topAnchor),
             tabBar.leadingAnchor.constraint(equalTo: tabbarView.leadingAnchor),
@@ -77,7 +78,6 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         checkInStoryboard.tabBarItem = UITabBarItem(title: LocalizableUtils.commonCheckIn(), image: UIImage(named: "ic_tabbar_calendar"), selectedImage: UIImage(named: "ic_tabbar_calendar"))
         viewControllers = [homeStoryboard, chatStoryboard, checkInStoryboard]
         NotificationCenter.default.addObserver(self, selector: #selector(gotoHome), name: NSNotification.Name("GOTOHOME_TABBAR"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(gotoDaily), name: NSNotification.Name("GOTODAILY_TABBAR"), object: nil)
 //        loadAdsBanner()
     }
     
@@ -115,13 +115,14 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         tabBar.didSelectTab(index: 0)
     }
     
-    @objc private func gotoDaily() {
-        tabBar.didSelectTab(index: 2)
-    }
+    
     
     private func getCurrentHeightAds(isSuccess: Bool = true) {
         guard isSuccess else {
-            heightContraintAds.constant = 10
+            viewAds.subviews.forEach { view in
+                view.removeFromSuperview()
+            }
+            heightContraintAds.constant = 15
             return
         }
         if DeviceInfos.isIpad() {
@@ -140,7 +141,7 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         viewAds.isHidden = false
         ADManager.shared.loadBanner(DollColoringAdID.banner_home, viewBanner: viewAds) {[weak self] success in
             self?.getCurrentHeightAds(isSuccess: success)
-            self?.viewAds.isHidden = !success
+//            self?.viewAds.isHidden = !success
         }
     }
 }

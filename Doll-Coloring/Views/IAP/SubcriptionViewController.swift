@@ -69,7 +69,7 @@ class SubcriptionViewController: UIViewController {
     
     private var iapIds: [IAPIdType] = []
     
-    private var packageIds: IAPIdType = .monthly
+    private var packageIds: IAPIdType = .weekly
     
     class func show(checkTime: Bool, handler: (() -> Void)? = nil, onClickCLose: (() -> Void)? = nil) {
         let controller = SubcriptionViewController.loadController()
@@ -87,6 +87,7 @@ class SubcriptionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewPremiumBanner.roundCorners(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 16)
+        viewPackage.forEach({$0.isUserInteractionEnabled = true})
         viewPackage.forEach { view in
             view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickViewIAP(_:))))
         }
@@ -144,6 +145,7 @@ class SubcriptionViewController: UIViewController {
                 lb_subcription_year.text = id.title
                 lbPrice_year.text = id.price
                 lb_price_package_year.text = LocalizableUtils.iapPrice_weekly(price)
+            default: break
             }
         }
     }
@@ -174,6 +176,7 @@ class SubcriptionViewController: UIViewController {
                 lb_price_package_month.isHidden = false
             case .yearly:
                 lb_price_package_year.isHidden = false
+            default: break
             }
            packageIds = packageIAP
         }
@@ -182,8 +185,9 @@ class SubcriptionViewController: UIViewController {
     @objc
     private func clickCloseScreen() {
         if let handler = onCloseScreen {
-            self.dismiss(animated: false)
-            handler()
+            self.dismiss(animated: false) {
+                handler()
+            }
         } else {
             self.dismiss(animated: true)
         }
@@ -191,9 +195,9 @@ class SubcriptionViewController: UIViewController {
     
     
     @IBAction func actionClose(_ sender: Any) {
-        if !UserDefaultManager.ABis_free_trial_us  {
-            onClickCLoseIAP?()
-        }
+//        if !UserDefaultManager.ABis_free_trial_us  {
+//            onClickCLoseIAP?()
+//        }
         clickCloseScreen()
     }
     

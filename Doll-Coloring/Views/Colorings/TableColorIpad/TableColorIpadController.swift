@@ -319,7 +319,7 @@ extension TableColorIpadController: UICollectionViewDelegate, UICollectionViewDa
                 ADManager.shared.loadReward(DollColoringAdID.reward_color) {[weak self] status in
                     guard let self = self else {return}
                     switch status {
-                    case .closed:
+                    case .closed, .success:
                         isWarchAds.append(self.itemColors[indexPath.row].first?.tableName ?? "")
                         self.selectTableColor(indexPath, index: index)
                     case .error:
@@ -336,11 +336,21 @@ extension TableColorIpadController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func showInter(_ indexPath: IndexPath, index: Int = 0) {
-        ADManager.shared.loadFull(DollColoringAdID.inter_color, isSplash: true) {[weak self] state in
-            
+        ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
+        AdLoadingView.show()
+        ADManager.shared.loadFull(DollColoringAdID.inter_color, isSplash: true) { state in
+            AdLoadingView.dismiss()
             switch state {
             case .closed, .error:
-                self?.selectTableColor(indexPath, index: index)
+                DispatchQueue.main.async {
+                    if IAPState.isUserVip {
+                        self.selectTableColor(indexPath, index: index)
+                        return
+                    }
+                    NativeFullScreenController.show() {
+                        self.selectTableColor(indexPath, index: index)
+                    }
+                }
             default:
                 break
             }

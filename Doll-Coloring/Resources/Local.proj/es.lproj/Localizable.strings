@@ -89,7 +89,11 @@ IAP.price_package_yearly                        =       "Anual %@";
 IAP.TermOfUse                                   =       "Términos de uso";
 IAP.PrivacyPolicy                               =       "Política de privacidad";
 IAP.RestorePurchase                             =       "Restaurar compra";
-
+IAP.OffSale                                     =       "¡Oferta especial - 50%% de descuento!";
+IAP.getSale                                     =       "¡Date prisa! Obtén Premium ahora a mitad de precio.";
+IAP.ClamNow                                     =       "Consíguelo ahora";
+IAP.timeLeft                                    =       "%d %@";
+IAP.left                                        =       "Restante";
 
 // ForceUpdate
 ForceUpdate.Title                               =       "Nueva versión disponible";

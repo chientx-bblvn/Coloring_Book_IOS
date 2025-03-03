@@ -75,7 +75,7 @@ extension ListTopPicksColoringViewController: UITableViewDataSource, UITableView
                 }
                 ADManager.shared.loadReward(DollColoringAdID.reward_alltopic) { status in
                     switch status {
-                    case .closed:
+                    case .closed, .success:
                         SQLiteManager.shared.insertTableColoringRew(data: data)
                         if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath == data.filePath}) {
                             AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .coloring, coloringAPI: data), with: .modal)
@@ -104,14 +104,30 @@ extension ListTopPicksColoringViewController: UITableViewDataSource, UITableView
                 }
                 return
             }
+            ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
+            AdLoadingView.show()
             ADManager.shared.loadFull(DollColoringAdID.inter_alltopic, isSplash: true) { status in
+                AdLoadingView.dismiss()
                 switch status {
                 case .closed, .error:
-                    self.numberClick = 0
-                    if let colorLocal = self.coloringLocal.first(where: {$0.filePath == data.filePath}) {
-                        AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .coloring, coloringAPI: data), with: .modal)
-                    } else {
-                        AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .coloring), with: .modal)
+                    DispatchQueue.main.async {
+                        NativeFullScreenController.show() {
+                            if IAPState.isUserVip {
+                                self.numberClick = 0
+                                if let colorLocal = self.coloringLocal.first(where: {$0.filePath == data.filePath}) {
+                                    AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .coloring, coloringAPI: data), with: .modal)
+                                } else {
+                                    AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .coloring), with: .modal)
+                                }
+                                return
+                            }
+                            self.numberClick = 0
+                            if let colorLocal = self.coloringLocal.first(where: {$0.filePath == data.filePath}) {
+                                AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .coloring, coloringAPI: data), with: .modal)
+                            } else {
+                                AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .coloring), with: .modal)
+                            }
+                        }
                     }
                 default:
                     break

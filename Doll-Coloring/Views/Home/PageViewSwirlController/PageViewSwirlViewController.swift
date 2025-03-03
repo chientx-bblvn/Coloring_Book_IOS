@@ -39,6 +39,9 @@ class PageViewSwirlViewController: BaseViewController {
     override func setup() {
         super.setup()
         setupView()
+        InappManager.share.didPaymentSuccess.subscribe { _ in
+            self.collectionView.reloadData()
+        }.disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +50,8 @@ class PageViewSwirlViewController: BaseViewController {
         coloringLocal = SQLiteManager.shared.selectionColorings()
         
     }
+    
+    
     
     override func updateMorePortrait() {
         super.updateMorePortrait()
@@ -84,7 +89,7 @@ class PageViewSwirlViewController: BaseViewController {
     
     private func loadNativeAds() {
         ADManager.shared.loadNativeWithoutView(DollColoringAdID.native_home,
-                                               nativeAdType: .customMediaFixedHeight,
+                                               nativeAdType: .customNativeMediaHorizontal,
                                                ratio: .portrait,
                                                { adId, success, nativeAdView in
             self.hasAd = success

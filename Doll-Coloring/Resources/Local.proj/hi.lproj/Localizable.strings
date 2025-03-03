@@ -88,6 +88,11 @@ IAP.price_package_yearly                        =       "वार्षिक %
 IAP.TermOfUse                                   =       "उपयोग की शर्तें";
 IAP.PrivacyPolicy                               =       "गोपनीयता नीति";
 IAP.RestorePurchase                             =       "खरीदारी बहाल करें";
+IAP.OffSale                                     =       "विशेष ऑफर - 50%% की छूट!";
+IAP.getSale                                     =       "जल्दी करें! अब आधे दाम में प्रीमियम प्राप्त करें!";
+IAP.ClamNow                                     =       "अभी प्राप्त करें";
+IAP.timeLeft                                    =       "%d %@";
+IAP.left                                        =       "शेष";
 
 
 

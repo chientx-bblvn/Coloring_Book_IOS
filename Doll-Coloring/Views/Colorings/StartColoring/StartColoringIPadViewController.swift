@@ -100,6 +100,7 @@ class StartColoringIPadViewController: BaseViewController {
         getListColorIpad()
         createColoringBookView()
         loadAdsView()
+        ADManager.shared.preLoadNative(DollColoringAdID.native_dialog, nativeAdType: .customMediaFixedHeight)
     }
     
     override func updateMorePortrait() {
@@ -359,10 +360,25 @@ class StartColoringIPadViewController: BaseViewController {
         let percentColoring = Int((percent * 100).rounded())
         if percentColoring < 100 {
             PopupColoringViewController.show(in: self, _percent: percent, _title: LocalizableUtils.commonDescExit(), _titleOk: LocalizableUtils.commonOK(), _titleCancel: LocalizableUtils.commonNo()) {
-                ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) {[weak self] state in
+                if IAPState.isUserVip {
+                    self.dissmissHistoryColoring()
+                    return
+                }
+                ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
+                AdLoadingView.show()
+                ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) { state in
+                    AdLoadingView.dismiss()
                     switch state {
                     case .closed, .error:
-                        self?.dissmissHistoryColoring()
+                        DispatchQueue.main.async {
+                            if IAPState.isUserVip {
+                                self.dissmissHistoryColoring()
+                                return
+                            }
+                            NativeFullScreenController.show() {
+                                self.dissmissHistoryColoring()
+                            }
+                        }
                     default:
                         break
                     }
@@ -372,10 +388,21 @@ class StartColoringIPadViewController: BaseViewController {
             }
             return
         }
-        ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) {[weak self] state in
+        ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
+        AdLoadingView.show()
+        ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) { state in
+            AdLoadingView.dismiss()
             switch state {
             case .closed, .error:
-                self?.dissmissHistoryColoring()
+                DispatchQueue.main.async {
+                    if IAPState.isUserVip {
+                        self.dissmissHistoryColoring()
+                        return
+                    }
+                    NativeFullScreenController.show() {
+                        self.dissmissHistoryColoring()
+                    }
+                }
             default:
                 break
             }

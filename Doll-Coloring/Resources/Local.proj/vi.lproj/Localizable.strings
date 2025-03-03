@@ -88,6 +88,11 @@ IAP.price_package_yearly                        =       "Năm %@";
 IAP.TermOfUse                                   =       "Điều khoản sử dụng";
 IAP.PrivacyPolicy                               =       "Chính sách bảo mật";
 IAP.RestorePurchase                             =       "Khôi phục mua hàng";
+IAP.OffSale                                     =       "Ưu đãi đặc biệt - Giảm 50%%!";
+IAP.getSale                                     =       "Nhanh tay! Nhận Premium ngay bây giờ với giá chỉ bằng một nửa!";
+IAP.ClamNow                                     =       "Nhận ngay";
+IAP.timeLeft                                    =       "%d %@";
+IAP.left                                        =       "Còn lại";
 
 
 // ForceUpdate

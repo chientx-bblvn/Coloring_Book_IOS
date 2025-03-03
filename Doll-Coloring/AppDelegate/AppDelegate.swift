@@ -16,6 +16,8 @@ import AdmobSDK
 import FBAudienceNetwork
 import SDWebImageSVGNativeCoder
 import SDWebImage
+import AVFAudio
+import Clarity
 
 var appDelegate: AppDelegate? {
     return  UIApplication.shared.delegate as? AppDelegate
@@ -48,6 +50,9 @@ class AppDelegate: BaseAppDelegate {
         SVProgressHUD.setDefaultMaskType(.black)
         configuarationSDWebImageSVG()
         setupReachability()
+        
+        let clarityConfig = ClarityConfig(projectId: "priky2anur")
+        ClaritySDK.initialize(config: clarityConfig)
         
         return true
     }

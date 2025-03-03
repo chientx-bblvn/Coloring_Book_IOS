@@ -13,6 +13,13 @@ class HomeNativeAdsCell: UICollectionViewCell, NibReusable {
     
     @IBOutlet private weak var viewNativeAds: UIView!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        viewNativeAds.layer.borderWidth = 0
+        viewNativeAds.generateOuterShadow()
+        viewNativeAds.layer.cornerRadius = 16
+    }
+    
     func loadAds(nativeAd: NativeAdProtocol?) {
         if nativeAd == nil {
             self.viewNativeAds.isSkeletonable = true
@@ -30,7 +37,7 @@ class HomeNativeAdsCell: UICollectionViewCell, NibReusable {
     
     private func addViewAndLoadData(nativeAd: NativeAdProtocol?) {
         guard
-            let nibObjects = Bundle.main.loadNibNamed("CustomMediaNativeAdViewFixedHeight",
+            let nibObjects = Bundle.main.loadNibNamed("CustomNativeMediaHorizontal",
                                                       owner: nil,
                                                       options: nil),
             let adNativeProtocol = nibObjects.first as? NativeAdProtocol else {

@@ -181,7 +181,7 @@ extension UIView {
     
     public func generateOuterShadow() {
         self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowColor = UIColor.black.withAlphaComponent(0.7).cgColor
         self.layer.shadowOffset =  CGSize.zero
         self.layer.shadowOpacity = 0.5
         self.layer.shadowRadius = 4

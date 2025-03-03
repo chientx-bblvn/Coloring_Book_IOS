@@ -314,11 +314,26 @@
 		6887E08AF4A7883B4B7FFB7E /* Pods_Doll_Coloring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C404DB90499F9B71148AEB8 /* Pods_Doll_Coloring.framework */; };
 		970B94892C6486100024CFD6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 970B94882C6486100024CFD6 /* GoogleService-Info.plist */; };
 		970BF0952C3F7F15002B445F /* soundFillColor.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 970BF0942C3F7F15002B445F /* soundFillColor.mp3 */; };
+		970C44202D0C43DF0022AA69 /* AdLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970C441C2D0C43DF0022AA69 /* AdLoadingView.xib */; };
+		970C44212D0C43DF0022AA69 /* AdLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = 970C441D2D0C43DF0022AA69 /* AdLoading.json */; };
+		970C44222D0C43DF0022AA69 /* AdLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970C441B2D0C43DF0022AA69 /* AdLoadingView.swift */; };
+		9749A6812CD4CD90005EF9B7 /* NativeFullScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9749A67F2CD4CD90005EF9B7 /* NativeFullScreenController.swift */; };
+		9749A6822CD4CD90005EF9B7 /* NativeFullScreenController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9749A6802CD4CD90005EF9B7 /* NativeFullScreenController.xib */; };
+		9749A6852CD4D666005EF9B7 /* FullScreenNativeAdsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9749A6832CD4D666005EF9B7 /* FullScreenNativeAdsView.xib */; };
+		9749A6862CD4D666005EF9B7 /* FullScreenNativeAdsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9749A6842CD4D666005EF9B7 /* FullScreenNativeAdsView.swift */; };
+		9749A6892CD4D9F7005EF9B7 /* IntroADSFullCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9749A6872CD4D9F6005EF9B7 /* IntroADSFullCollectionViewCell.xib */; };
+		9749A68A2CD4D9F7005EF9B7 /* IntroADSFullCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9749A6882CD4D9F6005EF9B7 /* IntroADSFullCollectionViewCell.swift */; };
 		9750F6562C51E3BA00371ED1 /* PageViewSwirlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9750F6542C51E3BA00371ED1 /* PageViewSwirlViewController.xib */; };
 		9750F6572C51E3BA00371ED1 /* PageViewSwirlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750F6552C51E3BA00371ED1 /* PageViewSwirlViewController.swift */; };
 		9750F65B2C51E4A000371ED1 /* CheckInRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750F6582C51E4A000371ED1 /* CheckInRoute.swift */; };
 		9750F65C2C51E4A000371ED1 /* CheckIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9750F6592C51E4A000371ED1 /* CheckIn.storyboard */; };
 		9750F65D2C51E4A000371ED1 /* CheckInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750F65A2C51E4A000371ED1 /* CheckInController.swift */; };
+		9763137E2D2BB5C500E9E6F9 /* CustomNativeMediaHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9763137D2D2BB5C500E9E6F9 /* CustomNativeMediaHorizontal.swift */; };
+		976313802D2BB5D000E9E6F9 /* CustomNativeMediaHorizontal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9763137F2D2BB5D000E9E6F9 /* CustomNativeMediaHorizontal.xib */; };
+		976313822D2BC38200E9E6F9 /* iapVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 976313812D2BC38200E9E6F9 /* iapVideo.mp4 */; };
+		976313862D2BC3B800E9E6F9 /* DiscountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976313852D2BC3B800E9E6F9 /* DiscountViewController.xib */; };
+		976313872D2BC3B800E9E6F9 /* DiscountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976313842D2BC3B800E9E6F9 /* DiscountViewController.swift */; };
+		9763138F2D2D2B3F00E9E6F9 /* flower.json in Resources */ = {isa = PBXBuildFile; fileRef = 9763138E2D2D2B3F00E9E6F9 /* flower.json */; };
 		97DBEA222C6365FB00D6715D /* PopupTomorrowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBEA202C6365FB00D6715D /* PopupTomorrowViewController.swift */; };
 		97DBEA232C6365FB00D6715D /* PopupTomorrowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DBEA212C6365FB00D6715D /* PopupTomorrowViewController.xib */; };
 		97DF85032C60AAE800FA19EF /* ChooseDateBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF84F62C60AAE800FA19EF /* ChooseDateBlock.swift */; };
@@ -683,11 +698,26 @@
 		7C404DB90499F9B71148AEB8 /* Pods_Doll_Coloring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Doll_Coloring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		970B94882C6486100024CFD6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		970BF0942C3F7F15002B445F /* soundFillColor.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soundFillColor.mp3; sourceTree = "<group>"; };
+		970C441B2D0C43DF0022AA69 /* AdLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdLoadingView.swift; sourceTree = "<group>"; };
+		970C441C2D0C43DF0022AA69 /* AdLoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdLoadingView.xib; sourceTree = "<group>"; };
+		970C441D2D0C43DF0022AA69 /* AdLoading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AdLoading.json; sourceTree = "<group>"; };
+		9749A67F2CD4CD90005EF9B7 /* NativeFullScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFullScreenController.swift; sourceTree = "<group>"; };
+		9749A6802CD4CD90005EF9B7 /* NativeFullScreenController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativeFullScreenController.xib; sourceTree = "<group>"; };
+		9749A6832CD4D666005EF9B7 /* FullScreenNativeAdsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullScreenNativeAdsView.xib; sourceTree = "<group>"; };
+		9749A6842CD4D666005EF9B7 /* FullScreenNativeAdsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenNativeAdsView.swift; sourceTree = "<group>"; };
+		9749A6872CD4D9F6005EF9B7 /* IntroADSFullCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroADSFullCollectionViewCell.xib; sourceTree = "<group>"; };
+		9749A6882CD4D9F6005EF9B7 /* IntroADSFullCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroADSFullCollectionViewCell.swift; sourceTree = "<group>"; };
 		9750F6542C51E3BA00371ED1 /* PageViewSwirlViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageViewSwirlViewController.xib; sourceTree = "<group>"; };
 		9750F6552C51E3BA00371ED1 /* PageViewSwirlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewSwirlViewController.swift; sourceTree = "<group>"; };
 		9750F6582C51E4A000371ED1 /* CheckInRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInRoute.swift; sourceTree = "<group>"; };
 		9750F6592C51E4A000371ED1 /* CheckIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CheckIn.storyboard; sourceTree = "<group>"; };
 		9750F65A2C51E4A000371ED1 /* CheckInController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInController.swift; sourceTree = "<group>"; };
+		9763137D2D2BB5C500E9E6F9 /* CustomNativeMediaHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNativeMediaHorizontal.swift; sourceTree = "<group>"; };
+		9763137F2D2BB5D000E9E6F9 /* CustomNativeMediaHorizontal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomNativeMediaHorizontal.xib; sourceTree = "<group>"; };
+		976313812D2BC38200E9E6F9 /* iapVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = iapVideo.mp4; sourceTree = "<group>"; };
+		976313842D2BC3B800E9E6F9 /* DiscountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountViewController.swift; sourceTree = "<group>"; };
+		976313852D2BC3B800E9E6F9 /* DiscountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscountViewController.xib; sourceTree = "<group>"; };
+		9763138E2D2D2B3F00E9E6F9 /* flower.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = flower.json; sourceTree = "<group>"; };
 		97DBEA202C6365FB00D6715D /* PopupTomorrowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupTomorrowViewController.swift; sourceTree = "<group>"; };
 		97DBEA212C6365FB00D6715D /* PopupTomorrowViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupTomorrowViewController.xib; sourceTree = "<group>"; };
 		97DF84F62C60AAE800FA19EF /* ChooseDateBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseDateBlock.swift; sourceTree = "<group>"; };
@@ -923,6 +953,7 @@
 				97DF85232C61CC8500FA19EF /* AnimationGitDaly.json */,
 				084A8B252BC4DC7600C8D045 /* animation_splash.json */,
 				08F5D1C62BFC88C9002DC669 /* animation_dissconnect.json */,
+				9763138E2D2D2B3F00E9E6F9 /* flower.json */,
 			);
 			path = Lottie_Json;
 			sourceTree = "<group>";
@@ -994,6 +1025,7 @@
 		08B5A0BB2BE32BB400BD55E1 /* music */ = {
 			isa = PBXGroup;
 			children = (
+				976313812D2BC38200E9E6F9 /* iapVideo.mp4 */,
 				970BF0942C3F7F15002B445F /* soundFillColor.mp3 */,
 				08A0C29D2BE490AA00C6E42D /* asrmColoring.mp3 */,
 				08E3AEEB2BE346C100B22163 /* musicBackground.mp3 */,
@@ -1051,6 +1083,9 @@
 		08DBCB822C34FC01004F80FC /* CustomNativeAds */ = {
 			isa = PBXGroup;
 			children = (
+				9763137C2D2BB58E00E9E6F9 /* CustomNativeMediaHorizontal */,
+				9749A6842CD4D666005EF9B7 /* FullScreenNativeAdsView.swift */,
+				9749A6832CD4D666005EF9B7 /* FullScreenNativeAdsView.xib */,
 				08DBCB842C34FC28004F80FC /* CustomMediaNativeAdViewFixedHeight.swift */,
 				08DBCB832C34FC27004F80FC /* CustomMediaNativeAdViewFixedHeight.xib */,
 				08DBCB882C352F61004F80FC /* CustomMediaNativeAdView.swift */,
@@ -1487,6 +1522,7 @@
 				570AF8022A53CE580069B329 /* EasyTipView */,
 				570AF8102A53CE580069B329 /* TopBarView */,
 				08A525C72C00871200EB9FBA /* VerticalSlider.swift */,
+				970C441F2D0C43DF0022AA69 /* AdLoading */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1521,6 +1557,7 @@
 		570AF8132A53CE580069B329 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9749A67E2CD4CD23005EF9B7 /* ViewNativeFullScreen */,
 				97DF852B2C62297200FA19EF /* GitView */,
 				9750F64F2C51E27B00371ED1 /* CheckIn */,
 				083CA3A62BC672C5006033EE /* Collections */,
@@ -1551,6 +1588,8 @@
 		5716CFDC2A880EF300D46980 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				9749A6882CD4D9F6005EF9B7 /* IntroADSFullCollectionViewCell.swift */,
+				9749A6872CD4D9F6005EF9B7 /* IntroADSFullCollectionViewCell.xib */,
 				5716CFC52A88066800D46980 /* IntroductionCell.swift */,
 				5716CFC62A88066800D46980 /* IntroductionCell.xib */,
 			);
@@ -1586,6 +1625,7 @@
 		57CAAC1F2B22372900C56E11 /* IAP */ = {
 			isa = PBXGroup;
 			children = (
+				976313832D2BC39A00E9E6F9 /* DiscountView */,
 				57CAAC202B22372900C56E11 /* IAPController.xib */,
 				57CAAC212B22372900C56E11 /* IAPController.swift */,
 				571B13522B231C1A0084F92B /* PremiumFloatingView.xib */,
@@ -1675,6 +1715,33 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		970C441E2D0C43DF0022AA69 /* animation */ = {
+			isa = PBXGroup;
+			children = (
+				970C441D2D0C43DF0022AA69 /* AdLoading.json */,
+			);
+			path = animation;
+			sourceTree = "<group>";
+		};
+		970C441F2D0C43DF0022AA69 /* AdLoading */ = {
+			isa = PBXGroup;
+			children = (
+				970C441B2D0C43DF0022AA69 /* AdLoadingView.swift */,
+				970C441C2D0C43DF0022AA69 /* AdLoadingView.xib */,
+				970C441E2D0C43DF0022AA69 /* animation */,
+			);
+			path = AdLoading;
+			sourceTree = "<group>";
+		};
+		9749A67E2CD4CD23005EF9B7 /* ViewNativeFullScreen */ = {
+			isa = PBXGroup;
+			children = (
+				9749A67F2CD4CD90005EF9B7 /* NativeFullScreenController.swift */,
+				9749A6802CD4CD90005EF9B7 /* NativeFullScreenController.xib */,
+			);
+			path = ViewNativeFullScreen;
+			sourceTree = "<group>";
+		};
 		9750F64F2C51E27B00371ED1 /* CheckIn */ = {
 			isa = PBXGroup;
 			children = (
@@ -1685,6 +1752,24 @@
 				97DF85252C61D92E00FA19EF /* CheckInModel.swift */,
 			);
 			path = CheckIn;
+			sourceTree = "<group>";
+		};
+		9763137C2D2BB58E00E9E6F9 /* CustomNativeMediaHorizontal */ = {
+			isa = PBXGroup;
+			children = (
+				9763137D2D2BB5C500E9E6F9 /* CustomNativeMediaHorizontal.swift */,
+				9763137F2D2BB5D000E9E6F9 /* CustomNativeMediaHorizontal.xib */,
+			);
+			path = CustomNativeMediaHorizontal;
+			sourceTree = "<group>";
+		};
+		976313832D2BC39A00E9E6F9 /* DiscountView */ = {
+			isa = PBXGroup;
+			children = (
+				976313842D2BC3B800E9E6F9 /* DiscountViewController.swift */,
+				976313852D2BC3B800E9E6F9 /* DiscountViewController.xib */,
+			);
+			path = DiscountView;
 			sourceTree = "<group>";
 		};
 		97DBEA1F2C6365BE00D6715D /* PopupTomorrow */ = {
@@ -1837,6 +1922,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				080CB5812BEBDFEE0036A471 /* animation_progess.json in Resources */,
+				970C44202D0C43DF0022AA69 /* AdLoadingView.xib in Resources */,
+				970C44212D0C43DF0022AA69 /* AdLoading.json in Resources */,
 				0847C9E42BD162780007FC00 /* ColorCell.xib in Resources */,
 				080CB5852BECBD9C0036A471 /* animation_loading_preview.json in Resources */,
 				08F75CF12BE8DC65005ACDA9 /* HomeAdsCell.xib in Resources */,
@@ -1850,10 +1937,13 @@
 				08F5D1B82BF74905002DC669 /* TabbarView.storyboard in Resources */,
 				08F75D0E2BE9DC3E005ACDA9 /* DetailColoring.storyboard in Resources */,
 				570070BB2A93C4BD00D7C1C6 /* countryCodes.json in Resources */,
+				976313802D2BB5D000E9E6F9 /* CustomNativeMediaHorizontal.xib in Resources */,
+				976313862D2BC3B800E9E6F9 /* DiscountViewController.xib in Resources */,
 				08D0EFDA2BC65273003B000D /* Settings.storyboard in Resources */,
 				08DBCB982C352F62004F80FC /* CustomMediaNativeAdView.xib in Resources */,
 				570070BE2A93C4BD00D7C1C6 /* IntroductionCell.xib in Resources */,
 				08F75CF52BE8DC84005ACDA9 /* FeatureHomeCell.xib in Resources */,
+				976313822D2BC38200E9E6F9 /* iapVideo.mp4 in Resources */,
 				97DF85152C61C24900FA19EF /* GitDaylyCell.xib in Resources */,
 				570070C32A93C4BD00D7C1C6 /* FlagKit.xcassets in Resources */,
 				570070C62A93C4BD00D7C1C6 /* SplashController.xib in Resources */,
@@ -1866,6 +1956,7 @@
 				570070C82A93C4BD00D7C1C6 /* LanguageCell.xib in Resources */,
 				570070CF2A93C4BD00D7C1C6 /* PickerPhoto.storyboard in Resources */,
 				570070D12A93C4BD00D7C1C6 /* DropDownMenu.storyboard in Resources */,
+				9749A6892CD4D9F7005EF9B7 /* IntroADSFullCollectionViewCell.xib in Resources */,
 				97DF85212C61C72400FA19EF /* ItemGitDalyCell.xib in Resources */,
 				970BF0952C3F7F15002B445F /* soundFillColor.mp3 in Resources */,
 				080ACD8A2BC3EA2800E00E2C /* Home.storyboard in Resources */,
@@ -1887,11 +1978,13 @@
 				083CA3F02BC672DA006033EE /* HistoryColoring.storyboard in Resources */,
 				08DBCB7C2C34F745004F80FC /* LanguageSecondViewController.xib in Resources */,
 				08A0C29E2BE490AA00C6E42D /* asrmColoring.mp3 in Resources */,
+				9749A6822CD4CD90005EF9B7 /* NativeFullScreenController.xib in Resources */,
 				08F5D1C12BFB366A002DC669 /* CategoryMenuCell.xib in Resources */,
 				5729F27F2B7469800059AB40 /* ErrorCode.strings in Resources */,
 				970B94892C6486100024CFD6 /* GoogleService-Info.plist in Resources */,
 				08F75CE72BE8D12A005ACDA9 /* DetailCollection.storyboard in Resources */,
 				085A067F2BC69FB5002D5F1D /* ListTopPicksColoringViewController.xib in Resources */,
+				9749A6852CD4D666005EF9B7 /* FullScreenNativeAdsView.xib in Resources */,
 				08EC01E02BFEEB8B00E98627 /* TableColorIpad.storyboard in Resources */,
 				97DF85102C60B99100FA19EF /* CalendarMonthCell.xib in Resources */,
 				084396242BCD635000C8E213 /* FillterCell.xib in Resources */,
@@ -1907,6 +2000,7 @@
 				083CA3DE2BC672DA006033EE /* SaveColoring.storyboard in Resources */,
 				084A8B262BC4DC7600C8D045 /* animation_splash.json in Resources */,
 				088448B02BEA053B00636C36 /* CategoryColoringCell.xib in Resources */,
+				9763138F2D2D2B3F00E9E6F9 /* flower.json in Resources */,
 				97DF852E2C62299D00FA19EF /* GitViewController.xib in Resources */,
 				97DBEA232C6365FB00D6715D /* PopupTomorrowViewController.xib in Resources */,
 				08DBCB852C34FC28004F80FC /* CustomMediaNativeAdViewFixedHeight.xib in Resources */,
@@ -2049,6 +2143,7 @@
 				570070342A93C4BD00D7C1C6 /* SwipeExpanding.swift in Sources */,
 				570070362A93C4BD00D7C1C6 /* ImageViewExt.swift in Sources */,
 				570070372A93C4BD00D7C1C6 /* GestureRecognizerHandler.swift in Sources */,
+				9749A6812CD4CD90005EF9B7 /* NativeFullScreenController.swift in Sources */,
 				570070392A93C4BD00D7C1C6 /* Swipeable.swift in Sources */,
 				5700703A2A93C4BD00D7C1C6 /* AlertViewController.swift in Sources */,
 				5700703C2A93C4BD00D7C1C6 /* EmptyView.swift in Sources */,
@@ -2069,6 +2164,7 @@
 				08F75D122BE9DC3E005ACDA9 /* DetailColoringService.swift in Sources */,
 				570070422A93C4BD00D7C1C6 /* BindableType.swift in Sources */,
 				570070442A93C4BD00D7C1C6 /* PickerController.swift in Sources */,
+				9749A6862CD4D666005EF9B7 /* FullScreenNativeAdsView.swift in Sources */,
 				571B13592B231C2A0084F92B /* PremiumFloatingView.swift in Sources */,
 				9750F6572C51E3BA00371ED1 /* PageViewSwirlViewController.swift in Sources */,
 				083CA3F32BC672DA006033EE /* HistoryColoringRoute.swift in Sources */,
@@ -2083,6 +2179,7 @@
 				088333E92C1939CC00FC3901 /* ALProgressBar.swift in Sources */,
 				08B9928D2BC7DA2C009951BB /* TableColor.swift in Sources */,
 				083CA3E02BC672DA006033EE /* SaveColoringModel.swift in Sources */,
+				970C44222D0C43DF0022AA69 /* AdLoadingView.swift in Sources */,
 				9750F65B2C51E4A000371ED1 /* CheckInRoute.swift in Sources */,
 				084396342BCD86D000C8E213 /* DownloadManager.swift in Sources */,
 				08FCC5D42BD2122B004085C5 /* Stroke.swift in Sources */,
@@ -2175,6 +2272,7 @@
 				083CA3FE2BC672DA006033EE /* PreviewColoringModel.swift in Sources */,
 				08F5D1B92BF74905002DC669 /* TabbarViewController.swift in Sources */,
 				5700707A2A93C4BD00D7C1C6 /* LanguageController.swift in Sources */,
+				976313872D2BC3B800E9E6F9 /* DiscountViewController.swift in Sources */,
 				08FE33932C085FA1000DB950 /* PagerContainerView.swift in Sources */,
 				5700707B2A93C4BD00D7C1C6 /* NumberExt.swift in Sources */,
 				08E3AEF22BE3481000B22163 /* UserDefaultManager.swift in Sources */,
@@ -2197,6 +2295,7 @@
 				083CA3E12BC672DA006033EE /* SaveColoringRoute.swift in Sources */,
 				083CA3E22BC672DA006033EE /* SaveColoringService.swift in Sources */,
 				570070832A93C4BD00D7C1C6 /* Bundle++.swift in Sources */,
+				9749A68A2CD4D9F7005EF9B7 /* IntroADSFullCollectionViewCell.swift in Sources */,
 				570070842A93C4BD00D7C1C6 /* SwipeCollectionViewCell+Display.swift in Sources */,
 				08FE33962C085FA1000DB950 /* InfiniteScrollView.swift in Sources */,
 				08FCC5D32BD2122B004085C5 /* Queue.swift in Sources */,
@@ -2220,6 +2319,7 @@
 				08F75CF02BE8DC65005ACDA9 /* HomeAdsCell.swift in Sources */,
 				08F75D102BE9DC3E005ACDA9 /* DetailColoringModel.swift in Sources */,
 				08F5D1CB2BFE3D22002DC669 /* StartColoringIPadViewController.swift in Sources */,
+				9763137E2D2BB5C500E9E6F9 /* CustomNativeMediaHorizontal.swift in Sources */,
 				570FC7F12BC1A2830088CE58 /* AppVersionModel.swift in Sources */,
 				570070902A93C4BD00D7C1C6 /* LottieAnimationView++JSON.swift in Sources */,
 				570070922A93C4BD00D7C1C6 /* TextViewWithPlaceholder.swift in Sources */,
@@ -2340,7 +2440,7 @@
 				DEVELOPMENT_TEAM = 9NN48ZXH6A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Doll-Coloring/ConfigFiles/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Doll Coloring";
+				INFOPLIST_KEY_CFBundleDisplayName = Coloritas;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Doll Coloring want to access to your camera to make video call with your dogs.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone access for uploading audio";
@@ -2359,7 +2459,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.9;
+				MARKETING_VERSION = 1.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2386,7 +2486,7 @@
 				DEVELOPMENT_TEAM = 9NN48ZXH6A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Doll-Coloring/ConfigFiles/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Doll Coloring";
+				INFOPLIST_KEY_CFBundleDisplayName = Coloritas;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Doll Coloring want to access to your camera to make video call with your dogs.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone access for uploading audio";
@@ -2405,7 +2505,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.9;
+				MARKETING_VERSION = 1.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -22,7 +22,9 @@ class PremiumFloatingView: BaseCustomXibView {
     }()
     
     class func show() {
-        if isClosed || IAPState.isUserVip || (IAPState.iapState == .unload) { return }
+        if isClosed || IAPState.isUserVip || (IAPState.iapState == .unload) || UserDefaultManager.disableSale {
+            return
+        }
         let premiumFloatingView = PremiumFloatingView.shared
         premiumFloatingView.removeFromSuperview()
         var window: UIWindow!
@@ -46,8 +48,8 @@ class PremiumFloatingView: BaseCustomXibView {
         NSLayoutConstraint.activate([
             premiumFloatingView.topAnchor.constraint(equalTo: window.topAnchor, constant: disY),
             premiumFloatingView.leadingAnchor.constraint(equalTo: window.leadingAnchor, constant: disX),
-            premiumFloatingView.heightAnchor.constraint(equalToConstant: 108),
-            premiumFloatingView.widthAnchor.constraint(equalToConstant: 108)
+            premiumFloatingView.heightAnchor.constraint(equalToConstant: 80),
+            premiumFloatingView.widthAnchor.constraint(equalToConstant: 80)
         ])
         premiumFloatingView.fadeIn()
     }
@@ -76,10 +78,12 @@ class PremiumFloatingView: BaseCustomXibView {
     }
     
     @IBOutlet private weak var imageCloseView: UIImageView!
-    @IBOutlet private weak var lottieAnimateView: LottieAnimationView!
     @IBOutlet private weak var imageMainPremiumView: UIImageView!
     @IBOutlet private weak var trailingClose: NSLayoutConstraint!
     @IBOutlet private weak var leadingClose: NSLayoutConstraint!
+    
+    @IBOutlet weak var viewBlur: UIView!
+    
     
     private static var isClosed = false
     private static var topBariel: CGFloat {
@@ -104,18 +108,14 @@ class PremiumFloatingView: BaseCustomXibView {
     }
     
     private func setupView() {
-        lottieAnimateView.loadAnimation(file: "iap_animate_banner",
-                                        loopMode: .loop,
-                                        autoPlay: true)
         imageCloseView.isUserInteractionEnabled = true
         imageCloseView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickCloseView)))
         imageMainPremiumView.isUserInteractionEnabled = true
         imageMainPremiumView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickMainPremiumView)))
-        lottieAnimateView.isUserInteractionEnabled = true
-        lottieAnimateView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickMainPremiumView)))
         
         self.isUserInteractionEnabled = true
         self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPanGesture(_:))))
+        viewBlur.cornerRadiusView = 30
     }
     
     @objc private func clickCloseView() {
@@ -123,7 +123,7 @@ class PremiumFloatingView: BaseCustomXibView {
     }
     
     @objc private func clickMainPremiumView() {
-        IAPController.show(checkTime: false)
+        DiscountViewController.show()
     }
     
     @objc private func onPanGesture(_ panGesture: UIPanGestureRecognizer) {

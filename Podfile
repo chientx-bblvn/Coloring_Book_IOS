@@ -21,6 +21,8 @@ def shared_pods
   # Core Dependencies
   pod 'SwiftLint', '~> 0.50.0'
   pod 'Reusable', '~> 4.1.0'
+  pod 'RxSwift', '~> 5.1.0'
+  pod 'RxCocoa', '~> 5.1.0'
   pod 'IQKeyboardManagerSwift', '6.5.10'
   pod 'Moya/RxSwift', '~> 14.0.0'
   
@@ -32,6 +34,14 @@ def shared_pods
   pod 'lottie-ios'
   pod 'SVGKit'
   pod 'SDWebImageSVGNativeCoder'
+  pod 'SVProgressHUD'
+  
+  ### Facebook SDK
+  pod 'FBAudienceNetwork'
+  pod 'FBSDKCoreKit'
+  pod 'FBAEMKit'
+  pod 'GoogleMobileAdsMediationFacebook'
+
   
   # For firebase
   #  # (Recommended) Pod for Google Analytics
@@ -39,9 +49,11 @@ def shared_pods
   
   pod 'BmoViewPager', :path => "./Submodules/BmoViewPager"
   
+  
   ### Admobs
-  pod 'AdmobSDK', :git => "https://AnhNVBBLabs@github.com/Binary-Bridge-Labs/ADMobSDK", :tag => 'v0.0.18'
-  #pod 'AdmobSDK', :path => "./Submodules/ADSDK"
+  #pod 'AdmobSDK', :git => "https://AnhNVBBLabs@github.com/Binary-Bridge-Labs/ADMobSDK", :branch => 'release/0.0.19'
+  pod 'AdmobSDK', :path => "./Submodules/ADMobSDK"
+  pod 'Clarity'
   
   ### SQLite DB
   pod 'SQLite.swift'

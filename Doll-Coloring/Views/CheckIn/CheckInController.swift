@@ -44,9 +44,9 @@ class CheckInController: BaseViewController {
         didSet {
             var height = UIScreen.main.bounds.width
             if UIDevice.current.userInterfaceIdiom == .pad {
-                height = height * (220 / 768)
+                height = height * (250 / 768)
             } else {
-                height = height * (200 / 393)
+                height = height * (250 / 412)
             }
             heightSlider.constant = height
         }
@@ -233,6 +233,10 @@ extension CheckInController: UICollectionViewDelegate, UICollectionViewDataSourc
                 }
             } else {
                 if let data = viewModel.itemDaly.first(where: {$0.filePath?.contains(image) ?? false}) {
+                    if IAPState.isUserVip {
+                        self.navigateColoring(data)
+                        return
+                    }
                     showRew(data)
                 }
             }
@@ -254,7 +258,7 @@ extension CheckInController: UICollectionViewDelegate, UICollectionViewDataSourc
         PopupShowAdsViewController.show(in: self, data: data, {
             ADManager.shared.loadReward(DollColoringAdID.reward_dailygift) { status in
                 switch status {
-                case .closed:
+                case .closed, .success:
                     if !UserDefaultManager.disableMusicBackground {
                         self.playAudioBackground()
                     }
@@ -273,14 +277,22 @@ extension CheckInController: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func loadInter(_ data: ColoringImage) {
-        ADManager.shared.loadFull(DollColoringAdID.inter_dailygift, isSplash: true){[weak self] state in
+        ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
+        AdLoadingView.show()
+        ADManager.shared.loadFull(DollColoringAdID.inter_dailygift, isSplash: true){state in
+            AdLoadingView.dismiss()
             switch state {
             case .closed, .error :
-                if !UserDefaultManager.disableMusicBackground {
-                    self?.playAudioBackground()
+                
+                DispatchQueue.main.async {
+                    NativeFullScreenController.show() {
+                        if !UserDefaultManager.disableMusicBackground {
+                            self.playAudioBackground()
+                        }
+                        SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
+                        self.navigateColoring(data)
                 }
-                SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
-                self?.navigateColoring(data)
+                }
             default:
                 break
             }

@@ -18,25 +18,34 @@ class IntroController: BaseViewController {
     private let listIntro: [IntroModel] = [
         IntroModel(name: LocalizableUtils.introIntroTitlePage1(),
                    desc: LocalizableUtils.introIntroContentPage1(),
-                   image: R.image.intro_doll2(),
+                   image: R.image.ic_item_onboading1(),
                    id: 0,
                    indicator: R.image.indicator_page1()),
         IntroModel(name: LocalizableUtils.introIntroTitlePage2(),
                    desc: LocalizableUtils.introIntroContentPage2(),
-                   image: R.image.intro_doll0(),
+                   image: R.image.ic_item_onboading2(),
                    id: 1,
                    indicator: R.image.indicator_page2()),
         IntroModel(name: LocalizableUtils.introIntroTitlePage3(),
                    desc: LocalizableUtils.introIntroContentPage3(),
-                   image: R.image.intro_doll1(),
+                   image: R.image.ic_item_onboading3(),
                    id: 2,
                    indicator: R.image.indicator_page3())
     ]
+    
+    private var hasAd: Bool = true
+    
+    private var nativeAdNative: NativeAdProtocol? {
+        didSet {
+            fsPagerView.reloadData()
+        }
+    }
     
     // MARK: - Setup controller and IBAction
     override func setup() {
         super.setup()
         setupView()
+        loadNativeFullSCR()
     }
     
     override func bindingData() {
@@ -46,6 +55,20 @@ class IntroController: BaseViewController {
     // MARK: - Language change event
     override func onLanguageChange() {
         super.onLanguageChange()
+    }
+    
+    func loadNativeFullSCR() {
+        ADManager.shared.loadNativeWithoutView(DollColoringAdID.naitve_fullscreen_onboarding, nativeAdType: .customFullScreenNative) { adId, success, nativeAdView in
+            if ADManager.shared.isTestMode {
+                self.hasAd = success
+                self.nativeAdNative = nativeAdView
+            } else {
+                if adId.contains(DollColoringAdID.naitve_fullscreen_onboarding.adId) {
+                    self.hasAd = success
+                    self.nativeAdNative = nativeAdView
+                }
+            }
+        }
     }
 
 }
@@ -76,8 +99,10 @@ extension IntroController {
         fsPagerView.dataSource = self
         fsPagerView.delegate = self
         fsPagerView.isInfinite = false
+        fsPagerView.isScrollEnabled = true
         fsPagerView.decelerationDistance = 1
         fsPagerView.register(cellType: IntroductionCell.self)
+        fsPagerView.register(cellType: IntroADSFullCollectionViewCell.self)
     }
     
     
@@ -85,17 +110,44 @@ extension IntroController {
 
 extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {
     func numberOfItems(in pagerView: FSPagerView) -> Int {
+        if hasAd {
+            return listIntro.count + 1
+        }
         return listIntro.count
     }
     
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
+        guard hasAd else {
+            let cell = pagerView.dequeueReusableCell(for: index, cellType: IntroductionCell.self)
+            let intro = listIntro[index]
+            cell.loadData(intro: intro)
+            cell.onNext = {
+                DispatchQueue.main.asyncSafety {
+                    let currentPage = self.fsPagerView.currentIndex
+                    if currentPage < (self.listIntro.count - 1) {
+                        self.fsPagerView.scrollToItem(at: currentPage + 1, animated: true)
+                    } else {
+                        UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
+                        UserDefaultManager.currentDateFirstOpenApp = Date().toMyString(format: "dd/MM/yyyy")
+                        AppRouter.shared.navigate(to: TabbarViewRoute.main, with: .changeRoot)
+                    }
+                }
+            }
+            return cell
+        }
+        
+        if index == 2 {
+            let cell = pagerView.dequeueReusableCell(for: index, cellType: IntroADSFullCollectionViewCell.self)
+            return cell
+        }
+    
         let cell = pagerView.dequeueReusableCell(for: index, cellType: IntroductionCell.self)
-        let intro = listIntro[index]
+        let intro = listIntro[index == 3 ? 2 : index]
         cell.loadData(intro: intro)
         cell.onNext = {
             DispatchQueue.main.asyncSafety {
                 let currentPage = self.fsPagerView.currentIndex
-                if currentPage < (self.listIntro.count - 1) {
+                if currentPage < (self.listIntro.count) {
                     self.fsPagerView.scrollToItem(at: currentPage + 1, animated: true)
                 } else {
                     UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
@@ -120,4 +172,15 @@ extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {
         }
     }
     
+    func pagerView(_ pagerView: FSPagerView, willDisplay cell: FSPagerViewCell, forItemAt index: Int) {
+        if let cell = cell as? IntroADSFullCollectionViewCell {
+            cell.loadAds(nativeAd: nativeAdNative)
+        }
+    }
+    
+    func pagerView(_ pagerView: FSPagerView, didEndDisplaying cell: FSPagerViewCell, forItemAt index: Int) {
+        if let cell = cell as? IntroADSFullCollectionViewCell {
+            cell.removeViewAds()
+        }
+    }
 }

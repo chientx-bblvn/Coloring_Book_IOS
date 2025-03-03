@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,7 +22,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLK-Hg-4i1" customClass="FSPagerView" customModule="Doll_Coloring" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24" width="1024" height="521"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="521"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1024" id="DPQ-m5-dle"/>
@@ -30,7 +30,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mL4-pd-4De" customClass="FSPageControl" customModule="Doll_Coloring" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="495" width="1024" height="50"/>
+                                <rect key="frame" x="0.0" y="471" width="1024" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="bBN-ih-GFd"/>
@@ -56,14 +56,14 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RvK-HB-mfo" customClass="BmoViewPagerNavigationBar" customModule="BmoViewPager">
-                                <rect key="frame" x="16" y="555" width="1024" height="40"/>
+                                <rect key="frame" x="16" y="531" width="1024" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="VVN-K7-b5s"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zjz-Uy-i00" customClass="BmoViewPager" customModule="BmoViewPager">
-                                <rect key="frame" x="0.0" y="610" width="1024" height="756"/>
+                                <rect key="frame" x="0.0" y="586" width="1024" height="780"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -84,7 +84,7 @@
                             <constraint firstItem="mL4-pd-4De" firstAttribute="trailing" secondItem="aLK-Hg-4i1" secondAttribute="trailing" id="U7p-lv-Gmr"/>
                             <constraint firstItem="ckz-jQ-SEj" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="W8m-EZ-Ewa"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="aLK-Hg-4i1" secondAttribute="trailing" id="WOx-nF-B8V"/>
-                            <constraint firstItem="aLK-Hg-4i1" firstAttribute="top" secondItem="3pi-N7-nbV" secondAttribute="top" id="X64-ob-rBY"/>
+                            <constraint firstItem="aLK-Hg-4i1" firstAttribute="top" secondItem="Z2g-4m-atm" secondAttribute="top" id="X64-ob-rBY"/>
                             <constraint firstAttribute="trailing" secondItem="nBS-ek-vxM" secondAttribute="trailing" id="YcD-aN-2NJ"/>
                             <constraint firstAttribute="bottom" secondItem="zjz-Uy-i00" secondAttribute="bottom" id="hMa-L8-Odw"/>
                             <constraint firstItem="RvK-HB-mfo" firstAttribute="trailing" secondItem="3pi-N7-nbV" secondAttribute="trailing" constant="16" id="heT-1a-hzC"/>

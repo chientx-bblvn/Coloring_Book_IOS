@@ -51,12 +51,12 @@ Content_delete_collection                       =       "The color will be delet
 Splash.Copyright                                =       "®Copyright by Binary Bridge Labs 2024";
 
 // Intro
-Intro.introTitlePage1                           =       "Beautiful doll-style graphics";
-Intro.introContentPage1                         =       "Unique doll-style graphics suitable for all ages!";
-Intro.introTitlePage2                           =       "Rich-colored palettes";
-Intro.introContentPage2                         =       "Over 20 rich-colored palettes, gradient colors";
-Intro.introTitlePage3                           =       "Save or Share";
-Intro.introContentPage3                         =       "Easily share or share your favorite paint to all social media";
+Intro.introTitlePage1                           =       "A World of Vibrant Colors";
+Intro.introContentPage1                         =       "Bring each scene to life with a rich palette of colorful pencils at your fingertips!";
+Intro.introTitlePage2                           =       "Discover Beautiful Artwork";
+Intro.introContentPage2                         =       "Choose from captivating designs like animals and princesses, ready for your artistic touch!";
+Intro.introTitlePage3                           =       "Shine with Dazzling Colors";
+Intro.introContentPage3                         =       "Add magic to your art with shimmering palettes and glowing effects!";
 
 // Language
 Language.Title                                  =       "Change language";
@@ -91,6 +91,12 @@ IAP.price_package_yearly                        =       "Yearly %@";
 IAP.TermOfUse                                   =       "Terms of use";
 IAP.PrivacyPolicy                               =       "Privacy Policy";
 IAP.RestorePurchase                             =       "Restore Purchase";
+
+IAP.OffSale                                     =       "Special Offer - 50%% OFF!";
+IAP.getSale                                     =       "Hurry! Get Premium now at half price!";
+IAP.ClamNow                                     =       "Clam It Now";
+IAP.timeLeft                                    =       "%d %@";
+IAP.left                                        =       "Left";
 
 
 // ForceUpdate

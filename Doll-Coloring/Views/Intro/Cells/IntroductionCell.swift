@@ -15,7 +15,6 @@ class IntroductionCell: FSPagerViewCell, NibReusable {
     @IBOutlet private weak var lbSubTitle: UILabel!
     @IBOutlet weak var indicatorImg: UIImageView!
     @IBOutlet weak var viewAds: UIView!
-    @IBOutlet weak var imgTitle: UIImageView!
     @IBOutlet weak var btnNext: UIButton!
     
     var onNext: (() -> Void)?
@@ -27,22 +26,21 @@ class IntroductionCell: FSPagerViewCell, NibReusable {
         switch intro.id {
         case 0:
             changeButtonNext(LocalizableUtils.commonNext())
-            imgTitle.image = R.image.ic_title_intro_0()
             viewAds.isHidden = true
+            loadAdsHigh()
         case 1:
-            changeButtonNext(LocalizableUtils.commonStart())
-            imgTitle.image = R.image.ic_title_intro_1()
+            changeButtonNext(LocalizableUtils.commonNext())
             viewAds.isHidden = false
             loadAdsHigh()
         case 2:
-            changeButtonNext(LocalizableUtils.commonNext())
-            imgTitle.image = R.image.ic_title_intro_2()
-            viewAds.isHidden = true
+            changeButtonNext(LocalizableUtils.commonStart())
+            viewAds.isHidden = false
+            loadAds()
         default:
             break
         }
         imageviewIntro.image = intro.image
-        lbTitle.text = ""
+        lbTitle.text = intro.name
         lbSubTitle.text = intro.desc
         indicatorImg.image = intro.indicator
     }
@@ -56,9 +54,8 @@ class IntroductionCell: FSPagerViewCell, NibReusable {
         ADManager.shared.loadNative(DollColoringAdID.native_onboarding_high,
                                     to: viewAds, refreshAd: true, nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success, _  in
             guard idAds.contains(DollColoringAdID.native_onboarding_high.adId) else {return}
-            if !success {
-                self?.loadAds()
-            }
+            self?.isLoadingAd = false
+            self?.viewAds.isHidden = !success
         }
     }
     

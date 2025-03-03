@@ -29,6 +29,8 @@ enum UserDefault: String {
     case state_show_iap = "state_show_iap"
     case is_free_trial_US = "is_free_trial_US"
     case date_first_open_app = "date_first_open_app"
+    case time_countdownt_sale = "time_countdownt_sale"
+    case is_disable_sale = "is_disable_sale"
 }
 
 enum KeyChainKey: String, CaseIterable {

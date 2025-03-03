@@ -179,6 +179,7 @@ extension IAPController {
             case .monthly:
                 FirebaseEventManager.logEvent(with: RMBGEventTracking.iapScreenContinueClicked,
                                               params: ["iap_name" : "month"])
+            default: break
             }
             InappManager.share.purchaseProduct(withId: bestPrice.id)
         }
