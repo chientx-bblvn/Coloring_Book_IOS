@@ -145,9 +145,9 @@
                                     <constraint firstAttribute="height" constant="54" id="u8g-Wr-bD0"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZSi-at-VgP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZSi-at-VgP">
                                 <rect key="frame" x="0.0" y="102" width="414" height="794"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" red="0.96266931300000003" green="0.96257919069999998" blue="0.96991878750000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Fuf-di-Bnt"/>
@@ -166,6 +166,7 @@
                         <outlet property="btnPremium" destination="oBK-8Q-uws" id="vJg-tj-bh9"/>
                         <outlet property="coloringTableView" destination="ZSi-at-VgP" id="vmP-oK-a4c"/>
                         <outlet property="lbColoring" destination="dm2-Z9-oYU" id="k1d-ep-UgI"/>
+                        <outlet property="topBarView" destination="uJJ-0u-u2l" id="w1n-vP-R7t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Axg-wm-qSk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
