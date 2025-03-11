@@ -37,7 +37,8 @@ class NetworkDisconnectController: BaseViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(removeView(_ :)), name: NSNotification.Name(rawValue: "network_connection"), object: nil)
         viewAnimation.loadAnimation(file: "animation_dissconnect", loopMode: .loop, autoPlay: true)
-        viewContent.generateOuterShadow()
+        viewContent.layer.backgroundColor = UIColor(hexString: "98A3F3").cgColor
+        viewContent.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 4, height: 4))
         showAnimate()
     }
     

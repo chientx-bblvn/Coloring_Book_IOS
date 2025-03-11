@@ -25,9 +25,10 @@ class AllColoringCell: UICollectionViewCell, NibReusable {
         super.awakeFromNib()
         // Initialization code
         progessRing.lineWidth = 5
-        viewContent.layer.borderWidth = 0
-        viewContent.generateOuterShadow()
+        viewContent.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
         viewContent.layer.cornerRadius = 16
+        imageView.layer.cornerRadius = 16
+//        viewContent.clipsToBounds = true
     }
     
     func setupView(image: String?, coloringLocal: [ColoringHistoryModel], filePath: String?, isDaily: Bool = false, index: Int) {

@@ -86,7 +86,7 @@ extension IntroController {
             fsPagerView.scrollToItem(at: currentPage + 1, animated: true)
         } else {
             UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
-            AppRouter.shared.navigate(to: TabbarViewRoute.main, with: .changeRoot)
+            AppRouter.shared.navigate(to:   MainTabbarViewRoute.tabbar, with: .changeRoot)
         }
     }
     
@@ -129,7 +129,7 @@ extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {
                     } else {
                         UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
                         UserDefaultManager.currentDateFirstOpenApp = Date().toMyString(format: "dd/MM/yyyy")
-                        AppRouter.shared.navigate(to: TabbarViewRoute.main, with: .changeRoot)
+                        AppRouter.shared.navigate(to: MainTabbarViewRoute.tabbar, with: .changeRoot)
                     }
                 }
             }
@@ -152,7 +152,7 @@ extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {
                 } else {
                     UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
                     UserDefaultManager.currentDateFirstOpenApp = Date().toMyString(format: "dd/MM/yyyy")
-                    AppRouter.shared.navigate(to: TabbarViewRoute.main, with: .changeRoot)
+                    AppRouter.shared.navigate(to:  MainTabbarViewRoute.tabbar, with: .changeRoot)
                 }
             }
         }

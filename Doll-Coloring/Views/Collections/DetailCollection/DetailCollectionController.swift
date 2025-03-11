@@ -46,9 +46,9 @@ class DetailCollectionController: BaseViewController {
         topBarView.title = LocalizableUtils.commonCollections().uppercased()
         topBarView.onLeftClick = {
             if self.viewModel.isCollection {
-                AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+                AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
             } else {
-                AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+                AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
             }
         }
         if IAPState.isUserVip {

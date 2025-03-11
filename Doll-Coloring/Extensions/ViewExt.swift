@@ -186,6 +186,17 @@ extension UIView {
         self.layer.shadowOpacity = 0.5
         self.layer.shadowRadius = 4
     }
+    
+    public func customGenerateOuterShadow(shadowOpacity:Float = 0.5, shadowRadius: CGFloat = 4, color: UIColor, shadowOffset: CGSize = CGSize(width: 0, height: 0)) {
+        self.layer.borderWidth = 2
+        self.layer.borderColor = color.cgColor
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = color.cgColor
+        self.layer.shadowOffset = shadowOffset
+        self.layer.shadowOpacity = shadowOpacity
+        self.layer.shadowRadius = shadowRadius
+        
+    }
 }
 
 enum GradientDirection {

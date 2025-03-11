@@ -212,7 +212,7 @@ extension SplashController {
                 return
             }
             BBLLogging.d("Check:: gotoHome")
-            AppRouter.shared.navigate(to: TabbarViewRoute.main, with: .changeRoot)
+            AppRouter.shared.navigate(to: MainTabbarViewRoute.tabbar, with: .changeRoot)
         }
     }
     

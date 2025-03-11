@@ -112,7 +112,7 @@ struct _R {
       var default_title: RswiftResources.StringResource { .init(key: "default_title", tableName: "ErrorCode", source: source, developmentValue: "Error", comment: nil) }
     }
 
-    /// This `_R.string.localizable` struct is generated, and contains static references to 101 localization keys.
+    /// This `_R.string.localizable` struct is generated, and contains static references to 102 localization keys.
     struct localizable {
       let source: RswiftResources.StringResource.Source
 
@@ -150,6 +150,13 @@ struct _R {
       ///
       /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
       var commonCollections: RswiftResources.StringResource { .init(key: "Common.Collections", tableName: "Localizable", source: source, developmentValue: "Collections", comment: nil) }
+
+      /// en translation: Coloring Books
+      ///
+      /// Key: Common.ColoringBooks
+      ///
+      /// Locales: en, vi
+      var commonColoringBooks: RswiftResources.StringResource { .init(key: "Common.ColoringBooks", tableName: "Localizable", source: source, developmentValue: "Coloring Books", comment: nil) }
 
       /// en translation: Please come back tomorrow to receive your gift 🎁!
       ///
@@ -857,7 +864,7 @@ struct _R {
     var textColor: RswiftResources.ColorResource { .init(name: "TextColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 740 images.
+  /// This `_R.image` struct is generated, and contains static references to 747 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -2841,6 +2848,9 @@ struct _R {
     /// Image `ic_back_right_calendar`.
     var ic_back_right_calendar: RswiftResources.ImageResource { .init(name: "ic_back_right_calendar", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `ic_btn_premium`.
+    var ic_btn_premium: RswiftResources.ImageResource { .init(name: "ic_btn_premium", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `ic_choose_subcription`.
     var ic_choose_subcription: RswiftResources.ImageResource { .init(name: "ic_choose_subcription", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -2852,6 +2862,12 @@ struct _R {
 
     /// Image `ic_close_iap`.
     var ic_close_iap: RswiftResources.ImageResource { .init(name: "ic_close_iap", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ic_collection_dark`.
+    var ic_collection_dark: RswiftResources.ImageResource { .init(name: "ic_collection_dark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ic_collection_gold`.
+    var ic_collection_gold: RswiftResources.ImageResource { .init(name: "ic_collection_gold", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_collection_pain`.
     var ic_collection_pain: RswiftResources.ImageResource { .init(name: "ic_collection_pain", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -2873,6 +2889,12 @@ struct _R {
 
     /// Image `ic_delete_photo`.
     var ic_delete_photo: RswiftResources.ImageResource { .init(name: "ic_delete_photo", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ic_diary_dark`.
+    var ic_diary_dark: RswiftResources.ImageResource { .init(name: "ic_diary_dark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ic_diary_gold`.
+    var ic_diary_gold: RswiftResources.ImageResource { .init(name: "ic_diary_gold", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_dismiss`.
     var ic_dismiss: RswiftResources.ImageResource { .init(name: "ic_dismiss", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -3008,6 +3030,12 @@ struct _R {
 
     /// Image `ic_setting`.
     var ic_setting: RswiftResources.ImageResource { .init(name: "ic_setting", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ic_setting_dark`.
+    var ic_setting_dark: RswiftResources.ImageResource { .init(name: "ic_setting_dark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ic_setting_gold`.
+    var ic_setting_gold: RswiftResources.ImageResource { .init(name: "ic_setting_gold", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_share`.
     var ic_share: RswiftResources.ImageResource { .init(name: "ic_share", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -3146,7 +3174,7 @@ struct _R {
     var soundFillColorMp3: RswiftResources.FileResource { .init(name: "soundFillColor", pathExtension: "mp3", bundle: bundle, locale: LocaleReference.none) }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 54 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 55 nibs.
   struct nib {
     let bundle: Foundation.Bundle
 
@@ -3185,6 +3213,9 @@ struct _R {
 
     /// Nib `ColorCell`.
     var colorCell: RswiftResources.NibReference<ColorCell> { .init(name: "ColorCell", bundle: bundle) }
+
+    /// Nib `ColoringBookCell`.
+    var coloringBookCell: RswiftResources.NibReferenceReuseIdentifier<ColoringBookCell, ColoringBookCell> { .init(name: "ColoringBookCell", bundle: bundle, identifier: "ColoringBookCell") }
 
     /// Nib `CustomMediaNativeAdView`.
     var customMediaNativeAdView: RswiftResources.NibReference<CustomMediaNativeAdView> { .init(name: "CustomMediaNativeAdView", bundle: bundle) }
@@ -3461,8 +3492,11 @@ struct _R {
     }
   }
 
-  /// This `_R.reuseIdentifier` struct is generated, and contains static references to 1 reuse identifiers.
+  /// This `_R.reuseIdentifier` struct is generated, and contains static references to 2 reuse identifiers.
   struct reuseIdentifier {
+
+    /// Reuse identifier `ColoringBookCell`.
+    let coloringBookCell: RswiftResources.ReuseIdentifier<ColoringBookCell> = .init(identifier: "ColoringBookCell")
 
     /// Reuse identifier `MenuActionCell`.
     let menuActionCell: RswiftResources.ReuseIdentifier<MenuActionCell> = .init(identifier: "MenuActionCell")
@@ -3676,11 +3710,13 @@ struct _R {
       let name = "Home"
 
       var homeController: RswiftResources.StoryboardViewControllerIdentifier<HomeController> { .init(identifier: "HomeController", storyboard: name, bundle: bundle) }
+      var newHomeController: RswiftResources.StoryboardViewControllerIdentifier<NewHomeController> { .init(identifier: "NewHomeController", storyboard: name, bundle: bundle) }
 
       func validate() throws {
         if UIKit.UIImage(named: "ic_setting", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_setting' is used in storyboard 'Home', but couldn't be loaded.") }
         if UIKit.UIColor(named: "ColorTextTopBar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTextTopBar' is used in storyboard 'Home', but couldn't be loaded.") }
         if homeController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'homeController' could not be loaded from storyboard 'Home' as 'HomeController'.") }
+        if newHomeController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'newHomeController' could not be loaded from storyboard 'Home' as 'NewHomeController'.") }
       }
     }
 
@@ -3870,11 +3906,13 @@ struct _R {
 
       let name = "TabbarView"
 
+      var mainTabbarViewController: RswiftResources.StoryboardViewControllerIdentifier<MainTabbarViewController> { .init(identifier: "MainTabbarViewController", storyboard: name, bundle: bundle) }
       var networkDisconnectController: RswiftResources.StoryboardViewControllerIdentifier<NetworkDisconnectController> { .init(identifier: "NetworkDisconnectController", storyboard: name, bundle: bundle) }
       var tabbarViewController: RswiftResources.StoryboardViewControllerIdentifier<TabbarViewController> { .init(identifier: "TabbarViewController", storyboard: name, bundle: bundle) }
 
       func validate() throws {
         if UIKit.UIColor(named: "ColorTitle", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTitle' is used in storyboard 'TabbarView', but couldn't be loaded.") }
+        if mainTabbarViewController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'mainTabbarViewController' could not be loaded from storyboard 'TabbarView' as 'MainTabbarViewController'.") }
         if networkDisconnectController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'networkDisconnectController' could not be loaded from storyboard 'TabbarView' as 'NetworkDisconnectController'.") }
         if tabbarViewController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'tabbarViewController' could not be loaded from storyboard 'TabbarView' as 'TabbarViewController'.") }
       }

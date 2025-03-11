@@ -22,6 +22,7 @@ Common.PhotoPicker.Camera = "Chụp ảnh";
 Common.Home = "Trang chủ";
 Common.CheckIn                                  =       "Check In";
 Common.StartColoring = "Bắt đầu tô màu";
+Common.ColoringBooks                           =       "Sách màu";
 Common.Collections = "Bộ sưu tập";
 Common.Settings = "Cài đặt";
 Common.History = "Lịch sử";

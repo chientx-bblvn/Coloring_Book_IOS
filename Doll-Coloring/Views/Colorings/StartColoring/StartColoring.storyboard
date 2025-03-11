@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -19,26 +19,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_home" translatesAutoresizingMaskIntoConstraints="NO" id="ZFH-eY-phq">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="844"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wv1-xe-6wJ">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="766"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="766"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZnH-AW-w9n">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="646"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="646"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vt4-j3-rvz">
-                                        <rect key="frame" x="0.0" y="646" width="393" height="120"/>
+                                        <rect key="frame" x="0.0" y="646" width="390" height="120"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="KVL-TA-a3n">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="120"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="390" height="120"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="41a-GY-gcH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="390" height="60"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dhz-L2-xNZ">
-                                                                <rect key="frame" x="76.666666666666686" y="0.0" width="240" height="60"/>
+                                                                <rect key="frame" x="75" y="0.0" width="240" height="60"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="u3u-Qm-aB9">
                                                                         <rect key="frame" x="10" y="10" width="220" height="40"/>
@@ -128,13 +128,13 @@
                                                         </constraints>
                                                     </view>
                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LMr-mC-0cd">
-                                                        <rect key="frame" x="0.0" y="60" width="393" height="60"/>
+                                                        <rect key="frame" x="0.0" y="60" width="390" height="60"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Skb-Wz-719">
-                                                                <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="390" height="60"/>
                                                                 <subviews>
                                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="B0A-co-ZGi">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="321" height="60"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="318" height="60"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="X2M-rP-VFv">
                                                                             <size key="itemSize" width="128" height="128"/>
@@ -145,7 +145,7 @@
                                                                         <cells/>
                                                                     </collectionView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gF5-2g-KV9">
-                                                                        <rect key="frame" x="333" y="0.0" width="60" height="60"/>
+                                                                        <rect key="frame" x="330" y="0.0" width="60" height="60"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="gF5-2g-KV9" secondAttribute="height" id="WSc-x0-SEW"/>
                                                                         </constraints>
@@ -192,7 +192,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2j3-Te-sUy">
-                                <rect key="frame" x="16.666666666666657" y="67" width="360" height="60"/>
+                                <rect key="frame" x="15" y="67" width="360" height="60"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="DCi-Ht-rjK">
                                         <rect key="frame" x="0.0" y="0.0" width="360" height="60"/>
@@ -279,10 +279,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gFY-TU-5Ll">
-                                <rect key="frame" x="20" y="582" width="353" height="44"/>
+                                <rect key="frame" x="20" y="582" width="350" height="44"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="FbG-Cw-x2O">
-                                        <rect key="frame" x="77" y="10" width="199" height="25"/>
+                                        <rect key="frame" x="77" y="10" width="196" height="25"/>
                                         <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="minimumTrackTintColor" name="ColorTextTopBar"/>
                                         <color key="maximumTrackTintColor" name="MainPrimary"/>
@@ -310,7 +310,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JX7-X7-Bo1">
-                                        <rect key="frame" x="294" y="0.0" width="44" height="44"/>
+                                        <rect key="frame" x="291" y="0.0" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="JX7-X7-Bo1" secondAttribute="height" id="B8I-Sm-wNr"/>
                                         </constraints>
@@ -342,7 +342,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dM6-BS-1MB">
-                                <rect key="frame" x="0.0" y="774" width="393" height="70"/>
+                                <rect key="frame" x="0.0" y="774" width="390" height="70"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="lbr-Hd-c3R">
