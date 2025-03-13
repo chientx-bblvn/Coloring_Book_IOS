@@ -47,6 +47,8 @@ class ColoringBookCell: UITableViewCell {
     private func setUpView() {
         self.coloringCollectionView.dataSource = self
         self.coloringCollectionView.delegate = self
+        self.coloringCollectionView.backgroundColor =  UIColor.clear
+        self.lbCategory.backgroundColor = UIColor.clear
         coloringCollectionView.register(cellType: AllColoringCell.self)
         coloringCollectionView.register(cellType: HomeNativeAdsCell.self)
         

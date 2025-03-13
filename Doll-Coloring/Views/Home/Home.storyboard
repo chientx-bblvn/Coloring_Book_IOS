@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -118,54 +117,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uJJ-0u-u2l">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uJJ-0u-u2l" customClass="TopBarView" customModule="Doll_Coloring" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="48" width="414" height="54"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oBK-8Q-uws">
-                                        <rect key="frame" x="16" y="7" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="eYo-wY-VFz"/>
-                                            <constraint firstAttribute="height" constant="40" id="pnM-uv-8hr"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coloring Books" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dm2-Z9-oYU">
-                                        <rect key="frame" x="40" y="12.5" width="334" height="29"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="dm2-Z9-oYU" secondAttribute="trailing" constant="40" id="7UW-3m-IhX"/>
-                                    <constraint firstItem="oBK-8Q-uws" firstAttribute="centerY" secondItem="uJJ-0u-u2l" secondAttribute="centerY" id="CBt-To-hF8"/>
-                                    <constraint firstItem="oBK-8Q-uws" firstAttribute="leading" secondItem="uJJ-0u-u2l" secondAttribute="leading" constant="16" id="DjZ-6Y-4NA"/>
-                                    <constraint firstItem="dm2-Z9-oYU" firstAttribute="centerY" secondItem="uJJ-0u-u2l" secondAttribute="centerY" id="LyA-4P-Mm8"/>
-                                    <constraint firstItem="dm2-Z9-oYU" firstAttribute="leading" secondItem="uJJ-0u-u2l" secondAttribute="leading" constant="40" id="R3j-V5-QUU"/>
                                     <constraint firstAttribute="height" constant="54" id="u8g-Wr-bD0"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="textAlignmentCenter" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showPremium" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="ic_btn_premium"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZSi-at-VgP">
-                                <rect key="frame" x="0.0" y="102" width="414" height="794"/>
-                                <color key="backgroundColor" red="0.96266931300000003" green="0.96257919069999998" blue="0.96991878750000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="106" width="414" height="790"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Fuf-di-Bnt"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.96266931300000003" green="0.96257919069999998" blue="0.96991878750000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ZSi-at-VgP" firstAttribute="leading" secondItem="Fuf-di-Bnt" secondAttribute="leading" id="8YU-EK-I6k"/>
-                            <constraint firstItem="ZSi-at-VgP" firstAttribute="top" secondItem="uJJ-0u-u2l" secondAttribute="bottom" id="9nK-ms-joM"/>
+                            <constraint firstItem="ZSi-at-VgP" firstAttribute="top" secondItem="uJJ-0u-u2l" secondAttribute="bottom" constant="4" id="9nK-ms-joM"/>
+                            <constraint firstItem="uJJ-0u-u2l" firstAttribute="leading" secondItem="J5g-Yg-Agj" secondAttribute="leading" id="CLl-G0-Gcw"/>
                             <constraint firstItem="uJJ-0u-u2l" firstAttribute="top" secondItem="Fuf-di-Bnt" secondAttribute="top" id="Pv6-z7-Wdy"/>
                             <constraint firstAttribute="bottom" secondItem="ZSi-at-VgP" secondAttribute="bottom" id="Zv1-aO-Xws"/>
-                            <constraint firstItem="uJJ-0u-u2l" firstAttribute="leading" secondItem="Fuf-di-Bnt" secondAttribute="leading" id="k6S-15-Xx6"/>
-                            <constraint firstItem="uJJ-0u-u2l" firstAttribute="trailing" secondItem="Fuf-di-Bnt" secondAttribute="trailing" id="mNw-of-xoz"/>
                             <constraint firstItem="Fuf-di-Bnt" firstAttribute="trailing" secondItem="ZSi-at-VgP" secondAttribute="trailing" id="wJy-4R-584"/>
+                            <constraint firstAttribute="trailing" secondItem="uJJ-0u-u2l" secondAttribute="trailing" id="wbx-Aj-wn4"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btnPremium" destination="oBK-8Q-uws" id="vJg-tj-bh9"/>
                         <outlet property="coloringTableView" destination="ZSi-at-VgP" id="vmP-oK-a4c"/>
-                        <outlet property="lbColoring" destination="dm2-Z9-oYU" id="k1d-ep-UgI"/>
                         <outlet property="topBarView" destination="uJJ-0u-u2l" id="w1n-vP-R7t"/>
                     </connections>
                 </viewController>
@@ -175,12 +160,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic_btn_premium" width="74" height="64"/>
         <image name="ic_setting" width="24" height="24"/>
         <namedColor name="ColorTextTopBar">
             <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

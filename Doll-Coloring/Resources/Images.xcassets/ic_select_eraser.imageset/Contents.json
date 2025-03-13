@@ -1,8 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "Frame 523.pdf",
-      "idiom" : "universal"
+      "filename" : "Frame 518.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Frame 518@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Frame 518@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

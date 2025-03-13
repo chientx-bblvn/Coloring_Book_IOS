@@ -12,13 +12,13 @@ class NewHomeController: BaseViewController {
     
     var viewModel: HomeVM!
     
-    @IBOutlet weak var btnPremium: UIImageView!
-    
-    @IBOutlet weak var lbColoring: UILabel!
+//    @IBOutlet weak var btnPremium: UIImageView!
+//    
+//    @IBOutlet weak var lbColoring: UILabel!
     
     @IBOutlet weak var coloringTableView: UITableView!
     
-    @IBOutlet weak var topBarView: UIView!
+    @IBOutlet weak var topBarView: TopBarView!
     
     
     private var numberClick = 4
@@ -29,7 +29,7 @@ class NewHomeController: BaseViewController {
     override func loadView() {
         super.loadView()
         setupView()
-        enableAudioBackground() /
+        enableAudioBackground()
         loadLanguage()
         settingIAP()
         requestNotification()
@@ -39,6 +39,12 @@ class NewHomeController: BaseViewController {
                 FileManagerLocal.shared.createFolderManager(fileName: file.rawValue)
             }
         }
+        topBarView.onLeftClick = {
+            SubcriptionViewController.show(checkTime: true)
+        }
+        topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
+        topBarView.title = "Coloring Books"
+
     }
     override func setup() {
         super.setup()
@@ -73,18 +79,15 @@ class NewHomeController: BaseViewController {
         coloringTableView.dataSource = self
         coloringTableView.register(UINib(nibName: "ColoringBookCell", bundle: nil), forCellReuseIdentifier: "ColoringBookCell")
         coloringTableView.contentInset.bottom = 160
-        btnPremium.image = R.image.ic_btn_premium()
         
         timeDistanceShowad = TimeInterval(ADManager.shared.timeRemoteShowFull)
         numberClick = UserDefaultManager.numberClickItemAllTopic
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showPremiumView))
-        btnPremium.addGestureRecognizer(tapGestureRecognizer)
-        btnPremium.isUserInteractionEnabled = true
+        self.coloringTableView.backgroundColor =  UIColor.clear
         
-        topBarView.layer.cornerRadius = 16
-        topBarView.layer.maskedCorners = [.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-        topBarView.layer.masksToBounds = true
+        
+        topBarView.roundCorners(corners: [.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 16)
+        
     }
     override func bindingData() {
         super.bindingData()
@@ -98,7 +101,7 @@ class NewHomeController: BaseViewController {
 
     private func settingIAP() {
         InappManager.share.didPaymentSuccess.subscribe(onNext: { [weak self] _ in
-            self?.btnPremium.isHidden = IAPState.isUserVip
+//            self?.topBarView = IAPState.isUserVip
             if IAPState.isUserVip {
                 PremiumFloatingView.hide()
             }
@@ -120,6 +123,46 @@ class NewHomeController: BaseViewController {
     override func onLanguageChange() {
          loadLanguage() 
      }
+
+    
+//    func scrollView(_ scrollView: UIScrollView) {
+//        let offsetY = scrollView.contentOffset.y
+//        var height = UIScreen.main.bounds.width
+//        let headerHeightMin: CGFloat = 0
+//        if UIDevice.current.userInterfaceIdiom == .pad {
+//            height = height * (250 / 768)
+//        } else {
+//            height = height * (250 / 412)
+//            
+//        }
+//        let newHeaderHeight = max(headerHeightMin, height - offsetY)
+//        
+//        heightSlider.constant = newHeaderHeight
+//        
+//        if (height / 2) >= newHeaderHeight {
+//            UIView.animate(withDuration: 0.2) {
+//                self.topbarView.isHidden = true
+//            }
+//        } else {
+//            UIView.animate(withDuration: 0.2) {
+//                self.topbarView.isHidden = false
+//            }
+//        }
+//        
+//        UIView.animate(withDuration: 0.2) {
+//            self.view.layoutIfNeeded()
+//        }
+//    }
+    
+    @objc private func showPremiumView() {
+        SubcriptionViewController.show(checkTime: true)
+    }
+
+    
+     
+    
+}
+extension NewHomeController {
     func navigateColoring(_ data: ColoringImage) {
         if let path = data.filePath?.components(separatedBy: "/").last, let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath.contains(path)}) {
             AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .home, coloringAPI: data), with: .modal)
@@ -352,44 +395,8 @@ class NewHomeController: BaseViewController {
         }
         navigateColoring(data)
     }
-    
-//    func scrollView(_ scrollView: UIScrollView) {
-//        let offsetY = scrollView.contentOffset.y
-//        var height = UIScreen.main.bounds.width
-//        let headerHeightMin: CGFloat = 0
-//        if UIDevice.current.userInterfaceIdiom == .pad {
-//            height = height * (250 / 768)
-//        } else {
-//            height = height * (250 / 412)
-//            
-//        }
-//        let newHeaderHeight = max(headerHeightMin, height - offsetY)
-//        
-//        heightSlider.constant = newHeaderHeight
-//        
-//        if (height / 2) >= newHeaderHeight {
-//            UIView.animate(withDuration: 0.2) {
-//                self.topbarView.isHidden = true
-//            }
-//        } else {
-//            UIView.animate(withDuration: 0.2) {
-//                self.topbarView.isHidden = false
-//            }
-//        }
-//        
-//        UIView.animate(withDuration: 0.2) {
-//            self.view.layoutIfNeeded()
-//        }
-//    }
-    
-    @objc private func showPremiumView() {
-        SubcriptionViewController.show(checkTime: true)
-    }
-
-    
-     
-    
 }
+
 extension NewHomeController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.colorings.count
@@ -400,6 +407,8 @@ extension NewHomeController: UITableViewDelegate, UITableViewDataSource {
         let category = viewModel.colorings[indexPath.row]
         let categoryName = category.categoryName ?? "Unknown Category"
         cell.setupCell(title: categoryName, itemColoring: category.imageUrls ?? [])
+        
+        cell.layer.backgroundColor =  UIColor.clear.cgColor
         cell.selectionStyle = .none
 //        cell.handleScrollView = { scroll in
 //            self.scrollView(scroll)

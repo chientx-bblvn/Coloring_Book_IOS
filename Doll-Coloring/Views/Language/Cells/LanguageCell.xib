@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,9 +13,9 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FPNCountryView" customModule="Pet_Translator" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FPNCountryView" customModule="Doll_Coloring" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FPNCountryView" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="94" id="xH0-ku-jot" customClass="LanguageCell" customModule="Pet_Translator" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FPNCountryView" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="94" id="xH0-ku-jot" customClass="LanguageCell" customModule="Doll_Coloring" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="471" height="94"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xH0-ku-jot" id="7Gk-Wr-zun">
@@ -38,7 +38,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Unknown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dia-wo-OOX">
-                                <rect key="frame" x="61" y="28.5" width="74" height="21"/>
+                                <rect key="frame" x="61" y="28.5" width="68" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="nis-FU-EGz"/>
                                 </constraints>
@@ -46,9 +46,18 @@
                                 <color key="textColor" name="TextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pBM-yt-aOo">
+                                <rect key="frame" x="431" y="27" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="pBM-yt-aOo" secondAttribute="height" id="50s-8U-LBL"/>
+                                    <constraint firstAttribute="height" constant="24" id="8hc-Vq-f64"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" name="ColorBGGray"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="pBM-yt-aOo" secondAttribute="trailing" constant="16" id="04P-UJ-oiR"/>
+                            <constraint firstItem="pBM-yt-aOo" firstAttribute="centerY" secondItem="iDC-Wf-Osc" secondAttribute="centerY" id="6Bf-hJ-NhE"/>
                             <constraint firstItem="dia-wo-OOX" firstAttribute="leading" secondItem="KFd-mf-a6Z" secondAttribute="trailing" constant="17" id="LIO-5w-KdT"/>
                             <constraint firstItem="KFd-mf-a6Z" firstAttribute="leading" secondItem="iDC-Wf-Osc" secondAttribute="leading" constant="12" id="W8W-Q0-Cix"/>
                             <constraint firstItem="dia-wo-OOX" firstAttribute="centerY" secondItem="iDC-Wf-Osc" secondAttribute="centerY" id="WVB-Mx-Gzz"/>
@@ -96,7 +105,7 @@
             <color red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
-            <color red="0.41176470588235292" green="0.24705882352941178" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="color_shadow_button">
             <color red="0.24300000071525574" green="0.52499997615814209" blue="0.98000001907348633" alpha="0.23999999463558197" colorSpace="custom" customColorSpace="sRGB"/>

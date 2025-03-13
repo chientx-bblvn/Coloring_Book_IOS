@@ -25,8 +25,10 @@ class CollectionsController: BaseViewController {
     
     @IBOutlet weak var lbEmpty: UILabel!
     
-    @IBOutlet weak var viewAnimation: LottieAnimationView!
-
+//    @IBOutlet weak var viewAnimation: LottieAnimationView!
+    
+    @IBOutlet weak var imgEmpty: UIImageView!
+    
     @IBOutlet weak var btnStartColoring: UIButton!
     
     @IBOutlet weak var viewAds: UIView!
@@ -43,30 +45,42 @@ class CollectionsController: BaseViewController {
     
     override func setup() {
         super.setup()
-        viewAnimation.loadAnimation(file: "animation_collection", loopMode: .loop, autoPlay: true)
-        topBarView.title = ""
-        topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
-        if navigate {
-            topBarView.title = LocalizableUtils.commonCollections().uppercased()
-            topBarView.leftIcon = R.image.ic_back()
-            topBarView.textAlignmentCenter = true
-        } else {
-            settingIAP()
-        }
-        topBarView.onLeftClick = {
-            self.topBarView.textAlignmentCenter = false
-            AppRouter.shared.dismissDetail()
-        }
+//        viewAnimation.loadAnimation(file: "animation_collection", loopMode: .loop, autoPlay: true)
+        topBarView.title = LocalizableUtils.commonCollections().uppercased()
+//        topBarView.onLeftClick = {
+//            if self.viewModel.isCollection {
+//                AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
+//            } else {
+//                AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
+//            }
+//        }
+//        if IAPState.isUserVip {
+//            btnSave.setImage(nil, for: .normal)
+//        }
+        topBarView.titleFont = UIFont.systemFont(ofSize: 20, weight: .bold)
+//        topBarView.title = ""
+//        topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
+//        if navigate {
+//            topBarView.title = LocalizableUtils.commonCollections().uppercased()
+//            topBarView.leftIcon = R.image.ic_back()
+//            topBarView.textAlignmentCenter = true
+//        } else {
+//            settingIAP()
+//        }
+//        topBarView.onLeftClick = {
+//            self.topBarView.textAlignmentCenter = false
+//            AppRouter.shared.dismissDetail()
+//        }
         
-        topBarView.onClickPremium = {
-            SubcriptionViewController.show(checkTime: true) {
-                
-            }
-        }
+//        topBarView.onClickPremium = {
+//            SubcriptionViewController.show(checkTime: true) {
+//                
+//            }
+//        }
         
-        topBarView.onRightClick = {
-            self.showSettingView()
-        }
+//        topBarView.onRightClick = {
+//            self.showSettingView()
+//        }
         setupCollectionView()
         loadLanguage()
     }
