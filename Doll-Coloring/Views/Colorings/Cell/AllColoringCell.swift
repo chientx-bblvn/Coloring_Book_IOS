@@ -15,7 +15,7 @@ class AllColoringCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var viewContent: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var adsViewAnimation: UIImageView!
-    @IBOutlet weak var progessRing: ALProgressRing!
+    @IBOutlet weak var progessRing: UIView!
     @IBOutlet weak var lbPercentColoring: UILabel!
     @IBOutlet weak var viewWatchAds: UIButton!
     @IBOutlet weak var showAdsDaily: UIImageView!
@@ -24,10 +24,13 @@ class AllColoringCell: UICollectionViewCell, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        progessRing.lineWidth = 5
+//        progessRing.lineWidth = 5
         viewContent.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
         viewContent.layer.cornerRadius = 16
         imageView.layer.cornerRadius = 16
+        progessRing.layer.borderWidth = 1
+        progessRing.layer.borderColor = UIColor.black.cgColor
+        progessRing.roundCorners(corners: [.layerMinXMinYCorner, .layerMaxXMaxYCorner], radius: 16)
 //        viewContent.clipsToBounds = true
     }
     
@@ -41,7 +44,7 @@ class AllColoringCell: UICollectionViewCell, NibReusable {
                 SDImageCache.shared.removeImage(forKey: cacheKey, withCompletion: nil)
                 imageView.setLocalImage(with: imageUrlString.path, placeholder: nil)
                 let percent = Float(coloring.historys.last?.percent_complete ?? 0)
-                progessRing.setProgress(percent, animated: true)
+//                progessRing.setProgress(percent, animated: true)
                 lbPercentColoring.text = "\(Int((percent * 100).rounded()))%"
             } else {
                 progessRing.isHidden = true

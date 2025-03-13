@@ -11,7 +11,7 @@ class PopupColoringViewController: UIViewController {
     
     @IBOutlet weak var viewContent: UIView!
     
-    @IBOutlet weak var viewProgressRing: ALProgressRing!
+    @IBOutlet weak var viewProgressRing: UIView!
     @IBOutlet weak var lbPercenColoring: UILabel!
     
     @IBOutlet weak var lbTitle: UILabel!

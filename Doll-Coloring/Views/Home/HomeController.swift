@@ -86,6 +86,9 @@ class HomeController: BaseViewController {
         topbarView.onRightClick = {
             self.showSettingView()
         }
+//        topbarView.onLeftClick = {
+//            CheckInController.show(self)
+//        }
         topbarView.onClickPremium = {
             SubcriptionViewController.show(checkTime: true)
         }

@@ -144,17 +144,17 @@ extension LanguageController {
     
     private func loadAdsHigh() {
         viewAds.isHidden = false
-//        ADManager.shared.loadNative(DollColoringAdID.native_language_high,
-//                                    to: self.viewAds, refreshAd: true , nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success ,_  in
-//            guard idAds.contains(DollColoringAdID.native_language_high.adId) else {
-//                return
-//            }
-//            if success {
-//                self?.viewAds.isHidden = !success
-//            } else {
-//                self?.loadAds()
-//            }
-//        }
+        ADManager.shared.loadNative(DollColoringAdID.native_language_high,
+                                    to: self.viewAds, refreshAd: true , nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success ,_  in
+            guard idAds.contains(DollColoringAdID.native_language_high.adId) else {
+                return
+            }
+            if success {
+                self?.viewAds.isHidden = !success
+            } else {
+                self?.loadAds()
+            }
+        }
         loadAds()
     }
     

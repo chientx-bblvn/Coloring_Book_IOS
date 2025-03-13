@@ -46,7 +46,9 @@ class CollectionsController: BaseViewController {
     override func setup() {
         super.setup()
 //        viewAnimation.loadAnimation(file: "animation_collection", loopMode: .loop, autoPlay: true)
-        topBarView.title = LocalizableUtils.commonCollections().uppercased()
+        topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
+        topBarView.title = "Collection"
+       
 //        topBarView.onLeftClick = {
 //            if self.viewModel.isCollection {
 //                AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
@@ -57,7 +59,6 @@ class CollectionsController: BaseViewController {
 //        if IAPState.isUserVip {
 //            btnSave.setImage(nil, for: .normal)
 //        }
-        topBarView.titleFont = UIFont.systemFont(ofSize: 20, weight: .bold)
 //        topBarView.title = ""
 //        topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
 //        if navigate {
@@ -207,7 +208,7 @@ extension CollectionsController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 8
     }
     
     func naviScreenColoring(fileName: String) {

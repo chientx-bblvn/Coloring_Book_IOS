@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -45,16 +44,16 @@
                                 <cells/>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AXA-nQ-Ug4">
-                                <rect key="frame" x="40" y="225" width="310" height="407"/>
+                                <rect key="frame" x="40" y="226.66666666666663" width="310" height="404"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No pictures yet!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHH-yo-0Z7">
-                                        <rect key="frame" x="20" y="302" width="270" height="27"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                        <color key="textColor" name="ColorTitle"/>
+                                        <rect key="frame" x="20" y="302" width="270" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <color key="textColor" red="0.57647061349999995" green="0.5647059083" blue="0.5647059083" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ow3-fa-Z0j">
-                                        <rect key="frame" x="75" y="337" width="160" height="70"/>
+                                        <rect key="frame" x="75" y="334" width="160" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="160" id="KS9-8f-vla"/>
                                             <constraint firstAttribute="height" constant="70" id="TiU-3Z-UKG"/>
@@ -134,8 +133,5 @@
     <resources>
         <image name="background_button_collection" width="182" height="92"/>
         <image name="ic_emptyCollection" width="250" height="220"/>
-        <namedColor name="ColorTitle">
-            <color red="0.14509803921568629" green="0.0" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
 </document>

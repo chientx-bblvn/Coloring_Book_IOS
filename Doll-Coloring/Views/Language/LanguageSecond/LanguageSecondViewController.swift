@@ -125,17 +125,17 @@ extension LanguageSecondViewController {
     private func loadAdsHigh() {
         viewAds.isHidden = false
         
-        ADManager.shared.loadNative(DollColoringAdID.native_language_2nd,
-                                    to: self.viewAds, refreshAd: true , nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success ,_  in
-            guard idAds.contains(DollColoringAdID.native_language_2nd.adId) else {
-                return
-            }
-            if success {
-                self?.viewAds.isHidden = false
-            } else {
-                self?.viewAds.isHidden = true
-            }
-        }
+//        ADManager.shared.loadNative(DollColoringAdID.native_language_2nd,
+//                                    to: self.viewAds, refreshAd: true , nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success ,_  in
+//            guard idAds.contains(DollColoringAdID.native_language_2nd.adId) else {
+//                return
+//            }
+//            if success {
+//                self?.viewAds.isHidden = false
+//            } else {
+//                self?.viewAds.isHidden = true
+//            }
+//        }
     }
     
     private func loadText() {

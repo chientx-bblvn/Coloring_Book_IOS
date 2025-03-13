@@ -27,6 +27,17 @@ class SubcriptionViewController: UIViewController {
         }
     }
     
+    
+    @IBOutlet weak var viewIAPShow: UIView!
+    
+    @IBOutlet weak var viewWeekly: UIView!
+    
+    @IBOutlet weak var viewMonthly: UIView!
+    
+    
+    @IBOutlet weak var viewYearly: UIView!
+    
+    
     @IBOutlet weak var lbRemoveAds: UILabel!
     
     @IBOutlet weak var viewPremiumBanner: UIView!
@@ -86,7 +97,7 @@ class SubcriptionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewPremiumBanner.roundCorners(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 16)
+//        viewPremiumBanner.roundCorners(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 16)
         viewPackage.forEach({$0.isUserInteractionEnabled = true})
         viewPackage.forEach { view in
             view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickViewIAP(_:))))
@@ -101,6 +112,13 @@ class SubcriptionViewController: UIViewController {
             }
         }).disposed(by: disposeBag)
         loadLanguage()
+        
+        viewIAPShow.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
+        viewWeekly.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
+        viewMonthly.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
+        viewYearly.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
+        btnSubscribe.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -161,9 +179,9 @@ class SubcriptionViewController: UIViewController {
             }
             icSelectPackage.enumerated().forEach { i, image in
                 if i == index {
-                    image.image = R.image.ic_choose_subcription()
+                    image.image = R.image.ic_select_language()
                 } else {
-                    image.image = R.image.ic_non_subcription()
+                    image.image = R.image.ic_unselect_language()
                 }
             }
             lb_price_package_week.isHidden = true

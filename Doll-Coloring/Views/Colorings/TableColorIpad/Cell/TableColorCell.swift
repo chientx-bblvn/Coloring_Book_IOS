@@ -36,8 +36,8 @@ class TableColorCell: UITableViewCell, NibReusable {
         listColor.delegate = self
         listColor.dataSource = self
         listColor.register(cellType: ColorCell.self)
-        viewContent.generateOuterShadow()
-        viewColor.layer.borderColor = R.color.colorTextTopBar()?.cgColor
+        viewContent.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
+//        viewColor.layer.borderColor = R.color.colorTextTopBar()?.cgColor
     }
     
     func setupData(data: [ItemColor?], width: CGFloat, isColoring: Bool = true ) {

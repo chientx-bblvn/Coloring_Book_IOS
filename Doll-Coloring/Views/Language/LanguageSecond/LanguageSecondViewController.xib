@@ -22,27 +22,6 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2R-eE-CVF" customClass="TopBarView" customModule="Doll_Coloring" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="59" width="393" height="56"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="56" id="XMd-gD-TmU"/>
-                    </constraints>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Language"/>
-                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
-                            <color key="value" name="TextColor"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorView">
-                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="rightTitleColor">
-                            <color key="value" name="TextColor"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="image" keyPath="rightIcon" value="ic_right_back"/>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="textAlignmentCenter" value="NO"/>
-                    </userDefinedRuntimeAttributes>
-                </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="WXu-Ja-6yY">
                     <rect key="frame" x="0.0" y="123" width="393" height="695"/>
                     <subviews>
@@ -82,6 +61,27 @@
                         <constraint firstAttribute="trailing" secondItem="5Id-lc-gh4" secondAttribute="trailing" id="hUm-ia-A8c"/>
                     </constraints>
                 </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2R-eE-CVF" customClass="TopBarView" customModule="Doll_Coloring" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="59" width="393" height="56"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="XMd-gD-TmU"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Language"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" name="TextColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorView">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="rightTitleColor">
+                            <color key="value" name="TextColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="image" keyPath="rightIcon" value="ic_right_back"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="textAlignmentCenter" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

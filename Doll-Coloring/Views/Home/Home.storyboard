@@ -130,6 +130,7 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="showPremium" value="NO"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="ic_btn_premium"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="rightIcon" value="ic_open_daily"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZSi-at-VgP">
@@ -161,6 +162,7 @@
     </scenes>
     <resources>
         <image name="ic_btn_premium" width="74" height="64"/>
+        <image name="ic_open_daily" width="42" height="32"/>
         <image name="ic_setting" width="24" height="24"/>
         <namedColor name="ColorTextTopBar">
             <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
