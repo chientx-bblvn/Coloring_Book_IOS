@@ -23,7 +23,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iDC-Wf-Osc">
-                        <rect key="frame" x="0.0" y="8" width="471" height="78"/>
+                        <rect key="frame" x="16" y="8" width="439" height="78"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VN" translatesAutoresizingMaskIntoConstraints="NO" id="KFd-mf-a6Z">
                                 <rect key="frame" x="12" y="23" width="32" height="32"/>
@@ -47,7 +47,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pBM-yt-aOo">
-                                <rect key="frame" x="431" y="27" width="24" height="24"/>
+                                <rect key="frame" x="399" y="27" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="pBM-yt-aOo" secondAttribute="height" id="50s-8U-LBL"/>
                                     <constraint firstAttribute="height" constant="24" id="8hc-Vq-f64"/>
@@ -65,7 +65,7 @@
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
-                                <real key="value" value="5"/>
+                                <real key="value" value="16"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
                                 <real key="value" value="6"/>
@@ -84,15 +84,16 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="iDC-Wf-Osc" secondAttribute="trailing" id="ACz-Hv-dIw"/>
+                    <constraint firstAttribute="trailing" secondItem="iDC-Wf-Osc" secondAttribute="trailing" constant="16" id="ACz-Hv-dIw"/>
                     <constraint firstAttribute="bottom" secondItem="iDC-Wf-Osc" secondAttribute="bottom" constant="8" id="d42-37-szU"/>
                     <constraint firstItem="iDC-Wf-Osc" firstAttribute="top" secondItem="7Gk-Wr-zun" secondAttribute="top" constant="8" id="hlN-Ev-6l7"/>
-                    <constraint firstItem="iDC-Wf-Osc" firstAttribute="leading" secondItem="7Gk-Wr-zun" secondAttribute="leading" id="lmm-Dh-EFO"/>
+                    <constraint firstItem="iDC-Wf-Osc" firstAttribute="leading" secondItem="7Gk-Wr-zun" secondAttribute="leading" constant="16" id="lmm-Dh-EFO"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="imageViewFlag" destination="KFd-mf-a6Z" id="XgJ-yr-jAW"/>
+                <outlet property="imgSelect" destination="pBM-yt-aOo" id="jSb-GE-S6X"/>
                 <outlet property="lbName" destination="dia-wo-OOX" id="TPK-vz-hKt"/>
                 <outlet property="viewContainer" destination="iDC-Wf-Osc" id="NdF-dI-ctY"/>
             </connections>

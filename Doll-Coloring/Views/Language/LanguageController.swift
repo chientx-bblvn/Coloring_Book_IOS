@@ -49,7 +49,7 @@ class LanguageController: BaseViewController {
         if goFrom == .intro {
             topBarView.rightTitleColor = R.color.colorTitle()
         } else {
-            topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTitle() ?? .black)
+            topBarView.rightIcon = R.image.ic_right_back()
         }
         
         topBarView.rightEnable = currentLanguage != nil
@@ -74,23 +74,37 @@ extension LanguageController {
             if goFrom == .intro {
                 topBarView.rightTitleColor = R.color.mainPrimary()?.withAlphaComponent(alpha)
             } else {
-                topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor((R.color.mainPrimary() ?? .black).withAlphaComponent(alpha))
+                topBarView.rightIcon = R.image.ic_right_back()
             }
         } else {
             if goFrom == .intro {
-                topBarView.rightTitleColor = R.color.mainPrimary()
+                topBarView.rightTitleColor = UIColor.black
             } else {
-                topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.mainPrimary() ?? .black)
+                topBarView.rightIcon = R.image.ic_right_back()
             }
             self.currentLanguage = Constants.currentLanguage
         }
-        topBarView.titleFont = .systemFont(ofSize: 20, weight: .bold)
+        topBarView.titleFont = .systemFont(ofSize: 24, weight: .bold)
+        topBarView.textAlignmentCenter = false
         topBarView.rightEnable = !language.isEmpty
         
         if goFrom == .setting {
-            topBarView.leftIcon = R.image.chevronBack()
-            topBarView.onLeftClick = {
-                AppRouter.shared.dismissDetail()
+//            topBarView.leftIcon = R.image.chevronBack()
+            topBarView.onRightClick = { [weak self] in
+                guard let language = self?.currentLanguage else {
+                    return
+                }
+                if self?.goFrom == .setting {
+                    self?.changeLanguage(language: language)
+                    AppRouter.shared.dismissDetail()
+                } else if self?.goFrom == .intro {
+                    self?.changeLanguage(language: language)
+                    let showIntro = UserDefaults.standard.bool(forKey: UserDefault.showedIntro.rawValue)
+                    if !showIntro {
+                        AppRouter.shared.navigate(to: IntroRoute.intro, with: .push)
+                        return
+                    }
+                }
             }
         }
         topBarView.onRightClick = { [weak self] in
@@ -160,9 +174,9 @@ extension LanguageController {
     
     private func loadText() {
         if goFrom == .intro {
-            topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTextTopBar() ?? .black)
+            topBarView.rightIcon = R.image.ic_right_back()
         } else {
-            topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTextTopBar() ?? .black)
+            topBarView.rightIcon = R.image.ic_right_back()
         }
         topBarView.title = LocalizableUtils.languageSubTitle()
         tableviewListCountry.reloadData()
@@ -177,7 +191,7 @@ extension LanguageController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 80
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

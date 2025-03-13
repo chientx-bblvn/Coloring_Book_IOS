@@ -864,7 +864,7 @@ struct _R {
     var textColor: RswiftResources.ColorResource { .init(name: "TextColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 757 images.
+  /// This `_R.image` struct is generated, and contains static references to 760 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -3031,6 +3031,9 @@ struct _R {
     /// Image `ic_reload`.
     var ic_reload: RswiftResources.ImageResource { .init(name: "ic_reload", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `ic_right_back`.
+    var ic_right_back: RswiftResources.ImageResource { .init(name: "ic_right_back", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `ic_sale_off`.
     var ic_sale_off: RswiftResources.ImageResource { .init(name: "ic_sale_off", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -3048,6 +3051,9 @@ struct _R {
 
     /// Image `ic_select_eraser`.
     var ic_select_eraser: RswiftResources.ImageResource { .init(name: "ic_select_eraser", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ic_select_language`.
+    var ic_select_language: RswiftResources.ImageResource { .init(name: "ic_select_language", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_select_pencil`.
     var ic_select_pencil: RswiftResources.ImageResource { .init(name: "ic_select_pencil", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -3099,6 +3105,9 @@ struct _R {
 
     /// Image `ic_undo`.
     var ic_undo: RswiftResources.ImageResource { .init(name: "ic_undo", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ic_unselect_language`.
+    var ic_unselect_language: RswiftResources.ImageResource { .init(name: "ic_unselect_language", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_video_ads`.
     var ic_video_ads: RswiftResources.ImageResource { .init(name: "ic_video_ads", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -3467,13 +3476,11 @@ struct _R {
       if UIKit.UIColor(named: "ColorBGGray", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGGray' is used in nib 'LanguageCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'LanguageCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "color_shadow_button", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'color_shadow_button' is used in nib 'LanguageCell', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "background_splash", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'background_splash' is used in nib 'LanguageController', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "ic_right_back", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_right_back' is used in nib 'LanguageController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "ColorBGAds", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGAds' is used in nib 'LanguageController', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "NeutralBackground", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'NeutralBackground' is used in nib 'LanguageController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'LanguageController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "color_shadow_button", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'color_shadow_button' is used in nib 'LanguageController', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "background_splash", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'background_splash' is used in nib 'LanguageSecondViewController', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "iccon_checkmark", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'iccon_checkmark' is used in nib 'LanguageSecondViewController', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "ic_right_back", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_right_back' is used in nib 'LanguageSecondViewController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "ColorBGAds", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGAds' is used in nib 'LanguageSecondViewController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'LanguageSecondViewController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "color_shadow_button", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'color_shadow_button' is used in nib 'LanguageSecondViewController', but couldn't be loaded.") }
