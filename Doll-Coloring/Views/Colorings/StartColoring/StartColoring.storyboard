@@ -364,8 +364,9 @@
                             <constraint firstAttribute="bottom" secondItem="dM6-BS-1MB" secondAttribute="bottom" id="6J1-Wf-Fnv"/>
                             <constraint firstAttribute="trailing" secondItem="dM6-BS-1MB" secondAttribute="trailing" id="8ha-eL-rkZ"/>
                             <constraint firstItem="wv1-xe-6wJ" firstAttribute="top" secondItem="fl9-fs-GwU" secondAttribute="top" id="8nO-zd-8jw"/>
-                            <constraint firstItem="2j3-Te-sUy" firstAttribute="centerX" secondItem="zsF-ke-zVV" secondAttribute="centerX" id="BKA-YW-0ib"/>
-                            <constraint firstItem="u9H-mV-hhS" firstAttribute="trailing" secondItem="2j3-Te-sUy" secondAttribute="trailing" constant="94" id="BLS-mm-jSP"/>
+                            <constraint firstItem="u9H-mV-hhS" firstAttribute="trailing" secondItem="2j3-Te-sUy" secondAttribute="trailing" constant="94" id="BLS-mm-jSP">
+                                <variation key="heightClass=regular-widthClass=regular" constant="300"/>
+                            </constraint>
                             <constraint firstAttribute="trailing" secondItem="wv1-xe-6wJ" secondAttribute="trailing" id="F9K-Bd-KMa"/>
                             <constraint firstItem="dM6-BS-1MB" firstAttribute="leading" secondItem="fl9-fs-GwU" secondAttribute="leading" id="HpN-ek-QRx"/>
                             <constraint firstItem="gFY-TU-5Ll" firstAttribute="leading" secondItem="ZnH-AW-w9n" secondAttribute="leading" constant="20" id="HtR-Lb-tNq"/>
@@ -379,7 +380,9 @@
                             <constraint firstItem="wv1-xe-6wJ" firstAttribute="leading" secondItem="fl9-fs-GwU" secondAttribute="leading" id="iPl-JC-K9g"/>
                             <constraint firstItem="gFY-TU-5Ll" firstAttribute="trailing" secondItem="ZnH-AW-w9n" secondAttribute="trailing" constant="-20" id="m93-M0-kKq"/>
                             <constraint firstItem="zsF-ke-zVV" firstAttribute="top" secondItem="fl9-fs-GwU" secondAttribute="top" id="mNs-0A-fcy"/>
-                            <constraint firstItem="2j3-Te-sUy" firstAttribute="leading" secondItem="u9H-mV-hhS" secondAttribute="leading" constant="94" id="nIn-JG-wdW"/>
+                            <constraint firstItem="2j3-Te-sUy" firstAttribute="leading" secondItem="u9H-mV-hhS" secondAttribute="leading" constant="94" id="nIn-JG-wdW">
+                                <variation key="heightClass=regular-widthClass=regular" constant="300"/>
+                            </constraint>
                             <constraint firstItem="2j3-Te-sUy" firstAttribute="top" secondItem="zsF-ke-zVV" secondAttribute="bottom" constant="8" id="oGL-Po-kGv"/>
                             <constraint firstItem="zsF-ke-zVV" firstAttribute="leading" secondItem="u9H-mV-hhS" secondAttribute="leading" id="tov-sK-rVi"/>
                         </constraints>

@@ -864,7 +864,7 @@ struct _R {
     var textColor: RswiftResources.ColorResource { .init(name: "TextColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 779 images.
+  /// This `_R.image` struct is generated, and contains static references to 780 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -3079,6 +3079,9 @@ struct _R {
     /// Image `ic_save`.
     var ic_save: RswiftResources.ImageResource { .init(name: "ic_save", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `ic_save_image`.
+    var ic_save_image: RswiftResources.ImageResource { .init(name: "ic_save_image", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `ic_save_photo`.
     var ic_save_photo: RswiftResources.ImageResource { .init(name: "ic_save_photo", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -3695,8 +3698,7 @@ struct _R {
       var checkInController: RswiftResources.StoryboardViewControllerIdentifier<CheckInController> { .init(identifier: "CheckInController", storyboard: name, bundle: bundle) }
 
       func validate() throws {
-        if UIKit.UIImage(named: "ic_setting", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_setting' is used in storyboard 'CheckIn', but couldn't be loaded.") }
-        if UIKit.UIColor(named: "ColorTextTopBar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTextTopBar' is used in storyboard 'CheckIn', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "ic_left_back", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_left_back' is used in storyboard 'CheckIn', but couldn't be loaded.") }
         if checkInController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'checkInController' could not be loaded from storyboard 'CheckIn' as 'CheckInController'.") }
       }
     }
@@ -3727,8 +3729,8 @@ struct _R {
       func validate() throws {
         if UIKit.UIImage(named: "ic_delete_image", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_delete_image' is used in storyboard 'DetailCollection', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_edit_image", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_edit_image' is used in storyboard 'DetailCollection', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "ic_image_save", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_image_save' is used in storyboard 'DetailCollection', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_left_back", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_left_back' is used in storyboard 'DetailCollection', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "ic_save_image", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_save_image' is used in storyboard 'DetailCollection', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_send_image", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_send_image' is used in storyboard 'DetailCollection', but couldn't be loaded.") }
         if detailCollectionController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'detailCollectionController' could not be loaded from storyboard 'DetailCollection' as 'DetailCollectionController'.") }
       }

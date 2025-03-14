@@ -42,6 +42,9 @@ class NewHomeController: BaseViewController {
         topBarView.onLeftClick = {
             SubcriptionViewController.show(checkTime: true)
         }
+        topBarView.onRightClick = {
+            AppRouter.shared.navigate(to: CheckInRoute.main, with: .push)
+        }
         topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
         topBarView.title = "Coloring Books"
 

@@ -20,10 +20,10 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Qu-1C-4cB">
-                        <rect key="frame" x="0.0" y="0.0" width="507" height="382"/>
+                        <rect key="frame" x="3" y="3" width="501" height="376"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cpk-Rs-iWg">
-                                <rect key="frame" x="0.0" y="0.0" width="507" height="382"/>
+                                <rect key="frame" x="0.0" y="0.0" width="501" height="376"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
@@ -63,7 +63,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OY0-ec-bus">
-                                <rect key="frame" x="467" y="342" width="40" height="40"/>
+                                <rect key="frame" x="461" y="336" width="40" height="40"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_trash_collection" translatesAutoresizingMaskIntoConstraints="NO" id="vd3-3a-jyI">
                                         <rect key="frame" x="12" y="12" width="16" height="16"/>
@@ -102,10 +102,10 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="6Qu-1C-4cB" secondAttribute="bottom" id="SNm-HK-XRD"/>
-                <constraint firstAttribute="trailing" secondItem="6Qu-1C-4cB" secondAttribute="trailing" id="aow-Nr-f9t"/>
-                <constraint firstItem="6Qu-1C-4cB" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="auH-TN-MuM"/>
-                <constraint firstItem="6Qu-1C-4cB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="opu-YF-QEQ"/>
+                <constraint firstItem="6Qu-1C-4cB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="3" id="QMN-EU-6At"/>
+                <constraint firstAttribute="bottom" secondItem="6Qu-1C-4cB" secondAttribute="bottom" constant="3" id="SNm-HK-XRD"/>
+                <constraint firstAttribute="trailing" secondItem="6Qu-1C-4cB" secondAttribute="trailing" constant="3" id="aow-Nr-f9t"/>
+                <constraint firstItem="6Qu-1C-4cB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="3" id="opu-YF-QEQ"/>
             </constraints>
             <size key="customSize" width="507" height="382"/>
             <connections>

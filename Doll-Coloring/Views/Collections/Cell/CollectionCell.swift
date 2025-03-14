@@ -7,6 +7,7 @@
 
 import UIKit
 import Reusable
+import SDWebImage
 
 class CollectionCell: UICollectionViewCell, NibReusable {
 
@@ -22,8 +23,15 @@ class CollectionCell: UICollectionViewCell, NibReusable {
     
     @IBOutlet weak var imgTrash: UIImageView!
     
+    var trashButtonTapped: (() -> Void)?
+    var navigateToDetail: (() -> Void)?
+    
     
     override func awakeFromNib() {
+        super.awakeFromNib()
+        self.setUpView()
+    }
+    private func setUpView() {
         viewContent.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
         viewContent.layer.cornerRadius = 16
         super.awakeFromNib()
@@ -31,17 +39,28 @@ class CollectionCell: UICollectionViewCell, NibReusable {
         viewPercent.layer.borderWidth = 1
         viewPercent.layer.borderColor = UIColor.black.cgColor
         viewPercent.roundCorners(corners: [.layerMinXMinYCorner, .layerMaxXMaxYCorner], radius: 16)
-        
 
-        
         viewTrash.layer.borderWidth = 1
         viewTrash.layer.borderColor = UIColor.black.cgColor
         viewTrash.roundCorners(corners: [.layerMinXMinYCorner, .layerMaxXMaxYCorner], radius: 16)
-//        imgTrash.image = UIImage(named: "ic_trash_collection")
-//        imgTrash.contentMode = .scaleAspectFit
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(trashTapped))
+        viewTrash.addGestureRecognizer(tapGesture)
+        viewTrash.isUserInteractionEnabled = true
+        
+        let navigateGesture = UITapGestureRecognizer(target: self, action: #selector(navigateGesture))
+        imageView.addGestureRecognizer(navigateGesture)
+        imageView.isUserInteractionEnabled = true
+
     }
     
-    func setupView() {
+    @objc func trashTapped() {
+        trashButtonTapped?()
     }
+    
+    @objc func navigateGesture() {
+        navigateToDetail?()
+    }
+    
 }
 

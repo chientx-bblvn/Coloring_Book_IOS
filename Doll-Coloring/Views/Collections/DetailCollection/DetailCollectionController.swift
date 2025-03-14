@@ -26,6 +26,8 @@ class DetailCollectionController: BaseViewController {
     
     @IBOutlet weak var btnEdit: UIButton!
     
+    @IBOutlet weak var btnShare: UIButton!
+    
     @IBOutlet weak var viewAds: UIView!
     
     
@@ -44,6 +46,7 @@ class DetailCollectionController: BaseViewController {
     
     private func setupView() {
         topBarView.title = LocalizableUtils.commonCollections().uppercased()
+        topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
         topBarView.onLeftClick = {
             if self.viewModel.isCollection {
                 AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
@@ -75,13 +78,49 @@ class DetailCollectionController: BaseViewController {
         loadInterADSEdit()
     }
     
+    @IBAction func actionShare(_ sender: Any) {
+        showActivityController()
+    }
+    
+    func showActivityController() {
+        let firstActivityItem = Bundle.main.applicationName ?? "Doll Coloring"
+        let imagePath = FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: viewModel.history?.imagePath ?? "").path
+
+           guard let image = UIImage(contentsOfFile: imagePath) else {
+               return
+           }
+        let imageToShare = [image, firstActivityItem] as [Any]
+        
+        let activityViewController : UIActivityViewController = UIActivityViewController(
+            activityItems: imageToShare, applicationActivities: nil)
+        activityViewController.activityItemsConfiguration = [
+            UIActivity.ActivityType.message
+        ] as? UIActivityItemsConfigurationReading
+        activityViewController.excludedActivityTypes = [
+            UIActivity.ActivityType.saveToCameraRoll,
+            UIActivity.ActivityType.airDrop
+        ]
+        
+        if DeviceInfos.isIpad() {
+            if let view = btnShare ?? self.view {
+                activityViewController.popoverPresentationController?.sourceView = view
+                activityViewController.popoverPresentationController?.sourceRect = view.bounds
+            }
+        }
+        FirebaseEventManager.logEvent(with: RMBGEventTracking.share_coloring_screen)
+        activityViewController.isModalInPresentation = true
+        DispatchQueue.main.async {
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+    }
+    
     func deleteColoring() {
         let coloring = viewModel.coloringLocal
         guard let history = viewModel.history else {
             if viewModel.isCollection {
-                AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+                AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
             } else {
-                AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+                AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
             }
             return
         }
@@ -98,9 +137,9 @@ class DetailCollectionController: BaseViewController {
             FileManagerLocal.shared.deleteFile(typeFile: .ColoringSave, fileName: history.imagePath)
         }
         if viewModel.isCollection {
-            AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+            AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
         } else {
-            AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+            AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
         }
         let local = FileManagerLocal.shared.getFileColoringlocalURL()
         local.forEach { url in
@@ -267,9 +306,9 @@ class DetailCollectionController: BaseViewController {
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: {_ in
             DispatchQueue.main.async {
                 if self.viewModel.isCollection {
-                    AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+                    AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
                 } else {
-                    AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+                    AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
                 }
             }
         }))

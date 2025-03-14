@@ -488,7 +488,11 @@ class StartColoringIPadViewController: BaseViewController {
             PopupColoringViewController.show(in: self, _percent: percent, _title: LocalizableUtils.commonSaveColoring(), _titleOk: LocalizableUtils.commonSave(), _titleCancel: LocalizableUtils.commonDiscard()) {
                 self.saveHistoryColoring()
                 self.coloringBookView.layer.borderWidth = 0
-                AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: self.coloringBookView.asImage(), coloringLocal: self.viewModel.coloringLocal, history: self.viewModel.history, typeScreen: self.viewModel.typeScreen), with: .push)
+                if let history = self.viewModel.history {
+                    AppRouter.shared.navigate(to: DetailCollectionRoute.main(coloringLocal: self.viewModel.coloringLocal, history:history, isCollection: true), with: .push)
+                }
+//
+//                AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: self.coloringBookView.asImage(), coloringLocal: self.viewModel.coloringLocal, history: self.viewModel.history, typeScreen: self.viewModel.typeScreen), with: .push)
                 self.coloringBookView.layer.borderWidth = 0.5
             } actionCancel: {
                 
@@ -496,7 +500,10 @@ class StartColoringIPadViewController: BaseViewController {
         } else {
             saveHistoryColoring()
             coloringBookView.layer.borderWidth = 0
-            AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: coloringBookView.asImage(), coloringLocal: viewModel.coloringLocal, history: viewModel.history, typeScreen: viewModel.typeScreen), with: .push)
+            if let history = self.viewModel.history {
+                AppRouter.shared.navigate(to: DetailCollectionRoute.main(coloringLocal: self.viewModel.coloringLocal, history:history, isCollection: true), with: .push)
+            }
+//            AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: coloringBookView.asImage(), coloringLocal: viewModel.coloringLocal, history: viewModel.history, typeScreen: viewModel.typeScreen), with: .push)
             coloringBookView.layer.borderWidth = 0.5
         }
     }

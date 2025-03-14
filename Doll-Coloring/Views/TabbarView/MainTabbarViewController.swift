@@ -48,7 +48,7 @@ class MainTabbarViewController: BaseViewController {
     
     let coloringBookController = HomeRoute.main.screen
     let collectionController = CollectionsRoute.main(navigate: false).screen
-    let settingController = CheckInRoute.main.screen
+    let settingController = SettingsRoute.main.screen
     
     override func setup() {
         super.setup()
