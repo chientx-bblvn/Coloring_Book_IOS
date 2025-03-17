@@ -312,7 +312,6 @@
 		57FE22042AA8C41E0060606F /* FloatingPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE21FD2AA8C41E0060606F /* FloatingPoint+Extension.swift */; };
 		57FE22072AA8C41E0060606F /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE21FE2AA8C41E0060606F /* CircularProgressView.swift */; };
 		6887E08AF4A7883B4B7FFB7E /* Pods_Doll_Coloring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C404DB90499F9B71148AEB8 /* Pods_Doll_Coloring.framework */; };
-		970B94892C6486100024CFD6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 970B94882C6486100024CFD6 /* GoogleService-Info.plist */; };
 		970BF0952C3F7F15002B445F /* soundFillColor.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 970BF0942C3F7F15002B445F /* soundFillColor.mp3 */; };
 		970C44202D0C43DF0022AA69 /* AdLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970C441C2D0C43DF0022AA69 /* AdLoadingView.xib */; };
 		970C44212D0C43DF0022AA69 /* AdLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = 970C441D2D0C43DF0022AA69 /* AdLoading.json */; };
@@ -358,6 +357,7 @@
 		97DF852A2C62046700FA19EF /* HeaderDalyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF85272C62046700FA19EF /* HeaderDalyView.swift */; };
 		97DF852E2C62299D00FA19EF /* GitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DF852D2C62299D00FA19EF /* GitViewController.xib */; };
 		97DF852F2C62299D00FA19EF /* GitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF852C2C62299D00FA19EF /* GitViewController.swift */; };
+		97EBC51C2D78408A005ED53D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97EBC51B2D78408A005ED53D /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -696,7 +696,6 @@
 		57FE3EE62A87F26700ACF272 /* LanguageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageVM.swift; sourceTree = "<group>"; };
 		57FFC3EA2A8E7636004F6E45 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		7C404DB90499F9B71148AEB8 /* Pods_Doll_Coloring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Doll_Coloring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		970B94882C6486100024CFD6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		970BF0942C3F7F15002B445F /* soundFillColor.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soundFillColor.mp3; sourceTree = "<group>"; };
 		970C441B2D0C43DF0022AA69 /* AdLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdLoadingView.swift; sourceTree = "<group>"; };
 		970C441C2D0C43DF0022AA69 /* AdLoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdLoadingView.xib; sourceTree = "<group>"; };
@@ -742,6 +741,7 @@
 		97DF85282C62046700FA19EF /* HeaderDalyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderDalyView.xib; sourceTree = "<group>"; };
 		97DF852C2C62299D00FA19EF /* GitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitViewController.swift; sourceTree = "<group>"; };
 		97DF852D2C62299D00FA19EF /* GitViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GitViewController.xib; sourceTree = "<group>"; };
+		97EBC51B2D78408A005ED53D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C03131B72AA3762400A29FC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1282,8 +1282,8 @@
 			isa = PBXGroup;
 			children = (
 				570AF76A2A53CE560069B329 /* BuildEnv.swift */,
+				97EBC51B2D78408A005ED53D /* GoogleService-Info.plist */,
 				C03131B72AA3762400A29FC1 /* Info.plist */,
-				970B94882C6486100024CFD6 /* GoogleService-Info.plist */,
 			);
 			path = ConfigFiles;
 			sourceTree = "<group>";
@@ -1979,9 +1979,9 @@
 				08DBCB7C2C34F745004F80FC /* LanguageSecondViewController.xib in Resources */,
 				08A0C29E2BE490AA00C6E42D /* asrmColoring.mp3 in Resources */,
 				9749A6822CD4CD90005EF9B7 /* NativeFullScreenController.xib in Resources */,
+				97EBC51C2D78408A005ED53D /* GoogleService-Info.plist in Resources */,
 				08F5D1C12BFB366A002DC669 /* CategoryMenuCell.xib in Resources */,
 				5729F27F2B7469800059AB40 /* ErrorCode.strings in Resources */,
-				970B94892C6486100024CFD6 /* GoogleService-Info.plist in Resources */,
 				08F75CE72BE8D12A005ACDA9 /* DetailCollection.storyboard in Resources */,
 				085A067F2BC69FB5002D5F1D /* ListTopPicksColoringViewController.xib in Resources */,
 				9749A6852CD4D666005EF9B7 /* FullScreenNativeAdsView.xib in Resources */,
@@ -2459,7 +2459,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2505,7 +2505,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
