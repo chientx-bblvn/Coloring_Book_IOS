@@ -101,6 +101,7 @@ extension HistoryColoringController: FSPagerViewDelegate, FSPagerViewDataSource 
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(for: index, cellType: HistoryCellCollectionViewCell.self)
         let data = viewModel.coloring.historys[index].imagePath
+        cell.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
         cell.imageView.setLocalImage(with: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: data).path, placeholder: nil)
         let percent = Float(viewModel.coloring.historys[index].percent_complete ?? 0)
         cell.progressRing.isHidden = false

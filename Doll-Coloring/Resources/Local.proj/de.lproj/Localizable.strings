@@ -122,3 +122,10 @@ subtite_delete = "Die Farbe wird gelöscht. Klicken Sie zum Fortfahren auf Lösc
 save_picture_ads = "Um die Zeichnung auf Ihrem Gerät zu speichern, sehen Sie sich bitte eine kurze Werbung an. Die Werbung endet automatisch nach ein paar Sekunden. Sobald die Werbung beendet ist, können Sie die Zeichnung herunterladen.";
 save_picture_success = "Ihr Bild wurde in Ihren Fotos gespeichert.";
 save_picture_fail = "Ihr Bild wurde nicht in Ihren Fotos gespeichert.";
+
+Setting.Language                                =       "Sprache";
+Setting.Policy                                  =       "Datenschutzrichtlinie";
+Setting.ShareApp                                =       "App teilen";
+Setting.RateApp                                 =       "App bewerten";
+Setting.FeedBack                                =       "Feedback";
+Setting.MoreApp                                 =       "Weitere Apps";

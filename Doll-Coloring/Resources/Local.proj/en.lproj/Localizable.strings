@@ -20,6 +20,9 @@ Common.Button.Disagree                          =       "Disagree";
 Common.PhotoPicker.Gallery                      =       "Select from library";
 Common.PhotoPicker.Camera                       =       "Take photo";
 Common.Home                                     =       "Home";
+
+Common.ColoringBooks                           =       "Coloring Books";
+
 Common.CheckIn                                  =       "Check In";
 Common.StartColoring                            =       "Start Coloring";
 Common.Collections                              =       "Collections";
@@ -104,6 +107,15 @@ ForceUpdate.Title                               =       "New version available";
 ForceUpdate.Description                         =       "In order to use the app, you must download the latest version.";
 ForceUpdate.Button                              =       "Update app";
 
+// Setting
+
+Setting.Language                                =       "Language";
+Setting.Policy                                  =       "Privacy Policy";
+Setting.ShareApp                                =       "Share App";
+Setting.RateApp                                 =       "Rate App";
+Setting.FeedBack                                =       "Feedback";
+Setting.MoreApp                                 =       "More App";
+
 
 // Table Color
 
@@ -132,3 +144,4 @@ save_picture_ads = "To save the drawing to your device, please watch a short adv
 
 save_picture_success = "Your picture has been saved to your photos.";
 save_picture_fail = "Your picture has not been saved to your photos.";
+

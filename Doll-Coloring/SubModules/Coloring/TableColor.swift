@@ -32,7 +32,7 @@ enum BannerHome {
         case .ipad:
             return ["banner2_Ipad", "banner1_Ipad", "banner3_ipad"]
         case .iap:
-            return ["Banner_IAP0", "Banner_IAP1", "Banner_IAP2", "Banner_IAP3", "Banner_IAP4"]
+            return ["bg_iap_1", "bg_iap_2", "bg_iap_3"]
         }
     }
 }

@@ -38,7 +38,9 @@ class DalyMonthVM {
         serviceManager.requestAPI(.newList, type: [ColoringModel].self) {[weak self] isSuccess, response in
             self?.itemDaly = response.first(where: {$0.categoryName?.contains("Daily") ?? false})?.imageUrls ?? []
             self?.calculatorDay()
+            SVProgressHUD.dismiss()
         } onFailed: { error in
+            SVProgressHUD.dismiss()
             debugPrint(error.localizedDescription)
         }
     }

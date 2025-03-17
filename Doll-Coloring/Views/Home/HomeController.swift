@@ -20,6 +20,7 @@ class HomeController: BaseViewController {
     
     @IBOutlet weak var topbarView: TopBarView!
     
+    //bỏ
     @IBOutlet weak var slidePages: FSPagerView! {
         didSet {
             self.slidePages.register(cellType: HistoryCellCollectionViewCell.self)
@@ -31,7 +32,7 @@ class HomeController: BaseViewController {
             self.slidePages.dataSource = self
         }
     }
-    
+    //bỏ
     @IBOutlet weak var pageController: FSPageControl! {
         didSet {
             self.pageController.numberOfPages = bannerHome.images.count
@@ -85,6 +86,9 @@ class HomeController: BaseViewController {
         topbarView.onRightClick = {
             self.showSettingView()
         }
+//        topbarView.onLeftClick = {
+//            CheckInController.show(self)
+//        }
         topbarView.onClickPremium = {
             SubcriptionViewController.show(checkTime: true)
         }

@@ -3,7 +3,7 @@
 //  Doll-Coloring
 //
 //  Created by Việt Anh Nguyễn on 10/04/2024.
-//  
+//
 //
 
 import Foundation
@@ -19,14 +19,16 @@ class CollectionsController: BaseViewController {
     
     @IBOutlet weak var topBarView: TopBarView!
     
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var viewEmpty: UIView!
     
     @IBOutlet weak var lbEmpty: UILabel!
     
-    @IBOutlet weak var viewAnimation: LottieAnimationView!
-
+    @IBOutlet weak var imgEmpty: UIImageView!
+    
     @IBOutlet weak var btnStartColoring: UIButton!
     
     @IBOutlet weak var viewAds: UIView!
@@ -34,6 +36,10 @@ class CollectionsController: BaseViewController {
     @IBOutlet weak var viewHeightAds: NSLayoutConstraint!
     
     private var listCollection: [String] = []
+    
+    private var lisCompleted: [String] = []
+    
+    private var listNotCompleted: [String] = []
     
     private var listColoring: [ColoringHistoryModel] = []
     
@@ -43,34 +49,17 @@ class CollectionsController: BaseViewController {
     
     override func setup() {
         super.setup()
-        viewAnimation.loadAnimation(file: "animation_collection", loopMode: .loop, autoPlay: true)
-        topBarView.title = ""
+        //        viewAnimation.loadAnimation(file: "animation_collection", loopMode: .loop, autoPlay: true)
         topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
-        if navigate {
-            topBarView.title = LocalizableUtils.commonCollections().uppercased()
-            topBarView.leftIcon = R.image.ic_back()
-            topBarView.textAlignmentCenter = true
-        } else {
-            settingIAP()
-        }
-        topBarView.onLeftClick = {
-            self.topBarView.textAlignmentCenter = false
-            AppRouter.shared.dismissDetail()
-        }
+        topBarView.title = "Collection"
         
-        topBarView.onClickPremium = {
-            SubcriptionViewController.show(checkTime: true) {
-                
-            }
-        }
-        
-        topBarView.onRightClick = {
-            self.showSettingView()
-        }
+        segmentControl.setTitle("Finished", forSegmentAt: 0)
+        segmentControl.setTitle("Unfinished", forSegmentAt: 1)
+        segmentControl.selectedSegmentIndex = 0
         setupCollectionView()
         loadLanguage()
     }
-
+    
     override func bindingData() {
         super.bindingData()
     }
@@ -87,6 +76,10 @@ class CollectionsController: BaseViewController {
             loadColapBanner()
         }
         
+        let dataFilter = filterImagePaths()
+        lisCompleted = dataFilter.completed
+        listNotCompleted = dataFilter.notCompleted
+        updateDataColection()
     }
     
     private func settingIAP() {
@@ -131,14 +124,55 @@ class CollectionsController: BaseViewController {
     @IBAction func actionStartColoring(_ sender: Any) {
         FirebaseEventManager.logEvent(with: RMBGEventTracking.collection_start_coloring)
         NotificationCenter.default.post(name: NSNotification.Name("GOTOHOME_TABBAR"), object: nil)
-//        AppRouter.shared.navigate(to: MainColoringsRoute.main, with: .push)
+        //        AppRouter.shared.navigate(to: MainColoringsRoute.main, with: .push)
     }
+    
+    
+    
+    @IBAction func segmentChanged(_ sender: Any) {
+        updateDataColection()
+    }
+    
+    func updateDataColection() {
+        listColoring = SQLiteManager.shared.selectionColorings()
+        listCollection = FileManagerLocal.shared.getFileColoringlocal()
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            listCollection = lisCompleted
+            collectionView.reloadData()
+            viewEmpty.isHidden = !listCollection.isEmpty
+        case 1:
+            listCollection = listNotCompleted
+            collectionView.reloadData()
+            viewEmpty.isHidden = !listCollection.isEmpty
+        default:
+            break
+        }
+    }
+    
+    func filterImagePaths() -> (completed: [String], notCompleted: [String]) {
+        var completedImages: [String] = []
+        var notCompletedImages: [String] = []
+        
+        for coloring in listColoring {
+            for history in coloring.historys {
+                let percent = ((history.percent_complete ?? 0) * 100)
+                if percent >= 100 {
+                    completedImages.append(history.imagePath)
+                } else {
+                    notCompletedImages.append(history.imagePath)
+                }
+            }
+        }
+        
+        return (completedImages, notCompletedImages)
+    }
+    
     
 }
 
 extension CollectionsController {
     func loadLanguage() {
-        topBarView.title = LocalizableUtils.commonCollections().uppercased()
         lbEmpty.text = LocalizableUtils.commonEmptyCollections()
         btnStartColoring.setTitle(LocalizableUtils.commonStartColoring(), for: .normal)
     }
@@ -153,7 +187,7 @@ extension CollectionsController {
             } else {
                 self?.viewHeightAds.constant = success ? 56 : 0
             }
-           
+            
         }
     }
 }
@@ -168,13 +202,34 @@ extension CollectionsController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: CollectionCell.self)
         let data = listCollection[indexPath.row]
         cell.imageView.setLocalImage(with: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: data).path, placeholder: nil)
+        if let coloring = listColoring.first(where: { coloring in
+            coloring.historys.contains(where: { $0.imagePath == listCollection[indexPath.row] })
+        }) {
+            if let lastHistory = coloring.historys.last {
+                let percent = (lastHistory.percent_complete ?? 0) * 100
+                cell.labelPercent.text = "\(Int(percent.rounded()))%"
+            } else {
+                cell.labelPercent.text = "0%"
+            }
+        } else {
+            cell.labelPercent.text = "0%"
+        }
+        
+        cell.navigateToDetail = {
+            self.naviScreenColoring(fileName: data)
+        }
+        
+        cell.trashButtonTapped = {
+            DeleteColoringViewController.show(in: self) {
+                
+            } onclickDelete: {
+                self.deleteColoring(fileName: data)
+            }
+            
+        }
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let data = listCollection[indexPath.row]
-        naviScreenColoring(fileName: data)
-    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width - 32)
@@ -185,7 +240,7 @@ extension CollectionsController: UICollectionViewDelegate, UICollectionViewDataS
                 return CGSize(width: (Int(width) - 34) / 4, height: Int(width / 4))
             }
         }
-        return CGSize(width: (Int(width) - 8) / 2, height: Int(width / 2))
+        return CGSize(width: (Int(width) - 8) / 2, height: (Int(width) - 8) / 2)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -193,7 +248,7 @@ extension CollectionsController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 8
     }
     
     func naviScreenColoring(fileName: String) {
@@ -210,6 +265,39 @@ extension CollectionsController: UICollectionViewDelegate, UICollectionViewDataS
             AppRouter.shared.navigate(to: DetailCollectionRoute.main(coloringLocal: coloring, history: history, isCollection: true), with: .push)
         }
     }
+    func deleteColoring(fileName: String) {
+        if let index = listColoring.firstIndex(where: { coloring in
+            coloring.historys.contains(where: { history in
+                history.imagePath.contains(fileName)
+            })
+        }) {
+            var coloring = listColoring[index]
+            
+            coloring.historys.removeAll { history in
+                history.imagePath.contains(fileName)
+            }
+
+            FileManagerLocal.shared.deleteFile(typeFile: .Coloring, fileName: coloring.filePath)
+            FileManagerLocal.shared.deleteFile(typeFile: .ColoringSave, fileName: fileName)
+            
+            if coloring.historys.isEmpty {
+                SQLiteManager.shared.deleteColorings(id: coloring.id)
+            } else {
+                _ = SQLiteManager.shared.updateColorings(data: coloring)
+            }
+            
+            listColoring.remove(at: index)
+
+            listCollection.removeAll { $0 == fileName }
+            
+            let imageUrlString = FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: fileName)
+            let cacheKey = SDWebImageManager.shared.cacheKey(for: imageUrlString)
+            SDImageCache.shared.removeImage(forKey: cacheKey, withCompletion: nil)
+            
+            collectionView.reloadData()
+            viewEmpty.isHidden = !listCollection.isEmpty
+        }
+    }
     
     func reloadDataColection() {
         listColoring = SQLiteManager.shared.selectionColorings()
@@ -217,4 +305,6 @@ extension CollectionsController: UICollectionViewDelegate, UICollectionViewDataS
         viewEmpty.isHidden = !listCollection.isEmpty
         collectionView.reloadData()
     }
+    
+    
 }

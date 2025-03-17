@@ -19,9 +19,9 @@ class LanguageSecondViewController: BaseViewController {
     private var currentLanguage: Language? = nil {
         didSet {
             if goFrom == .intro {
-                topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTitle() ?? .black)
+                topBarView.rightIcon = R.image.ic_right_back()
             } else {
-                topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTitle() ?? .black)
+                topBarView.rightIcon = R.image.ic_right_back()
             }
             
             topBarView.rightEnable = true
@@ -58,28 +58,44 @@ extension LanguageSecondViewController {
         if language.isEmpty {
             FirebaseEventManager.logEvent(with: RMBGEventTracking.languageScr)
             if goFrom == .intro {
-                topBarView.rightTitleColor = R.color.mainPrimary()
-                topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor((R.color.colorTextTopBar() ?? .black))
+                topBarView.rightTitleColor =  R.color.mainPrimary()
+                topBarView.rightIcon = R.image.ic_right_back()
             } else {
-                topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor((R.color.colorTextTopBar() ?? .black))
+                topBarView.rightIcon = R.image.ic_right_back()
             }
         } else {
             if goFrom == .intro {
-                topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor((R.color.colorTextTopBar() ?? .black))
+                topBarView.rightIcon = R.image.ic_right_back()
             } else {
-                topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTextTopBar() ?? .black)
+                topBarView.rightIcon = R.image.ic_right_back()
             }
             self.currentLanguage = Constants.currentLanguage
         }
         topBarView.rightEnable = true
         
         if goFrom == .setting {
-            topBarView.leftIcon = R.image.chevronBack()
-            topBarView.onLeftClick = {
-                AppRouter.shared.dismissDetail()
+//            topBarView.leftIcon = R.image.chevronBack()
+            topBarView.titleFont = .systemFont(ofSize: 24, weight: .bold)
+            topBarView.textAlignmentCenter = false
+            topBarView.onRightClick = { [weak self] in
+                guard let language = self?.currentLanguage else {
+                    return
+                }
+                if self?.goFrom == .setting {
+                    self?.changeLanguage(language: language)
+                    AppRouter.shared.dismissDetail()
+                } else if self?.goFrom == .intro {
+                    self?.changeLanguage(language: language)
+                    let showIntro = UserDefaults.standard.bool(forKey: UserDefault.showedIntro.rawValue)
+                    if !showIntro {
+                        AppRouter.shared.navigate(to: IntroRoute.intro, with: .push)
+                        return
+                    }
+                }
             }
         }
-        topBarView.titleFont = .systemFont(ofSize: 20, weight: .bold)
+        topBarView.titleFont = .systemFont(ofSize: 24, weight: .bold)
+        topBarView.textAlignmentCenter = false
         topBarView.onRightClick = { [weak self] in
             guard let language = self?.currentLanguage else {
                 return
@@ -124,9 +140,9 @@ extension LanguageSecondViewController {
     
     private func loadText() {
         if goFrom == .intro {
-            topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTextTopBar() ?? .black)
+            topBarView.rightIcon = R.image.ic_right_back()
         } else {
-            topBarView.rightIcon = R.image.iccon_checkmark()?.withTintColor(R.color.colorTextTopBar() ?? .black)
+            topBarView.rightIcon = R.image.ic_right_back()
         }
         topBarView.title = LocalizableUtils.languageSubTitle()
         tableviewListCountry.reloadData()
@@ -141,7 +157,7 @@ extension LanguageSecondViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 80
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

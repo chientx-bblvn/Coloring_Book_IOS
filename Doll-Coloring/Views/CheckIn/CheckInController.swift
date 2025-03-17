@@ -20,37 +20,37 @@ class CheckInController: BaseViewController {
     
     @IBOutlet weak var topbarView: TopBarView!
     
-    @IBOutlet weak var slidePages: FSPagerView! {
-        didSet {
-            self.slidePages.register(cellType: HistoryCellCollectionViewCell.self)
-            self.slidePages.itemSize = FSPagerView.automaticSize
-            self.slidePages.automaticSlidingInterval = 2
-            self.slidePages.isInfinite = true
-            self.slidePages.decelerationDistance = 2
-            self.slidePages.delegate = self
-            self.slidePages.dataSource = self
-        }
-    }
+//    @IBOutlet weak var slidePages: FSPagerView! {
+//        didSet {
+//            self.slidePages.register(cellType: HistoryCellCollectionViewCell.self)
+//            self.slidePages.itemSize = FSPagerView.automaticSize
+//            self.slidePages.automaticSlidingInterval = 2
+//            self.slidePages.isInfinite = true
+//            self.slidePages.decelerationDistance = 2
+//            self.slidePages.delegate = self
+//            self.slidePages.dataSource = self
+//        }
+//    }
     
-    @IBOutlet weak var pageController: FSPageControl! {
-        didSet {
-            self.pageController.numberOfPages = bannerHome.images.count
-            self.pageController.contentHorizontalAlignment = .center
-            self.pageController.contentInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        }
-    }
+//    @IBOutlet weak var pageController: FSPageControl! {
+//        didSet {
+//            self.pageController.numberOfPages = bannerHome.images.count
+//            self.pageController.contentHorizontalAlignment = .center
+//            self.pageController.contentInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+//        }
+//    }
     
-    @IBOutlet weak var heightSlider: NSLayoutConstraint! {
-        didSet {
-            var height = UIScreen.main.bounds.width
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                height = height * (250 / 768)
-            } else {
-                height = height * (250 / 412)
-            }
-            heightSlider.constant = height
-        }
-    }
+//    @IBOutlet weak var heightSlider: NSLayoutConstraint! {
+//        didSet {
+//            var height = UIScreen.main.bounds.width
+//            if UIDevice.current.userInterfaceIdiom == .pad {
+//                height = height * (250 / 768)
+//            } else {
+//                height = height * (250 / 412)
+//            }
+//            heightSlider.constant = height
+//        }
+//    }
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -98,10 +98,14 @@ class CheckInController: BaseViewController {
             bannerHome = .ipad
         }
         topbarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
-        topbarView.title = ""
-        topbarView.onRightClick = {
-            self.showSettingView()
+//        topbarView.title = ""
+        topbarView.title = "Daily"
+        topbarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
+        topbarView.onLeftClick = {
+            AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
         }
+        topbarView.textAlignmentCenter = true
+        
         updateLayoutContent()
         loadLanguage()
         setupCollectionView()
@@ -114,6 +118,8 @@ class CheckInController: BaseViewController {
         collectionView.register(cellType: GitDaylyCell.self)
         collectionView.register(UINib(nibName: "HeaderDalyView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderDalyView")
         collectionView.register(UINib(nibName: "HeaderDalyView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "HeaderDalyView")
+
+        
         collectionView.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
     
@@ -124,10 +130,10 @@ class CheckInController: BaseViewController {
             break
         case .portrait, .portraitUpsideDown:
             isLandscape = false
-            slidePages.reloadData()
+//            slidePages.reloadData()
         case .landscapeLeft, .landscapeRight:
             isLandscape = true
-            slidePages.reloadData()
+//            slidePages.reloadData()
         default:
             break
         }
@@ -139,36 +145,36 @@ class CheckInController: BaseViewController {
     
 }
 
-extension CheckInController: FSPagerViewDataSource,FSPagerViewDelegate {
-    public func numberOfItems(in pagerView: FSPagerView) -> Int {
-        return bannerHome.images.count
-    }
-    
-    public func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
-        let cell = pagerView.dequeueReusableCell(for: index, cellType: HistoryCellCollectionViewCell.self)
-        cell.imageView?.image = UIImage(named: bannerHome.images[index])
-        cell.imageView?.contentMode = .scaleAspectFill
-        cell.imageView.layer.borderWidth = 0
-        cell.imageView.layer.cornerRadius = 0
-        cell.imageView?.clipsToBounds = true
-        return cell
-    }
-    
-    // MARK:- FSPagerView Delegate
-    
-    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
-        pagerView.deselectItem(at: index, animated: true)
-        pagerView.scrollToItem(at: index, animated: true)
-    }
-    
-    func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
-        self.pageController.currentPage = targetIndex
-    }
-    
-    func pagerViewDidEndScrollAnimation(_ pagerView: FSPagerView) {
-        self.pageController.currentPage = pagerView.currentIndex
-    }
-}
+//extension CheckInController: FSPagerViewDataSource,FSPagerViewDelegate {
+//    public func numberOfItems(in pagerView: FSPagerView) -> Int {
+//        return bannerHome.images.count
+//    }
+//    
+//    public func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
+//        let cell = pagerView.dequeueReusableCell(for: index, cellType: HistoryCellCollectionViewCell.self)
+//        cell.imageView?.image = UIImage(named: bannerHome.images[index])
+//        cell.imageView?.contentMode = .scaleAspectFill
+//        cell.imageView.layer.borderWidth = 0
+//        cell.imageView.layer.cornerRadius = 0
+//        cell.imageView?.clipsToBounds = true
+//        return cell
+//    }
+//    
+//    // MARK:- FSPagerView Delegate
+//    
+//    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
+//        pagerView.deselectItem(at: index, animated: true)
+//        pagerView.scrollToItem(at: index, animated: true)
+//    }
+//    
+//    func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
+//        self.pageController.currentPage = targetIndex
+//    }
+//    
+//    func pagerViewDidEndScrollAnimation(_ pagerView: FSPagerView) {
+//        self.pageController.currentPage = pagerView.currentIndex
+//    }
+//}
 
 extension CheckInController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     

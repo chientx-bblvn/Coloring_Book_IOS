@@ -35,9 +35,6 @@ class SplashController: BaseViewController {
         }
         setupView()
         loadSavedLanguage()
-        
-        
-        
     }
     
     override func bindingData() {
@@ -212,7 +209,7 @@ extension SplashController {
                 return
             }
             BBLLogging.d("Check:: gotoHome")
-            AppRouter.shared.navigate(to: TabbarViewRoute.main, with: .changeRoot)
+            AppRouter.shared.navigate(to: MainTabbarViewRoute.tabbar, with: .changeRoot)
         }
     }
     
@@ -237,7 +234,12 @@ extension SplashController {
             "9b689f03a451ea6278b47db3210f81d8"
         ]
         ADManager.shared.startAds(style: style, testIds: testIds)
-        
+        let archiveFiles = ArchiveFileLocal.allCases
+        for file in archiveFiles {
+            if !FileManagerLocal.shared.checkFileExits(typeFile: file, fileName: "") {
+                FileManagerLocal.shared.createFolderManager(fileName: file.rawValue)
+            }
+        }
     }
     
     private func loadText() {

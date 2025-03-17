@@ -11,7 +11,7 @@ class PopupColoringViewController: UIViewController {
     
     @IBOutlet weak var viewContent: UIView!
     
-    @IBOutlet weak var viewProgressRing: ALProgressRing!
+    @IBOutlet weak var viewProgressRing: UIView!
     @IBOutlet weak var lbPercenColoring: UILabel!
     
     @IBOutlet weak var lbTitle: UILabel!
@@ -20,10 +20,10 @@ class PopupColoringViewController: UIViewController {
     
     @IBOutlet weak var btnCancel: UIButton!
     
-    @IBOutlet weak var viewAds: UIView!
-    
-    @IBOutlet weak var heightAdsView: NSLayoutConstraint!
-    
+//    @IBOutlet weak var viewAds: UIView!
+//    
+//    @IBOutlet weak var heightAdsView: NSLayoutConstraint!
+//    
     var titlePopup: String = ""
     var titleOk: String = ""
     var titleCancel: String = ""
@@ -48,17 +48,19 @@ class PopupColoringViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadAds()
-        viewContent.generateOuterShadow()
+//        loadAds()
+         viewContent.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 4, height: 4))
         lbTitle.text = titlePopup
         btnCancel.setTitle(titleCancel, for: .normal)
+        btnCancel.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 4, height: 4))
         btnDrawing.setTitle(titleOk, for: .normal)
-        viewProgressRing.startColor = UIColor(hexString: "80C4E9").withAlphaComponent(0.5)
-        viewProgressRing.endColor = UIColor(hexString: "80C4E9")
+        btnDrawing.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 4, height: 4))
+//        viewProgressRing.startColor = UIColor(hexString: "80C4E9").withAlphaComponent(0.5)
+//        viewProgressRing.endColor = UIColor(hexString: "80C4E9")
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        viewProgressRing.setProgress(Float(percent), animated: true)
+//        viewProgressRing.setProgress(Float(percent), animated: true)
         lbPercenColoring.text = "\(Int((percent * 100).rounded()))%"
     }
     
@@ -76,14 +78,14 @@ class PopupColoringViewController: UIViewController {
         }
     }
     
-    func loadAds() {
-        viewAds.isHidden = false
-        heightAdsView.constant = 190
-        ADManager.shared.loadNative(DollColoringAdID.native_dialog, to: viewAds, nativeAdType: .customMediaFixedHeight) {[weak self] adId, success, nativeAdView in
-            self?.viewAds.isHidden = !success
-            self?.heightAdsView.constant = success ? 190 : 0
-        }
-    }
+//    func loadAds() {
+//        viewAds.isHidden = false
+//        heightAdsView.constant = 190
+//        ADManager.shared.loadNative(DollColoringAdID.native_dialog, to: viewAds, nativeAdType: .customMediaFixedHeight) {[weak self] adId, success, nativeAdView in
+//            self?.viewAds.isHidden = !success
+//            self?.heightAdsView.constant = success ? 190 : 0
+//        }
+//    }
 }
 
 extension PopupColoringViewController {

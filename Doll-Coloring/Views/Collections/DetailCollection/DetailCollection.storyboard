@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,78 +16,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_collection" translatesAutoresizingMaskIntoConstraints="NO" id="PsW-Ja-7ry">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Uli-fE-Rei">
-                                <rect key="frame" x="16" y="363" width="343" height="44"/>
+                                <rect key="frame" x="63.5" y="351" width="248" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LB4-Jb-6NA">
-                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="44"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
-                                        <state key="normal" title="Delete" image="ic_delete_photo" backgroundImage="color_bling3_pastel12"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
-                                                <real key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EZL-7t-qgF">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="EZL-7t-qgF" secondAttribute="height" multiplier="1:1" id="kay-t3-sWL"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="ic_send_image"/>
                                         <connections>
-                                            <action selector="actionDelete:" destination="zIc-eW-6fX" eventType="touchUpInside" id="tIV-wv-AeG"/>
+                                            <action selector="actionShare:" destination="zIc-eW-6fX" eventType="touchUpInside" id="ZSQ-np-zSm"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3h-Tb-LM3">
-                                        <rect key="frame" x="119.5" y="0.0" width="104" height="44"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
-                                        <state key="normal" title="Save" image="ic_ads_video" backgroundImage="color_bling3_pastel12">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
-                                                <real key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cgz-BD-KSY">
+                                        <rect key="frame" x="66" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Cgz-BD-KSY" secondAttribute="height" multiplier="1:1" id="z0s-GT-KpW"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="ic_edit_image"/>
                                         <connections>
-                                            <action selector="actionSave:" destination="zIc-eW-6fX" eventType="touchUpInside" id="Vac-LJ-A1N"/>
+                                            <action selector="actionEdit:" destination="zIc-eW-6fX" eventType="touchUpInside" id="Kk0-Ho-ES1"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8SI-O3-3u7">
-                                        <rect key="frame" x="239.5" y="0.0" width="103.5" height="44"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
-                                        <state key="normal" title="Edit" image="ic_collection_photo" backgroundImage="color_bling3_pastel12"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
-                                                <real key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSG-cc-xNS">
+                                        <rect key="frame" x="132" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="RSG-cc-xNS" secondAttribute="height" multiplier="1:1" id="Cy2-KT-RL0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="ic_save_image"/>
                                         <connections>
-                                            <action selector="actionEdit:" destination="zIc-eW-6fX" eventType="touchUpInside" id="sSp-H2-OCR"/>
+                                            <action selector="actionSave:" destination="zIc-eW-6fX" eventType="touchUpInside" id="gdK-8v-2A1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xrO-LX-W5e">
+                                        <rect key="frame" x="198" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="xrO-LX-W5e" secondAttribute="height" multiplier="1:1" id="zTj-C2-o6D"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="ic_delete_image"/>
+                                        <connections>
+                                            <action selector="actionDelete:" destination="zIc-eW-6fX" eventType="touchUpInside" id="Nau-Uh-ivf"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="fd5-ae-aDO"/>
+                                    <constraint firstAttribute="width" constant="248" id="Ed9-mD-Ic6"/>
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zeg-me-y3P">
@@ -106,13 +88,14 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
-                                        <color key="value" name="ColorTextTopBar"/>
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="ic_back"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="ic_left_back"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Collection"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TSm-ab-E6t">
-                                <rect key="frame" x="16" y="86" width="343" height="261"/>
+                                <rect key="frame" x="16" y="86" width="343" height="249"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3pi-N7-nbV"/>
@@ -120,27 +103,23 @@
                         <constraints>
                             <constraint firstItem="9DL-oF-WvV" firstAttribute="top" secondItem="3pi-N7-nbV" secondAttribute="top" id="8W9-1f-UiU"/>
                             <constraint firstItem="9DL-oF-WvV" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="93W-WE-T7i"/>
-                            <constraint firstAttribute="bottom" secondItem="PsW-Ja-7ry" secondAttribute="bottom" id="9jo-54-wER"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="9DL-oF-WvV" secondAttribute="trailing" id="9lA-Sm-qxK"/>
                             <constraint firstItem="TSm-ab-E6t" firstAttribute="top" secondItem="9DL-oF-WvV" secondAttribute="bottom" constant="16" id="JsO-ru-3eG"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="zeg-me-y3P" secondAttribute="trailing" id="MGX-2B-zkx"/>
-                            <constraint firstItem="PsW-Ja-7ry" firstAttribute="leading" secondItem="Z2g-4m-atm" secondAttribute="leading" id="TCT-I3-WGK"/>
                             <constraint firstItem="TSm-ab-E6t" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" constant="16" id="URZ-Rs-nYm"/>
                             <constraint firstItem="Uli-fE-Rei" firstAttribute="top" secondItem="TSm-ab-E6t" secondAttribute="bottom" constant="16" id="YAR-ht-DjC"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="TSm-ab-E6t" secondAttribute="trailing" constant="16" id="Yxf-Xi-et1"/>
-                            <constraint firstAttribute="trailing" secondItem="PsW-Ja-7ry" secondAttribute="trailing" id="c0l-FK-MDm"/>
-                            <constraint firstItem="PsW-Ja-7ry" firstAttribute="top" secondItem="Z2g-4m-atm" secondAttribute="top" id="coT-K0-SiP"/>
                             <constraint firstItem="zeg-me-y3P" firstAttribute="bottom" secondItem="3pi-N7-nbV" secondAttribute="bottom" id="ecQ-qb-kYg"/>
-                            <constraint firstItem="zeg-me-y3P" firstAttribute="top" secondItem="Uli-fE-Rei" secondAttribute="bottom" constant="10" id="gJx-ok-wCk"/>
-                            <constraint firstItem="Uli-fE-Rei" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" constant="16" id="itV-7N-CgB"/>
-                            <constraint firstAttribute="trailing" secondItem="Uli-fE-Rei" secondAttribute="trailing" constant="16" id="naN-Pb-5IG"/>
+                            <constraint firstItem="Uli-fE-Rei" firstAttribute="centerX" secondItem="3pi-N7-nbV" secondAttribute="centerX" id="f1K-9V-TaM"/>
+                            <constraint firstItem="zeg-me-y3P" firstAttribute="top" secondItem="Uli-fE-Rei" secondAttribute="bottom" constant="16" id="gJx-ok-wCk"/>
                             <constraint firstItem="zeg-me-y3P" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="nz8-bU-NE5"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btnDelete" destination="LB4-Jb-6NA" id="9KB-IN-xhs"/>
-                        <outlet property="btnEdit" destination="8SI-O3-3u7" id="7se-f5-Dxp"/>
-                        <outlet property="btnSave" destination="f3h-Tb-LM3" id="iIQ-T7-Lpv"/>
+                        <outlet property="btnDelete" destination="xrO-LX-W5e" id="DG1-kG-gvp"/>
+                        <outlet property="btnEdit" destination="Cgz-BD-KSY" id="M2c-vI-4Sz"/>
+                        <outlet property="btnSave" destination="RSG-cc-xNS" id="ugN-6e-RpN"/>
+                        <outlet property="btnShare" destination="EZL-7t-qgF" id="7sX-qg-svU"/>
                         <outlet property="imageView" destination="TSm-ab-E6t" id="FIv-8s-hWV"/>
                         <outlet property="topBarView" destination="9DL-oF-WvV" id="164-an-F6N"/>
                         <outlet property="viewAds" destination="zeg-me-y3P" id="3GN-th-Yr1"/>
@@ -152,14 +131,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background_collection" width="393" height="852"/>
-        <image name="color_bling3_pastel12" width="215" height="215"/>
-        <image name="ic_ads_video" width="24" height="24"/>
-        <image name="ic_back" width="32" height="32"/>
-        <image name="ic_collection_photo" width="24.5" height="24"/>
-        <image name="ic_delete_photo" width="24" height="24"/>
-        <namedColor name="ColorTextTopBar">
-            <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <image name="ic_delete_image" width="50" height="50.5"/>
+        <image name="ic_edit_image" width="50" height="50.5"/>
+        <image name="ic_left_back" width="32" height="32"/>
+        <image name="ic_save_image" width="50" height="50.5"/>
+        <image name="ic_send_image" width="50" height="50.5"/>
     </resources>
 </document>

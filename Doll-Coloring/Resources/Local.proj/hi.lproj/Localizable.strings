@@ -124,3 +124,11 @@ save_picture_ads = "अपने डिवाइस पर चित्र क�
 
 save_picture_success = "आपकी तस्वीर आपके फोटो में सहेजी गई है।";
 save_picture_fail = "आपकी तस्वीर आपके फोटो में सहेजी नहीं गई है।";
+
+
+Setting.Language                                =       "भाषा";
+Setting.Policy                                  =       "गोपनीयता नीति";
+Setting.ShareApp                                =       "ऐप साझा करें";
+Setting.RateApp                                 =       "ऐप रेट करें";
+Setting.FeedBack                                =       "प्रतिक्रिया";
+Setting.MoreApp                                 =       "अधिक ऐप्स";

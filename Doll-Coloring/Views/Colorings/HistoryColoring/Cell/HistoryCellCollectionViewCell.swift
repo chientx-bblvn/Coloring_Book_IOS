@@ -17,6 +17,7 @@ class HistoryCellCollectionViewCell: FSPagerViewCell, NibReusable {
         super.awakeFromNib()
         // Initialization code
         progressRing.lineWidth = 5
+        
     }
 
 }

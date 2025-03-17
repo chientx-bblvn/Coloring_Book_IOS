@@ -53,11 +53,11 @@ class FillterColorCell: UICollectionViewCell, NibReusable {
     
     func setupData(_ index: Int, isSelect: Bool) {
         imageView.image = images[index].image
-        imageView.backgroundColor = isSelect ? UIColor(hexString: "C3A0F1") : .clear
-        imageView.layer.borderWidth = isSelect ? 0 : 1
-        imageView.layer.borderColor = UIColor(hexString: "C3A0F1").cgColor
-        viewContent.layer.borderWidth = isSelect ? 7 : 0
-        viewContent.layer.borderColor = isSelect ? UIColor(hexString: "A968FF").cgColor : nil
+        imageView.backgroundColor = UIColor(hexString: "FFFFFF").withAlphaComponent(0.3)
+        imageView.layer.borderWidth = isSelect ? 2 : 0
+        imageView.layer.borderColor = isSelect ? UIColor(hexString: "8EF3FF").cgColor : nil
+//        viewContent.layer.borderWidth = isSelect ? 2 : 0
+//        viewContent.layer.borderColor = isSelect ? UIColor(hexString: "8EF3FF").cgColor : nil
     }
 
 }

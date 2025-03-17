@@ -358,6 +358,10 @@
 		97DF852E2C62299D00FA19EF /* GitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DF852D2C62299D00FA19EF /* GitViewController.xib */; };
 		97DF852F2C62299D00FA19EF /* GitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF852C2C62299D00FA19EF /* GitViewController.swift */; };
 		97EBC51C2D78408A005ED53D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97EBC51B2D78408A005ED53D /* GoogleService-Info.plist */; };
+		C06F84232D7E98790010E9BF /* MainTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F84212D7E98790010E9BF /* MainTabbarViewController.swift */; };
+		C06F84292D7FF8810010E9BF /* ColoringBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C06F84282D7FF8810010E9BF /* ColoringBookCell.xib */; };
+		C06F842A2D7FF8810010E9BF /* ColoringBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F84272D7FF8810010E9BF /* ColoringBookCell.swift */; };
+		C06F84302D801E480010E9BF /* NewHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F842F2D801E480010E9BF /* NewHomeController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -743,6 +747,10 @@
 		97DF852D2C62299D00FA19EF /* GitViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GitViewController.xib; sourceTree = "<group>"; };
 		97EBC51B2D78408A005ED53D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C03131B72AA3762400A29FC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C06F84212D7E98790010E9BF /* MainTabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarViewController.swift; sourceTree = "<group>"; };
+		C06F84272D7FF8810010E9BF /* ColoringBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoringBookCell.swift; sourceTree = "<group>"; };
+		C06F84282D7FF8810010E9BF /* ColoringBookCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColoringBookCell.xib; sourceTree = "<group>"; };
+		C06F842F2D801E480010E9BF /* NewHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHomeController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -779,6 +787,7 @@
 				080ACD862BC3EA2800E00E2C /* HomeRoute.swift */,
 				080ACD872BC3EA2800E00E2C /* HomeService.swift */,
 				080ACD882BC3EA2800E00E2C /* HomeVM.swift */,
+				C06F842F2D801E480010E9BF /* NewHomeController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1153,6 +1162,7 @@
 				08F5D1B22BF74905002DC669 /* TabbarViewController.swift */,
 				08F5D1B42BF74905002DC669 /* TabbarViewRoute.swift */,
 				08F5D1C82BFC8C86002DC669 /* NetworkDisconnectController.swift */,
+				C06F84212D7E98790010E9BF /* MainTabbarViewController.swift */,
 			);
 			path = TabbarView;
 			sourceTree = "<group>";
@@ -1190,6 +1200,8 @@
 				08F75CF72BE8E1AD005ACDA9 /* HeaderHomeCell.xib */,
 				08F5D1BE2BFB366A002DC669 /* CategoryMenuCell.swift */,
 				08F5D1BF2BFB366A002DC669 /* CategoryMenuCell.xib */,
+				C06F84272D7FF8810010E9BF /* ColoringBookCell.swift */,
+				C06F84282D7FF8810010E9BF /* ColoringBookCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1966,6 +1978,7 @@
 				08E830F82C06E9AE0042607A /* CategoryItemViewController.xib in Resources */,
 				085A06832BC69FD3002D5F1D /* ListThemeColoringViewController.xib in Resources */,
 				084396282BCD637400C8E213 /* ThemeCell.xib in Resources */,
+				C06F84292D7FF8810010E9BF /* ColoringBookCell.xib in Resources */,
 				08F6936D2BEE22A1005FAEF5 /* animation_ads_video.json in Resources */,
 				570070DC2A93C4BD00D7C1C6 /* LaunchScreen.storyboard in Resources */,
 				570070DD2A93C4BD00D7C1C6 /* ButtonView.xib in Resources */,
@@ -2226,6 +2239,7 @@
 				08A525C82C00871200EB9FBA /* VerticalSlider.swift in Sources */,
 				570070632A93C4BD00D7C1C6 /* SwipeCollectionViewCellDelegate.swift in Sources */,
 				570070642A93C4BD00D7C1C6 /* PlayerManager.swift in Sources */,
+				C06F84232D7E98790010E9BF /* MainTabbarViewController.swift in Sources */,
 				570070652A93C4BD00D7C1C6 /* FSPagerViewObjcCompat.m in Sources */,
 				570070662A93C4BD00D7C1C6 /* FSPageViewTransformer.swift in Sources */,
 				570070682A93C4BD00D7C1C6 /* PickerPhotoController.swift in Sources */,
@@ -2291,6 +2305,7 @@
 				083CA39F2BC67287006033EE /* DeleteColoringViewController.swift in Sources */,
 				080ACD8C2BC3EA2800E00E2C /* HomeModel.swift in Sources */,
 				570070822A93C4BD00D7C1C6 /* EasyTipView.swift in Sources */,
+				C06F84302D801E480010E9BF /* NewHomeController.swift in Sources */,
 				083CA4002BC672DA006033EE /* PreviewColoringService.swift in Sources */,
 				083CA3E12BC672DA006033EE /* SaveColoringRoute.swift in Sources */,
 				083CA3E22BC672DA006033EE /* SaveColoringService.swift in Sources */,
@@ -2311,6 +2326,7 @@
 				08C688B02C0499340091882F /* TableColorCell.swift in Sources */,
 				083CA3DF2BC672DA006033EE /* SaveColoringController.swift in Sources */,
 				97DF85112C60B99100FA19EF /* CalendarMonthCell.swift in Sources */,
+				C06F842A2D7FF8810010E9BF /* ColoringBookCell.swift in Sources */,
 				083CA3AC2BC672C5006033EE /* CollectionsVM.swift in Sources */,
 				08971F772BCFB8B700623026 /* HistoryCellCollectionViewCell.swift in Sources */,
 				083CA3F42BC672DA006033EE /* HistoryColoringService.swift in Sources */,
@@ -2459,7 +2475,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2505,7 +2521,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

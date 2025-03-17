@@ -16,6 +16,8 @@ class TableColorIpadController: BaseViewController {
     
     @IBOutlet weak var viewContent: UIView!
     
+    @IBOutlet weak var topBarView: TopBarView!
+    
     @IBOutlet weak var viewListBling: UIView!
     
     @IBOutlet weak var viewTexture: UIView!
@@ -31,6 +33,8 @@ class TableColorIpadController: BaseViewController {
     @IBOutlet weak var lbPlain: UILabel!
     
     @IBOutlet weak var listBlingColor: UICollectionView!
+    
+    @IBOutlet weak var viewBlinkColor: UIView!
     
     @IBOutlet weak var listItemColor: UITableView!
     
@@ -80,9 +84,17 @@ class TableColorIpadController: BaseViewController {
         listBlingColor.delegate = self
         listBlingColor.dataSource = self
         listBlingColor.register(cellType: FillterColorCell.self)
+        viewBlinkColor.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
+//        listBlingColor.layer.masksToBounds = true
         viewContent.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(actionBack)))
         viewPlain.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(actionPlain)))
         viewTexture.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(actionTexture)))
+        topBarView.onLeftClick = {
+            self.actionBack()
+        }
+        topBarView.textAlignmentCenter = true
+        topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
+        
         changePalettes(true)
     }
     
@@ -102,15 +114,15 @@ class TableColorIpadController: BaseViewController {
             }
             viewListBling.isHidden = true
             lbPlain.font = .boldSystemFont(ofSize: 14)
-            imgPlain.isHidden = false
-            viewPlain.backgroundColor = R.color.mainPrimary()
-            lbPlain.textColor = .white
+            imgPlain.isHidden = true
+            viewPlain.backgroundColor = UIColor.white
+            lbPlain.textColor = .black
         } else {
             viewListBling.isHidden = false
-            imgTexture.isHidden = false
-            viewTexture.backgroundColor = R.color.mainPrimary()
+            imgTexture.isHidden = true
+            viewTexture.backgroundColor = UIColor.white
             lbTexture.font = .boldSystemFont(ofSize: 14)
-            lbTexture.textColor = .white
+            lbTexture.textColor = .black
             updateThemeColor()
         }
         listItemColor.reloadData()

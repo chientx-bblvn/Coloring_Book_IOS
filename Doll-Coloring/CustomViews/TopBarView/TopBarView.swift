@@ -70,11 +70,11 @@ final class TopBarView: BaseCustomXibView {
     @IBInspectable var showPremium: Bool = true {
         didSet {
             if IAPState.isUserVip {
-                btnPremium.isHidden = true
-                viewPremium.isHidden = true
+                btnLeft.isHidden = true
+//                viewPremium.isHidden = true
             } else {
-                btnPremium.isHidden = showPremium
-                viewPremium.isHidden = showPremium
+                btnLeft.isHidden = showPremium
+//                viewPremium.isHidden = showPremium
             }
         }
     }

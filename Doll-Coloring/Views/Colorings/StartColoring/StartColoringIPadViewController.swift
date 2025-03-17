@@ -19,9 +19,7 @@ class StartColoringIPadViewController: BaseViewController {
     
     var viewModel: StartColoringVM!
     
-    @IBOutlet weak var progessRing: ALProgressRing!
-    
-    @IBOutlet weak var lbPercenColoring: UILabel!
+    @IBOutlet weak var topBarView: TopBarView!
     
     @IBOutlet weak var btnBack: UIButton!
     
@@ -74,6 +72,8 @@ class StartColoringIPadViewController: BaseViewController {
     @IBOutlet weak var viewTools: UIView!
     
     @IBOutlet weak var viewColor: UIView!
+    
+    @IBOutlet weak var topView: UIView!
     
     private var currentConstraintColorView: CGFloat = 160
     private var palettes: PalettesColor = .Plain
@@ -129,6 +129,15 @@ class StartColoringIPadViewController: BaseViewController {
         listColor.register(cellType: ColorCell.self)
         listColor.delegate = self
         listColor.dataSource = self
+        
+        topBarView.roundCorners(corners: [.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 16)
+        topView.roundCorners(corners: [.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 16)
+        
+        topBarView.onLeftClick = {
+            self.actionBackTabbars()
+        }
+        topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
+        topBarView.title = "Coloring Books"
         
     }
     
@@ -356,6 +365,11 @@ class StartColoringIPadViewController: BaseViewController {
     }
     
     @IBAction func actionBack(_ sender: Any) {
+        coloringBookView?.clear()
+        createColoringBookView()
+    }
+    
+    private func actionBackTabbars() {
         let percent = coloringBookView.percentColoring
         let percentColoring = Int((percent * 100).rounded())
         if percentColoring < 100 {
@@ -407,20 +421,19 @@ class StartColoringIPadViewController: BaseViewController {
                 break
             }
         }
-        
     }
     
     func dissmissHistoryColoring(){
         self.saveHistoryColoring()
         switch self.viewModel.typeScreen {
         case .home:
-            AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+            AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
         case .coloring:
             AppRouter.shared.popToController(controller: MainColoringsController.classForCoder())
         case .detailColoring:
             AppRouter.shared.popToController(controller: DetailColoringController.classForCoder())
         case .collection:
-            AppRouter.shared.popToController(controller: TabbarViewController.classForCoder())
+            AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
         }
     }
     
@@ -475,7 +488,11 @@ class StartColoringIPadViewController: BaseViewController {
             PopupColoringViewController.show(in: self, _percent: percent, _title: LocalizableUtils.commonSaveColoring(), _titleOk: LocalizableUtils.commonSave(), _titleCancel: LocalizableUtils.commonDiscard()) {
                 self.saveHistoryColoring()
                 self.coloringBookView.layer.borderWidth = 0
-                AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: self.coloringBookView.asImage(), coloringLocal: self.viewModel.coloringLocal, history: self.viewModel.history, typeScreen: self.viewModel.typeScreen), with: .push)
+                if let history = self.viewModel.history {
+                    AppRouter.shared.navigate(to: DetailCollectionRoute.main(coloringLocal: self.viewModel.coloringLocal, history:history, isCollection: true), with: .push)
+                }
+//
+//                AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: self.coloringBookView.asImage(), coloringLocal: self.viewModel.coloringLocal, history: self.viewModel.history, typeScreen: self.viewModel.typeScreen), with: .push)
                 self.coloringBookView.layer.borderWidth = 0.5
             } actionCancel: {
                 
@@ -483,7 +500,10 @@ class StartColoringIPadViewController: BaseViewController {
         } else {
             saveHistoryColoring()
             coloringBookView.layer.borderWidth = 0
-            AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: coloringBookView.asImage(), coloringLocal: viewModel.coloringLocal, history: viewModel.history, typeScreen: viewModel.typeScreen), with: .push)
+            if let history = self.viewModel.history {
+                AppRouter.shared.navigate(to: DetailCollectionRoute.main(coloringLocal: self.viewModel.coloringLocal, history:history, isCollection: true), with: .push)
+            }
+//            AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: coloringBookView.asImage(), coloringLocal: viewModel.coloringLocal, history: viewModel.history, typeScreen: viewModel.typeScreen), with: .push)
             coloringBookView.layer.borderWidth = 0.5
         }
     }
@@ -575,8 +595,8 @@ extension StartColoringIPadViewController {
         coloringBookView.currentWidth = CGFloat(simd_mix(1.0, 40.0, lineWidthPen))
         coloringBookView.delegate = self
         coloringBookView.transform = .identity.scaledBy(x: 1.2, y: 1.2)
-        progessRing.setProgress(Float(coloringBookView.percentColorImage), animated: true)
-        lbPercenColoring.text = "\(Int(((coloringBookView.percentColorImage) * 100).rounded()))%"
+//        progessRing.setProgress(Float(coloringBookView.percentColorImage), animated: true)
+//        lbPercenColoring.text = "\(Int(((coloringBookView.percentColorImage) * 100).rounded()))%"
         getHistoryColoring()
     }
     
@@ -648,9 +668,9 @@ extension StartColoringIPadViewController {
                 viewModel.coloringLocal = coloringModel
             }
             viewModel.history = newHistory
-            let percent =  Float(newHistory.percent_complete ?? 0)
-            progessRing.setProgress(percent, animated: true)
-            lbPercenColoring.text = "\(Int((percent * 100).rounded()))%"
+//            let percent =  Float(newHistory.percent_complete ?? 0)
+//            progessRing.setProgress(percent, animated: true)
+//            lbPercenColoring.text = "\(Int((percent * 100).rounded()))%"
         }
     }
     

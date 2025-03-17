@@ -16,6 +16,7 @@ class IntroductionCell: FSPagerViewCell, NibReusable {
     @IBOutlet weak var indicatorImg: UIImageView!
     @IBOutlet weak var viewAds: UIView!
     @IBOutlet weak var btnNext: UIButton!
+    @IBOutlet weak var imgInside: UIImageView!
     
     var onNext: (() -> Void)?
     private var isLoadingAd = false
@@ -42,6 +43,7 @@ class IntroductionCell: FSPagerViewCell, NibReusable {
         imageviewIntro.image = intro.image
         lbTitle.text = intro.name
         lbSubTitle.text = intro.desc
+        imgInside.image = intro.insideImage
         indicatorImg.image = intro.indicator
     }
     

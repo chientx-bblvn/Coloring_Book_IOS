@@ -15,23 +15,9 @@ class SettingsController: BaseViewController {
     
     var viewModel: SettingsVM!
     
+    @IBOutlet weak var topBarView: TopBarView!
+    
     @IBOutlet weak var viewContent: UIView!
-    
-    @IBOutlet weak var lbSettings: UILabel!
-    
-    @IBOutlet weak var btnClose: UIButton!
-    
-    @IBOutlet weak var viewSound: UIView!
-    
-    @IBOutlet weak var imgSound: UIImageView!
-    
-    @IBOutlet weak var lbSound: UILabel!
-    
-    @IBOutlet weak var viewMusic: UIView!
-    
-    @IBOutlet weak var imgMusic: UIImageView!
-    
-    @IBOutlet weak var lbMusic: UILabel!
     
     @IBOutlet weak var viewLanguage: UIView!
     
@@ -40,6 +26,22 @@ class SettingsController: BaseViewController {
     @IBOutlet weak var viewRate: UIView!
     
     @IBOutlet weak var lbRate: UILabel!
+    
+    @IBOutlet weak var viewPolicy: UIView!
+    
+    @IBOutlet weak var lbPolicy: UILabel!
+    
+    @IBOutlet weak var viewShare: UIView!
+    
+    @IBOutlet weak var lbShare: UILabel!
+    
+    @IBOutlet weak var viewFeedback: UIView!
+    
+    @IBOutlet weak var lbFeedBack: UILabel!
+    
+    @IBOutlet weak var viewMoreApp: UIView!
+    
+    @IBOutlet weak var lbMoreApp: UILabel!
     
     class func show(in parent: UIViewController) {
         let mainStoryboard = UIStoryboard(name: "Settings", bundle: nil)
@@ -71,32 +73,20 @@ class SettingsController: BaseViewController {
     }
     
     private func setupView() {
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissView)))
-        viewSound.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickViewSound)))
-        viewMusic.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickViewMusicBackground)))
+        viewContent.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 4, height: 4))
+        
+        topBarView.titleFont = .systemFont(ofSize: 24, weight: .bold)
+        topBarView.textAlignmentCenter = true
         viewLanguage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickViewLanguage)))
-        viewRate.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickViewRate)))
-        imgMusic.image = UserDefaultManager.disableMusicBackground ? R.image.ic_off_music_background() : R.image.ic_on_music_background()
-        imgSound.image = UserDefaultManager.disableSound ? R.image.ic_off_sound() : R.image.ic_on_sound()
+       viewRate.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickViewRate)))
+        viewPolicy.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickViewPolicy)))
+        viewShare.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickViewShare)))
+        viewFeedback.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickViewFeedback)))
+        viewMoreApp.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickViewMore)))
     }
     
     @objc private func dismissView() {
         removeAnimate()
-    }
-    
-    @IBAction func actionDismiss(_ sender: Any) {
-        dismissView()
-    }
-    
-    @objc func onclickViewSound() {
-        UserDefaultManager.currentAccessDisableSound = !UserDefaultManager.disableSound
-        imgSound.image = UserDefaultManager.disableSound ? R.image.ic_off_sound() : R.image.ic_on_sound()
-    }
-    
-    @objc func onclickViewMusicBackground() {
-        UserDefaultManager.currentAccessDisableMusicBackground = !UserDefaultManager.disableMusicBackground
-        imgMusic.image = UserDefaultManager.disableMusicBackground ? R.image.ic_off_music_background() : R.image.ic_on_music_background()
-        enableAudioBackground()
     }
     
     @objc func onclickViewLanguage() {
@@ -105,6 +95,22 @@ class SettingsController: BaseViewController {
     
     @objc func onclickViewRate() {
         rateApp()
+    }
+    
+    @objc func onclickViewPolicy() {
+        privacyUrl.openLink()
+    }
+    
+    @objc func onclickViewShare() {
+       
+    }
+    
+    @objc func onclickViewFeedback() {
+        
+    }
+    
+    @objc func onclickViewMore() {
+        
     }
     
     func rateApp() {
@@ -119,11 +125,13 @@ class SettingsController: BaseViewController {
 
 extension SettingsController {
     func loadLanguage() {
-        lbSettings.text = LocalizableUtils.commonSettings()
-        lbSound.text = LocalizableUtils.commonSound()
-        lbMusic.text = LocalizableUtils.commonMusic()
+        topBarView.title = LocalizableUtils.commonSettings()
         lbLanguage.text = LocalizableUtils.commonLanguage()
-        lbRate.text = LocalizableUtils.commonRateApp()
+        lbRate.text = LocalizableUtils.settingRateApp()
+        lbPolicy.text = LocalizableUtils.settingPolicy()
+        lbShare.text = LocalizableUtils.settingShareApp()
+        lbFeedBack.text = LocalizableUtils.settingFeedBack()
+        
     }
     
     func showInView(parent: UIViewController) {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,31 +13,31 @@
         <scene sceneID="XJ1-QA-Nrj">
             <objects>
                 <viewController storyboardIdentifier="HomeController" id="zIc-eW-6fX" customClass="HomeController" customModule="Doll_Coloring" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Z2g-4m-atm">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="Z2g-4m-atm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nBS-ek-vxM">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nBS-ek-vxM">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLK-Hg-4i1" customClass="FSPagerView" customModule="Doll_Coloring" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="521"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aLK-Hg-4i1" customClass="FSPagerView" customModule="Doll_Coloring" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="521"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1024" id="DPQ-m5-dle"/>
                                     <constraint firstAttribute="height" constant="521" id="JwL-iQ-rvd"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mL4-pd-4De" customClass="FSPageControl" customModule="Doll_Coloring" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="471" width="1024" height="50"/>
+                            <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mL4-pd-4De" customClass="FSPageControl" customModule="Doll_Coloring" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="471" width="414" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="bBN-ih-GFd"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckz-jQ-SEj" customClass="TopBarView" customModule="Doll_Coloring" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24" width="1024" height="54"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ckz-jQ-SEj" customClass="TopBarView" customModule="Doll_Coloring" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="48" width="414" height="54"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="pK1-Z8-Lwb"/>
@@ -55,15 +55,15 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="textAlignmentCenter" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RvK-HB-mfo" customClass="BmoViewPagerNavigationBar" customModule="BmoViewPager">
-                                <rect key="frame" x="16" y="531" width="1024" height="40"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RvK-HB-mfo" customClass="BmoViewPagerNavigationBar" customModule="BmoViewPager">
+                                <rect key="frame" x="16" y="531" width="414" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="VVN-K7-b5s"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zjz-Uy-i00" customClass="BmoViewPager" customModule="BmoViewPager">
-                                <rect key="frame" x="0.0" y="586" width="1024" height="780"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zjz-Uy-i00" customClass="BmoViewPager" customModule="BmoViewPager">
+                                <rect key="frame" x="0.0" y="586" width="414" height="310"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -107,10 +107,62 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rle-ol-2Ax" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="304.20560747663552" y="301.94384449244063"/>
+            <point key="canvasLocation" x="-33" y="185"/>
+        </scene>
+        <!--New Home Controller-->
+        <scene sceneID="XXM-YF-rBT">
+            <objects>
+                <viewController storyboardIdentifier="NewHomeController" id="DTR-U2-YwT" customClass="NewHomeController" customModule="Doll_Coloring" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J5g-Yg-Agj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uJJ-0u-u2l" customClass="TopBarView" customModule="Doll_Coloring" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="48" width="414" height="54"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="u8g-Wr-bD0"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="textAlignmentCenter" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showPremium" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="ic_btn_premium"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="rightIcon" value="ic_open_daily"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZSi-at-VgP">
+                                <rect key="frame" x="0.0" y="106" width="414" height="790"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Fuf-di-Bnt"/>
+                        <color key="backgroundColor" red="0.96266931300000003" green="0.96257919069999998" blue="0.96991878750000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ZSi-at-VgP" firstAttribute="leading" secondItem="Fuf-di-Bnt" secondAttribute="leading" id="8YU-EK-I6k"/>
+                            <constraint firstItem="ZSi-at-VgP" firstAttribute="top" secondItem="uJJ-0u-u2l" secondAttribute="bottom" constant="4" id="9nK-ms-joM"/>
+                            <constraint firstItem="uJJ-0u-u2l" firstAttribute="leading" secondItem="J5g-Yg-Agj" secondAttribute="leading" id="CLl-G0-Gcw"/>
+                            <constraint firstItem="uJJ-0u-u2l" firstAttribute="top" secondItem="Fuf-di-Bnt" secondAttribute="top" id="Pv6-z7-Wdy"/>
+                            <constraint firstAttribute="bottom" secondItem="ZSi-at-VgP" secondAttribute="bottom" id="Zv1-aO-Xws"/>
+                            <constraint firstItem="Fuf-di-Bnt" firstAttribute="trailing" secondItem="ZSi-at-VgP" secondAttribute="trailing" id="wJy-4R-584"/>
+                            <constraint firstAttribute="trailing" secondItem="uJJ-0u-u2l" secondAttribute="trailing" id="wbx-Aj-wn4"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="coloringTableView" destination="ZSi-at-VgP" id="vmP-oK-a4c"/>
+                        <outlet property="topBarView" destination="uJJ-0u-u2l" id="w1n-vP-R7t"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Axg-wm-qSk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1082.608695652174" y="184.82142857142856"/>
         </scene>
     </scenes>
     <resources>
+        <image name="ic_btn_premium" width="74" height="64"/>
+        <image name="ic_open_daily" width="42" height="32"/>
         <image name="ic_setting" width="24" height="24"/>
         <namedColor name="ColorTextTopBar">
             <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -125,3 +125,10 @@ save_picture_ads = "Pour enregistrer le dessin sur votre appareil, veuillez rega
 
 save_picture_success = "Votre image a été enregistrée dans vos photos.";
 save_picture_fail = "Votre image n'a pas été enregistrée dans vos photos.";
+
+Setting.Language                                =       "Langue";
+Setting.Policy                                  =       "Politique de confidentialité";
+Setting.ShareApp                                =       "Partager l'application";
+Setting.RateApp                                 =       "Noter l'application";
+Setting.FeedBack                                =       "Retour d'information";
+Setting.MoreApp                                 =       "Plus d'applications";

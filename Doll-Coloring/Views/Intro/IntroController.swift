@@ -19,16 +19,19 @@ class IntroController: BaseViewController {
         IntroModel(name: LocalizableUtils.introIntroTitlePage1(),
                    desc: LocalizableUtils.introIntroContentPage1(),
                    image: R.image.ic_item_onboading1(),
+                   insideImage: UIImage(named: "ic_inside_onboading1"),
                    id: 0,
                    indicator: R.image.indicator_page1()),
         IntroModel(name: LocalizableUtils.introIntroTitlePage2(),
                    desc: LocalizableUtils.introIntroContentPage2(),
                    image: R.image.ic_item_onboading2(),
+                   insideImage: UIImage(named: "ic_inside_onboading2"),
                    id: 1,
                    indicator: R.image.indicator_page2()),
         IntroModel(name: LocalizableUtils.introIntroTitlePage3(),
                    desc: LocalizableUtils.introIntroContentPage3(),
                    image: R.image.ic_item_onboading3(),
+                   insideImage: UIImage(named: "ic_inside_onboading3"),
                    id: 2,
                    indicator: R.image.indicator_page3())
     ]
@@ -86,7 +89,7 @@ extension IntroController {
             fsPagerView.scrollToItem(at: currentPage + 1, animated: true)
         } else {
             UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
-            AppRouter.shared.navigate(to: TabbarViewRoute.main, with: .changeRoot)
+            AppRouter.shared.navigate(to:   MainTabbarViewRoute.tabbar, with: .changeRoot)
         }
     }
     
@@ -129,7 +132,7 @@ extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {
                     } else {
                         UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
                         UserDefaultManager.currentDateFirstOpenApp = Date().toMyString(format: "dd/MM/yyyy")
-                        AppRouter.shared.navigate(to: TabbarViewRoute.main, with: .changeRoot)
+                        AppRouter.shared.navigate(to: MainTabbarViewRoute.tabbar, with: .changeRoot)
                     }
                 }
             }
@@ -152,7 +155,7 @@ extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {
                 } else {
                     UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
                     UserDefaultManager.currentDateFirstOpenApp = Date().toMyString(format: "dd/MM/yyyy")
-                    AppRouter.shared.navigate(to: TabbarViewRoute.main, with: .changeRoot)
+                    AppRouter.shared.navigate(to:  MainTabbarViewRoute.tabbar, with: .changeRoot)
                 }
             }
         }

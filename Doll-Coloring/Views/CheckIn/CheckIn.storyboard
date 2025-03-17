@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -19,24 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nBS-ek-vxM">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLK-Hg-4i1" customClass="FSPagerView" customModule="Doll_Coloring" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="521"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="521" id="JwL-iQ-rvd"/>
-                                </constraints>
-                            </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mL4-pd-4De" customClass="FSPageControl" customModule="Doll_Coloring" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="471" width="1024" height="50"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="bBN-ih-GFd"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckz-jQ-SEj" customClass="TopBarView" customModule="Doll_Coloring" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="24" width="1024" height="54"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -45,19 +26,19 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
-                                        <color key="value" name="ColorTextTopBar"/>
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="textAlignment" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="rightIcon" value="ic_setting"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="rightEnable" value="YES"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorView">
                                         <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="textAlignmentCenter" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="ic_left_back"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4C5-VJ-FKq">
-                                <rect key="frame" x="0.0" y="521" width="1024" height="825"/>
+                                <rect key="frame" x="0.0" y="94" width="1024" height="1252"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BCK-P7-AcK">
                                     <size key="itemSize" width="128" height="128"/>
@@ -88,43 +69,27 @@
                         <viewLayoutGuide key="safeArea" id="3pi-N7-nbV"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="nBS-ek-vxM" firstAttribute="leading" secondItem="Z2g-4m-atm" secondAttribute="leading" id="1W5-62-ifc"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="ckz-jQ-SEj" secondAttribute="trailing" id="3xv-26-1NZ"/>
-                            <constraint firstItem="mL4-pd-4De" firstAttribute="leading" secondItem="aLK-Hg-4i1" secondAttribute="leading" id="5ay-Fv-5kU"/>
-                            <constraint firstItem="nBS-ek-vxM" firstAttribute="top" secondItem="Z2g-4m-atm" secondAttribute="top" id="70B-7d-WTc"/>
-                            <constraint firstItem="4C5-VJ-FKq" firstAttribute="top" secondItem="aLK-Hg-4i1" secondAttribute="bottom" id="Blf-lv-JI0"/>
-                            <constraint firstItem="mL4-pd-4De" firstAttribute="bottom" secondItem="aLK-Hg-4i1" secondAttribute="bottom" id="DxY-GJ-Np7"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="4C5-VJ-FKq" secondAttribute="trailing" id="HlV-0k-aEM"/>
-                            <constraint firstItem="aLK-Hg-4i1" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="MRZ-Nl-wa2"/>
-                            <constraint firstItem="mL4-pd-4De" firstAttribute="trailing" secondItem="aLK-Hg-4i1" secondAttribute="trailing" id="U7p-lv-Gmr"/>
+                            <constraint firstItem="4C5-VJ-FKq" firstAttribute="top" secondItem="ckz-jQ-SEj" secondAttribute="bottom" constant="16" id="NUF-ue-gTb"/>
                             <constraint firstItem="ckz-jQ-SEj" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="W8m-EZ-Ewa"/>
-                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="aLK-Hg-4i1" secondAttribute="trailing" id="WOx-nF-B8V"/>
-                            <constraint firstItem="aLK-Hg-4i1" firstAttribute="top" secondItem="Z2g-4m-atm" secondAttribute="top" id="X64-ob-rBY"/>
-                            <constraint firstAttribute="trailing" secondItem="nBS-ek-vxM" secondAttribute="trailing" id="YcD-aN-2NJ"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="bottom" secondItem="4C5-VJ-FKq" secondAttribute="bottom" id="j1J-wQ-KYo"/>
                             <constraint firstItem="4C5-VJ-FKq" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="lb4-Md-UD0"/>
-                            <constraint firstItem="nBS-ek-vxM" firstAttribute="bottom" secondItem="Z2g-4m-atm" secondAttribute="bottom" id="q7O-Qn-pa9"/>
                             <constraint firstItem="ckz-jQ-SEj" firstAttribute="top" secondItem="3pi-N7-nbV" secondAttribute="top" id="sBa-iL-QeY"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="4C5-VJ-FKq" id="Q1T-YO-0m3"/>
-                        <outlet property="heightSlider" destination="JwL-iQ-rvd" id="O5P-V7-fX4"/>
-                        <outlet property="pageController" destination="mL4-pd-4De" id="9Ad-Ix-mrQ"/>
-                        <outlet property="slidePages" destination="aLK-Hg-4i1" id="TKS-58-pIq"/>
                         <outlet property="topbarView" destination="ckz-jQ-SEj" id="tE9-Ht-tWd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rle-ol-2Ax" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="304.20560747663552" y="301.94384449244063"/>
+            <point key="canvasLocation" x="304.1015625" y="301.75695461200581"/>
         </scene>
     </scenes>
     <resources>
-        <image name="ic_setting" width="24" height="24"/>
-        <namedColor name="ColorTextTopBar">
-            <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <image name="ic_left_back" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
