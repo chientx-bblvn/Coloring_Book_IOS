@@ -22,11 +22,15 @@ Common.PhotoPicker.Camera                       =       "Take photo";
 Common.Home                                     =       "Home";
 
 Common.ColoringBooks                           =       "Coloring Books";
+Common.Collections                              =       "Collections";
+Common.Settings                                 =       "Settings";
 
 Common.CheckIn                                  =       "Check In";
 Common.StartColoring                            =       "Start Coloring";
-Common.Collections                              =       "Collections";
-Common.Settings                                 =       "Settings";
+Common.finished                                 =       "finished";
+Common.unfinished                               =       "unfinished";
+
+
 Common.History                                  =       "History";
 Common.Continue                                 =       "Continue";
 Common.CreateNew                                =       "Create New";
@@ -47,6 +51,7 @@ Common.SaveColoring                             =       "Do you want to save or 
 Common.DescExit                                 =       "Are you sure you want to exit";
 Common.NoInternet                               =       "Ops! Lost internet connection";
 Common.CombackTomorrow                          =       "Please come back tomorrow to receive your gift 🎁!";
+Common.Daily = "Daily";
 
 Content_delete_collection                       =       "The color will be deleted \n Click delete to continue.";
 
@@ -54,12 +59,12 @@ Content_delete_collection                       =       "The color will be delet
 Splash.Copyright                                =       "®Copyright by Binary Bridge Labs 2024";
 
 // Intro
-Intro.introTitlePage1                           =       "A World of Vibrant Colors";
-Intro.introContentPage1                         =       "Bring each scene to life with a rich palette of colorful pencils at your fingertips!";
-Intro.introTitlePage2                           =       "Discover Beautiful Artwork";
-Intro.introContentPage2                         =       "Choose from captivating designs like animals and princesses, ready for your artistic touch!";
-Intro.introTitlePage3                           =       "Shine with Dazzling Colors";
-Intro.introContentPage3                         =       "Add magic to your art with shimmering palettes and glowing effects!";
+Intro.introTitlePage1                           =       "Endless Coloring Pages";
+Intro.introContentPage1                         =       "Endless Coloring Pages";
+Intro.introTitlePage2                           =       "Tap, Fill & Create";
+Intro.introContentPage2                         =       "Simply tap to color and watch your masterpiece come to life effortlessly";
+Intro.introTitlePage3                           =       "Express Yourself";
+Intro.introContentPage3                         =       "Choose from diverse themes, color palettes, and creative tools";
 
 // Language
 Language.Title                                  =       "Change language";

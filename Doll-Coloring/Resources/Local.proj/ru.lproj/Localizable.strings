@@ -22,8 +22,14 @@ Common.PhotoPicker.Camera                       =       "Сделать фото
 Common.Home                                     =       "Главная";
 Common.CheckIn                                  =       "Check In";
 Common.StartColoring                            =       "Начать раскрашивать";
+
+Common.ColoringBooks                           =       "Раскраски";
 Common.Collections                              =       "Коллекции";
 Common.Settings                                 =       "Настройки";
+
+Common.finished                                 =       "Завершено";
+Common.unfinished                               =       "Незавершено";
+
 Common.History                                  =       "История";
 Common.CreateNew                                =       "Создать новый";
 Common.Music                                    =       "Музыка";
@@ -45,17 +51,19 @@ Common.SaveColoring                             =       "Вы хотите со�
 Common.DescExit                                 =       "Вы уверены, что хотите выйти?";
 Common.NoInternet                               =       "Упс! Потеряно интернет-соединение";
 Common.CombackTomorrow                          =       "Пожалуйста, вернитесь завтра, чтобы получить свой подарок 🎁!";
+Common.Daily                                   =       "Ежедневно";
 
 // Splash
 Splash.Copyright                                =       "®Авторское право Binary Bridge Labs";
 
 // Intro
-Intro.introTitlePage1                           =       "Красивая графика в стиле куклы";
-Intro.introContentPage1                         =       "Уникальная графика в стиле куклы, подходящая для всех возрастов!";
-Intro.introTitlePage2                           =       "Богатые палитры цветов";
-Intro.introContentPage2                         =       "Более 20 богатых палитр цветов, градиентные цвета";
-Intro.introTitlePage3                           =       "Сохранить или поделиться";
-Intro.introContentPage3                         =       "Легко поделитесь или поделитесь своей любимой краской со всеми социальными медиа";
+Intro.introTitlePage1                           =       "Бесконечные страницы для раскрашивания";
+Intro.introContentPage1                         =       "Бесконечные страницы для раскрашивания";
+Intro.introTitlePage2                           =       "Нажмите, заполняйте и создавайте";
+Intro.introContentPage2                         =       "Просто нажмите, чтобы раскрасить, и наблюдайте, как ваше произведение искусства оживает легко";
+Intro.introTitlePage3                           =       "Выразите себя";
+Intro.introContentPage3                         =       "Выберите из множества тем, палитр цветов и творческих инструментов";
+
 
 // Language
 Language.Title                                  =       "Изменить язык";

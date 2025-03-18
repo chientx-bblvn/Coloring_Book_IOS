@@ -22,8 +22,14 @@ Common.PhotoPicker.Camera                       =       "Prendre une photo";
 Common.Home                                     =       "Accueil";
 Common.CheckIn                                  =       "Check In";
 Common.StartColoring                            =       "Commencer à colorier";
+
+Common.ColoringBooks                           =       "Livres de coloriage";
 Common.Collections                              =       "Collections";
 Common.Settings                                 =       "Paramètres";
+
+Common.finished                                 =       "Terminé";
+Common.unfinished                               =       "Non terminé";
+
 Common.History                                  =       "Historique";
 Common.CreateNew                                =       "Créer nouveau";
 Common.Music                                    =       "Musique";
@@ -45,17 +51,18 @@ Common.SaveColoring                             =       "Voulez-vous enregistrer
 Common.DescExit                                 =       "Êtes-vous sûr de vouloir quitter";
 Common.NoInternet                               =       "Oups! Connexion Internet perdue";
 Common.CombackTomorrow                          =       "Veuillez revenir demain pour recevoir votre cadeau 🎁 !";
+Common.Daily                                   =       "Quotidien";
 
 // Splash
 Splash.Copyright                                =       "®Droits d'auteur par Binary Bridge Labs 2024";
 
 // Intro
-Intro.introTitlePage1                           =       "Graphiques de style poupée magnifiques";
-Intro.introContentPage1                         =       "Graphiques de style poupée uniques adaptés à tous les âges !";
-Intro.introTitlePage2                           =       "Palettes de couleurs riches";
-Intro.introContentPage2                         =       "Plus de 20 palettes de couleurs riches, couleurs dégradées";
-Intro.introTitlePage3                           =       "Enregistrer ou partager";
-Intro.introContentPage3                         =       "Partagez ou partagez facilement votre peinture préférée sur tous les réseaux sociaux";
+Intro.introTitlePage1                           =       "Pages de coloriage sans fin";
+Intro.introContentPage1                         =       "Pages de coloriage sans fin";
+Intro.introTitlePage2                           =       "Tapez, remplissez et créez";
+Intro.introContentPage2                         =       "Il suffit de toucher pour colorier et regarder votre chef-d'œuvre prendre vie sans effort";
+Intro.introTitlePage3                           =       "Exprimez-vous";
+Intro.introContentPage3                         =       "Choisissez parmi divers thèmes, palettes de couleurs et outils créatifs";
 
 // Language
 Language.Title                                  =       "Changer de langue";

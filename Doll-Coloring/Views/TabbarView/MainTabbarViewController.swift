@@ -56,6 +56,7 @@ class MainTabbarViewController: BaseViewController {
     }
     override func onLanguageChange() {
         super.onLanguageChange()
+        loadLanguage()
     }
     
     private func setupView() {

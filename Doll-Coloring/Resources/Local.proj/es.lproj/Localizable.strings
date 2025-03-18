@@ -22,8 +22,14 @@ Common.PhotoPicker.Camera                       =       "Tomar foto";
 Common.Home                                     =       "Inicio";
 Common.CheckIn                                  =       "Check In";
 Common.StartColoring                            =       "Comenzar a colorear";
+
+Common.ColoringBooks                           =       "Libros para colorear";
 Common.Collections                              =       "Colecciones";
 Common.Settings                                 =       "Configuración";
+
+Common.finished                                 =       "Terminado";
+Common.unfinished                               =       "Incompleto";
+
 Common.History                                  =       "Historial";
 Common.CreateNew                                =       "Crear nuevo";
 Common.Music                                    =       "Música";
@@ -45,17 +51,18 @@ Common.SaveColoring                             =       "¿Quieres guardar o des
 Common.DescExit                                 =       "¿Estás seguro de que quieres salir?";
 Common.NoInternet                               =       "¡Vaya! Conexión a Internet perdida";
 Common.CombackTomorrow                          =       "¡Por favor, vuelve mañana para recibir tu regalo 🎁!";
+Common.Daily                                   =       "Ежедневно";
 
 // Splash
 Splash.Copyright                                =       "®Derechos de autor por Binary Bridge Labs";
 
 // Intro
-Intro.introTitlePage1                           =       "Gráficos hermosos de estilo de muñeca";
-Intro.introContentPage1                         =       "¡Gráficos únicos de estilo de muñeca adecuados para todas las edades!";
-Intro.introTitlePage2                           =       "Paletas de colores ricos";
-Intro.introContentPage2                         =       "Más de 20 paletas de colores ricos, colores degradados";
-Intro.introTitlePage3                           =       "Guardar o compartir";
-Intro.introContentPage3                         =       "Comparte o guarda fácilmente tu pintura favorita en todas las redes sociales";
+Intro.introTitlePage1                           =       "Páginas de colorear interminables";
+Intro.introContentPage1                         =       "Páginas de colorear interminables";
+Intro.introTitlePage2                           =       "Toca, llena y crea";
+Intro.introContentPage2                         =       "Simplemente toca para colorear y observa cómo tu obra maestra cobra vida sin esfuerzo";
+Intro.introTitlePage3                           =       "Exprésate";
+Intro.introContentPage3                         =       "Elige entre diversos temas, paletas de colores y herramientas creativas";
 
 // Language
 Language.Title                                  =       "Cambiar idioma";

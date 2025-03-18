@@ -22,8 +22,14 @@ Common.PhotoPicker.Camera                       =       "写真を撮る";
 Common.Home                                     =       "ホーム";
 Common.CheckIn                                  =       "Check In";
 Common.StartColoring                            =       "塗り絵を開始";
+
+Common.ColoringBooks                           =       "塗り絵本";
 Common.Collections                              =       "コレクション";
 Common.Settings                                 =       "設定";
+
+Common.finished                                 =       "終了";
+Common.unfinished                               =       "未完了";
+
 Common.History                                  =       "履歴";
 Common.CreateNew                                =       "新規作成";
 Common.Music                                    =       "音楽";
@@ -45,17 +51,18 @@ Common.SaveColoring                             =       "保存しますか、�
 Common.DescExit                                 =       "本当に終了してもよろしいですか";
 Common.NoInternet                               =       "おっと! インターネット接続が切れました";
 Common.CombackTomorrow                          =       "明日、プレゼントを受け取りに戻ってきてください 🎁!";
+Common.Daily                                   =       "日常";
 
 // Splash
 Splash.Copyright                                =       "®Binary Bridge Labs";
 
 // Intro
-Intro.introTitlePage1                           =       "美しいドールスタイルのグラフィック";
-Intro.introContentPage1                         =       "すべての年齢に適したユニークなドールスタイルのグラフィック！";
-Intro.introTitlePage2                           =       "豊富なカラーパレット";
-Intro.introContentPage2                         =       "20以上の豊富なカラーパレット、グラデーションカラー";
-Intro.introTitlePage3                           =       "保存または共有";
-Intro.introContentPage3                         =       "お気に入りの絵を簡単にすべてのソーシャルメディアに共有または共有";
+Intro.introTitlePage1                           =       "終わりのない塗り絵ページ";
+Intro.introContentPage1                         =       "終わりのない塗り絵ページ";
+Intro.introTitlePage2                           =       "タップ、塗りつぶし、作成";
+Intro.introContentPage2                         =       "色を塗るためにタップするだけで、あなたの傑作が簡単に命を吹き込まれるのを見てください";
+Intro.introTitlePage3                           =       "自己表現";
+Intro.introContentPage3                         =       "さまざまなテーマ、カラーパレット、創造的なツールから選んでください";
 
 // Language
 Language.Title                                  =       "言語を変更";

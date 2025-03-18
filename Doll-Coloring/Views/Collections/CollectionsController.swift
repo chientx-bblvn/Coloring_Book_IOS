@@ -49,12 +49,8 @@ class CollectionsController: BaseViewController {
     
     override func setup() {
         super.setup()
-        //        viewAnimation.loadAnimation(file: "animation_collection", loopMode: .loop, autoPlay: true)
         topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
-        topBarView.title = "Collection"
         
-        segmentControl.setTitle("Finished", forSegmentAt: 0)
-        segmentControl.setTitle("Unfinished", forSegmentAt: 1)
         segmentControl.selectedSegmentIndex = 0
         setupCollectionView()
         loadLanguage()
@@ -156,7 +152,7 @@ class CollectionsController: BaseViewController {
         
         for coloring in listColoring {
             for history in coloring.historys {
-                let percent = ((history.percent_complete ?? 0) * 100)
+                let percent = ((history.percent_complete ?? 0) * 100).rounded()
                 if percent >= 100 {
                     completedImages.append(history.imagePath)
                 } else {
@@ -173,8 +169,11 @@ class CollectionsController: BaseViewController {
 
 extension CollectionsController {
     func loadLanguage() {
+        topBarView.title = LocalizableUtils.commonCollections()
         lbEmpty.text = LocalizableUtils.commonEmptyCollections()
         btnStartColoring.setTitle(LocalizableUtils.commonStartColoring(), for: .normal)
+        segmentControl.setTitle(LocalizableUtils.commonFinished(), forSegmentAt: 0)
+        segmentControl.setTitle(LocalizableUtils.commonUnfinished(), forSegmentAt: 1)
     }
     
     func loadColapBanner() {

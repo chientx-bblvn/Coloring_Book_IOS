@@ -33,7 +33,7 @@ class ColoringBookCell: UITableViewCell {
      }
     
     var onClickItem: ((ColoringImage, String, Int) -> Void)?
-    var handleScrollView: ((UIScrollView) -> Void)?
+//    var handleScrollView: ((UIScrollView) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,6 +41,7 @@ class ColoringBookCell: UITableViewCell {
         InappManager.share.didPaymentSuccess.subscribe { _ in
             self.coloringCollectionView.reloadData()
         }.disposed(by: disposeBag)
+        prepareForDisplay()
     }
 
     
@@ -75,7 +76,7 @@ class ColoringBookCell: UITableViewCell {
     
 
     
-    func setupCell(title: String, itemColoring: [ColoringImage]) {
+    func setupCell(title: String, itemColoring: [ColoringImage],days:Int) {
         self.itemColoring = itemColoring
         let drawingsText = NSLocalizedString("Drawings", comment: "The word 'Drawings' in category label")
         let fullText = "\(title) (\(itemColoring.count) \(drawingsText))"
@@ -85,6 +86,7 @@ class ColoringBookCell: UITableViewCell {
         let rangeCount = (fullText as NSString).range(of: "\(itemColoring.count) \(drawingsText)")
         attributedString.addAttributes([.font: UIFont.systemFont(ofSize: 16)], range: rangeCount)
         lbCategory.attributedText = attributedString
+        totalDays = days
     }
     
     
@@ -223,8 +225,8 @@ extension ColoringBookCell: UICollectionViewDelegate, UICollectionViewDataSource
         let itemWidth = (Int(width) - 8) / 2
         return CGSize(width: itemWidth, height: itemWidth)
     }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        handleScrollView?(scrollView)
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        handleScrollView?(scrollView)
+//    }
     
 }

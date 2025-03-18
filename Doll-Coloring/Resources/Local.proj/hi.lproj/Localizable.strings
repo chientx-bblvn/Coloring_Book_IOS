@@ -22,6 +22,11 @@ Common.PhotoPicker.Camera = "फोटो लें";
 Common.Home = "होम";
 Common.CheckIn = "Check In";
 Common.StartColoring = "रंग भरना शुरू करें";
+
+Common.ColoringBooks                           =       "रंग भरने की किताबें";
+Common.finished                                 =       "समाप्त";
+Common.unfinished                               =       "अपूर्ण";
+
 Common.Collections = "संग्रह";
 Common.Settings = "सेटिंग्स";
 Common.History = "इतिहास";
@@ -45,17 +50,18 @@ Common.SaveColoring                             =       "क्या आप स
 Common.DescExit                                 =       "क्या आप वाकई बाहर निकलना चाहते हैं?";
 Common.NoInternet                               =       "ओह! इंटरनेट कनेक्शन खो गया";
 Common.CombackTomorrow                          =       "कृपया कल वापस आएं अपना उपहार प्राप्त करने के लिए 🎁!";
+Common.Daily                                   =       "दैनिक";
 
 // Splash
 Splash.Copyright = "®कॉपीराइट बाइ बाइनरी ब्रिज लैब्स 2024";
 
 // Intro
-Intro.introTitlePage1 = "सुंदर गुड़िया-शैली ग्राफिक्स";
-Intro.introContentPage1 = "सभी आयु के लिए उपयुक्त अद्वितीय गुड़िया-शैली ग्राफिक्स!";
-Intro.introTitlePage2 = "धनी-रंगीन पैलेट";
-Intro.introContentPage2 = "20 से अधिक धनी-रंगीन पैलेट, ढाल रंग";
-Intro.introTitlePage3 = "सहेजें या साझा करें";
-Intro.introContentPage3 = "अपनी पसंदीदा पेंट को आसानी से साझा करें या सभी सोशल मीडिया पर साझा करें";
+Intro.introTitlePage1                           =       "अंतहीन रंग भरने वाली पृष्ठ";
+Intro.introContentPage1                         =       "अंतहीन रंग भरने वाली पृष्ठ";
+Intro.introTitlePage2                           =       "टैप करें, भरें और बनाएं";
+Intro.introContentPage2                         =       "बस टैप करें रंग भरने के लिए और अपना मास्टरपीस आसानी से जीवन में आएगा";
+Intro.introTitlePage3                           =       "स्वयं को व्यक्त करें";
+Intro.introContentPage3                         =       "विविध विषयों, रंग पैलेट और रचनात्मक उपकरणों में से चुनें";
 
 // Language
 Language.Title = "भाषा बदलें";

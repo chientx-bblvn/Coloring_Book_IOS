@@ -112,7 +112,7 @@ struct _R {
       var default_title: RswiftResources.StringResource { .init(key: "default_title", tableName: "ErrorCode", source: source, developmentValue: "Error", comment: nil) }
     }
 
-    /// This `_R.string.localizable` struct is generated, and contains static references to 108 localization keys.
+    /// This `_R.string.localizable` struct is generated, and contains static references to 111 localization keys.
     struct localizable {
       let source: RswiftResources.StringResource.Source
 
@@ -155,7 +155,7 @@ struct _R {
       ///
       /// Key: Common.ColoringBooks
       ///
-      /// Locales: en, vi
+      /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
       var commonColoringBooks: RswiftResources.StringResource { .init(key: "Common.ColoringBooks", tableName: "Localizable", source: source, developmentValue: "Coloring Books", comment: nil) }
 
       /// en translation: Please come back tomorrow to receive your gift 🎁!
@@ -192,6 +192,13 @@ struct _R {
       ///
       /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
       var commonCreateNew: RswiftResources.StringResource { .init(key: "Common.CreateNew", tableName: "Localizable", source: source, developmentValue: "Create New", comment: nil) }
+
+      /// en translation: Daily
+      ///
+      /// Key: Common.Daily
+      ///
+      /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
+      var commonDaily: RswiftResources.StringResource { .init(key: "Common.Daily", tableName: "Localizable", source: source, developmentValue: "Daily", comment: nil) }
 
       /// en translation: Delete
       ///
@@ -375,6 +382,20 @@ struct _R {
       /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
       var commonDiscard: RswiftResources.StringResource { .init(key: "Common.discard", tableName: "Localizable", source: source, developmentValue: "Discard", comment: nil) }
 
+      /// en translation: finished
+      ///
+      /// Key: Common.finished
+      ///
+      /// Locales: en, hi, fr, de, ko, ja, ru, es, pt, pt-BR
+      var commonFinished: RswiftResources.StringResource { .init(key: "Common.finished", tableName: "Localizable", source: source, developmentValue: "finished", comment: nil) }
+
+      /// en translation: unfinished
+      ///
+      /// Key: Common.unfinished
+      ///
+      /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
+      var commonUnfinished: RswiftResources.StringResource { .init(key: "Common.unfinished", tableName: "Localizable", source: source, developmentValue: "unfinished", comment: nil) }
+
       /// en translation: The color will be deleted   Click delete to continue.
       ///
       /// Key: Content_delete_collection
@@ -529,47 +550,47 @@ struct _R {
       /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
       var iapYearly: RswiftResources.StringResource { .init(key: "IAP.yearly", tableName: "Localizable", source: source, developmentValue: "YEARLY", comment: nil) }
 
-      /// en translation: Bring each scene to life with a rich palette of colorful pencils at your fingertips!
+      /// en translation: Endless Coloring Pages
       ///
       /// Key: Intro.introContentPage1
       ///
       /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
-      var introIntroContentPage1: RswiftResources.StringResource { .init(key: "Intro.introContentPage1", tableName: "Localizable", source: source, developmentValue: "Bring each scene to life with a rich palette of colorful pencils at your fingertips!", comment: nil) }
+      var introIntroContentPage1: RswiftResources.StringResource { .init(key: "Intro.introContentPage1", tableName: "Localizable", source: source, developmentValue: "Endless Coloring Pages", comment: nil) }
 
-      /// en translation: Choose from captivating designs like animals and princesses, ready for your artistic touch!
+      /// en translation: Simply tap to color and watch your masterpiece come to life effortlessly
       ///
       /// Key: Intro.introContentPage2
       ///
       /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
-      var introIntroContentPage2: RswiftResources.StringResource { .init(key: "Intro.introContentPage2", tableName: "Localizable", source: source, developmentValue: "Choose from captivating designs like animals and princesses, ready for your artistic touch!", comment: nil) }
+      var introIntroContentPage2: RswiftResources.StringResource { .init(key: "Intro.introContentPage2", tableName: "Localizable", source: source, developmentValue: "Simply tap to color and watch your masterpiece come to life effortlessly", comment: nil) }
 
-      /// en translation: Add magic to your art with shimmering palettes and glowing effects!
+      /// en translation: Choose from diverse themes, color palettes, and creative tools
       ///
       /// Key: Intro.introContentPage3
       ///
       /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
-      var introIntroContentPage3: RswiftResources.StringResource { .init(key: "Intro.introContentPage3", tableName: "Localizable", source: source, developmentValue: "Add magic to your art with shimmering palettes and glowing effects!", comment: nil) }
+      var introIntroContentPage3: RswiftResources.StringResource { .init(key: "Intro.introContentPage3", tableName: "Localizable", source: source, developmentValue: "Choose from diverse themes, color palettes, and creative tools", comment: nil) }
 
-      /// en translation: A World of Vibrant Colors
+      /// en translation: Endless Coloring Pages
       ///
       /// Key: Intro.introTitlePage1
       ///
       /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
-      var introIntroTitlePage1: RswiftResources.StringResource { .init(key: "Intro.introTitlePage1", tableName: "Localizable", source: source, developmentValue: "A World of Vibrant Colors", comment: nil) }
+      var introIntroTitlePage1: RswiftResources.StringResource { .init(key: "Intro.introTitlePage1", tableName: "Localizable", source: source, developmentValue: "Endless Coloring Pages", comment: nil) }
 
-      /// en translation: Discover Beautiful Artwork
+      /// en translation: Tap, Fill & Create
       ///
       /// Key: Intro.introTitlePage2
       ///
       /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
-      var introIntroTitlePage2: RswiftResources.StringResource { .init(key: "Intro.introTitlePage2", tableName: "Localizable", source: source, developmentValue: "Discover Beautiful Artwork", comment: nil) }
+      var introIntroTitlePage2: RswiftResources.StringResource { .init(key: "Intro.introTitlePage2", tableName: "Localizable", source: source, developmentValue: "Tap, Fill & Create", comment: nil) }
 
-      /// en translation: Shine with Dazzling Colors
+      /// en translation: Express Yourself
       ///
       /// Key: Intro.introTitlePage3
       ///
       /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
-      var introIntroTitlePage3: RswiftResources.StringResource { .init(key: "Intro.introTitlePage3", tableName: "Localizable", source: source, developmentValue: "Shine with Dazzling Colors", comment: nil) }
+      var introIntroTitlePage3: RswiftResources.StringResource { .init(key: "Intro.introTitlePage3", tableName: "Localizable", source: source, developmentValue: "Express Yourself", comment: nil) }
 
       /// en translation: Enter: country name|code|dial code
       ///

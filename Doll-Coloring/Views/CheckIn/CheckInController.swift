@@ -93,13 +93,20 @@ class CheckInController: BaseViewController {
         updateLayoutContent()
     }
     
+    override func bindingData() {
+        super.bindingData()
+        viewModel.getDalyColoring {
+            self.collectionView.reloadData()
+        }
+    }
+    
     func setupView() {
         if UIDevice.current.userInterfaceIdiom == .pad {
             bannerHome = .ipad
         }
         topbarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
 //        topbarView.title = ""
-        topbarView.title = "Daily"
+//        topbarView.title = "Daily"
         topbarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
         topbarView.onLeftClick = {
             AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
@@ -140,7 +147,7 @@ class CheckInController: BaseViewController {
     }
     
     func loadLanguage() {
-        
+        topbarView.title = LocalizableUtils.commonCollections()
     }
     
 }

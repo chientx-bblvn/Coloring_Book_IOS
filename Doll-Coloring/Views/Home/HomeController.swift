@@ -490,6 +490,7 @@ extension HomeController {
         }
     }
     
+
     func showRewDaily(_ data: ColoringImage) {
         guard SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) == nil else {
             navigateColoring(data)

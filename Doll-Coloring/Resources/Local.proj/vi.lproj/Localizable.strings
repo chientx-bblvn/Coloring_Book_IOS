@@ -22,9 +22,14 @@ Common.PhotoPicker.Camera = "Chụp ảnh";
 Common.Home = "Trang chủ";
 Common.CheckIn                                  =       "Check In";
 Common.StartColoring = "Bắt đầu tô màu";
+
 Common.ColoringBooks                           =       "Sách màu";
 Common.Collections = "Bộ sưu tập";
 Common.Settings = "Cài đặt";
+
+ommon.finished                                 =       "Hoàn thành";
+Common.unfinished                               =       "Chưa hoàn thành";
+
 Common.History = "Lịch sử";
 Common.CreateNew = "Tạo mới";
 Common.Music = "Âm nhạc";
@@ -46,17 +51,18 @@ Common.SaveColoring                             =       "Bạn muốn lưu hay b
 Common.DescExit                                 =       "Bạn có chắc chắn muốn thoát không?";
 Common.NoInternet                               =       "Rất tiếc! Mất kết nối internet";
 Common.CombackTomorrow                          =       "Hãy quay lại vào ngày mai để nhận quà của bạn 🎁!";
+Common.Daily                                   =       "Hàng ngày";
 
 // Splash
 Splash.Copyright = "®Bản quyền thuộc Binary Bridge Labs 2024";
 
 // Intro
-Intro.introTitlePage1 = "Đồ họa phong cách búp bê đẹp";
-Intro.introContentPage1 = "Đồ họa phong cách búp bê độc đáo phù hợp với mọi độ tuổi!";
-Intro.introTitlePage2 = "Bảng màu phong phú";
-Intro.introContentPage2 = "Hơn 20 bảng màu phong phú, màu chuyển động";
-Intro.introTitlePage3 = "Lưu hoặc Chia sẻ";
-Intro.introContentPage3 = "Dễ dàng chia sẻ hoặc chia sẻ hình vẽ yêu thích của bạn lên tất cả các phương tiện truyền thông xã hội";
+Intro.introTitlePage1                           =       "Trang tô màu vô tận";
+Intro.introContentPage1                         =       "Trang tô màu vô tận";
+Intro.introTitlePage2                           =       "Chạm, Tô màu và Tạo ra";
+Intro.introContentPage2                         =       "Chỉ cần chạm để tô màu và xem tác phẩm nghệ thuật của bạn sống động một cách dễ dàng";
+Intro.introTitlePage3                           =       "Thể hiện bản thân";
+Intro.introContentPage3                         =       "Chọn từ các chủ đề, bảng màu và công cụ sáng tạo đa dạng";
 
 // Language
 Language.Title = "Thay đổi ngôn ngữ";

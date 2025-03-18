@@ -22,8 +22,15 @@ Common.PhotoPicker.Camera = "Foto aufnehmen";
 Common.Home = "Startseite";
 Common.CheckIn = "Check In";
 Common.StartColoring = "Ausmalen starten";
+
+Common.ColoringBooks                           =       "Ausmalbücher";
 Common.Collections = "Sammlungen";
 Common.Settings = "Einstellungen";
+
+Common.finished                                 =       "Fertig";
+Common.unfinished                               =       "Unvollständig";
+
+
 Common.History = "Verlauf";
 Common.CreateNew = "Neu erstellen";
 Common.Music = "Musik";
@@ -45,17 +52,18 @@ Common.SaveColoring                             =       "Möchten Sie speichern 
 Common.DescExit                                 =       "Sind Sie sicher, dass Sie beenden möchten?";
 Common.NoInternet                               =       "Hoppla! Internetverbindung verloren";
 Common.CombackTomorrow                          =       "Bitte kommen Sie morgen zurück, um Ihr Geschenk zu erhalten 🎁!";
+Common.Daily                                   =       "Täglich";
 
 // Splash
 Splash.Copyright = "®Urheberrecht von Binary Bridge Labs 2024";
 
 // Intro
-Intro.introTitlePage1 = "Schöne Puppenstil-Grafiken";
-Intro.introContentPage1 = "Einzigartige Puppenstil-Grafiken, geeignet für alle Altersgruppen!";
-Intro.introTitlePage2 = "Reichhaltige Farbpaletten";
-Intro.introContentPage2 = "Über 20 reichhaltige Farbpaletten, Farbverläufe";
-Intro.introTitlePage3 = "Speichern oder Teilen";
-Intro.introContentPage3 = "Speichern oder teilen Sie Ihre Lieblingsmalerei ganz einfach in allen sozialen Medien";
+Intro.introTitlePage1                           =       "Endlose Ausmalbilder";
+Intro.introContentPage1                         =       "Endlose Ausmalbilder";
+Intro.introTitlePage2                           =       "Tippen, Füllen & Erstellen";
+Intro.introContentPage2                         =       "Tippen Sie einfach, um zu färben, und sehen Sie, wie Ihr Meisterwerk mühelos zum Leben erwacht";
+Intro.introTitlePage3                           =       "Drücken Sie sich aus";
+Intro.introContentPage3                         =       "Wählen Sie aus verschiedenen Themen, Farbschemata und kreativen Werkzeugen";
 
 // Language
 Language.Title = "Sprache ändern";

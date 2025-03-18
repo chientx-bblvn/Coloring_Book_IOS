@@ -37,7 +37,6 @@ class NewHomeController: BaseViewController {
             AppRouter.shared.navigate(to: CheckInRoute.main, with: .push)
         }
         topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
-        topBarView.title = "Coloring Books"
         
     }
     override func setup() {
@@ -92,16 +91,19 @@ class NewHomeController: BaseViewController {
         super.bindingData()
         viewModel.getNewColorings { [weak self] in
             guard let self = self else {return}
-            self.coloringTableView.reloadData()
+            self.viewModel.colorings.forEach { model in
+                self.coloringTableView.reloadData()
+            }
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        coloringTableView.reloadData()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        coloringTableView.reloadData()
+//    }
     
     private func loadLanguage() {
+        topBarView.title = LocalizableUtils.commonColoringBooks()
     }
     
     private func settingIAP() {
@@ -380,12 +382,12 @@ extension NewHomeController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ColoringBookCell", for:  indexPath) as! ColoringBookCell
         let category = viewModel.colorings[indexPath.row]
         let categoryName = category.categoryName ?? "Unknown Category"
-        cell.setupCell(title: categoryName, itemColoring: category.imageUrls ?? [])
-        
+        let day = self.calculatorDays()
+        cell.setupCell(title: categoryName, itemColoring: category.imageUrls ?? [], days: day)
         cell.layer.backgroundColor =  UIColor.clear.cgColor
         cell.selectionStyle = .none
+        
         cell.onClickItem = { item, categoryName, index in
-            let day = self.calculatorDays()
             guard !(categoryName.contains("Daily")) else {
                 if SQLiteManager.shared.selectionGitColorings().contains(where: {$0.filePath.contains(item.filePath ?? "")}) {
                     self.navigateColoring(item)

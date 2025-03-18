@@ -22,8 +22,14 @@ Common.PhotoPicker.Camera                       =       "사진 촬영";
 Common.Home                                     =       "홈";
 Common.CheckIn                                  =       "Check In";
 Common.StartColoring                            =       "색칠 시작";
+
+Common.ColoringBooks                           =       "색칠책";
 Common.Collections                              =       "컬렉션";
 Common.Settings                                 =       "설정";
+
+Common.finished                                 =       "완료됨";
+Common.unfinished                               =       "미완료";
+
 Common.History                                  =       "기록";
 Common.CreateNew                                =       "새로 만들기";
 Common.Music                                    =       "음악";
@@ -45,17 +51,18 @@ Common.SaveColoring                             =       "저장하시겠습니�
 Common.DescExit                                 =       "정말로 종료하시겠습니까?";
 Common.NoInternet                               =       "이런! 인터넷 연결이 끊겼습니다";
 Common.CombackTomorrow                          =       "내일 선물을 받으러 다시 와주세요 🎁!";
+Common.Daily                                   =       "일일";
 
 // Splash
 Splash.Copyright                                =       "®Binary Bridge Labs에 의한 저작권";
 
 // Intro
-Intro.introTitlePage1                           =       "아름다운 인형 스타일 그래픽";
-Intro.introContentPage1                         =       "모든 연령에 적합한 독특한 인형 스타일 그래픽!";
-Intro.introTitlePage2                           =       "풍부한 색상 팔레트";
-Intro.introContentPage2                         =       "20가지 이상의 풍부한 색상 팔레트, 그라데이션 색상";
-Intro.introTitlePage3                           =       "저장 또는 공유";
-Intro.introContentPage3                         =       "쉽게 좋아하는 그림을 모든 소셜 미디어로 공유하거나 공유";
+Intro.introTitlePage1                           =       "끝없는 색칠 페이지";
+Intro.introContentPage1                         =       "끝없는 색칠 페이지";
+Intro.introTitlePage2                           =       "탭, 채우기 및 생성";
+Intro.introContentPage2                         =       "색칠하려면 탭만 하면 되고, 당신의 걸작이 쉽게 생동감을 얻는 것을 지켜보세요";
+Intro.introTitlePage3                           =       "자신을 표현하세요";
+Intro.introContentPage3                         =       "다양한 테마, 색상 팔레트 및 창의적인 도구 중에서 선택하세요";
 
 // Language
 Language.Title                                  =       "언어 변경";
