@@ -131,7 +131,17 @@ class NewHomeController: BaseViewController {
     }
     
     @objc private func showPremiumView() {
-        SubcriptionViewController.show(checkTime: true)
+        SubcriptionViewController.show(checkTime: true) {
+            if DollColoringAdID.inter_back.isEnableAd {
+                AdLoadingView.show()
+                ADManager.shared.loadFull(DollColoringAdID.inter_back) {_ in
+                    AdLoadingView.dismiss()
+                }
+            }
+        } onClickCLose: {
+            
+        }
+
     }
     
     
@@ -176,7 +186,17 @@ extension NewHomeController {
                 }
             }
         }, {
-            SubcriptionViewController.show(checkTime: true)
+            SubcriptionViewController.show(checkTime: true) {
+                if DollColoringAdID.inter_back.isEnableAd {
+                    AdLoadingView.show()
+                    ADManager.shared.loadFull(DollColoringAdID.inter_back) {_ in
+                        AdLoadingView.dismiss()
+                    }
+                }
+            } onClickCLose: {
+                
+            }
+
         })
     }
     func loadInterDaily(_ data: ColoringImage) {
@@ -253,6 +273,12 @@ extension NewHomeController {
             navigateColoring(data)
             return
         }
+        
+        guard DollColoringAdID.inter_alltopic.isEnableAd else {
+            navigateColoring(data)
+            return
+        }
+        
         numberClick += 1
         if numberClick >= UserDefaultManager.numberClickItemAllTopic {
             if !UserDefaultManager.disableMusicBackground {
@@ -309,6 +335,12 @@ extension NewHomeController {
             navigateColoring(data)
             return
         }
+        
+        guard DollColoringAdID.reward_alltopic.isEnableAd else {
+            navigateColoring(data)
+            return
+        }
+        
         if !UserDefaultManager.disableMusicBackground {
             pauseAudioBackground()
         }
@@ -330,7 +362,17 @@ extension NewHomeController {
                 }
             }
         }, {
-            SubcriptionViewController.show(checkTime: true)
+            SubcriptionViewController.show(checkTime: true) {
+                if DollColoringAdID.inter_back.isEnableAd {
+                    AdLoadingView.show()
+                    ADManager.shared.loadFull(DollColoringAdID.inter_back) {_ in
+                        AdLoadingView.dismiss()
+                    }
+                }
+            } onClickCLose: {
+                
+            }
+
         })
     }
     
@@ -363,7 +405,12 @@ extension NewHomeController {
             }
             
             SubcriptionViewController.show(checkTime: true) {
-                
+                if DollColoringAdID.inter_back.isEnableAd {
+                    AdLoadingView.show()
+                    ADManager.shared.loadFull(DollColoringAdID.inter_back) {_ in
+                        AdLoadingView.dismiss()
+                    }
+                }
             } onClickCLose: {
                 self.showRew(data)
             }

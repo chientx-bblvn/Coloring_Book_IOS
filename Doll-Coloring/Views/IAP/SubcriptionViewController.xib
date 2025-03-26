@@ -68,7 +68,7 @@
                     </connections>
                 </button>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zLl-pn-Y1v">
-                    <rect key="frame" x="16" y="568" width="408" height="88"/>
+                    <rect key="frame" x="16" y="529.66666666666663" width="408" height="88"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="XdE-jQ-FNs">
                             <rect key="frame" x="0.0" y="0.0" width="408" height="88"/>
@@ -234,7 +234,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TmJ-eV-WfA">
-                    <rect key="frame" x="16" y="672" width="408" height="192"/>
+                    <rect key="frame" x="16" y="633.66666666666663" width="408" height="192"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="omb-ys-Wry">
                             <rect key="frame" x="0.0" y="0.0" width="408" height="192"/>
@@ -476,8 +476,8 @@
                         <constraint firstAttribute="bottom" secondItem="omb-ys-Wry" secondAttribute="bottom" id="qLq-9K-UNZ"/>
                     </constraints>
                 </view>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQA-b1-Px8">
-                    <rect key="frame" x="16" y="864" width="408" height="0.0"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto renewable, cancel anytime." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQA-b1-Px8">
+                    <rect key="frame" x="16" y="841.66666666666663" width="408" height="14.333333333333371"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" name="TextColor"/>
                     <nil key="highlightedColor"/>
@@ -495,13 +495,13 @@
                     <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                 </constraint>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="k4N-fF-fma" secondAttribute="trailing" constant="12" id="Phq-1s-XCm"/>
-                <constraint firstItem="jex-2s-cVj" firstAttribute="top" secondItem="LQA-b1-Px8" secondAttribute="bottom" constant="8" symbolic="YES" id="PuZ-JC-vBF"/>
+                <constraint firstItem="jex-2s-cVj" firstAttribute="top" secondItem="LQA-b1-Px8" secondAttribute="bottom" constant="16" id="PuZ-JC-vBF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jkq-Cu-RA9" secondAttribute="trailing" id="SBP-1q-wWc"/>
                 <constraint firstItem="jex-2s-cVj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Uif-QG-cBq">
                     <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                 </constraint>
                 <constraint firstItem="TmJ-eV-WfA" firstAttribute="top" secondItem="zLl-pn-Y1v" secondAttribute="bottom" constant="16" id="WJn-SX-JpG"/>
-                <constraint firstItem="LQA-b1-Px8" firstAttribute="top" secondItem="TmJ-eV-WfA" secondAttribute="bottom" id="eCf-Bd-sgO"/>
+                <constraint firstItem="LQA-b1-Px8" firstAttribute="top" secondItem="TmJ-eV-WfA" secondAttribute="bottom" constant="16" id="eCf-Bd-sgO"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="TmJ-eV-WfA" secondAttribute="trailing" constant="16" id="i9q-F7-6Oj">
                     <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                 </constraint>
@@ -517,7 +517,7 @@
                     <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                 </constraint>
             </constraints>
-            <point key="canvasLocation" x="136.80000000000001" y="19.340329835082461"/>
+            <point key="canvasLocation" x="136.36363636363637" y="18.82845188284519"/>
         </view>
     </objects>
     <resources>

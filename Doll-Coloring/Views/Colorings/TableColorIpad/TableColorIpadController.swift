@@ -348,6 +348,10 @@ extension TableColorIpadController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func showInter(_ indexPath: IndexPath, index: Int = 0) {
+        guard DollColoringAdID.inter_color.isEnableAd else {
+            self.selectTableColor(indexPath, index: index)
+            return
+        }
         ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
         AdLoadingView.show()
         ADManager.shared.loadFull(DollColoringAdID.inter_color, isSplash: true) { state in
@@ -374,7 +378,12 @@ extension TableColorIpadController: UICollectionViewDelegate, UICollectionViewDa
             selectTableColor(indexPath, index: index)
         } else {
             SubcriptionViewController.show(checkTime: true) {
-                
+                if DollColoringAdID.inter_back.isEnableAd {
+                    AdLoadingView.show()
+                    ADManager.shared.loadFull(DollColoringAdID.inter_back) {_ in
+                        AdLoadingView.dismiss()
+                    }
+                }
             } onClickCLose: {
                 self.showRew(indexPath, index: index)
             }

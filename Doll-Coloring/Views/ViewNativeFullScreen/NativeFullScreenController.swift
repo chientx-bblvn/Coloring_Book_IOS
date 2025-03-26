@@ -16,6 +16,9 @@ class NativeFullScreenController: BaseViewController {
     var onTapClose: (() -> Void)?
     
     class func show(actionOk: (() -> Void)? = nil) {
+        if !DollColoringAdID.nativefull_afterinter.isEnableAd {
+            return
+        }
         let customView = NativeFullScreenController.loadController()
         customView.providesPresentationContextTransitionStyle = true
         customView.definesPresentationContext = true
@@ -36,14 +39,20 @@ class NativeFullScreenController: BaseViewController {
     
     
     func loadAdsNative() {
-        ADManager.shared.loadNative(DollColoringAdID.nativefull_afterinter, to: viewAds, nativeAdType: .customFullScreenNative) { adId, success, nativeAdView in
-            guard adId.contains(DollColoringAdID.nativefull_afterinter.adId) else {
-                return
-            }
-            if !success {
-                self.removeAnimate {
-                    self.onTapClose?()
+        if DollColoringAdID.nativefull_afterinter.isEnableAd {
+            ADManager.shared.loadNative(DollColoringAdID.nativefull_afterinter, to: viewAds, nativeAdType: .customFullScreenNative) { adId, success, nativeAdView in
+                guard adId.contains(DollColoringAdID.nativefull_afterinter.adId) else {
+                    return
                 }
+                if !success {
+                    self.removeAnimate {
+                        self.onTapClose?()
+                    }
+                }
+            }
+        } else {
+            self.removeAnimate {
+                self.onTapClose?()
             }
         }
     }

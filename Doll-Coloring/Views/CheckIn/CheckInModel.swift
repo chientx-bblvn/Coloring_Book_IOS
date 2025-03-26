@@ -26,9 +26,7 @@ class DalyMonthVM {
     var monthsData: [MonthsData] = []
     
     init() {
-        if itemDaly.isEmpty {
-            getDalyColoring()
-        }
+        
     }
     
     
@@ -51,8 +49,10 @@ class DalyMonthVM {
             SVProgressHUD.dismiss()
             self?.itemDaly = response.first(where: {$0.categoryName?.contains("Daily") ?? false})?.imageUrls ?? []
             self?.calculatorDay()
+            complection()
         } onFailed: { error in
             SVProgressHUD.dismiss()
+            complection()
         }
     }
     

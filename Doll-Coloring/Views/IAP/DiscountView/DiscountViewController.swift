@@ -146,6 +146,12 @@ class DiscountViewController: BaseViewController {
     
     @IBAction func actionClose(_ sender: Any) {
         self.dismiss(animated: false) {
+            guard DollColoringAdID.inter_back.isEnableAd else {
+                if let handler = self.onCloseScreen {
+                    handler()
+                }
+                return
+            }
             ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) { state in
                 switch state {
                 case .closed, .error:

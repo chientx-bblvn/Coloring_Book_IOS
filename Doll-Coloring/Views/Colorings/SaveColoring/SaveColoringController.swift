@@ -234,6 +234,10 @@ extension SaveColoringController {
     }
     
     func loadInterAds() {
+        guard DollColoringAdID.inter_save.isEnableAd else {
+            self.savePhotosAlbum()
+            return
+        }
         ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
         AdLoadingView.show()
         ADManager.shared.loadFull(DollColoringAdID.inter_save, isSplash: true) { status in

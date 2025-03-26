@@ -222,6 +222,10 @@ class DetailCollectionController: BaseViewController {
     }
     
     func loadInterAds() {
+        guard DollColoringAdID.inter_save.isEnableAd else {
+            self.savePhotosAlbum()
+            return
+        }
         ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
         AdLoadingView.show()
         ADManager.shared.loadFull(DollColoringAdID.inter_save, isSplash: true) { status in
@@ -244,6 +248,10 @@ class DetailCollectionController: BaseViewController {
     }
     
     func loadInterADSEdit() {
+        guard DollColoringAdID.inter_edit_collection.isEnableAd else {
+            self.editColoring()
+            return
+        }
         ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
         AdLoadingView.show()
         ADManager.shared.loadFull(DollColoringAdID.inter_edit_collection, isSplash: true) {status in

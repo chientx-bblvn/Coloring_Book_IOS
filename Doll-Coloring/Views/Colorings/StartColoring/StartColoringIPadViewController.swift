@@ -378,6 +378,12 @@ class StartColoringIPadViewController: BaseViewController {
                     self.dissmissHistoryColoring()
                     return
                 }
+                
+                guard DollColoringAdID.nativefull_afterinter.isEnableAd else {
+                    self.dissmissHistoryColoring()
+                    return
+                }
+                
                 ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
                 AdLoadingView.show()
                 ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) { state in
@@ -402,6 +408,12 @@ class StartColoringIPadViewController: BaseViewController {
             }
             return
         }
+        
+        guard DollColoringAdID.inter_back.isEnableAd else {
+            self.dissmissHistoryColoring()
+            return
+        }
+        
         ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
         AdLoadingView.show()
         ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) { state in

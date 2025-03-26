@@ -51,7 +51,7 @@ def shared_pods
   
   
   ### Admobs
-  #pod 'AdmobSDK', :git => "https://AnhNVBBLabs@github.com/Binary-Bridge-Labs/ADMobSDK", :branch => 'release/0.0.19'
+  #pod 'AdmobSDK', :git => "https://AnhNVBBLabs@github.com/Binary-Bridge-Labs/ADMobSDK", :branch => 'release/0.0.22-beta'
   pod 'AdmobSDK', :path => "./Submodules/ADMobSDK"
   pod 'Clarity'
   

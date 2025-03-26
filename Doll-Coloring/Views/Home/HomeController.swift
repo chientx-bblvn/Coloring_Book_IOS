@@ -520,7 +520,17 @@ extension HomeController {
                 }
             }
         }, {
-            SubcriptionViewController.show(checkTime: true)
+            SubcriptionViewController.show(checkTime: true) {
+                if DollColoringAdID.inter_back.isEnableAd {
+                    AdLoadingView.show()
+                    ADManager.shared.loadFull(DollColoringAdID.inter_back) {_ in
+                        AdLoadingView.dismiss()
+                    }
+                }
+            } onClickCLose: {
+                
+            }
+
         })
     }
     
