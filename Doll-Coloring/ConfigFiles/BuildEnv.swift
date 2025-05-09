@@ -20,15 +20,16 @@ var baseURLImage: String = "https://storage.bunnycdn.com/bblprivate/doll-colorin
 var apiAccessKey: String = "03d01bc4-2cec-4d16-92ca5d0d2ca5-3eae-4cb8"
 var sharedSecret = "240a2be04f014eefb263692845d17b10"
 
+
 let isDev = false
 
 var isWarchAds: [String] = []
 
 enum IAPIdType: String, Decodable, CaseIterable, IAPType {
-    case weekly = "weekly.discount_1.99"
-    case monthly = "DollColoring_Monthly"
-    case yearly = "monthly.discount_7.99"
-    case weeklySale = "weekly.sub_0.99"
+    case weekly = "DollColoring_weekly"
+    case monthly = "monthly.sub_2.99"
+    case yearly = "yearly.sub_10.99"
+    case monthlySale = "monthly.sub_1.49"
     
     var title: String {
         switch self {
@@ -38,29 +39,29 @@ enum IAPIdType: String, Decodable, CaseIterable, IAPType {
             return LocalizableUtils.iapYearly()
         case .monthly:
             return LocalizableUtils.iapMonthly()
-        case .weeklySale:
-            return LocalizableUtils.iapWeekly()
+        case .monthlySale:
+            return LocalizableUtils.iapMonthly()
         }
     }
     
     var numberDay: Int {
         switch self {
-        case .weekly, .weeklySale:
+        case .weekly:
             return 7
         case .yearly:
             return 365
-        case .monthly:
+        case .monthly, .monthlySale:
             return 30
         }
     }
     
     var unit: String {
         switch self {
-        case .weekly, .weeklySale:
+        case .weekly:
             return LocalizableUtils.iapWeek()
         case .yearly:
             return LocalizableUtils.iapYear()
-        case .monthly:
+        case .monthly, .monthlySale:
             return LocalizableUtils.iapMonth()
         }
     }
@@ -79,157 +80,103 @@ extension IAPIdType {
         })
     }
 }
-
 enum DollColoringAdID: String, CaseIterable, AdConfigId {
     case inter_splash = "inter_splash"
-    case appopen_splash = "appopen_splash"
+    case inter_splash_high = "inter_splash_high"
     case native_language = "native_language"
-    case native_language_high = "native_language_high"
-    case native_onboarding_high = "native_onboarding_high"
-    case native_onboarding = "native_onboarding"
-    case native_home = "native_home"
-    case inter_alltopic = "inter_alltopic"
-    case reward_alltopic = "reward_alltopic"
+    case native_language_2nd = "native_language_2nd"
+    case native_onboarding_1 = "native_onboarding_1"
+    case native_onboarding_2 = "native_onboarding_2"
+    case native_onboarding_3 = "native_onboarding_3"
+    case inter_after_iap = "inter_after_iap"
+    case inter_main = "inter_main"
+    case reward_draw = "reward_draw"
     case banner_coloring = "banner_coloring"
-    case inter_save = "inter_save"
-    case banner_collection = "banner_collection"
+    case reward_save = "reward_save"
     case appopen_resume = "appopen_resume"
     case native_result = "native_result"
-    case reward_save = "reward_save"
-    case banner_home = "banner_home"
     case inter_back = "inter_back"
-    case reward_color = "reward_color"
-    case inter_color = "inter_color"
-    case native_dialog = "native_dialog"
-    case native_language_2nd = "native_language_2nd"
-    case inter_edit_collection = "inter_edit_collection"
-    case appopen_allprice = "appopen_allprice"
-    case reward_dailygift = "reward_dailygift"
-    case inter_dailygift = "inter_dailygift"
-    case naitve_fullscreen_onboarding = "naitve_fullscreen_onboarding"
-    case nativefull_afterinter = "nativefull_afterinter"
+    case banner_splash = "banner_splash"
     
     var name: String { return self.rawValue }
     
     var adType: AdType {
-        switch self
-        {
+        switch self {
         case .inter_splash:
             return .Interstitial
-        case .appopen_splash:
-            return .OpenApp
-        case .native_language:
-            return .Native
-        case .native_language_high:
-            return .Native
-        case .native_onboarding_high:
-            return .Native
-        case .native_onboarding:
-            return .Native
-        case .native_home:
-            return .Native
-        case .inter_alltopic:
+        case .inter_after_iap:
             return .Interstitial
-        case .reward_alltopic:
-            return .Reward
-        case .banner_coloring:
-            return .Banner
-        case .inter_save:
+        case .inter_main:
             return .Interstitial
-        case .banner_collection:
-            return .Banner
-        case .appopen_resume:
-            return .OpenApp
-        case .native_result:
-            return .Native
-        case .reward_save:
-            return .Reward
-        case .banner_home:
-            return .Banner
         case .inter_back:
             return .Interstitial
-        case .reward_color:
-            return .Reward
-        case .inter_color:
-            return .Interstitial
-        case .inter_edit_collection:
-            return .Interstitial
-        case .native_dialog:
+
+        case .native_language:
             return .Native
         case .native_language_2nd:
             return .Native
-        case .appopen_allprice:
-            return .OpenApp
-        case .reward_dailygift:
+        case .native_onboarding_1:
+            return .Native
+        case .native_onboarding_2:
+            return .Native
+        case .native_onboarding_3:
+            return .Native
+        case .native_result:
+            return .Native
+        case .reward_draw:
             return .Reward
-        case .inter_dailygift:
+        case .reward_save:
+            return .Reward
+
+        case .banner_coloring:
+            return .Banner
+        case .banner_splash:
+            return .Banner
+
+        case .appopen_resume:
+            return .OpenApp
+
+        case .inter_splash_high:
             return .Interstitial
-        case .naitve_fullscreen_onboarding:
-            return .Native
-        case .nativefull_afterinter:
-            return .Native
         }
     }
     
     var adId: String {
         switch self {
         case .inter_splash:
-            return "ca-app-pub-3850749456614322/7931400606"
-        case .appopen_splash:
-            return "ca-app-pub-3850749456614322/8346333570"
+            return "ca-app-pub-3850749456614322/1686824052"
         case .native_language:
-            return "ca-app-pub-3850749456614322/2112097713"
-        case .native_language_high:
-            return "ca-app-pub-3850749456614322/3038166573"
-        case .native_onboarding_high:
-            return "ca-app-pub-3850749456614322/8796532669"
-        case .native_onboarding:
-            return "ca-app-pub-3850749456614322/1141403928"
-        case .native_home:
-            return "ca-app-pub-3850749456614322/1533513213"
-        case .inter_alltopic:
-            return "ca-app-pub-3850749456614322/7325952838"
-        case .reward_alltopic:
-            return "ca-app-pub-3850749456614322/2663095192"
-        case .banner_coloring:
-            return "ca-app-pub-3850749456614322/9214838285"
-        case .inter_save:
-            return "ca-app-pub-3850749456614322/8973019537"
-        case .banner_collection:
-            return "ca-app-pub-3850749456614322/7392677691"
-        case .appopen_resume:
-            return "ca-app-pub-3850749456614322/5033774529"
-        case .native_result:
-            return "ca-app-pub-3850749456614322/2299115185"
-        case .reward_save:
-            return "ca-app-pub-3850749456614322/1262025796"
-        case .banner_home:
-            return "ca-app-pub-3850749456614322/9959855034"
-        case .inter_back:
-            return "ca-app-pub-3850749456614322/9636453221"
-        case .reward_color:
-            return "ca-app-pub-3850749456614322/6174562817"
-        case .inter_color:
-            return "ca-app-pub-3850749456614322/1161909288"
-        case .inter_edit_collection:
-            return "ca-app-pub-3850749456614322/6375170531"
-        case .native_dialog:
-            return "ca-app-pub-3850749456614322/7845820837"
+            return "ca-app-pub-3850749456614322/7314555257"
         case .native_language_2nd:
-            return "ca-app-pub-3850749456614322/8443377784"
-        case .appopen_allprice:
-            return "ca-app-pub-3850749456614322/5998498061"
-        case .reward_dailygift:
-            return "ca-app-pub-3850749456614322/3958607753"
-        case .inter_dailygift:
-            return "ca-app-pub-3850749456614322/2525535769"
-        case .naitve_fullscreen_onboarding:
-            return "ca-app-pub-3850749456614322/6376413141"
-        case .nativefull_afterinter:
-            return "ca-app-pub-3850749456614322/3767567265"
+            return "ca-app-pub-3850749456614322/9749146907"
+        case .native_onboarding_1:
+            return "ca-app-pub-3850749456614322/8436065238"
+        case .native_onboarding_2:
+            return "ca-app-pub-3850749456614322/5809901897"
+        case .native_onboarding_3:
+            return "ca-app-pub-3850749456614322/2502284109"
+        case .inter_after_iap:
+            return "ca-app-pub-3850749456614322/3183738554"
+        case .inter_main:
+            return "ca-app-pub-3850749456614322/1711677116"
+        case .reward_draw:
+            return "ca-app-pub-3850749456614322/6772432101"
+        case .banner_coloring:
+            return "ca-app-pub-3850749456614322/7687162171"
+        case .reward_save:
+            return "ca-app-pub-3850749456614322/4146268760"
+        case .appopen_resume:
+            return "ca-app-pub-3850749456614322/8684549077"
+        case .native_result:
+            return "ca-app-pub-3850749456614322/6827470097"
+        case .inter_back:
+            return "ca-app-pub-3850749456614322/4305248538"
+        case .banner_splash:
+            return "ca-app-pub-3850749456614322/7722821195"
+        case .inter_splash_high:
+            return "ca-app-pub-3850749456614322/4660494808"
         }
     }
-    
 }
 enum RMBGEventTracking: String, EventTracking {
     // Splash

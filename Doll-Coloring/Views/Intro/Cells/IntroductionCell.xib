@@ -28,7 +28,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="347" height="671"/>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="neF-5s-Ujc">
-                        <rect key="frame" x="24" y="341" width="299" height="322"/>
+                        <rect key="frame" x="24" y="267" width="299" height="396"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TcQ-Ud-U4M">
                                 <rect key="frame" x="0.0" y="0.0" width="299" height="50"/>
@@ -96,8 +96,40 @@
                                     <constraint firstAttribute="bottom" secondItem="XoK-FJ-nxQ" secondAttribute="bottom" id="pxU-MA-Mjj"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UQY-zf-36s">
+                                <rect key="frame" x="0.0" y="102" width="299" height="70"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7PF-9o-h3A">
+                                        <rect key="frame" x="16" y="-4" width="267" height="58"/>
+                                        <color key="backgroundColor" red="0.60392159219999997" green="0.63921570780000003" blue="0.92941176889999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="58" id="dwm-2q-H9z"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Next">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
+                                                <real key="value" value="16"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="buttonNextOnTouch:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Mhc-fm-URE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="7PF-9o-h3A" secondAttribute="trailing" constant="16" id="CYY-fX-kft"/>
+                                    <constraint firstItem="7PF-9o-h3A" firstAttribute="leading" secondItem="UQY-zf-36s" secondAttribute="leading" constant="16" id="Tas-T9-1Ff"/>
+                                    <constraint firstAttribute="bottom" secondItem="7PF-9o-h3A" secondAttribute="bottom" constant="16" id="kbq-gy-abS"/>
+                                    <constraint firstAttribute="height" constant="70" id="mEs-MM-KI0"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wtR-BS-DTC">
-                                <rect key="frame" x="0.0" y="102" width="299" height="220"/>
+                                <rect key="frame" x="0.0" y="176" width="299" height="220"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="220" id="n7M-uT-hDW"/>
@@ -106,7 +138,7 @@
                         </subviews>
                     </stackView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vUX-kM-nfa">
-                        <rect key="frame" x="32" y="49" width="283" height="276"/>
+                        <rect key="frame" x="32" y="49" width="283" height="202"/>
                     </imageView>
                 </subviews>
             </view>
@@ -126,6 +158,7 @@
             <size key="customSize" width="347" height="671"/>
             <connections>
                 <outlet property="btnNext" destination="XoK-FJ-nxQ" id="ou9-bV-kmg"/>
+                <outlet property="btnNext2" destination="7PF-9o-h3A" id="IyM-SL-To1"/>
                 <outlet property="imageviewIntro" destination="L5v-Qk-UW2" id="dJN-Kl-Iex"/>
                 <outlet property="imgInside" destination="vUX-kM-nfa" id="Fc8-3q-oIx"/>
                 <outlet property="indicatorImg" destination="Qiv-bV-eRk" id="aTG-W1-zNr"/>

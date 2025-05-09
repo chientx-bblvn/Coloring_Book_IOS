@@ -18,7 +18,7 @@ class NewHomeController: BaseViewController {
     @IBOutlet weak var topBarView: TopBarView!
     
     
-    private var numberClick = 4
+    private var numberClick = 0
     private var timeDistanceShowad: TimeInterval = 5
     private var currentTime: TimeInterval = 0
     private var hasAd = true
@@ -31,7 +31,18 @@ class NewHomeController: BaseViewController {
         settingIAP()
         requestNotification()
         topBarView.onLeftClick = {
-            SubcriptionViewController.show(checkTime: true)
+            SubcriptionViewController.show(checkTime: true, handler: {
+                if DollColoringAdID.inter_after_iap.isEnableAd {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        AdLoadingView.show()
+                        ADManager.shared.loadFull(DollColoringAdID.inter_after_iap) { _ in
+                            AdLoadingView.dismiss()
+                        }
+                    }
+                }
+            }, onClickCLose: {
+                // Có thể bỏ trống nếu không cần logic gì sau khi user bấm tắt
+            })
         }
         topBarView.onRightClick = {
             AppRouter.shared.navigate(to: CheckInRoute.main, with: .push)
@@ -39,39 +50,36 @@ class NewHomeController: BaseViewController {
         topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
         
     }
-    override func setup() {
-        super.setup()
-        if UserDefaultManager.ABShowIAPColoring, !IAPState.isUserVip {
-            SubcriptionViewController.show(checkTime: false,handler: {
-                if UserDefaultManager.disableSale {
-                    if DollColoringAdID.inter_back.isEnableAd {
-                        AdLoadingView.show()
-                        ADManager.shared.loadFull(DollColoringAdID.inter_back) {_ in
-                            AdLoadingView.dismiss()
+        override func setup() {
+            super.setup()
+            if UserDefaultManager.ABShowIAPColoring, !IAPState.isUserVip {
+                SubcriptionViewController.show(checkTime: false,handler: {
+                    if UserDefaultManager.disableSale {
+                        ADManager.shared.loadFull(DollColoringAdID.inter_back)
+                        return
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        PremiumFloatingView.show()
+                        DiscountViewController.show {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                AdLoadingView.show()
+                                ADManager.shared.loadFull(DollColoringAdID.inter_back) { _ in
+                                    AdLoadingView.dismiss()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
+                                        self.calculatorDay()
+                                    }
+                                }
+                            }
                         }
                     }
-                    return
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    PremiumFloatingView.show()
-                    DiscountViewController.show {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            self.calculatorDay()
-                        }
-                        
-                    }
-                }
-            }, onClickCLose:  {
-                
-            })
-            
+                }, onClickCLose:  {
+    
+                })
+    
+            }
+            NotificationCenter.default.addObserver(self, selector: #selector(gotoDaily), name: NSNotification.Name("GOTODAILY_TABBAR"), object: nil)
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(gotoDaily), name: NSNotification.Name("GOTODAILY_TABBAR"), object: nil)
-        if !IAPState.isUserVip {
-            ADManager.shared.preLoadReward(DollColoringAdID.reward_alltopic)
-            ADManager.shared.preLoadReward(DollColoringAdID.reward_dailygift)
-        }
-    }
+
     private func setupView() {
         coloringTableView.delegate = self
         coloringTableView.dataSource = self
@@ -79,7 +87,7 @@ class NewHomeController: BaseViewController {
         coloringTableView.contentInset.bottom = 160
         
         timeDistanceShowad = TimeInterval(ADManager.shared.timeRemoteShowFull)
-        numberClick = UserDefaultManager.numberClickItemAllTopic
+//        numberClick = UserDefaultManager.numberClickItemAllTopic
         
         self.coloringTableView.backgroundColor =  UIColor.clear
         
@@ -158,67 +166,54 @@ extension NewHomeController {
     }
     
     func showRewDaily(_ data: ColoringImage) {
-        guard SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) == nil else {
+        guard SQLiteManager.shared.selectionColoringsRew().first(where: { $0.filePath == data.filePath }) == nil else {
             navigateColoring(data)
             return
         }
+
         if IAPState.isUserVip {
             navigateColoring(data)
             return
         }
+
         if !UserDefaultManager.disableMusicBackground {
             pauseAudioBackground()
         }
+
         PopupShowAdsViewController.show(in: self, data: data, {
-            ADManager.shared.loadReward(DollColoringAdID.reward_dailygift) { status in
-                switch status {
-                case .closed, .success:
-                    if !UserDefaultManager.disableMusicBackground {
-                        self.playAudioBackground()
-                    }
-                    SQLiteManager.shared.insertTableColoringRew(data: data)
-                    SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
-                    self.navigateColoring(data)
-                case .error:
-                    self.loadInterDaily(data)
-                default:
-                    break
-                }
+            if !UserDefaultManager.disableMusicBackground {
+                self.playAudioBackground()
             }
+            SQLiteManager.shared.insertTableColoringRew(data: data)
+            SQLiteManager.shared.insertTableGitColoring(
+                _id: SQLiteManager.shared.selectionGitColorings().count,
+                _name: data.filePath ?? ""
+            )
+            self.navigateColoring(data)
+
         }, {
             SubcriptionViewController.show(checkTime: true) {
                 if DollColoringAdID.inter_back.isEnableAd {
                     AdLoadingView.show()
-                    ADManager.shared.loadFull(DollColoringAdID.inter_back) {_ in
+                    ADManager.shared.loadFull(DollColoringAdID.inter_back) { _ in
                         AdLoadingView.dismiss()
                     }
                 }
             } onClickCLose: {
-                
             }
-
         })
     }
     func loadInterDaily(_ data: ColoringImage) {
-        ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
-        AdLoadingView.show()
-        ADManager.shared.loadFull(DollColoringAdID.inter_dailygift, isSplash: true){ state in
-            AdLoadingView.dismiss()
-            switch state {
-            case .closed, .error :
-                DispatchQueue.main.async {
-                    NativeFullScreenController.show() {
-                        if !UserDefaultManager.disableMusicBackground {
-                            self.playAudioBackground()
-                        }
-                        SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
-                        self.navigateColoring(data)
-                    }
-                }
-            default:
-                break
-            }
+        if !UserDefaultManager.disableMusicBackground {
+            self.playAudioBackground()
         }
+
+        SQLiteManager.shared.insertTableGitColoring(
+            _id: SQLiteManager.shared.selectionGitColorings().count,
+            _name: data.filePath ?? ""
+        )
+
+        self.navigateColoring(data)
     }
     @objc private func gotoDaily() {
         let sqliteData = SQLiteManager.shared.selectionGitColorings()
@@ -273,31 +268,23 @@ extension NewHomeController {
             navigateColoring(data)
             return
         }
-        
-        guard DollColoringAdID.inter_alltopic.isEnableAd else {
-            navigateColoring(data)
-            return
-        }
-        
+
         numberClick += 1
         if numberClick >= UserDefaultManager.numberClickItemAllTopic {
             if !UserDefaultManager.disableMusicBackground {
                 pauseAudioBackground()
             }
-            ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
+
             AdLoadingView.show()
-            ADManager.shared.loadFull(DollColoringAdID.inter_alltopic, isSplash: true) { status in
+            ADManager.shared.loadFull(DollColoringAdID.inter_main, isSplash: true) { status in
                 AdLoadingView.dismiss()
                 switch status {
                 case .closed, .error:
                     DispatchQueue.main.async {
-                        NativeFullScreenController.show() {
-                            if !UserDefaultManager.disableMusicBackground {
-                                self.playAudioBackground()
-                            }
-                            self.numberClick = 0
-                            self.navigateColoring(data)
+                        if !UserDefaultManager.disableMusicBackground {
+                            self.playAudioBackground()
                         }
+                        self.navigateColoring(data)
                     }
                 default:
                     break
@@ -327,73 +314,45 @@ extension NewHomeController {
         return 0
     }
     func showRew(_ data: ColoringImage) {
-        guard SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) == nil else {
+        guard SQLiteManager.shared.selectionColoringsRew().first(where: { $0.filePath == data.filePath }) == nil else {
             navigateColoring(data)
             return
         }
+
         if IAPState.isUserVip {
             navigateColoring(data)
             return
         }
-        
-        guard DollColoringAdID.reward_alltopic.isEnableAd else {
-            navigateColoring(data)
-            return
-        }
-        
+
         if !UserDefaultManager.disableMusicBackground {
             pauseAudioBackground()
         }
+
         PopupShowAdsViewController.show(in: self, data: data, {
-            ADManager.shared.loadReward(DollColoringAdID.reward_alltopic) { status in
-                switch status {
-                case .closed, .success:
-                    if !UserDefaultManager.disableMusicBackground {
-                        self.playAudioBackground()
-                    }
-                    SQLiteManager.shared.insertTableColoringRew(data: data)
-                    self.navigateColoring(data)
-                case .error:
-                    self.loadInter(data)
-                case .showed:
-                    break
-                case .loaded:
-                    break
-                }
+            if !UserDefaultManager.disableMusicBackground {
+                self.playAudioBackground()
             }
+            SQLiteManager.shared.insertTableColoringRew(data: data)
+            self.navigateColoring(data)
         }, {
             SubcriptionViewController.show(checkTime: true) {
-                if DollColoringAdID.inter_back.isEnableAd {
+                if DollColoringAdID.inter_after_iap.isEnableAd {
                     AdLoadingView.show()
-                    ADManager.shared.loadFull(DollColoringAdID.inter_back) {_ in
+                    ADManager.shared.loadFull(DollColoringAdID.inter_after_iap) { _ in
                         AdLoadingView.dismiss()
                     }
                 }
             } onClickCLose: {
-                
             }
-
         })
     }
     
     func loadInter(_ data: ColoringImage) {
-        ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
-        AdLoadingView.show()
-        ADManager.shared.loadFull(DollColoringAdID.inter_alltopic, isSplash: true){ state in
-            AdLoadingView.dismiss()
-            switch state {
-            case .closed, .error :
-                DispatchQueue.main.async {
-                    NativeFullScreenController.show() {
-                        if !UserDefaultManager.disableMusicBackground {
-                            self.playAudioBackground()
-                        }
-                        self.navigateColoring(data)
-                    }
-                }
-            default:
-                break
+        DispatchQueue.main.async {
+            if !UserDefaultManager.disableMusicBackground {
+                self.playAudioBackground()
             }
+            self.navigateColoring(data)
         }
     }
     func showIAP(_ data: ColoringImage) {

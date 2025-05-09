@@ -36,6 +36,7 @@ Common.Continue                                 =       "Continue";
 Common.CreateNew                                =       "Create New";
 Common.Music                                    =       "Music";
 Common.Sound                                    =       "Sound";
+Common.SoundBrush                                    =       "Sound Brush";
 Common.RateApp                                  =       "Rate App";
 Common.Save                                     =       "Save";
 Common.Delete                                   =       "Delete";

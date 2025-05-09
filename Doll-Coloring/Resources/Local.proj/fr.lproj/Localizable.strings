@@ -33,6 +33,7 @@ Common.unfinished                               =       "Non terminé";
 Common.History                                  =       "Historique";
 Common.CreateNew                                =       "Créer nouveau";
 Common.Music                                    =       "Musique";
+Common.SoundBrush = "Pinceau Sonore";
 Common.Sound                                    =       "Son";
 Common.RateApp                                  =       "Noter l'application";
 Common.Save                                     =       "Enregistrer";

@@ -70,7 +70,7 @@ class TableColorIpadController: BaseViewController {
     override func setup() {
         super.setup()
         setupView()
-        ADManager.shared.preLoadReward(DollColoringAdID.reward_color)
+//        ADManager.shared.preLoadReward(DollColoringAdID.reward_color)
     }
     
     override func bindingData() {
@@ -324,53 +324,15 @@ extension TableColorIpadController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func showRew(_ indexPath: IndexPath, index: Int = 0) {
-        if IAPState.isUserVip || isWarchAds.contains(where: {$0.contains(self.itemColors[indexPath.row].first?.tableName ?? "")}) {
+        if IAPState.isUserVip || isWarchAds.contains(where: { $0.contains(self.itemColors[indexPath.row].first?.tableName ?? "") }) {
             selectTableColor(indexPath, index: index)
         } else {
-            PopupShowAdsViewController.show(in: self, colors: itemColors[indexPath.row], {
-                ADManager.shared.loadReward(DollColoringAdID.reward_color) {[weak self] status in
-                    guard let self = self else {return}
-                    switch status {
-                    case .closed, .success:
-                        isWarchAds.append(self.itemColors[indexPath.row].first?.tableName ?? "")
-                        self.selectTableColor(indexPath, index: index)
-                    case .error:
-                        isWarchAds.removeAll(where: {$0.contains(self.itemColors[indexPath.row].first?.tableName ?? "")})
-                        self.showInter(indexPath, index: index)
-                    default:
-                        break
-                    }
-                }
-            }, {
-                self.showIAP(indexPath, index: index)
-            })
+                self.showInter(indexPath, index: index)
         }
     }
     
     func showInter(_ indexPath: IndexPath, index: Int = 0) {
-        guard DollColoringAdID.inter_color.isEnableAd else {
-            self.selectTableColor(indexPath, index: index)
-            return
-        }
-        ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
-        AdLoadingView.show()
-        ADManager.shared.loadFull(DollColoringAdID.inter_color, isSplash: true) { state in
-            AdLoadingView.dismiss()
-            switch state {
-            case .closed, .error:
-                DispatchQueue.main.async {
-                    if IAPState.isUserVip {
-                        self.selectTableColor(indexPath, index: index)
-                        return
-                    }
-                    NativeFullScreenController.show() {
-                        self.selectTableColor(indexPath, index: index)
-                    }
-                }
-            default:
-                break
-            }
-        }
+        self.selectTableColor(indexPath, index: index)
     }
     
     func showIAP(_ indexPath: IndexPath, index: Int = 0) {

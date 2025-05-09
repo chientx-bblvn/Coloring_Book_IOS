@@ -101,6 +101,7 @@ public class InappManager: NSObject {
         if let subscription = InappManager.share.listProduct.first(where: {
             $0.productIdentifier == id
         }) {
+            
             return subscription.regularPrice ?? ""
         }
         return ""
@@ -128,7 +129,7 @@ public class InappManager: NSObject {
         if let subscription = InappManager.share.listProduct.first(where: {
             $0.productIdentifier == id
         }) {
-            return subscription.discounts.first?.regularPrice ?? ""
+            return subscription.introductoryPrice?.regularPrice ?? ""
         }
         return ""
     }

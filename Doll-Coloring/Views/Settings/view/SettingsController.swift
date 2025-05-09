@@ -43,6 +43,23 @@ class SettingsController: BaseViewController {
     
     @IBOutlet weak var lbMoreApp: UILabel!
     
+    @IBOutlet weak var imgToggleSound: UIImageView!
+    
+    @IBOutlet weak var imgToggleBrush: UIImageView!
+    
+    @IBOutlet weak var switchSound: UISwitch!
+    
+    @IBOutlet weak var switchBrush: UISwitch!
+    
+    @IBOutlet weak var lblSound: UILabel!
+    
+    @IBOutlet weak var lblBrush: UILabel!
+    
+    
+    
+    
+    
+    
     class func show(in parent: UIViewController) {
         let mainStoryboard = UIStoryboard(name: "Settings", bundle: nil)
         guard let customView = mainStoryboard.instantiateViewController(withIdentifier: String(describing: self)) as? SettingsController else {
@@ -83,6 +100,12 @@ class SettingsController: BaseViewController {
         viewShare.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickViewShare)))
         viewFeedback.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickViewFeedback)))
         viewMoreApp.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickViewMore)))
+        
+        switchSound.isOn = !UserDefaultManager.disableMusicBackground
+            switchBrush.isOn = !UserDefaultManager.disableSound
+        
+        imgToggleSound.image = UserDefaultManager.disableMusicBackground ? R.image.imgStopSound() : R.image.imgToggleSound()
+        imgToggleBrush.image = UserDefaultManager.disableSound ? R.image.imgStopBrush() : R.image.imgToggleBrush()
     }
     
     @objc private func dismissView() {
@@ -102,15 +125,17 @@ class SettingsController: BaseViewController {
     }
     
     @objc func onclickViewShare() {
-       
+        self.shareContent(text: nil,
+                            url: URL(string: "https://apps.apple.com/us/app/boost-find/6502046149"),
+                          sourceView: viewShare)
     }
     
     @objc func onclickViewFeedback() {
-        
+        self.sendMail(email: "dental.taydo@gmail.com")
     }
     
     @objc func onclickViewMore() {
-        
+        print("viewMore")
     }
     
     func rateApp() {
@@ -120,6 +145,23 @@ class SettingsController: BaseViewController {
             UIApplication.shared.openURL(url)
         }
     }
+    
+    @IBAction func actionSwitchSound(_ sender: UISwitch) {
+        UserDefaultManager.currentAccessDisableMusicBackground = !sender.isOn
+        imgToggleSound.image = UserDefaultManager.disableMusicBackground ? R.image.imgStopSound() : R.image.imgToggleSound()
+                enableAudioBackground()
+    }
+    
+    
+    @IBAction func actionSwitchBrush(_ sender: UISwitch) {
+        UserDefaultManager.currentAccessDisableSound = !sender.isOn
+        imgToggleBrush.image = UserDefaultManager.disableSound ? R.image.imgStopBrush() : R.image.imgToggleBrush()
+        
+    }
+    
+    
+    
+    
     
 }
 
@@ -131,6 +173,8 @@ extension SettingsController {
         lbPolicy.text = LocalizableUtils.settingPolicy()
         lbShare.text = LocalizableUtils.settingShareApp()
         lbFeedBack.text = LocalizableUtils.settingFeedBack()
+        lblSound.text = LocalizableUtils.commonSound()
+        lblBrush.text = LocalizableUtils.commonSoundBrush()
         
     }
     

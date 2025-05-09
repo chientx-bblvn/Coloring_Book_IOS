@@ -18,15 +18,7 @@ class HomeAdsCell: UICollectionViewCell, NibReusable {
         adsView.layer.borderWidth = 0
         adsView.generateOuterShadow()
         adsView.layer.cornerRadius = 16
-        loadAds()
+
     }
     
-    func loadAds() {
-        ADManager.shared.loadNative(DollColoringAdID.native_home, to: adsView, nativeAdType: .customNativeMediaHorizontal) {[weak self] adId, success, nativeAdView in
-            if adId.contains(DollColoringAdID.native_home.adId) {
-                self?.adsView.isHidden = !success
-                self?.actionAds?(success)
-            }
-        }
-    }
 }

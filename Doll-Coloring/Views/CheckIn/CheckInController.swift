@@ -30,7 +30,7 @@ class CheckInController: BaseViewController {
     override func setup() {
         super.setup()
         setupView()
-        ADManager.shared.preLoadReward(DollColoringAdID.reward_dailygift)
+//        ADManager.shared.preLoadReward(DollColoringAdID.reward_dailygift)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -163,78 +163,73 @@ extension CheckInController: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func showRew(_ data: ColoringImage) {
-        guard SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) == nil else {
+        guard SQLiteManager.shared.selectionColoringsRew().first(where: { $0.filePath == data.filePath }) == nil else {
             navigateColoring(data)
             return
         }
+
         if IAPState.isUserVip {
             navigateColoring(data)
             return
         }
+
         if !UserDefaultManager.disableMusicBackground {
             pauseAudioBackground()
         }
+
         PopupShowAdsViewController.show(in: self, data: data, {
-            ADManager.shared.loadReward(DollColoringAdID.reward_dailygift) { status in
-                switch status {
-                case .closed, .success:
-                    if !UserDefaultManager.disableMusicBackground {
-                        self.playAudioBackground()
-                    }
-                    SQLiteManager.shared.insertTableColoringRew(data: data)
-                    SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
-                    self.navigateColoring(data)
-                case .error:
-                    self.loadInter(data)
-                default:
-                    break
-                }
+            // 👉 Thực hiện luôn hành động mở khóa, không chờ quảng cáo
+            SQLiteManager.shared.insertTableColoringRew(data: data)
+            SQLiteManager.shared.insertTableGitColoring(
+                _id: SQLiteManager.shared.selectionGitColorings().count,
+                _name: data.filePath ?? ""
+            )
+
+            if !UserDefaultManager.disableMusicBackground {
+                self.playAudioBackground()
             }
+
+            self.navigateColoring(data)
+
         }, {
             SubcriptionViewController.show(checkTime: true) {
                 if DollColoringAdID.inter_back.isEnableAd {
                     AdLoadingView.show()
-                    ADManager.shared.loadFull(DollColoringAdID.inter_back) {_ in
+                    ADManager.shared.loadFull(DollColoringAdID.inter_back) { _ in
                         AdLoadingView.dismiss()
                     }
                 }
-            } onClickCLose: {
-                
-            }
-
+            } onClickCLose: { }
         })
     }
     
-    func loadInter(_ data: ColoringImage) {
-        guard DollColoringAdID.inter_dailygift.isEnableAd else {
-            if !UserDefaultManager.disableMusicBackground {
-                self.playAudioBackground()
-            }
-            SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
-            self.navigateColoring(data)
-            return
-        }
-        ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
-        AdLoadingView.show()
-        ADManager.shared.loadFull(DollColoringAdID.inter_dailygift, isSplash: true){state in
-            AdLoadingView.dismiss()
-            switch state {
-            case .closed, .error :
-                
-                DispatchQueue.main.async {
-                    NativeFullScreenController.show() {
-                        if !UserDefaultManager.disableMusicBackground {
-                            self.playAudioBackground()
-                        }
-                        SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
-                        self.navigateColoring(data)
-                }
-                }
-            default:
-                break
-            }
-        }
-    }
+//    func loadInter(_ data: ColoringImage) {
+//        guard DollColoringAdID.inter_dailygift.isEnableAd else {
+//            if !UserDefaultManager.disableMusicBackground {
+//                self.playAudioBackground()
+//            }
+//            SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
+//            self.navigateColoring(data)
+//            return
+//        }
+//
+//        AdLoadingView.show()
+//        ADManager.shared.loadFull(DollColoringAdID.inter_dailygift, isSplash: true) { state in
+//            AdLoadingView.dismiss()
+//            switch state {
+//            case .closed, .error:
+//                DispatchQueue.main.async {
+//                    if !UserDefaultManager.disableMusicBackground {
+//                        self.playAudioBackground()
+//                    }
+//                    SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
+//                    self.navigateColoring(data)
+//                }
+//            default:
+//                break
+//            }
+//        }
+//    }
     
     func navigateColoring(_ data: ColoringImage) {
         if let path = data.filePath?.components(separatedBy: "/").last, let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath.contains(path)}) {

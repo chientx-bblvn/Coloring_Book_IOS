@@ -54,9 +54,9 @@ class DetailCollectionController: BaseViewController {
                 AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
             }
         }
-        if IAPState.isUserVip {
-            btnSave.setImage(nil, for: .normal)
-        }
+//        if IAPState.isUserVip {
+//            btnSave.setImage(nil, for: .normal)
+//        }
         topBarView.titleFont = UIFont.systemFont(ofSize: 20, weight: .bold)
         imageView.setLocalImage(with: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: viewModel.history?.imagePath ?? "").path, placeholder: nil)
     }
@@ -75,7 +75,7 @@ class DetailCollectionController: BaseViewController {
     }
     
     @IBAction func actionEdit(_ sender: Any) {
-        loadInterADSEdit()
+        self.editColoring()
     }
     
     @IBAction func actionShare(_ sender: Any) {
@@ -221,65 +221,59 @@ class DetailCollectionController: BaseViewController {
         }
     }
     
-    func loadInterAds() {
-        guard DollColoringAdID.inter_save.isEnableAd else {
-            self.savePhotosAlbum()
-            return
-        }
-        ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
-        AdLoadingView.show()
-        ADManager.shared.loadFull(DollColoringAdID.inter_save, isSplash: true) { status in
-            AdLoadingView.dismiss()
-            switch status {
-            case .closed, .error:
-                DispatchQueue.main.async {
-                    if IAPState.isUserVip {
-                        self.savePhotosAlbum()
-                        return
-                    }
-                    NativeFullScreenController.show() {
-                        self.savePhotosAlbum()
-                    }
-                }
-            default:
-                break
-            }
-        }
-    }
+//    func loadInterAds() {
+//        guard DollColoringAdID.inter_save.isEnableAd else {
+//            self.savePhotosAlbum()
+//            return
+//        }
+//
+//        AdLoadingView.show()
+//        ADManager.shared.loadFull(DollColoringAdID.inter_save, isSplash: true) { status in
+//            AdLoadingView.dismiss()
+//            switch status {
+//            case .closed, .error:
+//                DispatchQueue.main.async {
+//                    self.savePhotosAlbum()
+//                }
+//            default:
+//                break
+//            }
+//        }
+//    }
     
-    func loadInterADSEdit() {
-        guard DollColoringAdID.inter_edit_collection.isEnableAd else {
-            self.editColoring()
-            return
-        }
-        ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
-        AdLoadingView.show()
-        ADManager.shared.loadFull(DollColoringAdID.inter_edit_collection, isSplash: true) {status in
-            AdLoadingView.dismiss()
-            switch status {
-            case .closed, .error:
-                DispatchQueue.main.async {
-                    if IAPState.isUserVip {
-                        self.editColoring()
-                        return
-                    }
-                    NativeFullScreenController.show() {
-                        self.editColoring()
-                    }
-                }
-            default:
-                break
-            }
-        }
-    }
+//    func loadInterADSEdit() {
+//        guard DollColoringAdID.inter_edit_collection.isEnableAd else {
+//            self.editColoring()
+//            return
+//        }
+//        ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
+//        AdLoadingView.show()
+//        ADManager.shared.loadFull(DollColoringAdID.inter_edit_collection, isSplash: true) {status in
+//            AdLoadingView.dismiss()
+//            switch status {
+//            case .closed, .error:
+//                DispatchQueue.main.async {
+//                    if IAPState.isUserVip {
+//                        self.editColoring()
+//                        return
+//                    }
+//                    NativeFullScreenController.show() {
+//                        self.editColoring()
+//                    }
+//                }
+//            default:
+//                break
+//            }
+//        }
+//    }
     
     func loadAdsView() {
-        ADManager.shared.loadReward(DollColoringAdID.reward_save) {[weak self] status in
+        ADManager.shared.loadReward(DollColoringAdID.reward_save) { [weak self] status in
             switch status {
             case .closed, .success:
                 self?.savePhotosAlbum()
             case .error:
-                self?.loadInterAds()
+                print("Reward ad failed to load or show: reward_save")
             default:
                 break
             }

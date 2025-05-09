@@ -170,9 +170,9 @@ extension IAPController {
         }) {
             
             switch bestPrice {
-            case .weekly:
-                FirebaseEventManager.logEvent(with: RMBGEventTracking.iapScreenContinueClicked,
-                                              params: ["iap_name" : "yearly"])
+//            case .weekly:
+//                FirebaseEventManager.logEvent(with: RMBGEventTracking.iapScreenContinueClicked,
+//                                              params: ["iap_name" : "yearly"])
             case .yearly:
                 FirebaseEventManager.logEvent(with: RMBGEventTracking.iapScreenContinueClicked,
                                               params: ["iap_name" : "weekly"])

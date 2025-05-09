@@ -177,17 +177,17 @@ extension CollectionsController {
     }
     
     func loadColapBanner() {
-        viewAds.isHidden = false
-        viewHeightAds.constant = DeviceInfos.isIpad() ? 90 : 56
-        ADManager.shared.loadBanner(DollColoringAdID.banner_collection, viewBanner: viewAds) {[weak self] success in
-            self?.viewAds.isHidden = !success
-            if DeviceInfos.isIpad() {
-                self?.viewHeightAds.constant = success ? 90 : 0
-            } else {
-                self?.viewHeightAds.constant = success ? 56 : 0
-            }
-            
-        }
+        viewAds.isHidden = true
+//        viewHeightAds.constant = DeviceInfos.isIpad() ? 90 : 56
+//        ADManager.shared.loadBanner(DollColoringAdID.banner_collection, viewBanner: viewAds) {[weak self] success in
+//            self?.viewAds.isHidden = !success
+//            if DeviceInfos.isIpad() {
+//                self?.viewHeightAds.constant = success ? 90 : 0
+//            } else {
+//                self?.viewHeightAds.constant = success ? 56 : 0
+//            }
+//            
+//        }
     }
 }
 

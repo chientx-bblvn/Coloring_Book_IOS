@@ -35,6 +35,7 @@ Common.History = "Verlauf";
 Common.CreateNew = "Neu erstellen";
 Common.Music = "Musik";
 Common.Sound = "Ton";
+Common.SoundBrush = "Sound-Pinsel";
 Common.RateApp = "App bewerten";
 Common.Save = "Speichern";
 Common.Delete = "Löschen";

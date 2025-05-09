@@ -13,6 +13,10 @@ class CustomMediaNativeAdViewFixedHeight: GADNativeAdView {
     @IBOutlet private weak var lblAds: UILabel!
     @IBOutlet private weak var viewMedia: UIView!
     @IBOutlet private weak var bannerImageView: UIImageView!
+    
+    @IBOutlet weak var btnAction: UIButton!
+    
+    
    
     var adUnitID: String?
     var gadNativeAd: GADNativeAd?
@@ -32,6 +36,7 @@ class CustomMediaNativeAdViewFixedHeight: GADNativeAdView {
         )
         lblAds.roundCorners(corners: [.layerMinXMinYCorner, .layerMaxXMaxYCorner],
                             radius: 8)
+        btnAction.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
     }
     
     override func layoutSubviews() {

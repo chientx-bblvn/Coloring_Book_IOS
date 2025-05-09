@@ -31,6 +31,7 @@ enum UserDefault: String {
     case date_first_open_app = "date_first_open_app"
     case time_countdownt_sale = "time_countdownt_sale"
     case is_disable_sale = "is_disable_sale"
+    case date_first_install_app = "date_first_install_app"
 }
 
 enum KeyChainKey: String, CaseIterable {

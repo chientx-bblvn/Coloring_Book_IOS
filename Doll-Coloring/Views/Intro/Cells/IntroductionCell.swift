@@ -18,25 +18,42 @@ class IntroductionCell: FSPagerViewCell, NibReusable {
     @IBOutlet weak var btnNext: UIButton!
     @IBOutlet weak var imgInside: UIImageView!
     
+    @IBOutlet weak var btnNext2: UIButton!
+    
+    
     var onNext: (() -> Void)?
     private var isLoadingAd = false
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.btnNext2.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
+        
+    }
+        
     
     
     func loadData(intro: IntroModel) {
         switch intro.id {
         case 0:
             changeButtonNext(LocalizableUtils.commonNext())
-            viewAds.isHidden = true
-            loadAdsHigh()
+            viewAds.isHidden = false
+            self.btnNext.isHidden = false
+            self.btnNext2.isHidden = true
+            loadNativeAd(adId: .native_onboarding_1)
         case 1:
             changeButtonNext(LocalizableUtils.commonNext())
-            viewAds.isHidden = false
-            loadAdsHigh()
+            viewAds.isHidden = true
+            self.btnNext.isHidden = true
+            self.btnNext2.isHidden = false
+            self.indicatorImg.isHidden = true
+           
+//            loadNativeAd(adId: .native_onboarding_2)
         case 2:
             changeButtonNext(LocalizableUtils.commonStart())
             viewAds.isHidden = false
-            loadAds()
+            self.btnNext.isHidden = false
+            self.btnNext2.isHidden = true
+            loadNativeAd(adId: .native_onboarding_3)
         default:
             break
         }
@@ -49,29 +66,20 @@ class IntroductionCell: FSPagerViewCell, NibReusable {
     
     func changeButtonNext(_ title: String) {
         self.btnNext.setTitle(title, for: .normal)
+        self.btnNext2.setTitle(title, for: .normal)
     }
     
-    private func loadAdsHigh() {
-        self.viewAds.isHidden = false
-        ADManager.shared.loadNative(DollColoringAdID.native_onboarding_high,
-                                    to: viewAds, refreshAd: true, nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success, _  in
-            guard idAds.contains(DollColoringAdID.native_onboarding_high.adId) else {return}
-            self?.isLoadingAd = false
-            self?.viewAds.isHidden = !success
+    private func loadNativeAd(adId: DollColoringAdID) {
+            if isLoadingAd { return }
+            isLoadingAd = true
+            viewAds.isHidden = false
+
+            ADManager.shared.loadNative(adId, to: viewAds, nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success, _ in
+                guard idAds == adId.adId else { return }
+                self?.isLoadingAd = false
+                self?.viewAds.isHidden = !success
+            }
         }
-    }
-    
-    private func loadAds() {
-        if isLoadingAd { return }
-        isLoadingAd = true
-        self.viewAds.isHidden = false
-        ADManager.shared.loadNative(DollColoringAdID.native_onboarding,
-                                    to: viewAds, refreshAd: true, nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success, _  in
-            guard idAds.contains(DollColoringAdID.native_onboarding.adId) else {return}
-            self?.isLoadingAd = false
-            self?.viewAds.isHidden = !success
-        }
-    }
     
     @IBAction func buttonNextOnTouch(_ sender: UIButton) {
         onNext?()

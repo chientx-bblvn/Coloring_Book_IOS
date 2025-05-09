@@ -29,6 +29,7 @@ Common.Settings                                 =       "Настройки";
 
 Common.finished                                 =       "Завершено";
 Common.unfinished                               =       "Незавершено";
+Common.SoundBrush = "Звуковая кисть";
 
 Common.History                                  =       "История";
 Common.CreateNew                                =       "Создать новый";

@@ -14,27 +14,19 @@ class PopupTomorrowViewController: BaseViewController {
     
     @IBOutlet weak var lbTitle: UILabel!
     
-    @IBOutlet weak var viewAds: UIView!
-    
     @IBOutlet weak var btnDone: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
             lbTitle.text = LocalizableUtils.commonCombackTomorrow()
             btnDone.setTitle(LocalizableUtils.commonYes(), for: .normal)
-        loadAds()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         showAnimate()
     }
 
-    func loadAds() {
-        viewAds.isHidden = false
-        ADManager.shared.loadNative(DollColoringAdID.native_dialog, to: viewAds, nativeAdType: .customMediaFixedHeight) {[weak self] adId, success, nativeAdView in
-            self?.viewAds.isHidden = !success
-        }
-    }
+
     
     @IBAction func actionDone(_ sender: Any) {
         removeAnimate()

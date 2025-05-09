@@ -46,10 +46,10 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         return tabBar
     }()
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        loadAdsBanner()
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        loadAdsBanner()
+//    }
     
     override func loadView() {
         super.loadView()
@@ -59,7 +59,7 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         SOTabBarSetting.tabBarSizeImage = 40
         SOTabBarSetting.tabBarShadowColor = UIColor.clear.cgColor
         SOTabBarSetting.tabBarTintColor = .clear
-        settingIAP()
+//        settingIAP()
     }
     
     override func viewDidLoad() {
@@ -90,11 +90,11 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         super.viewWillTransition(to: size, with: coordinator)
     }
     
-    private func settingIAP() {
-        InappManager.share.didPaymentSuccess.subscribe(onNext: { [weak self] _ in
-            self?.loadAdsBanner()
-        }).disposed(by: disposeBag)
-    }
+//    private func settingIAP() {
+//        InappManager.share.didPaymentSuccess.subscribe(onNext: { [weak self] _ in
+//            self?.loadAdsBanner()
+//        }).disposed(by: disposeBag)
+//    }
     
     func tabBar(_ tabBar: SOTabBar, didSelectTabAt index: Int) {
         let previousVC = viewControllers[index]
@@ -132,16 +132,16 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
         }
     }
     
-    func loadAdsBanner() {
-        if DeviceInfos.isIpad() {
-            heightContraintAds.constant = 90
-        } else {
-            heightContraintAds.constant = 60
-        }
-        viewAds.isHidden = false
-        ADManager.shared.loadBanner(DollColoringAdID.banner_home, viewBanner: viewAds) {[weak self] success in
-            self?.getCurrentHeightAds(isSuccess: success)
-//            self?.viewAds.isHidden = !success
-        }
-    }
+//    func loadAdsBanner() {
+//        if DeviceInfos.isIpad() {
+//            heightContraintAds.constant = 90
+//        } else {
+//            heightContraintAds.constant = 60
+//        }
+//        viewAds.isHidden = false
+//        ADManager.shared.loadBanner(DollColoringAdID.banner_home, viewBanner: viewAds) {[weak self] success in
+//            self?.getCurrentHeightAds(isSuccess: success)
+////            self?.viewAds.isHidden = !success
+//        }
+//    }
 }

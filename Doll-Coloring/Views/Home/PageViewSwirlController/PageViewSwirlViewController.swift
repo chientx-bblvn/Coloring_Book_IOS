@@ -46,7 +46,7 @@ class PageViewSwirlViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         hasAd = false
-        loadNativeAds()
+//        loadNativeAds()
         coloringLocal = SQLiteManager.shared.selectionColorings()
         
     }
@@ -87,15 +87,15 @@ class PageViewSwirlViewController: BaseViewController {
         collectionView.reloadData()
     }
     
-    private func loadNativeAds() {
-        ADManager.shared.loadNativeWithoutView(DollColoringAdID.native_home,
-                                               nativeAdType: .customNativeMediaHorizontal,
-                                               ratio: .portrait,
-                                               { adId, success, nativeAdView in
-            self.hasAd = success
-            self.nativeAdView = nativeAdView
-        })
-    }
+//    private func loadNativeAds() {
+//        ADManager.shared.loadNativeWithoutView(DollColoringAdID.native_home,
+//                                               nativeAdType: .customNativeMediaHorizontal,
+//                                               ratio: .portrait,
+//                                               { adId, success, nativeAdView in
+//            self.hasAd = success
+//            self.nativeAdView = nativeAdView
+//        })
+//    }
 }
 
 extension PageViewSwirlViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

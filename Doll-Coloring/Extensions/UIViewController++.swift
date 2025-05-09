@@ -155,24 +155,29 @@ extension UIViewController {
         
     }
 
-    func shareContent(text: String? = nil, url: URL? = nil, image: UIImage? = nil) {
-        var sharedObjects: [AnyObject] = []
-        if let someText = text, !someText.isEmpty {
-            sharedObjects.append(someText as AnyObject)
+    func shareContent(text: String? = nil, url: URL? = nil, image: UIImage? = nil,
+                          sourceView: UIView?) {
+            var sharedObjects: [AnyObject] = []
+            if let someText = text, !someText.isEmpty {
+                sharedObjects.append(someText as AnyObject)
+            }
+            if let webUrl = url {
+                sharedObjects.append(webUrl as AnyObject)
+            }
+            if let imageShare = image {
+                sharedObjects.append(imageShare as AnyObject)
+            }
+            let activityViewController = UIActivityViewController(activityItems: sharedObjects, applicationActivities: nil)
+            if DeviceInfos.isIpad() {
+                if let view = sourceView ?? self.view {
+                    activityViewController.popoverPresentationController?.sourceView = view
+                    activityViewController.popoverPresentationController?.sourceRect = view.bounds
+                }
+            }
+            activityViewController.excludedActivityTypes = [UIActivity.ActivityType.saveToCameraRoll]
+
+            self.present(activityViewController, animated: true, completion: nil)
         }
-        if let webUrl = url {
-            sharedObjects.append(webUrl as AnyObject)
-        }
-        if let imageShare = image {
-            sharedObjects.append(imageShare as AnyObject)
-        }
-        let activityViewController = UIActivityViewController(activityItems: sharedObjects, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-//
-//        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook,UIActivityType.postToTwitter,UIActivityType.mail]
-//
-        self.present(activityViewController, animated: true, completion: nil)
-    }
     
 }
 

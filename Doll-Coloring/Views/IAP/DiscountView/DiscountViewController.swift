@@ -28,10 +28,10 @@ class DiscountViewController: BaseViewController {
     
     @IBOutlet weak var lbDescription: UILabel!
     
-    private var iapId: IAPIdType = .weeklySale
+    private var iapId: IAPIdType = .monthlySale
     private var iapIds: [IAPIdType] = []
     
-    private var currentTime: Int = 3600
+    private var currentTime: Int = 900
     
     private var timer: Timer?
     
@@ -58,12 +58,19 @@ class DiscountViewController: BaseViewController {
     
     override func setup() {
         super.setup()
+        if UserDefaultManager.numberOfDaysSinceInstall() >= 7 {
+               self.dismiss(animated: true) {
+                   self.onCloseScreen?()
+               }
+               return
+           }
+        
         viewCountdown.cornerRadiusView = 8
-        viewCountdown.layer.borderColor = UIColor.white.cgColor
-        viewCountdown.layer.borderWidth = 1
+        viewCountdown.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 1, height: 1))
         videoView.loadAnimation(file: "flower", loopMode: .loop, contentMode: .scaleAspectFill)
         btnClamItNow.cornerRadiusView = 28
-        btnClamItNow.backgroundColor = UIColor(hexString: "E6E653")
+        btnClamItNow.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
+       
         currentTime = UserDefaultManager.timeCountdown
         getInfoIAP()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(onTimer), userInfo: nil, repeats: true)
@@ -102,19 +109,12 @@ class DiscountViewController: BaseViewController {
      }
     
     private func loadData() {
-        iapId = .weeklySale
+        iapId = .monthlySale
         iapIds.forEach { iap in
-            if iap == .weeklySale {
-                let text = "\(IAPIdType.weeklySale.price)/\(LocalizableUtils.iapWeek())"
-                let attrString = NSAttributedString(
-                    string: text,
-                    attributes: [
-                        NSAttributedString.Key.strokeColor: UIColor(hexString: "F6B259"),
-                        NSAttributedString.Key.strokeWidth: -2.0,
-                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24.0, weight: .bold)
-                    ]
-                )
-                lbPrice.attributedText = attrString
+            guard UserDefaultManager.numberOfDaysSinceInstall() < 7 else { return }
+            if iap == .monthlySale {
+                let text = "\(IAPState.iapState == .expired ? IAPIdType.monthlySale.price : IAPIdType.monthlySale.discountPrice)/\(LocalizableUtils.iapMonth())"
+                lbPrice.text = text
             }
         }
     }
@@ -146,23 +146,10 @@ class DiscountViewController: BaseViewController {
     
     @IBAction func actionClose(_ sender: Any) {
         self.dismiss(animated: false) {
-            guard DollColoringAdID.inter_back.isEnableAd else {
                 if let handler = self.onCloseScreen {
                     handler()
                 }
-                return
             }
-            ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) { state in
-                switch state {
-                case .closed, .error:
-                    if let handler = self.onCloseScreen {
-                        handler()
-                    }
-                    
-                default: break
-                }
-            }
-        }
     }
     
     @IBAction func actionClamitNow(_ sender: Any) {

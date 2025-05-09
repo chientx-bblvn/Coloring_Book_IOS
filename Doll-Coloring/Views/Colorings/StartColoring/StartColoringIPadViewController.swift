@@ -63,7 +63,7 @@ class StartColoringIPadViewController: BaseViewController {
     
     @IBOutlet weak var stackToolsView: UIStackView!
     
-    @IBOutlet weak var btnPencil: UIButton!
+//    @IBOutlet weak var btnPencil: UIButton!
     
     @IBOutlet weak var btnEraser: UIButton!
     
@@ -92,6 +92,7 @@ class StartColoringIPadViewController: BaseViewController {
     private var indexListColor: Int? = 0
     private var indexColorBling: Int? = 0
     private var indexItemColor: Int? = 0
+    private var bannerReloadTimer: Timer?
     
     override func setup() {
         super.setup()
@@ -100,7 +101,7 @@ class StartColoringIPadViewController: BaseViewController {
         getListColorIpad()
         createColoringBookView()
         loadAdsView()
-        ADManager.shared.preLoadNative(DollColoringAdID.native_dialog, nativeAdType: .customMediaFixedHeight)
+//        ADManager.shared.preLoadNative(DollColoringAdID.native_dialog, nativeAdType: .customMediaFixedHeight)
     }
     
     override func updateMorePortrait() {
@@ -112,6 +113,12 @@ class StartColoringIPadViewController: BaseViewController {
     override func updateMoreLandscape() {
         super.updateMoreLandscape()
         updateLayoutContent()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        bannerReloadTimer?.invalidate()
+        bannerReloadTimer = nil
     }
     
     private func setupView() {
@@ -307,17 +314,17 @@ class StartColoringIPadViewController: BaseViewController {
         btnPen.isSelected = false
         btnFill.isSelected = false
         btnEraser.isSelected = false
-        btnPencil.isSelected = false
+//        btnPencil.isSelected = false
         switch tools {
-        case .Pencil:
-            btnPencil.isSelected = true
-            viewChangeLineWidth.isHidden = true
-            coloringBookView.currentWidth = CGFloat(simd_mix(1.0, 40.0, 0.2))
-            coloringBookView.currentColor = currentColor ?? .red
-            coloringBookView.nameColor = nameColor ?? ""
-            panGesture.maximumNumberOfTouches = 2
-            panGesture.minimumNumberOfTouches = 2
-            coloringBookView.isPens = true
+//        case .Pencil:
+//            btnPencil.isSelected = true
+//            viewChangeLineWidth.isHidden = true
+//            coloringBookView.currentWidth = CGFloat(simd_mix(1.0, 40.0, 0.2))
+//            coloringBookView.currentColor = currentColor ?? .red
+//            coloringBookView.nameColor = nameColor ?? ""
+//            panGesture.maximumNumberOfTouches = 2
+//            panGesture.minimumNumberOfTouches = 2
+//            coloringBookView.isPens = true
         case .Eraser:
             panGesture.maximumNumberOfTouches = 2
             panGesture.minimumNumberOfTouches = 2
@@ -372,63 +379,51 @@ class StartColoringIPadViewController: BaseViewController {
     private func actionBackTabbars() {
         let percent = coloringBookView.percentColoring
         let percentColoring = Int((percent * 100).rounded())
+
         if percentColoring < 100 {
-            PopupColoringViewController.show(in: self, _percent: percent, _title: LocalizableUtils.commonDescExit(), _titleOk: LocalizableUtils.commonOK(), _titleCancel: LocalizableUtils.commonNo()) {
+            PopupColoringViewController.show(in: self,
+                                             _percent: percent,
+                                             _title: LocalizableUtils.commonDescExit(),
+                                             _titleOk: LocalizableUtils.commonOK(),
+                                             _titleCancel: LocalizableUtils.commonNo()) {
                 if IAPState.isUserVip {
                     self.dissmissHistoryColoring()
                     return
                 }
-                
-                guard DollColoringAdID.nativefull_afterinter.isEnableAd else {
+
+                guard DollColoringAdID.inter_back.isEnableAd else {
                     self.dissmissHistoryColoring()
                     return
                 }
-                
-                ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
+
                 AdLoadingView.show()
                 ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) { state in
                     AdLoadingView.dismiss()
                     switch state {
                     case .closed, .error:
-                        DispatchQueue.main.async {
-                            if IAPState.isUserVip {
-                                self.dissmissHistoryColoring()
-                                return
-                            }
-                            NativeFullScreenController.show() {
-                                self.dissmissHistoryColoring()
-                            }
-                        }
+                        self.dissmissHistoryColoring()
                     default:
                         break
                     }
                 }
+
             } actionCancel: {
-                
             }
+
             return
         }
-        
+
         guard DollColoringAdID.inter_back.isEnableAd else {
             self.dissmissHistoryColoring()
             return
         }
-        
-        ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
+
         AdLoadingView.show()
         ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) { state in
             AdLoadingView.dismiss()
             switch state {
             case .closed, .error:
-                DispatchQueue.main.async {
-                    if IAPState.isUserVip {
-                        self.dissmissHistoryColoring()
-                        return
-                    }
-                    NativeFullScreenController.show() {
-                        self.dissmissHistoryColoring()
-                    }
-                }
+                self.dissmissHistoryColoring()
             default:
                 break
             }
@@ -466,9 +461,9 @@ class StartColoringIPadViewController: BaseViewController {
         changeStateTools(.Brush)
     }
     
-    @IBAction func actionPencil(_ sender: Any) {
-        changeStateTools(.Pencil)
-    }
+//    @IBAction func actionPencil(_ sender: Any) {
+//        changeStateTools(.Pencil)
+//    }
     
     @IBAction func actionEraser(_ sender: Any) {
         changeStateColoring(true)
@@ -716,22 +711,28 @@ extension StartColoringIPadViewController {
     }
     
     func loadAdsView() {
+        bannerReloadTimer?.invalidate()
+
         if DeviceInfos.isIpad() {
             heightViewAds.constant = 90
         } else {
             heightViewAds.constant = 70
         }
         viewAds.isHidden = false
-        ADManager.shared.loadBanner(DollColoringAdID.banner_coloring, viewBanner: viewAds) {[weak self] success in
-            if DeviceInfos.isIpad() {
-                self?.heightViewAds.constant = success ? 90 : 90
-            } else {
-                self?.heightViewAds.constant = success ? 70 : 70
+        ADManager.shared.loadBanner(DollColoringAdID.banner_coloring, viewBanner: viewAds) { [weak self] success in
+            guard let self = self else { return }
+            self.viewAds.isHidden = !success
+            self.heightViewAds.constant = success
+                ? (DeviceInfos.isIpad() ? 90 : 70)
+                : 0
+
+            self.bannerReloadTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { _ in
+                ADManager.shared.loadBanner(DollColoringAdID.banner_coloring, viewBanner: self.viewAds) { success in
+                    self.viewAds.isHidden = !success
+                }
             }
-            self?.viewAds.isHidden = !success
         }
     }
-    
 }
 
 extension StartColoringIPadViewController: ColoringBookViewDelegate {
@@ -752,7 +753,7 @@ extension StartColoringIPadViewController: ColoringBookViewDelegate {
 }
 
 enum ToolsColoring: String {
-    case Pencil = "Pencil"
+//    case Pencil = "Pencil"
     case Eraser = "Eraser"
     case Bucket = "Bucket"
     case Brush = "Brush"

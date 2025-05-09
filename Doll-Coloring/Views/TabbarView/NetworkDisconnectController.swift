@@ -16,6 +16,7 @@ class NetworkDisconnectController: BaseViewController {
     @IBOutlet weak var viewAnimation: LottieAnimationView!
     @IBOutlet weak var lbDisconnected: UILabel!
     
+    @IBOutlet weak var btnGoToSetting: UIButton!
     
     class func show() {
         let mainStoryboard = UIStoryboard(name: "TabbarView", bundle: nil)
@@ -39,6 +40,7 @@ class NetworkDisconnectController: BaseViewController {
         viewAnimation.loadAnimation(file: "animation_dissconnect", loopMode: .loop, autoPlay: true)
         viewContent.layer.backgroundColor = UIColor(hexString: "98A3F3").cgColor
         viewContent.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 4, height: 4))
+        btnGoToSetting.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 4, height: 4))
         showAnimate()
     }
     
@@ -54,6 +56,21 @@ class NetworkDisconnectController: BaseViewController {
             }
         }
     }
+    
+    @IBAction func dismissAction(_ sender: Any) {
+        removeAnimate {
+            self.dismiss(animated: true)
+        }
+    }
+    
+    @IBAction func settingNetworkAction(_ sender: Any) {
+        if let settingsUrl = URL(string: UIApplication.openSettingsURLString),
+               UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+            }
+    }
+    
+    
 }
 
 extension NetworkDisconnectController {

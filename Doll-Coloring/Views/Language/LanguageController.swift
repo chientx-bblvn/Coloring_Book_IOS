@@ -46,12 +46,6 @@ class LanguageController: BaseViewController {
     }
     
     func checkSelectLanguage() {
-        if goFrom == .intro {
-            topBarView.rightTitleColor = R.color.colorTitle()
-        } else {
-            topBarView.rightIcon = R.image.ic_right_back()
-        }
-        
         topBarView.rightEnable = currentLanguage != nil
     }
 }
@@ -68,23 +62,25 @@ extension LanguageController {
         let language = UserDefaults.standard.string(forKey: UserDefault.languageKey.rawValue) ?? ""
         if language.isEmpty {
             FirebaseEventManager.logEvent(with: RMBGEventTracking.languageScr)
-            let alpha = CGFloat(RemoteConfigManager.shared
-                .getValue(by: RMBGRemoteConfig.alphaLanguageColor)?
-                .numberValue.floatValue ?? 0.0)
-            if goFrom == .intro {
-                topBarView.rightTitleColor = R.color.mainPrimary()?.withAlphaComponent(alpha)
-            } else {
-                topBarView.rightIcon = R.image.ic_right_back()
-            }
+//            let alpha = CGFloat(RemoteConfigManager.shared
+//                .getValue(by: RMBGRemoteConfig.alphaLanguageColor)?
+//                .numberValue.floatValue ?? 0.0)
+//            if goFrom == .intro {
+//                topBarView.rightTitleColor = R.color.mainPrimary()?.withAlphaComponent(alpha)
+//            } else {
+//                topBarView.rightIcon = R.image.ic_right_back()
+//            }
         } else {
-            if goFrom == .intro {
-                topBarView.rightTitleColor = UIColor.black
-            } else {
-                topBarView.rightIcon = R.image.ic_right_back()
-            }
+//            if goFrom == .intro {
+//                topBarView.rightTitleColor = UIColor.black
+//            } else {
+//                topBarView.rightIcon = R.image.ic_right_back()
+//            }
             self.currentLanguage = Constants.currentLanguage
         }
         topBarView.titleFont = .systemFont(ofSize: 24, weight: .bold)
+        topBarView.titleLRightFont = .systemFont(ofSize: 24, weight: .bold)
+        topBarView.rightTitleColor = UIColor(hexString: "98A3F3")
         topBarView.textAlignmentCenter = false
         topBarView.rightEnable = !language.isEmpty
         
@@ -129,9 +125,14 @@ extension LanguageController {
         tableviewListCountry.delegate = self
         tableviewListCountry.dataSource = self
         if goFrom == .intro {
-            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_high)
-            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding)
-            ADManager.shared.preLoadNative(DollColoringAdID.naitve_fullscreen_onboarding, nativeAdType: .customFullScreenNative)
+            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_1,
+                                           nativeAdType: .customMediaFixedHeight)
+            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_2,
+                                                      nativeAdType: .customMediaFixedHeight)
+            
+            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_3,
+                                                      nativeAdType: .customMediaFixedHeight)
+
         }
         setupListenChangeIAP()
     }
@@ -144,40 +145,40 @@ extension LanguageController {
     
     private func loadAdsHigh() {
         viewAds.isHidden = false
-        ADManager.shared.loadNative(DollColoringAdID.native_language_high,
-                                    to: self.viewAds, refreshAd: true , nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success ,_  in
-            guard idAds.contains(DollColoringAdID.native_language_high.adId) else {
+        ADManager.shared.loadNative(DollColoringAdID.native_language,
+                                    to: self.viewAds, nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success ,_  in
+            guard idAds.contains(DollColoringAdID.native_language.adId) else {
                 return
             }
             if success {
                 self?.viewAds.isHidden = !success
             } else {
-                self?.loadAds()
-            }
-        }
-        loadAds()
-    }
-    
-    private func loadAds() {
-        ADManager.shared.loadNative(DollColoringAdID.native_language,
-                                    to: self.viewAds, refreshAd: true, nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success ,_  in
-            guard idAds.contains(DollColoringAdID.native_language.adId) else {
-                return
-            }
-            if success {
-                self?.viewAds.isHidden = false
-            } else {
                 self?.viewAds.isHidden = true
             }
         }
+//        loadAds()
     }
     
+//    private func loadAds() {
+//        ADManager.shared.loadNative(DollColoringAdID.native_language,
+//                                    to: self.viewAds, nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success ,_  in
+//            guard idAds.contains(DollColoringAdID.native_language.adId) else {
+//                return
+//            }
+//            if success {
+//                self?.viewAds.isHidden = false
+//            } else {
+//                self?.viewAds.isHidden = true
+//            }
+//        }
+//    }
+    
     private func loadText() {
-        if goFrom == .intro {
-            topBarView.rightIcon = R.image.ic_right_back()
-        } else {
-            topBarView.rightIcon = R.image.ic_right_back()
-        }
+//        if goFrom == .intro {
+//            topBarView.rightIcon = R.image.ic_right_back()
+//        } else {
+//            topBarView.rightIcon = R.image.ic_right_back()
+//        }
         topBarView.title = LocalizableUtils.languageSubTitle()
         tableviewListCountry.reloadData()
     }

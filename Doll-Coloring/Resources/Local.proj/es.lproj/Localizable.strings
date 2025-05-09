@@ -29,7 +29,7 @@ Common.Settings                                 =       "Configuración";
 
 Common.finished                                 =       "Terminado";
 Common.unfinished                               =       "Incompleto";
-
+Common.SoundBrush = "Pincel de Sonido";
 Common.History                                  =       "Historial";
 Common.CreateNew                                =       "Crear nuevo";
 Common.Music                                    =       "Música";

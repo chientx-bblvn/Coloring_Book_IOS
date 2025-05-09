@@ -189,3 +189,32 @@ class UserDefaultManager {
     }
     
 }
+extension UserDefaultManager {
+    
+    static var dateInstallApp: String? {
+        get {
+            return UserDefaults.standard.string(forKey: UserDefault.date_first_install_app.rawValue)
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: UserDefault.date_first_install_app.rawValue)
+            UserDefaults.standard.synchronize()
+        }
+    }
+
+    static func numberOfDaysSinceInstall() -> Int {
+        guard let installDateString = UserDefaultManager.dateInstallApp else { return 0 }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        guard let installDate = formatter.date(from: installDateString) else { return 0 }
+        let components = Calendar.current.dateComponents([.day], from: installDate, to: Date())
+        return components.day ?? 0
+    }
+
+    static func saveInstallDateIfNeeded() {
+        if UserDefaultManager.dateInstallApp == nil {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yyyy"
+            UserDefaultManager.dateInstallApp = formatter.string(from: Date())
+        }
+    }
+}

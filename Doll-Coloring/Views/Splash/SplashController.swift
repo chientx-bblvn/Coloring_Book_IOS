@@ -17,9 +17,12 @@ import SwiftyStoreKit
 import SDWebImage
 
 class SplashController: BaseViewController {
-    @IBOutlet private weak var lbCopyright: UILabel!
     @IBOutlet private weak var animationView: LottieAnimationView!
     @IBOutlet weak var animationColoring: LottieAnimationView!
+     
+    
+    @IBOutlet weak var viewBannerAds: UIView!
+    
     
     private var isSetLanguage = false
     private var configLoaded = false
@@ -28,14 +31,17 @@ class SplashController: BaseViewController {
     // MARK: - Setup controller and IBAction
     override func setup() {
         super.setup()
+        UserDefaultManager.saveInstallDateIfNeeded()
+        loadSavedLanguage()
+        setupView()
         requestNotification {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 self.loadConfigData()
             }
         }
-        setupView()
-        loadSavedLanguage()
+
     }
+    
     
     override func bindingData() {
         super.bindingData()
@@ -66,6 +72,16 @@ extension SplashController {
                 }
             })
         }
+    }
+    
+    private func setUpCountdown() {
+        if UserDefaults.standard.string(forKey: UserDefault.date_first_install_app.rawValue) == nil {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yyyy"
+            let todayString = formatter.string(from: Date())
+            UserDefaults.standard.set(todayString, forKey: UserDefault.date_first_install_app.rawValue)
+        }
+
     }
     
     // MARK: - Check IAP config
@@ -120,7 +136,9 @@ extension SplashController {
             RemoteConfigManager.shared.fetchConfig(completion: { [weak self] isLoaded in
                 BBLLogging.d("Check:: fetchConfig \(isLoaded)")
                 UserDefaultManager.currentAccessNumberClick = RemoteConfigManager.shared.number(forKey: KeyRemoteConfig.NumberClickItemAllTopic)
+                
                 UserDefaultManager.currentAccessABTestFillColoring = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.ABTestFillColoring)
+                
                 UserDefaultManager.currentAccessABShowIAPColoring = true
                 UserDefaultManager.currentAccessAB_is_free_trial_US = false
                 
@@ -156,19 +174,22 @@ extension SplashController {
     }
     
     private func showAdvert() {
-        self.timer?.invalidate()
-        self.timer = nil
-        BBLLogging.d("Check:: showAdvert")
-        ADManager.shared.loadOpenAsync(DollColoringAdID.appopen_splash) { [weak self] showed in
-            if showed {
-                DispatchQueue.main.asyncSafety { [weak self] in
-                    self?.preloadOpenResumeAd()
-                    self?.navigateScreen()
-                }
-            } else {
-                self?.showFullAds()
-            }
+        let showIntro = UserDefaults.standard.bool(forKey: UserDefault.showedIntro.rawValue)
+        if !isSetLanguage {
+            ADManager.shared.preLoadNative(DollColoringAdID.native_language_2nd,
+                                           nativeAdType: .customMediaFixedHeight)
+        } else if !showIntro {
+            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_1,
+                                           nativeAdType: .customMediaFixedHeight)
+            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_2,
+                                                      nativeAdType: .customMediaFixedHeight)
+            
+            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_3,
+                                                      nativeAdType: .customMediaFixedHeight)
         }
+        BBLLogging.d("Check:: showAdvert")
+        self.loadAdsHigh()
+        
     }
     
     private func preloadOpenResumeAd() {
@@ -177,20 +198,51 @@ extension SplashController {
         }
     }
     
-    private func showFullAds() {
-        self.timer?.invalidate()
-        self.timer = nil
-        if !DollColoringAdID.appopen_allprice.isEnableAd {
-            self.navigateScreen()
-            return
-        }
-        BBLLogging.d("Check:: showFullAds")
-        ADManager.shared.loadOpenAsync(DollColoringAdID.appopen_allprice) {[weak self] showed in
-            self?.preloadOpenResumeAd()
-            self?.navigateScreen()
+    private func loadAdsHigh() {
+        BBLLogging.d("Check:: showFullAdsHigh")
+        ADManager.shared.loadFull(DollColoringAdID.inter_splash_high) { [weak self] adResult in
+            guard let self = self else { return }
+            BBLLogging.d("Check:: loaded high: \(adResult)")
+            switch adResult {
+            case .loaded:
+                break
+
+            case .error:
+                DispatchQueue.main.asyncSafety {
+                    self.loadAds()
+                }
+
+            case .closed:
+                DispatchQueue.main.asyncSafety {
+                    self.navigateScreen()
+                }
+
+            default:
+                break
+            }
         }
     }
-    
+
+    private func loadAds() {
+        BBLLogging.d("Check:: showFullAds")
+        ADManager.shared.loadFull(DollColoringAdID.inter_splash) { [weak self] adResult in
+            guard let self = self else { return }
+            BBLLogging.d("Check:: loaded normal: \(adResult)")
+            switch adResult {
+            case .loaded:
+                break
+
+            case .closed, .error:
+                DispatchQueue.main.asyncSafety {
+                    self.navigateScreen()
+                }
+
+            default:
+                break
+            }
+        }
+    }
+
     private func navigateScreen() {
         BBLLogging.d("Check:: navigateScreen")
         DispatchQueue.main.asyncSafety { [weak self] in
@@ -229,11 +281,15 @@ extension SplashController {
                     contenColor: R.color.textColor()!,
                     actionColor: R.color.textColor()!,
                     backgroundAction: [R.color.colorTextTopBar()!])
-        let testIds =     [
-            "1999dafded8682859eeec95e2482fbe9",
-            "9b689f03a451ea6278b47db3210f81d8"
-        ]
+        let testIds: [String] = []
         ADManager.shared.startAds(style: style, testIds: testIds)
+        if !IAPState.isUserVip {
+            viewBannerAds.isHidden = false
+            ADManager.shared.forceLoadSingleBanner(DollColoringAdID.banner_splash,
+                                                   viewBanner: viewBannerAds) { success in
+                self.viewBannerAds.isHidden = !success
+            }
+        }
         let archiveFiles = ArchiveFileLocal.allCases
         for file in archiveFiles {
             if !FileManagerLocal.shared.checkFileExits(typeFile: file, fileName: "") {
@@ -243,34 +299,18 @@ extension SplashController {
     }
     
     private func loadText() {
-        lbCopyright.text = LocalizableUtils.splashCopyright()
     }
-    
+
     private func loadSavedLanguage() {
         let currLang = UserDefaults.standard.string(forKey: UserDefault.languageKey.rawValue) ?? ""
-        let showIntro = UserDefaults.standard.bool(forKey: UserDefault.showedIntro.rawValue)
         if !currLang.isEmpty {
-            Constants.currentLanguage = Language(key: currLang)
             isSetLanguage = true
-            ADManager.shared.preLoadNative(DollColoringAdID.native_language_2nd, nativeAdType: .customMediaFixedHeight)
+            Constants.currentLanguage = Language(key: currLang)
             return
-        } else {
-            if !showIntro {
-                ADManager.shared.preLoadNative(DollColoringAdID.naitve_fullscreen_onboarding, nativeAdType: .customFullScreenNative)
-                ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_high, nativeAdType: .customMediaFixedHeight) { adId, success in
-                    if ADManager.shared.isTestMode {
-                        return
-                    }
-                    if adId == DollColoringAdID.native_onboarding_high.adId, !success {
-                        ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding, nativeAdType: .customMediaFixedHeight)
-                    }
-                }
-            }
         }
-        Constants.currentLanguage = .english
         isSetLanguage = false
+        Constants.currentLanguage = .english
     }
-    
     private func requestNotification(complection: @escaping () -> Void) {
         BBLLogging.d("Check:: requestNotification")
         appDelegate?.requestNotificationPermission(completion: { success, error in

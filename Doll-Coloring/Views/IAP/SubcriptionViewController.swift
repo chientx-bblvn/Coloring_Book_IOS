@@ -58,9 +58,14 @@ class SubcriptionViewController: UIViewController {
     @IBOutlet var lb_price_package_month: UILabel!
     @IBOutlet var lb_price_package_year: UILabel!
     
-    @IBOutlet var icSelectPackage: [UIImageView]!
+    @IBOutlet weak var icSelectWeekly: UIImageView!
     
-    @IBOutlet var viewPackage: [UIView]!
+    @IBOutlet weak var icSelectMonthly: UIImageView!
+    
+    
+    @IBOutlet weak var icSelectYearly: UIImageView!
+    
+    
     
     @IBOutlet var contraintHeightPackage: [NSLayoutConstraint]!
     
@@ -80,7 +85,7 @@ class SubcriptionViewController: UIViewController {
     
     private var iapIds: [IAPIdType] = []
     
-    private var packageIds: IAPIdType = .weekly
+    private var packageIds: IAPIdType = .yearly
     
     class func show(checkTime: Bool, handler: (() -> Void)? = nil, onClickCLose: (() -> Void)? = nil) {
         let controller = SubcriptionViewController.loadController()
@@ -97,10 +102,6 @@ class SubcriptionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewPackage.forEach({$0.isUserInteractionEnabled = true})
-        viewPackage.forEach { view in
-            view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickViewIAP(_:))))
-        }
         InappManager.share.didPaymentSuccess.asObservable().subscribe(onNext: { [weak self] _ in
             if IAPState.isUserVip {
                 FirebaseEventManager.logEvent(with: RMBGEventTracking.iapScreenPurchase_made,
@@ -117,6 +118,14 @@ class SubcriptionViewController: UIViewController {
         viewMonthly.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
         viewYearly.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
         btnSubscribe.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
+        
+        viewMonthly.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapMonthly)))
+            viewYearly.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapYearly)))
+            viewWeekly.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapWeekly)))
+
+            viewMonthly.isUserInteractionEnabled = true
+            viewYearly.isUserInteractionEnabled = true
+            viewWeekly.isUserInteractionEnabled = true
         
     }
     
@@ -163,36 +172,60 @@ class SubcriptionViewController: UIViewController {
         }
     }
     
-    @objc private func onClickViewIAP(_ gesture: UIGestureRecognizer) {
-        if let view = gesture.view,  let index = viewPackage.firstIndex(of: view), let packageIAP = iapIds.first(where: {$0.id == view.restorationIdentifier}){
-            viewPackage.forEach { v in
-                if v == view {
-                    v.backgroundColor = UIColor(hexString: "FEF08A", alpha: 1)
-                } else {
-                    v.backgroundColor = .white
-                }
-            }
-            icSelectPackage.enumerated().forEach { i, image in
-                if i == index {
-                    image.image = R.image.ic_select_language()
-                } else {
-                    image.image = R.image.ic_unselect_language()
-                }
-            }
-            lb_price_package_week.isHidden = true
-            lb_price_package_year.isHidden = true
+    @objc private func onTapWeekly() {
+        selectIAP(type: .weekly)
+    }
+
+    @objc private func onTapMonthly() {
+        selectIAP(type: .monthly)
+    }
+
+    @objc private func onTapYearly() {
+        selectIAP(type: .yearly)
+    }
+    
+    private func selectIAP(type: IAPIdType) {
+        // Reset tất cả màu và icon
+        viewWeekly.backgroundColor = .white
+        viewMonthly.backgroundColor = .white
+        viewYearly.backgroundColor = .white
+
+        icSelectWeekly.image = R.image.ic_unselect_language()
+        icSelectMonthly.image = R.image.ic_unselect_language()
+        icSelectYearly.image = R.image.ic_unselect_language()
+        
+        lb_price_package_week.isHidden = true
+        lb_price_package_year.isHidden = true
+        lb_price_package_month.isHidden = true
+
+        // Hiển thị đúng gói được chọn
+        switch type {
+        case .weekly:
+            viewWeekly.backgroundColor = UIColor(hexString: "FEF08A")
+            icSelectWeekly.image = R.image.ic_select_language()
+
+            lb_price_package_week.isHidden = false
             lb_price_package_month.isHidden = true
-            switch packageIAP {
-            case .weekly:
-                lb_price_package_week.isHidden = false
-            case .monthly:
-                lb_price_package_month.isHidden = false
-            case .yearly:
-                lb_price_package_year.isHidden = false
-            default: break
-            }
-           packageIds = packageIAP
+            lb_price_package_year.isHidden = true
+        case .monthly:
+            viewMonthly.backgroundColor = UIColor(hexString: "FEF08A")
+            icSelectMonthly.image = R.image.ic_select_language()
+
+            lb_price_package_week.isHidden = true
+            lb_price_package_month.isHidden = false
+            lb_price_package_year.isHidden = true
+        case .yearly:
+            viewYearly.backgroundColor = UIColor(hexString: "FEF08A")
+            icSelectYearly.image = R.image.ic_select_language()
+
+            lb_price_package_week.isHidden = true
+            lb_price_package_month.isHidden = true
+            lb_price_package_year.isHidden = false
+        default:
+            break
         }
+
+        packageIds = type
     }
     
     @objc

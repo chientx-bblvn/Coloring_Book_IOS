@@ -71,33 +71,71 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vqm-oV-38N">
-                                <rect key="frame" x="65" y="328.66666666666669" width="300" height="300.00000000000006"/>
+                                <rect key="frame" x="65" y="318.66666666666669" width="300" height="320.00000000000006"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l8y-ph-co1" customClass="LottieAnimationView" customModule="Lottie">
-                                        <rect key="frame" x="43" y="43" width="214" height="214"/>
+                                        <rect key="frame" x="43" y="24" width="214" height="214"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="l8y-ph-co1" secondAttribute="height" id="tgI-fK-Zjb"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disconnected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dn7-MA-4fc">
-                                        <rect key="frame" x="24" y="218.33333333333331" width="252" height="38.666666666666686"/>
+                                        <rect key="frame" x="24" y="199.33333333333331" width="252" height="38.666666666666657"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                         <color key="textColor" name="ColorTitle"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="03Q-ZN-6M4">
+                                        <rect key="frame" x="43" y="253.99999999999994" width="214" height="48"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="EOX-Xj-qUF"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Go to Setting">
+                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
+                                            <color key="baseForegroundColor" red="0.1470178664" green="0.0" blue="0.33530890940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
+                                                <real key="value" value="16"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="settingNetworkAction:" destination="QVo-ES-wd5" eventType="touchUpInside" id="JaF-G4-4ac"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bsg-v3-NpL">
+                                        <rect key="frame" x="268" y="8" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="bsg-v3-NpL" secondAttribute="height" id="KK4-hG-KX5"/>
+                                            <constraint firstAttribute="height" constant="24" id="pta-ad-hFz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="ic_dismiss"/>
+                                        <connections>
+                                            <action selector="dismissAction:" destination="QVo-ES-wd5" eventType="touchUpInside" id="fwF-7P-m7E"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="03Q-ZN-6M4" firstAttribute="leading" secondItem="vqm-oV-38N" secondAttribute="leading" constant="43" id="26Y-on-Pxq"/>
+                                    <constraint firstItem="bsg-v3-NpL" firstAttribute="top" secondItem="vqm-oV-38N" secondAttribute="top" constant="8" id="2Hc-On-YxE"/>
                                     <constraint firstAttribute="trailing" secondItem="dn7-MA-4fc" secondAttribute="trailing" constant="24" id="5Ql-OO-rhl"/>
+                                    <constraint firstItem="03Q-ZN-6M4" firstAttribute="top" secondItem="l8y-ph-co1" secondAttribute="bottom" constant="16" id="5m7-at-YQz"/>
+                                    <constraint firstAttribute="trailing" secondItem="bsg-v3-NpL" secondAttribute="trailing" constant="8" id="7kZ-nt-8Fe"/>
                                     <constraint firstItem="dn7-MA-4fc" firstAttribute="bottom" secondItem="l8y-ph-co1" secondAttribute="bottom" id="9Nz-5r-Zic"/>
                                     <constraint firstItem="l8y-ph-co1" firstAttribute="leading" secondItem="vqm-oV-38N" secondAttribute="leading" constant="43" id="9jA-XE-sra"/>
-                                    <constraint firstItem="l8y-ph-co1" firstAttribute="centerY" secondItem="vqm-oV-38N" secondAttribute="centerY" id="LiS-YW-SJx"/>
+                                    <constraint firstAttribute="trailing" secondItem="03Q-ZN-6M4" secondAttribute="trailing" constant="43" id="Jh8-6X-99x"/>
                                     <constraint firstAttribute="trailing" secondItem="l8y-ph-co1" secondAttribute="trailing" constant="43" id="UoT-Uc-8Kf"/>
                                     <constraint firstItem="dn7-MA-4fc" firstAttribute="centerX" secondItem="l8y-ph-co1" secondAttribute="centerX" id="fuh-wc-5W8"/>
-                                    <constraint firstAttribute="height" constant="300" id="iTo-Yp-9jM">
+                                    <constraint firstAttribute="height" constant="320" id="iTo-Yp-9jM">
                                         <variation key="heightClass=regular-widthClass=regular" constant="410"/>
                                     </constraint>
+                                    <constraint firstItem="l8y-ph-co1" firstAttribute="top" secondItem="vqm-oV-38N" secondAttribute="top" constant="24" id="jrb-qO-Fsf"/>
                                     <constraint firstItem="dn7-MA-4fc" firstAttribute="leading" secondItem="vqm-oV-38N" secondAttribute="leading" constant="24" id="kFv-MS-qL9"/>
                                     <constraint firstAttribute="width" constant="300" id="ouj-dn-Nib">
                                         <variation key="heightClass=regular-widthClass=regular" constant="410"/>
@@ -118,6 +156,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnGoToSetting" destination="03Q-ZN-6M4" id="tAl-OK-wn2"/>
                         <outlet property="lbDisconnected" destination="dn7-MA-4fc" id="zP0-iz-fhD"/>
                         <outlet property="viewAnimation" destination="l8y-ph-co1" id="6hh-8d-Z3q"/>
                         <outlet property="viewContent" destination="vqm-oV-38N" id="w2i-uz-58V"/>
@@ -125,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wy5-ub-cve" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1022" y="303"/>
+            <point key="canvasLocation" x="1021.3953488372093" y="302.57510729613733"/>
         </scene>
         <!--Main Tabbar View Controller-->
         <scene sceneID="7fq-T1-XB4">
@@ -334,6 +373,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic_dismiss" width="24" height="24"/>
         <namedColor name="ColorTitle">
             <color red="0.14509803921568629" green="0.0" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

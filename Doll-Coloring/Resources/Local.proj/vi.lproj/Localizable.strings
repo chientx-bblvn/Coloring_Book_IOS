@@ -34,6 +34,7 @@ Common.History = "Lịch sử";
 Common.CreateNew = "Tạo mới";
 Common.Music = "Âm nhạc";
 Common.Sound = "Âm thanh";
+Common.SoundBrush = "Âm Thanh Cọ";
 Common.RateApp = "Đánh giá ứng dụng";
 Common.Save = "Lưu";
 Common.Delete = "Xóa";

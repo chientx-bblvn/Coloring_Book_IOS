@@ -33,6 +33,7 @@ Common.History = "इतिहास";
 Common.CreateNew = "नया बनाएं";
 Common.Music = "संगीत";
 Common.Sound = "ध्वनि";
+Common.SoundBrush  = "साउंड ब्रश";
 Common.RateApp = "ऐप को रेट करें";
 Common.Save = "सहेजें";
 Common.Delete = "हटाएं";

@@ -59,18 +59,18 @@ class ColoringBookCell: UITableViewCell {
             layout.minimumInteritemSpacing = 8
         }
     }
-    private func loadNativeAds() {
-        ADManager.shared.loadNativeWithoutView(DollColoringAdID.native_home,
-                                               nativeAdType: .customNativeMediaHorizontal,
-                                               ratio: .portrait,
-                                               { adId, success, nativeAdView in
-            self.hasAd = success
-            self.nativeAdView = nativeAdView
-        })
-    }
+//    private func loadNativeAds() {
+//        ADManager.shared.loadNativeWithoutView(DollColoringAdID.native_home,
+//                                               nativeAdType: .customNativeMediaHorizontal,
+//                                               ratio: .portrait,
+//                                               { adId, success, nativeAdView in
+//            self.hasAd = success
+//            self.nativeAdView = nativeAdView
+//        })
+//    }
     func prepareForDisplay() {
         hasAd = false
-        loadNativeAds()
+//        loadNativeAds()
         coloringLocal = SQLiteManager.shared.selectionColorings()
     }
     

@@ -90,7 +90,6 @@ class MainTabbarViewController: BaseViewController {
         lbColoringBooks.text = LocalizableUtils.commonColoringBooks()
         lbCollection.text = LocalizableUtils.commonCollections()
         lbSettings.text = LocalizableUtils.commonSettings()
-
     }
     
     @objc private func changeTabbar(_ gesture: UIGestureRecognizer) {
@@ -108,7 +107,6 @@ class MainTabbarViewController: BaseViewController {
         case viewColoringBooks.restorationIdentifier:
             pointColoringBooks.isHidden = false
             imgColoringBook.image = R.image.ic_diary_gold()
-//            ContraintHeightGame.constant = 54
             lbColoringBooks.textColor = UIColor(hexString: "FEF08A")
             viewContainer.presentedPageIndex = 0
             lbColoringBooks.text = LocalizableUtils.commonColoringBooks()
@@ -116,7 +114,6 @@ class MainTabbarViewController: BaseViewController {
             pointCollection.isHidden = false
             imgCollection.image = R.image.ic_collection_gold()
             lbCollection.textColor = UIColor(hexString: "FEF08A")
-//            contraintHeightEmoji.constant = 54
             viewContainer.presentedPageIndex = 1
             lbCollection.text = LocalizableUtils.commonCollections()
         case viewSettings.restorationIdentifier:
@@ -129,14 +126,12 @@ class MainTabbarViewController: BaseViewController {
         default:
             break
         }
-        
     }
 }
 extension MainTabbarViewController: BmoViewPagerDelegate, BmoViewPagerDataSource {
     func bmoViewPagerDataSourceNumberOfPage(in viewPager: BmoViewPager) -> Int {
         return 3
     }
-    
     func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController {
         switch page {
         case 0:
@@ -149,6 +144,4 @@ extension MainTabbarViewController: BmoViewPagerDelegate, BmoViewPagerDataSource
             return UIViewController()
         }
     }
-    
-    
 }

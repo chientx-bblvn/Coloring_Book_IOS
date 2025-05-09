@@ -37,7 +37,7 @@ class IntroController: BaseViewController {
     ]
     
     private var hasAd: Bool = true
-    
+//    
     private var nativeAdNative: NativeAdProtocol? {
         didSet {
             fsPagerView.reloadData()
@@ -48,7 +48,7 @@ class IntroController: BaseViewController {
     override func setup() {
         super.setup()
         setupView()
-        loadNativeFullSCR()
+//        loadNativeFullSCR()
     }
     
     override func bindingData() {
@@ -60,19 +60,6 @@ class IntroController: BaseViewController {
         super.onLanguageChange()
     }
     
-    func loadNativeFullSCR() {
-        ADManager.shared.loadNativeWithoutView(DollColoringAdID.naitve_fullscreen_onboarding, nativeAdType: .customFullScreenNative) { adId, success, nativeAdView in
-            if ADManager.shared.isTestMode {
-                self.hasAd = success
-                self.nativeAdNative = nativeAdView
-            } else {
-                if adId.contains(DollColoringAdID.naitve_fullscreen_onboarding.adId) {
-                    self.hasAd = success
-                    self.nativeAdNative = nativeAdView
-                }
-            }
-        }
-    }
 
 }
 
@@ -105,7 +92,7 @@ extension IntroController {
         fsPagerView.isScrollEnabled = true
         fsPagerView.decelerationDistance = 1
         fsPagerView.register(cellType: IntroductionCell.self)
-        fsPagerView.register(cellType: IntroADSFullCollectionViewCell.self)
+//        fsPagerView.register(cellType: IntroADSFullCollectionViewCell.self)
     }
     
     
@@ -113,9 +100,9 @@ extension IntroController {
 
 extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {
     func numberOfItems(in pagerView: FSPagerView) -> Int {
-        if hasAd {
-            return listIntro.count + 1
-        }
+//        if hasAd {
+//            return listIntro.count + 1
+//        }
         return listIntro.count
     }
     
@@ -139,18 +126,18 @@ extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {
             return cell
         }
         
-        if index == 2 {
-            let cell = pagerView.dequeueReusableCell(for: index, cellType: IntroADSFullCollectionViewCell.self)
-            return cell
-        }
+//        if index == 2 {
+//            let cell = pagerView.dequeueReusableCell(for: index, cellType: IntroADSFullCollectionViewCell.self)
+//            return cell
+//        }
     
         let cell = pagerView.dequeueReusableCell(for: index, cellType: IntroductionCell.self)
-        let intro = listIntro[index == 3 ? 2 : index]
+        let intro = listIntro[index]
         cell.loadData(intro: intro)
         cell.onNext = {
             DispatchQueue.main.asyncSafety {
                 let currentPage = self.fsPagerView.currentIndex
-                if currentPage < (self.listIntro.count) {
+                if currentPage < (self.listIntro.count - 1) {
                     self.fsPagerView.scrollToItem(at: currentPage + 1, animated: true)
                 } else {
                     UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
@@ -175,15 +162,15 @@ extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {
         }
     }
     
-    func pagerView(_ pagerView: FSPagerView, willDisplay cell: FSPagerViewCell, forItemAt index: Int) {
-        if let cell = cell as? IntroADSFullCollectionViewCell {
-            cell.loadAds(nativeAd: nativeAdNative)
-        }
-    }
-    
-    func pagerView(_ pagerView: FSPagerView, didEndDisplaying cell: FSPagerViewCell, forItemAt index: Int) {
-        if let cell = cell as? IntroADSFullCollectionViewCell {
-            cell.removeViewAds()
-        }
-    }
+//    func pagerView(_ pagerView: FSPagerView, willDisplay cell: FSPagerViewCell, forItemAt index: Int) {
+//        if let cell = cell as? IntroADSFullCollectionViewCell {
+//            cell.loadAds(nativeAd: nativeAdNative)
+//        }
+//    }
+//    
+//    func pagerView(_ pagerView: FSPagerView, didEndDisplaying cell: FSPagerViewCell, forItemAt index: Int) {
+//        if let cell = cell as? IntroADSFullCollectionViewCell {
+//            cell.removeViewAds()
+//        }
+//    }
 }

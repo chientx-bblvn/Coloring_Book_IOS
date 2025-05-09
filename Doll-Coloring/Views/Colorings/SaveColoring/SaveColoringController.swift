@@ -233,31 +233,25 @@ extension SaveColoringController {
         }
     }
     
-    func loadInterAds() {
-        guard DollColoringAdID.inter_save.isEnableAd else {
-            self.savePhotosAlbum()
-            return
-        }
-        ADManager.shared.preLoadNative(DollColoringAdID.nativefull_afterinter, refreshAd: true, nativeAdType: .customFullScreenNative)
-        AdLoadingView.show()
-        ADManager.shared.loadFull(DollColoringAdID.inter_save, isSplash: true) { status in
-            AdLoadingView.dismiss()
-            switch status {
-            case .closed, .error:
-                DispatchQueue.main.async {
-                    if IAPState.isUserVip {
-                        self.savePhotosAlbum()
-                        return
-                    }
-                    NativeFullScreenController.show() {
-                        self.savePhotosAlbum()
-                    }
-                }
-            default:
-                break
-            }
-        }
-    }
+//    func loadInterAds() {
+//        guard DollColoringAdID.inter_save.isEnableAd else {
+//            self.savePhotosAlbum()
+//            return
+//        }
+//
+//        AdLoadingView.show()
+//        ADManager.shared.loadFull(DollColoringAdID.inter_save, isSplash: true) { status in
+//            AdLoadingView.dismiss()
+//            switch status {
+//            case .closed, .error:
+//                DispatchQueue.main.async {
+//                    self.savePhotosAlbum()
+//                }
+//            default:
+//                break
+//            }
+//        }
+//    }
     
     func loadAdsView() {
         ADManager.shared.loadReward(DollColoringAdID.reward_save) {[weak self] status in
@@ -265,7 +259,7 @@ extension SaveColoringController {
             case .closed, .success:
                 self?.savePhotosAlbum()
             case .error:
-                self?.loadInterAds()
+                print("reward save error")
             default:
                 break
             }

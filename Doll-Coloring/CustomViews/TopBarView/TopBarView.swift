@@ -128,6 +128,15 @@ final class TopBarView: BaseCustomXibView {
             btnRight.isUserInteractionEnabled = newValue
         }
     }
+    var titleLRightFont: UIFont {
+        get {
+            return btnRight.titleLabel?.font ?? .systemFont(ofSize: 24)
+        }
+        set {
+            btnRight.titleLabel?.font = newValue
+        }
+    }
+
     
     override func didLoadFromNib() {
         super.didLoadFromNib()

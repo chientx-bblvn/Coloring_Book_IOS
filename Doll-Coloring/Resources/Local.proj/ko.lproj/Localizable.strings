@@ -34,6 +34,7 @@ Common.History                                  =       "기록";
 Common.CreateNew                                =       "새로 만들기";
 Common.Music                                    =       "음악";
 Common.Sound                                    =       "소리";
+Common.SoundBrush = "사운드 브러시";
 Common.RateApp                                  =       "앱 평가";
 Common.Save                                     =       "저장";
 Common.Delete                                   =       "삭제";
