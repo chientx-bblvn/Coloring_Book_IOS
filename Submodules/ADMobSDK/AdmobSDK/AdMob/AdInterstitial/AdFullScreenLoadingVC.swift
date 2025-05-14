@@ -16,6 +16,7 @@ class AdFullScreenLoadingVC: UIViewController {
     var adType: AdMobFullScreenType?
     var blockWillDismiss: VoidBlockAds?
     var blockDidDismiss: VoidBlockAds?
+    var blockFail: VoidBlockAds?
     var blocWillPresent: VoidBlockAds?
 
     var needLoadAd = true
@@ -86,7 +87,7 @@ class AdFullScreenLoadingVC: UIViewController {
                     return
                 }
                 _self.stopCheckTimmer()
-                _self.blockDidDismiss?()
+                _self.blockFail?()
             }
 
         } else {
@@ -136,7 +137,7 @@ class AdFullScreenLoadingVC: UIViewController {
                     return
                 }
                 _self.stopCheckTimmer()
-                _self.blockDidDismiss?()
+                _self.blockFail?()
             }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in

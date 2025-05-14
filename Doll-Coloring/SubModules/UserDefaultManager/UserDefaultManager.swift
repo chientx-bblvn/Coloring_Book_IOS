@@ -188,6 +188,34 @@ class UserDefaultManager {
         }
     }
     
+    static var countdownEndTime: Date? {
+        get {
+            let timeInterval = UserDefaults.standard.double(forKey: UserDefault.countdown_end_time.rawValue)
+            return timeInterval > 0 ? Date(timeIntervalSince1970: timeInterval) : nil
+        }
+        set {
+            if let date = newValue {
+                UserDefaults.standard.set(date.timeIntervalSince1970, forKey: UserDefault.countdown_end_time.rawValue)
+            } else {
+                UserDefaults.standard.removeObject(forKey: UserDefault.countdown_end_time.rawValue)
+            }
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    static func getRemainingCountdownTime() -> Int {
+        if let endTime = countdownEndTime {
+            let remaining = Int(endTime.timeIntervalSince1970 - Date().timeIntervalSince1970)
+            return max(0, remaining)
+        }
+        return currentTimeCountdown
+    }
+    
+    static func setupCountdownTimer(duration: Int) {
+        let endTime = Date().addingTimeInterval(TimeInterval(duration))
+        countdownEndTime = endTime
+        currentTimeCountdown = duration
+    }
 }
 extension UserDefaultManager {
     

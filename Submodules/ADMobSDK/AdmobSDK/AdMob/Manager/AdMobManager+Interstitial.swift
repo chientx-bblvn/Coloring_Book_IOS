@@ -129,13 +129,13 @@ extension AdMobManager: GADFullScreenContentDelegate {
     public func showIntertitial(unitId: AdUnitID,
                                 isSplash: Bool = false,
                                 blockWillDismiss: VoidBlockAds? = nil,
-                                blockDidDismiss: VoidBlockAds? = nil) {
+                                blockDidDismiss: VoidBlockAds? = nil, blockFail: VoidBlockAds? = nil) {
         if isSplash {
             AdResumeManager.shared.isShowingAd = true // kiểm tra nếu show inter thì ko show resume
             createAdInterstitialIfNeed(unitId: unitId) { [weak self] result in
                 if result {
                     self?.isSplash = true
-                    self?.showIntertitial(unitId: unitId, blockWillDismiss: blockWillDismiss, blockDidDismiss: blockDidDismiss)
+                    self?.showIntertitial(unitId: unitId, blockWillDismiss: blockWillDismiss, blockDidDismiss: blockDidDismiss, blockFail: blockFail)
                 } else {
                     blockWillDismiss?()
                     blockDidDismiss?()
@@ -170,6 +170,7 @@ extension AdMobManager: GADFullScreenContentDelegate {
             blockDidDismiss?()
         }
         loadingVC.blockWillDismiss = blockWillDismiss
+        loadingVC.blockFail = blockFail
         rootVC.addChild(loadingVC)
         rootVC.view.addSubview(loadingVC.view)
         NSLayoutConstraint.activate([

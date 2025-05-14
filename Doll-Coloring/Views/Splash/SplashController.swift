@@ -154,6 +154,12 @@ extension SplashController {
                     baseURLImage = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiURLImage)
                 }
                 UserDefaultManager.currentTimeCountdown = RemoteConfigManager.shared.number(forKey: KeyRemoteConfig.TimeCountdowntSale)
+                
+                // Setup countdown end time if not already set
+                if UserDefaultManager.countdownEndTime == nil {
+                    UserDefaultManager.setupCountdownTimer(duration: RemoteConfigManager.shared.number(forKey: KeyRemoteConfig.TimeCountdowntSale))
+                }
+                
                 UserDefaultManager.currentAccessDisableSale = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.IsDisableSale)
                 
 
@@ -181,8 +187,6 @@ extension SplashController {
         } else if !showIntro {
             ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_1,
                                            nativeAdType: .customMediaFixedHeight)
-            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_2,
-                                                      nativeAdType: .customMediaFixedHeight)
             
             ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_3,
                                                       nativeAdType: .customMediaFixedHeight)
@@ -204,9 +208,6 @@ extension SplashController {
             guard let self = self else { return }
             BBLLogging.d("Check:: loaded high: \(adResult)")
             switch adResult {
-            case .loaded:
-                break
-
             case .error:
                 DispatchQueue.main.asyncSafety {
                     self.loadAds()
@@ -229,9 +230,6 @@ extension SplashController {
             guard let self = self else { return }
             BBLLogging.d("Check:: loaded normal: \(adResult)")
             switch adResult {
-            case .loaded:
-                break
-
             case .closed, .error:
                 DispatchQueue.main.asyncSafety {
                     self.navigateScreen()

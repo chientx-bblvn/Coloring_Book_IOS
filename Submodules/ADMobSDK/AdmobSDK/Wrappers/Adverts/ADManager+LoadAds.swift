@@ -178,7 +178,15 @@ extension ADManager {
             if needRefresh {
                 AdMobManager.shared.createAdInterstitialIfNeed(unitId: adId)
             }
-        })
+        }) {
+            BBLLogging.d("ADMANAGER: FULL Showed and fail")
+            AdMobManager.shared.blockFullScreenAdFailed = nil
+            self.isShowingAd = false
+            completion?(.error)
+            if needRefresh {
+                AdMobManager.shared.createAdInterstitialIfNeed(unitId: adId)
+            }
+        }
     }
     
     public func preLoadReward(_ id: AdConfigId,

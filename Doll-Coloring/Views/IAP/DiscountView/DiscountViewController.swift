@@ -62,6 +62,7 @@ class DiscountViewController: BaseViewController {
                self.dismiss(animated: true) {
                    self.onCloseScreen?()
                }
+            PremiumFloatingView.hide()
                return
            }
         
@@ -71,7 +72,12 @@ class DiscountViewController: BaseViewController {
         btnClamItNow.cornerRadiusView = 28
         btnClamItNow.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
        
-        currentTime = UserDefaultManager.timeCountdown
+        currentTime = UserDefaultManager.getRemainingCountdownTime()
+        if UserDefaultManager.countdownEndTime == nil {
+            UserDefaultManager.setupCountdownTimer(duration: UserDefaultManager.timeCountdown)
+            currentTime = UserDefaultManager.timeCountdown
+        }
+        
         getInfoIAP()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(onTimer), userInfo: nil, repeats: true)
         lbCountdown.text = formatTime(seconds: currentTime)
@@ -133,12 +139,12 @@ class DiscountViewController: BaseViewController {
     }
     
     @objc func onTimer() {
-        currentTime -= 1
-        UserDefaultManager.currentTimeCountdown = currentTime
+        currentTime = UserDefaultManager.getRemainingCountdownTime()
         lbCountdown.text = formatTime(seconds: currentTime)
         if currentTime <= 0 {
             timer?.invalidate()
             timer = nil
+            UserDefaultManager.countdownEndTime = nil
             PremiumFloatingView.hide()
         }
     }

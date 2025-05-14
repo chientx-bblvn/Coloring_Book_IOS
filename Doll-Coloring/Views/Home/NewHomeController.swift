@@ -55,7 +55,7 @@ class NewHomeController: BaseViewController {
             if UserDefaultManager.ABShowIAPColoring, !IAPState.isUserVip {
                 SubcriptionViewController.show(checkTime: false,handler: {
                     if UserDefaultManager.disableSale {
-                        ADManager.shared.loadFull(DollColoringAdID.inter_back)
+                        ADManager.shared.loadFull(DollColoringAdID.inter_after_iap)
                         return
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -63,7 +63,7 @@ class NewHomeController: BaseViewController {
                         DiscountViewController.show {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                 AdLoadingView.show()
-                                ADManager.shared.loadFull(DollColoringAdID.inter_back) { _ in
+                                ADManager.shared.loadFull(DollColoringAdID.inter_after_iap) { _ in
                                     AdLoadingView.dismiss()
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
                                         self.calculatorDay()
@@ -140,9 +140,9 @@ class NewHomeController: BaseViewController {
     
     @objc private func showPremiumView() {
         SubcriptionViewController.show(checkTime: true) {
-            if DollColoringAdID.inter_back.isEnableAd {
+            if DollColoringAdID.inter_after_iap.isEnableAd {
                 AdLoadingView.show()
-                ADManager.shared.loadFull(DollColoringAdID.inter_back) {_ in
+                ADManager.shared.loadFull(DollColoringAdID.inter_after_iap) {_ in
                     AdLoadingView.dismiss()
                 }
             }
@@ -193,9 +193,9 @@ extension NewHomeController {
 
         }, {
             SubcriptionViewController.show(checkTime: true) {
-                if DollColoringAdID.inter_back.isEnableAd {
+                if DollColoringAdID.inter_after_iap.isEnableAd {
                     AdLoadingView.show()
-                    ADManager.shared.loadFull(DollColoringAdID.inter_back) { _ in
+                    ADManager.shared.loadFull(DollColoringAdID.inter_after_iap) { _ in
                         AdLoadingView.dismiss()
                     }
                 }
@@ -364,9 +364,9 @@ extension NewHomeController {
             }
             
             SubcriptionViewController.show(checkTime: true) {
-                if DollColoringAdID.inter_back.isEnableAd {
+                if DollColoringAdID.inter_after_iap.isEnableAd {
                     AdLoadingView.show()
-                    ADManager.shared.loadFull(DollColoringAdID.inter_back) {_ in
+                    ADManager.shared.loadFull(DollColoringAdID.inter_after_iap) {_ in
                         AdLoadingView.dismiss()
                     }
                 }

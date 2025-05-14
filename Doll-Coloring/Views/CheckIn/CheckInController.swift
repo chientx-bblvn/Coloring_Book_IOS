@@ -193,9 +193,9 @@ extension CheckInController: UICollectionViewDelegate, UICollectionViewDataSourc
 
         }, {
             SubcriptionViewController.show(checkTime: true) {
-                if DollColoringAdID.inter_back.isEnableAd {
+                if DollColoringAdID.inter_after_iap.isEnableAd {
                     AdLoadingView.show()
-                    ADManager.shared.loadFull(DollColoringAdID.inter_back) { _ in
+                    ADManager.shared.loadFull(DollColoringAdID.inter_after_iap) { _ in
                         AdLoadingView.dismiss()
                     }
                 }

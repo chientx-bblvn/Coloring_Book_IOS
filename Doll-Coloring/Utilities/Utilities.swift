@@ -30,6 +30,7 @@ enum UserDefault: String {
     case is_free_trial_US = "is_free_trial_US"
     case date_first_open_app = "date_first_open_app"
     case time_countdownt_sale = "time_countdownt_sale"
+    case countdown_end_time = "countdown_end_time"
     case is_disable_sale = "is_disable_sale"
     case date_first_install_app = "date_first_install_app"
 }

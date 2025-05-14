@@ -127,8 +127,6 @@ extension LanguageController {
         if goFrom == .intro {
             ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_1,
                                            nativeAdType: .customMediaFixedHeight)
-            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_2,
-                                                      nativeAdType: .customMediaFixedHeight)
             
             ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_3,
                                                       nativeAdType: .customMediaFixedHeight)

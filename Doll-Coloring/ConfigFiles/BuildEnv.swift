@@ -86,7 +86,6 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
     case native_language = "native_language"
     case native_language_2nd = "native_language_2nd"
     case native_onboarding_1 = "native_onboarding_1"
-    case native_onboarding_2 = "native_onboarding_2"
     case native_onboarding_3 = "native_onboarding_3"
     case inter_after_iap = "inter_after_iap"
     case inter_main = "inter_main"
@@ -116,8 +115,6 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
         case .native_language_2nd:
             return .Native
         case .native_onboarding_1:
-            return .Native
-        case .native_onboarding_2:
             return .Native
         case .native_onboarding_3:
             return .Native
@@ -151,8 +148,6 @@ enum DollColoringAdID: String, CaseIterable, AdConfigId {
             return "ca-app-pub-3850749456614322/9749146907"
         case .native_onboarding_1:
             return "ca-app-pub-3850749456614322/8436065238"
-        case .native_onboarding_2:
-            return "ca-app-pub-3850749456614322/5809901897"
         case .native_onboarding_3:
             return "ca-app-pub-3850749456614322/2502284109"
         case .inter_after_iap:
