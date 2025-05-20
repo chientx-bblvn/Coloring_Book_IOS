@@ -60,7 +60,7 @@ def shared_pods
   
 end
 
-target 'Doll-Coloring' do
+target 'Brainrot Coloring - Coloritas' do
 
   shared_pods
   

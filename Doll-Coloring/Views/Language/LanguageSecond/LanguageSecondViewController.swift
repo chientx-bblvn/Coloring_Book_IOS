@@ -80,6 +80,7 @@ class LanguageSecondViewController: BaseViewController {
      private func setupListenChangeIAP() {
          loadAdsHigh()
      }
+     
      private func loadAdsHigh() {
          viewAds.isHidden = false
          ADManager.shared.loadNative(DollColoringAdID.native_language_2nd, to: viewAds, nativeAdType: .customMediaFixedHeight) { adId, success, nativeAdView in
@@ -124,7 +125,9 @@ class LanguageSecondViewController: BaseViewController {
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          tableView.deselectRow(at: indexPath, animated: true)
          let country = getListCountry()[indexPath.row]
-         AppRouter.shared.navigate(to: LanguageRoute.language(gofrom: .intro, currentLanguage: country), with: .push, animated: false)
+         Constants.currentLanguage = country
+         AppRouter.shared.navigate(to: LanguageRoute.language(gofrom: .intro, currentLanguage: country), with: .changeRoot, animated: false)
      }
+     
      
  }

@@ -724,7 +724,7 @@ extension StartColoringIPadViewController {
             self.viewAds.isHidden = !success
             self.heightViewAds.constant = success
                 ? (DeviceInfos.isIpad() ? 90 : 70)
-                : 0
+                : 32
 
             self.bannerReloadTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { _ in
                 ADManager.shared.loadBanner(DollColoringAdID.banner_coloring, viewBanner: self.viewAds) { success in
@@ -753,7 +753,6 @@ extension StartColoringIPadViewController: ColoringBookViewDelegate {
 }
 
 enum ToolsColoring: String {
-//    case Pencil = "Pencil"
     case Eraser = "Eraser"
     case Bucket = "Bucket"
     case Brush = "Brush"

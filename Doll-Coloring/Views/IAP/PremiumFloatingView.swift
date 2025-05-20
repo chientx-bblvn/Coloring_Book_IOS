@@ -22,7 +22,7 @@ class PremiumFloatingView: BaseCustomXibView {
     }()
     
     class func show() {
-        if isClosed || IAPState.isUserVip || (IAPState.iapState == .unload) || UserDefaultManager.disableSale {
+        if isClosed || IAPState.isUserVip || (IAPState.iapState == .unload) || UserDefaultManager.disableSale || (UserDefaultManager.getRemainingCountdownTime() <= 0) {
             return
         }
         let premiumFloatingView = PremiumFloatingView.shared

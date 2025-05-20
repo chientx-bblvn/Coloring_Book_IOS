@@ -162,7 +162,7 @@ extension ADManager {
         }
         if isShowingAd {
             BBLLogging.d("ADMANAGER: FULL HAS AD SHOWING")
-            completion?(.showed)
+            completion?(.error)
             return
         }
         self.isShowingAd = true

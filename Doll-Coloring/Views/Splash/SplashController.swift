@@ -204,7 +204,7 @@ extension SplashController {
     
     private func loadAdsHigh() {
         BBLLogging.d("Check:: showFullAdsHigh")
-        ADManager.shared.loadFull(DollColoringAdID.inter_splash_high) { [weak self] adResult in
+        ADManager.shared.loadFull(DollColoringAdID.inter_splash_high, needRefresh: false) { [weak self] adResult in
             guard let self = self else { return }
             BBLLogging.d("Check:: loaded high: \(adResult)")
             switch adResult {
@@ -226,7 +226,7 @@ extension SplashController {
 
     private func loadAds() {
         BBLLogging.d("Check:: showFullAds")
-        ADManager.shared.loadFull(DollColoringAdID.inter_splash) { [weak self] adResult in
+        ADManager.shared.loadFull(DollColoringAdID.inter_splash, needRefresh: false) { [weak self] adResult in
             guard let self = self else { return }
             BBLLogging.d("Check:: loaded normal: \(adResult)")
             switch adResult {

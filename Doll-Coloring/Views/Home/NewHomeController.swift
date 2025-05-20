@@ -41,7 +41,7 @@ class NewHomeController: BaseViewController {
                     }
                 }
             }, onClickCLose: {
-                // Có thể bỏ trống nếu không cần logic gì sau khi user bấm tắt
+                
             })
         }
         topBarView.onRightClick = {
@@ -60,6 +60,18 @@ class NewHomeController: BaseViewController {
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         PremiumFloatingView.show()
+                        guard UserDefaultManager.getRemainingCountdownTime() > 0 else {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                AdLoadingView.show()
+                                ADManager.shared.loadFull(DollColoringAdID.inter_after_iap) { _ in
+                                    AdLoadingView.dismiss()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
+                                        self.calculatorDay()
+                                    }
+                                }
+                            }
+                            return
+                        }
                         DiscountViewController.show {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                 AdLoadingView.show()

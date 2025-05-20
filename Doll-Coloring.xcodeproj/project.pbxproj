@@ -311,7 +311,6 @@
 		57FE22012AA8C41E0060606F /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE21FC2AA8C41E0060606F /* CGFloat+Extension.swift */; };
 		57FE22042AA8C41E0060606F /* FloatingPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE21FD2AA8C41E0060606F /* FloatingPoint+Extension.swift */; };
 		57FE22072AA8C41E0060606F /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE21FE2AA8C41E0060606F /* CircularProgressView.swift */; };
-		6887E08AF4A7883B4B7FFB7E /* Pods_Doll_Coloring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C404DB90499F9B71148AEB8 /* Pods_Doll_Coloring.framework */; };
 		970BF0952C3F7F15002B445F /* soundFillColor.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 970BF0942C3F7F15002B445F /* soundFillColor.mp3 */; };
 		970C44202D0C43DF0022AA69 /* AdLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970C441C2D0C43DF0022AA69 /* AdLoadingView.xib */; };
 		970C44212D0C43DF0022AA69 /* AdLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = 970C441D2D0C43DF0022AA69 /* AdLoading.json */; };
@@ -333,6 +332,7 @@
 		976313862D2BC3B800E9E6F9 /* DiscountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976313852D2BC3B800E9E6F9 /* DiscountViewController.xib */; };
 		976313872D2BC3B800E9E6F9 /* DiscountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976313842D2BC3B800E9E6F9 /* DiscountViewController.swift */; };
 		9763138F2D2D2B3F00E9E6F9 /* flower.json in Resources */ = {isa = PBXBuildFile; fileRef = 9763138E2D2D2B3F00E9E6F9 /* flower.json */; };
+		97D2A5DAF1330EA56AD77256 /* Pods_Brainrot_Coloring___Coloritas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0AEB635307B0BC0584AC75A /* Pods_Brainrot_Coloring___Coloritas.framework */; };
 		97DBEA222C6365FB00D6715D /* PopupTomorrowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBEA202C6365FB00D6715D /* PopupTomorrowViewController.swift */; };
 		97DBEA232C6365FB00D6715D /* PopupTomorrowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DBEA212C6365FB00D6715D /* PopupTomorrowViewController.xib */; };
 		97DF85032C60AAE800FA19EF /* ChooseDateBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF84F62C60AAE800FA19EF /* ChooseDateBlock.swift */; };
@@ -699,7 +699,6 @@
 		57FE3EE22A87E38D00ACF272 /* LanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
 		57FE3EE62A87F26700ACF272 /* LanguageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageVM.swift; sourceTree = "<group>"; };
 		57FFC3EA2A8E7636004F6E45 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
-		7C404DB90499F9B71148AEB8 /* Pods_Doll_Coloring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Doll_Coloring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		970BF0942C3F7F15002B445F /* soundFillColor.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soundFillColor.mp3; sourceTree = "<group>"; };
 		970C441B2D0C43DF0022AA69 /* AdLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdLoadingView.swift; sourceTree = "<group>"; };
 		970C441C2D0C43DF0022AA69 /* AdLoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdLoadingView.xib; sourceTree = "<group>"; };
@@ -746,11 +745,14 @@
 		97DF852C2C62299D00FA19EF /* GitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitViewController.swift; sourceTree = "<group>"; };
 		97DF852D2C62299D00FA19EF /* GitViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GitViewController.xib; sourceTree = "<group>"; };
 		97EBC51B2D78408A005ED53D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A56D45D9A5C630DD624DC527 /* Pods-Brainrot Coloring - Coloritas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Brainrot Coloring - Coloritas.debug.xcconfig"; path = "Target Support Files/Pods-Brainrot Coloring - Coloritas/Pods-Brainrot Coloring - Coloritas.debug.xcconfig"; sourceTree = "<group>"; };
+		BCC5EC0D78E8EEE43D6A7C37 /* Pods-Brainrot Coloring - Coloritas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Brainrot Coloring - Coloritas.release.xcconfig"; path = "Target Support Files/Pods-Brainrot Coloring - Coloritas/Pods-Brainrot Coloring - Coloritas.release.xcconfig"; sourceTree = "<group>"; };
 		C03131B72AA3762400A29FC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C06F84212D7E98790010E9BF /* MainTabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarViewController.swift; sourceTree = "<group>"; };
 		C06F84272D7FF8810010E9BF /* ColoringBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoringBookCell.swift; sourceTree = "<group>"; };
 		C06F84282D7FF8810010E9BF /* ColoringBookCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColoringBookCell.xib; sourceTree = "<group>"; };
 		C06F842F2D801E480010E9BF /* NewHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHomeController.swift; sourceTree = "<group>"; };
+		F0AEB635307B0BC0584AC75A /* Pods_Brainrot_Coloring___Coloritas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_Brainrot_Coloring___Coloritas.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -759,7 +761,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57F1B1A32AA7B7F800F554E7 /* AudioToolbox.framework in Frameworks */,
-				6887E08AF4A7883B4B7FFB7E /* Pods_Doll_Coloring.framework in Frameworks */,
+				97D2A5DAF1330EA56AD77256 /* Pods_Brainrot_Coloring___Coloritas.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1250,6 +1252,8 @@
 			children = (
 				57F54B3030998923FB21FAD7 /* Pods-Doll-Coloring.debug.xcconfig */,
 				19B4B9ECD1F6BB0853B64B49 /* Pods-Doll-Coloring.release.xcconfig */,
+				A56D45D9A5C630DD624DC527 /* Pods-Brainrot Coloring - Coloritas.debug.xcconfig */,
+				BCC5EC0D78E8EEE43D6A7C37 /* Pods-Brainrot Coloring - Coloritas.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1861,7 +1865,7 @@
 			isa = PBXGroup;
 			children = (
 				57F1B1A02AA7B7E300F554E7 /* AudioToolbox.framework */,
-				7C404DB90499F9B71148AEB8 /* Pods_Doll_Coloring.framework */,
+				F0AEB635307B0BC0584AC75A /* Pods_Brainrot_Coloring___Coloritas.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2083,15 +2087,19 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Doll-Coloring/Pods-Doll-Coloring-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Brainrot Coloring - Coloritas/Pods-Brainrot Coloring - Coloritas-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Doll-Coloring/Pods-Doll-Coloring-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Brainrot Coloring - Coloritas/Pods-Brainrot Coloring - Coloritas-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Doll-Coloring/Pods-Doll-Coloring-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Brainrot Coloring - Coloritas/Pods-Brainrot Coloring - Coloritas-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BB6AD58C9EF562132D7365BF /* [CP] Embed Pods Frameworks */ = {
@@ -2100,15 +2108,19 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Doll-Coloring/Pods-Doll-Coloring-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Brainrot Coloring - Coloritas/Pods-Brainrot Coloring - Coloritas-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Doll-Coloring/Pods-Doll-Coloring-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Brainrot Coloring - Coloritas/Pods-Brainrot Coloring - Coloritas-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Doll-Coloring/Pods-Doll-Coloring-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Brainrot Coloring - Coloritas/Pods-Brainrot Coloring - Coloritas-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C3BC5E270DCCAA8DDEB49E36 /* [CP] Check Pods Manifest.lock */ = {
@@ -2126,7 +2138,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Doll-Coloring-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Brainrot Coloring - Coloritas-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2444,7 +2456,7 @@
 /* Begin XCBuildConfiguration section */
 		570071072A93C4BD00D7C1C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57F54B3030998923FB21FAD7 /* Pods-Doll-Coloring.debug.xcconfig */;
+			baseConfigurationReference = A56D45D9A5C630DD624DC527 /* Pods-Brainrot Coloring - Coloritas.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "--include-all-app-icons";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2475,7 +2487,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2490,7 +2502,7 @@
 		};
 		570071082A93C4BD00D7C1C6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 19B4B9ECD1F6BB0853B64B49 /* Pods-Doll-Coloring.release.xcconfig */;
+			baseConfigurationReference = BCC5EC0D78E8EEE43D6A7C37 /* Pods-Brainrot Coloring - Coloritas.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "--include-all-app-icons";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2521,7 +2533,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

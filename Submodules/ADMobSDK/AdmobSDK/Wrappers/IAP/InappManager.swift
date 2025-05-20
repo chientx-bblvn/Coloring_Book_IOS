@@ -9,6 +9,7 @@ import Foundation
 import StoreKit
 import SwiftyStoreKit
 import AVFoundation
+import AdjustSdk
 import RxSwift
 
 public enum IAPState: String {
@@ -275,6 +276,7 @@ public class InappManager: NSObject {
                                             currency: firstProduct.priceLocale.currencySymbol,
                                             productId: productId,
                                             renew: true)
+                            logAdjustmentAnalytic(product: firstProduct)
                         }
                     }
                     IAPState.iapState = .purchased
@@ -289,7 +291,6 @@ public class InappManager: NSObject {
                 IAPState.iapState = .notPurchased
                 completed()
             }
-            
         }
     }
     
@@ -379,6 +380,8 @@ public class InappManager: NSObject {
                                             currency: firstProduct.priceLocale.currencySymbol,
                                             productId: productId,
                                             renew: true)
+                            logAdjustmentAnalytic(product: firstProduct)
+                            
                         }
                     }
                     IAPState.iapState = .purchased
@@ -405,6 +408,29 @@ public class InappManager: NSObject {
                                                "product_id" : productId,
                                                "renew" : "\(renew)"
                                               ])
+    }
+    
+    private func logAdjustmentAnalytic(product: SKProduct) {
+        guard let subscription = ADJAppStoreSubscription(
+            price: product.price,
+            currency: product.priceLocale.currencyCode ?? "USD",
+            transactionId: product.productIdentifier
+        ) else {
+            return
+        }
+
+        let salesRegion = Locale.current.regionCode ?? "US"
+        subscription.setSalesRegion(salesRegion)
+
+        subscription.setTransactionDate(Date())
+        
+        subscription.addCallbackParameter("key1", value: "value1")
+        subscription.addCallbackParameter("key2", value: "value2")
+
+        subscription.addPartnerParameter("partner_key1", value: "partner_value1")
+        subscription.addPartnerParameter("partner_key2", value: "partner_value2")
+
+        Adjust.trackAppStoreSubscription(subscription)
     }
 }
 
