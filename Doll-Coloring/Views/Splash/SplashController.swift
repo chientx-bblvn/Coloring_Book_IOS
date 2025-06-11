@@ -184,6 +184,7 @@ extension SplashController {
         if !isSetLanguage {
             ADManager.shared.preLoadNative(DollColoringAdID.native_language_2nd,
                                            nativeAdType: .customMediaFixedHeight)
+            ADManager.shared.preLoadNative(DollColoringAdID.native_language, nativeAdType: .customMediaFixedHeight)
         } else if !showIntro {
             ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_1,
                                            nativeAdType: .customMediaFixedHeight)

@@ -304,6 +304,4 @@ extension CollectionsController: UICollectionViewDelegate, UICollectionViewDataS
         viewEmpty.isHidden = !listCollection.isEmpty
         collectionView.reloadData()
     }
-    
-    
 }

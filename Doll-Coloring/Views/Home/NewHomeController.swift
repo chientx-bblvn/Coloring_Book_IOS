@@ -437,15 +437,16 @@ extension NewHomeController: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let width = UIScreen.main.bounds.width - 32
-        let cellHeight = width * 0.6
+        let cellHeight = width * 0.75
         return cellHeight
     }
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let coloringCell = cell as? ColoringBookCell {
             coloringCell.prepareForDisplay()
         }
-    }
-    
+    } 
 }

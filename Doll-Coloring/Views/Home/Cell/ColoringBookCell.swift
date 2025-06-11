@@ -223,7 +223,7 @@ extension ColoringBookCell: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = UIScreen.main.bounds.width - 32
         let itemWidth = (width - 8) / 2
-        return CGSize(width: (itemWidth * 0.8), height: itemWidth)
+        return CGSize(width: (itemWidth), height: itemWidth * 1.3)
     }
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        handleScrollView?(scrollView)

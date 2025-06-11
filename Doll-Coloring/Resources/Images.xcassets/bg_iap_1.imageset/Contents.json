@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Iap 5.png",
+      "filename" : "Iap 9.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Iap 5@2x.png",
+      "filename" : "Iap 9@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Iap 5@3x.png",
+      "filename" : "Iap 9@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

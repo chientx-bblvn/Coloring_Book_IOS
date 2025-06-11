@@ -34,7 +34,7 @@ class DalyMonthVM {
     func getDalyColoring() {
         SVProgressHUD.show()
         serviceManager.requestAPI(.newList, type: [ColoringModel].self) {[weak self] isSuccess, response in
-            self?.itemDaly = response.first(where: {$0.categoryName?.contains("Daily") ?? false})?.imageUrls ?? []
+            self?.itemDaly = response.first(where: {($0.id == 1)})?.imageUrls ?? []
             self?.calculatorDay()
             SVProgressHUD.dismiss()
         } onFailed: { error in
@@ -47,7 +47,7 @@ class DalyMonthVM {
         SVProgressHUD.show()
         serviceManager.requestAPI(.newList, type: [ColoringModel].self) {[weak self] isSuccess, response in
             SVProgressHUD.dismiss()
-            self?.itemDaly = response.first(where: {$0.categoryName?.contains("Daily") ?? false})?.imageUrls ?? []
+            self?.itemDaly = response.first(where: {($0.id == 1)})?.imageUrls ?? []
             self?.calculatorDay()
             complection()
         } onFailed: { error in

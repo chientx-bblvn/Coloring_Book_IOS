@@ -42,7 +42,7 @@ class HomeVM {
             SVProgressHUD.dismiss()
             self?.colorings = response
             self?.itemColoring = response.first?.imageUrls ?? []
-            self?.itemDaly = response.first(where: {$0.categoryName?.contains("Daily") ?? false})?.imageUrls ?? []
+            self?.itemDaly = response.first(where: {$0.id == 1})?.imageUrls ?? []
             complection()
         } onFailed: { error in
             complection()

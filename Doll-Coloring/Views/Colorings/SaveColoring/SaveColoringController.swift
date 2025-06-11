@@ -94,7 +94,7 @@ extension SaveColoringController {
     
     func showActivityController() {
         // Setting description
-        let firstActivityItem = Bundle.main.applicationName ?? "Doll Coloring"
+        let firstActivityItem = Bundle.main.applicationName ?? "Brainrot Coloring"
         
         // Setting url
         let imageToShare = [viewModel.imageColoring, firstActivityItem] as [Any]

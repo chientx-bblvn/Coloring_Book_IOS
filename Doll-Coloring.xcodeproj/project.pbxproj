@@ -2487,7 +2487,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.4;
+				MARKETING_VERSION = 1.3.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2533,7 +2533,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.4;
+				MARKETING_VERSION = 1.3.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bblab.doll-coloring-iOS";
 				PRODUCT_NAME = "Doll Coloring";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

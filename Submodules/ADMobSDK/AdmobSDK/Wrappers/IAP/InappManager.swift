@@ -411,26 +411,42 @@ public class InappManager: NSObject {
     }
     
     private func logAdjustmentAnalytic(product: SKProduct) {
-        guard let subscription = ADJAppStoreSubscription(
-            price: product.price,
-            currency: product.priceLocale.currencyCode ?? "USD",
-            transactionId: product.productIdentifier
-        ) else {
+        // Lấy receipt base64
+        guard let receiptURL = Bundle.main.appStoreReceiptURL,
+              let receiptData = try? Data(contentsOf: receiptURL) else {
+            print("No receipt data found")
             return
         }
 
+        let receiptBase64 = receiptData.base64EncodedString()
+        
+        
+        let transactionId = infoPurchaseProduct?.transactionId ?? ""
+        
+        
         let salesRegion = Locale.current.regionCode ?? "US"
-        subscription.setSalesRegion(salesRegion)
+        
+        
+        guard let subscription = ADJAppStoreSubscription(
+            price: product.price,
+            currency: product.priceLocale.currencyCode ?? "USD",
+            transactionId: transactionId
+        ) else {
+            print("Failed to create ADJAppStoreSubscription")
+            return
+        }
 
         subscription.setTransactionDate(Date())
+        subscription.setSalesRegion(salesRegion)
+        
         
         subscription.addCallbackParameter("key1", value: "value1")
         subscription.addCallbackParameter("key2", value: "value2")
-
         subscription.addPartnerParameter("partner_key1", value: "partner_value1")
         subscription.addPartnerParameter("partner_key2", value: "partner_value2")
-
+        
         Adjust.trackAppStoreSubscription(subscription)
+        Adjust.trackEvent(<#T##event: ADJEvent?##ADJEvent?#>)
     }
 }
 

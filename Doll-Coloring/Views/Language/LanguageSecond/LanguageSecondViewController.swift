@@ -72,8 +72,6 @@ class LanguageSecondViewController: BaseViewController {
              }
          }
          
-         ADManager.shared.preLoadNative(DollColoringAdID.native_language, nativeAdType: .customMediaFixedHeight)
-         
          setupListenChangeIAP()
      }
      

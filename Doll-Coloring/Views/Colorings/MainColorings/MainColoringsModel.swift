@@ -10,6 +10,7 @@ import UIKit
 
 // MARK: - ColoringModel
 struct ColoringModel: Codable {
+    let id: Int?
     let categoryName: String?
     let imageUrls: [ColoringImage]?
 }

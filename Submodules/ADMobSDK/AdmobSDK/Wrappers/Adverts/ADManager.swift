@@ -192,6 +192,7 @@ public class ADManager: NSObject {
                     appToken: adjustToken,
                     environment: environment)
                 BBLLogging.d("AdjustSDK: config initialing")
+                config?.disableSkanAttribution()
                 config?.logLevel = ADManager.shared.isTestMode ? .verbose : .error
                 Adjust.initSdk(config)
             }
