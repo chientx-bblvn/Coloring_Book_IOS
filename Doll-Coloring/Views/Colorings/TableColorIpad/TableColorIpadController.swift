@@ -84,8 +84,7 @@ class TableColorIpadController: BaseViewController {
         listBlingColor.delegate = self
         listBlingColor.dataSource = self
         listBlingColor.register(cellType: FillterColorCell.self)
-        viewBlinkColor.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
-//        listBlingColor.layer.masksToBounds = true
+        viewBlinkColor.customGenerateOuterShadow(shadowOpacity: 0.2, shadowRadius: 6, color: UIColor(hexString: "C13F68").withAlphaComponent(0.35), shadowOffset: CGSize(width: 0, height: 2))
         viewContent.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(actionBack)))
         viewPlain.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(actionPlain)))
         viewTexture.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(actionTexture)))
@@ -96,6 +95,7 @@ class TableColorIpadController: BaseViewController {
         topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
         
         changePalettes(true)
+        
     }
     
     private func changePalettes(_ isNew: Bool = false) {
@@ -170,42 +170,9 @@ extension TableColorIpadController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         cell.lblName.text = itemColors[indexPath.row].first?.tableName
-        // hiện icon premium ở những thị trường có IAP
-        if UserDefaultManager.ABShowIAPColoring {
-            /** check tier 1
-             - hiện icon premium ở bảng màu isPremium
-             - show Watch ADS ở bảng màu thường
-             - free_trial cho xem ads để mở khoá bảng màu
-             -
-             */
-            if UserDefaultManager.ABis_free_trial_us {
-                cell.btnWatchAds.isHidden = true
-                cell.viewWatchADS.isHidden = true
-                if !isWarchAds.contains(where: {$0.contains(itemColors[indexPath.row].first?.tableName ?? "")}) {
-                    cell.btnWatchAds.isHidden = false
-                }
-            } else {
-                cell.btnWatchAds.isHidden = true
-                cell.viewWatchADS.isHidden = true
-                if !isWarchAds.contains(where: {$0.contains(itemColors[indexPath.row].first?.tableName ?? "")}) {
-                    cell.btnWatchAds.isHidden = !(itemColors[indexPath.row].first?.isPremium ?? true)
-                }
-            }
-        } else {
-            // ẩn icon premium dành cho thị trường ko có IAP
-            cell.btnWatchAds.isHidden = true
-            if !isWarchAds.contains(where: {$0.contains(itemColors[indexPath.row].first?.tableName ?? "")})  {
-                cell.viewWatchADS.isHidden = !(itemColors[indexPath.row].first?.isPremium ?? true)
-            } else {
-                cell.viewWatchADS.isHidden = true
-            }
-        }
-        
-        // check đã mua IAP ẩn ic Premium và ic watch ADS
-        if IAPState.isUserVip {
-            cell.viewWatchADS.isHidden = true
-            cell.btnWatchAds.isHidden = true
-        }
+        // Color tables unlock free — hide watch-ads / premium badges
+        cell.btnWatchAds.isHidden = true
+        cell.viewWatchADS.isHidden = true
         
         cell.setupData(data: itemColors[indexPath.row], width: (350 / (8 * 7) / 5))
         if indexPath.row == indexListColor {
@@ -213,59 +180,15 @@ extension TableColorIpadController: UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.viewColor.borderWidth = 0
         }
-        cell.selectColor = {[weak self] index in
-            guard let self = self else {return}
-            
-            // nếu đã mua IAP hoặc đã xem quảng cáo bỏ qua quảng cáo
-            if IAPState.isUserVip || isWarchAds.contains(where: {$0.contains(self.itemColors[indexPath.row].first?.tableName ?? "")}) {
-                selectTableColor(indexPath, index: index)
-                return
-            }
-             //Check có thị trường show IAP
-            guard UserDefaultManager.ABShowIAPColoring else {
-                if itemColors[indexPath.row].first?.isPremium ?? true {
-                    self.showRew(indexPath, index: index)
-                } else {
-                    selectTableColor(indexPath, index: index)
-                }
-                return
-            }
-            if UserDefaultManager.ABis_free_trial_us {
-                self.showRew(indexPath, index: index)
-            } else {
-                if itemColors[indexPath.row].first?.isPremium ?? true {
-                    self.showIAP(indexPath, index: index)
-                } else {
-                    selectTableColor(indexPath, index: index)
-                }
-            }
+        cell.selectColor = { [weak self] index in
+            guard let self = self else { return }
+            self.selectTableColor(indexPath, index: index)
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if IAPState.isUserVip || isWarchAds.contains(where: {$0.contains(itemColors[indexPath.row].first?.tableName ?? "")}) {
-            selectTableColor(indexPath)
-            return
-        }
-         //Check có thị trường show IAP
-        guard UserDefaultManager.ABShowIAPColoring else {
-            if itemColors[indexPath.row].first?.isPremium ?? true {
-                showRew(indexPath)
-            } else {
-                selectTableColor(indexPath)
-            }
-            return
-        }
-        if UserDefaultManager.ABis_free_trial_us {
-            self.showRew(indexPath)
-        } else {
-            if itemColors[indexPath.row].first?.isPremium ?? true {
-                showIAP(indexPath)
-            } else {
-                showRew(indexPath)
-            }
-        }
+        selectTableColor(indexPath)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -321,35 +244,6 @@ extension TableColorIpadController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 8
-    }
-    
-    func showRew(_ indexPath: IndexPath, index: Int = 0) {
-        if IAPState.isUserVip || isWarchAds.contains(where: { $0.contains(self.itemColors[indexPath.row].first?.tableName ?? "") }) {
-            selectTableColor(indexPath, index: index)
-        } else {
-                self.showInter(indexPath, index: index)
-        }
-    }
-    
-    func showInter(_ indexPath: IndexPath, index: Int = 0) {
-        self.selectTableColor(indexPath, index: index)
-    }
-    
-    func showIAP(_ indexPath: IndexPath, index: Int = 0) {
-        if IAPState.isUserVip ||  isWarchAds.contains(where: {$0.contains(self.itemColors[indexPath.row].first?.tableName ?? "")}) {
-            selectTableColor(indexPath, index: index)
-        } else {
-            SubcriptionViewController.show(checkTime: true) {
-                if DollColoringAdID.inter_after_iap.isEnableAd {
-                    AdLoadingView.show()
-                    ADManager.shared.loadFull(DollColoringAdID.inter_after_iap) {_ in
-                        AdLoadingView.dismiss()
-                    }
-                }
-            } onClickCLose: {
-                self.showRew(indexPath, index: index)
-            }
-        }
     }
     
     func selectTableColor(_ indexPath: IndexPath, index: Int = 0) {

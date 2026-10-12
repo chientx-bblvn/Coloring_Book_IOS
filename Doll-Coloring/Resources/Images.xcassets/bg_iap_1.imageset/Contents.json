@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "Iap 9.png",
+      "filename" : "bg_iap_1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Iap 9@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Iap 9@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

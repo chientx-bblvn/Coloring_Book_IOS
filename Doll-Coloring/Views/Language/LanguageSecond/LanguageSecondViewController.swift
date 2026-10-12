@@ -8,7 +8,6 @@
 import Foundation
 import RxSwift
 import UIKit
-import AdmobSDK
 
 class LanguageSecondViewController: BaseViewController {
     
@@ -71,24 +70,9 @@ class LanguageSecondViewController: BaseViewController {
                  }
              }
          }
-         
-         setupListenChangeIAP()
-     }
-     
-     private func setupListenChangeIAP() {
-         loadAdsHigh()
-     }
-     
-     private func loadAdsHigh() {
-         viewAds.isHidden = false
-         ADManager.shared.loadNative(DollColoringAdID.native_language_2nd, to: viewAds, nativeAdType: .customMediaFixedHeight) { adId, success, nativeAdView in
-             guard ADManager.shared.isTestMode else {
-                 if adId == DollColoringAdID.native_language_2nd.adId {
-                     self.viewAds.isHidden = !success
-                 }
-                 return
-             }
-             self.viewAds.isHidden = !success
+         viewAds?.isHidden = true
+         if let height = viewAds?.constraints.first(where: { $0.firstAttribute == .height }) {
+             height.constant = 0
          }
      }
      

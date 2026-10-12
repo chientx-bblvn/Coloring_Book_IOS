@@ -98,11 +98,11 @@ extension DetailColoringController: UICollectionViewDelegate, UICollectionViewDa
         }
     }
     private func openColoring(_ data: ColoringImage) {
-        if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: { $0.filePath == data.filePath }) {
-            AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .detailColoring, coloringAPI: data), with: .modal)
-        } else {
-            AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .detailColoring), with: .modal)
-        }
+        let local = SQLiteManager.shared.selectionColorings().first(where: { $0.filePath == data.filePath })
+        AppRouter.shared.navigate(
+            to: ColorFlowPresenter.route(api: data, local: local, typeScreen: .detailColoring),
+            with: .modal
+        )
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -187,14 +187,19 @@ extension UIView {
         self.layer.shadowRadius = 4
     }
     
-    public func customGenerateOuterShadow(shadowOpacity:Float = 0.5, shadowRadius: CGFloat = 4, color: UIColor, shadowOffset: CGSize = CGSize(width: 0, height: 0)) {
-        self.layer.borderWidth = 2
-        self.layer.borderColor = color.cgColor
+    public func customGenerateOuterShadow(shadowOpacity: Float = 0.25, shadowRadius: CGFloat = 6, color: UIColor, shadowOffset: CGSize = CGSize(width: 0, height: 2)) {
+        // Soft pink/brand shadow — no hard black border
+        self.layer.borderWidth = 0
         self.layer.masksToBounds = false
-        self.layer.shadowColor = color.cgColor
-        self.layer.shadowOffset = shadowOffset
-        self.layer.shadowOpacity = shadowOpacity
-        self.layer.shadowRadius = shadowRadius
+        let softColor = (color == .black || color == UIColor(hexString: "000000"))
+            ? UIColor(hexString: "C13F68").withAlphaComponent(0.28)
+            : color
+        self.layer.shadowColor = softColor.cgColor
+        self.layer.shadowOffset = shadowOffset == CGSize(width: 2, height: 2) || shadowOffset == CGSize(width: 4, height: 4)
+            ? CGSize(width: 0, height: 2)
+            : shadowOffset
+        self.layer.shadowOpacity = min(shadowOpacity, 0.35)
+        self.layer.shadowRadius = max(shadowRadius, 6)
     }
 }
 

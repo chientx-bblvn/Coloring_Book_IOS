@@ -19,28 +19,20 @@ extension HomeService: TargetType {
     
     public var baseURL: URL {
         switch self {
-        case .list:
-            return URL(string: apiBaseUrl)!
-        case .category:
+        case .list, .category, .newList:
             return URL(string: newApiBaseURL)!
         case .detailCategory:
             return URL(string: baseURLImage)!
-        case .newList:
-            return URL(string: newApiBaseURL)!
         }
         
     }
     
     public var path: String {
         switch self {
-        case .list:
-            return "/data_dollcoloring/doll_v4.json"
-        case .category:
+        case .list, .category, .newList:
             return ""
         case let .detailCategory(path):
             return "\(path)/"
-        case .newList:
-            return ""
         }
     }
     
@@ -76,17 +68,10 @@ extension HomeService: TargetType {
     }
     
     public var headers: [String: String]? {
-        switch self {
-        case .list:
-            return [
-                "Content-type": "application/json"
-            ]
-        case .category, .detailCategory, .newList:
-            return [
-                "AccessKey": apiAccessKey,
-                "Content-type": "application/json"
-            ]
-        }
+        return [
+            "AccessKey": apiAccessKey,
+            "Content-type": "application/json"
+        ]
     }
 }
 

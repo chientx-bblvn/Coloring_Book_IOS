@@ -15,13 +15,13 @@ enum SaveColoringService {
 extension SaveColoringService: TargetType {
     
     public var baseURL: URL {
-        return URL(string: apiBaseUrl)!
+        return URL(string: newApiBaseURL)!
     }
     
     public var path: String {
         switch self {
         case .list:
-            return "/list"
+            return ""
         }
     }
     
@@ -45,12 +45,10 @@ extension SaveColoringService: TargetType {
     }
     
     public var headers: [String: String]? {
-        switch self {
-        case .list:
-            return [
-                "Content-type": "application/json"
-            ]
-        }
+        return [
+            "AccessKey": apiAccessKey,
+            "Content-type": "application/json"
+        ]
     }
 }
 

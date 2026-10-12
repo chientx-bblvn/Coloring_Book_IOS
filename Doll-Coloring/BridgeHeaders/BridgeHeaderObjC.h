@@ -12,6 +12,5 @@
 #import "FSPagerViewObjcCompat.h"
 #import "AudioTone.h"
 #import "PulsingHaloLayer.h"
-#import <AdmobSDK/AdmobSDK.h>
 
 #endif /* BridgeHeaderObjC_h */

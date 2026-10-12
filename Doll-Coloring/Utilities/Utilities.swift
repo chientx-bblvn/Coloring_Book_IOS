@@ -8,10 +8,14 @@
 
 import Foundation
 import KeychainAccess
-import AdmobSDK
 
 func isNetworkConnected() -> Bool {
-    return (UIApplication.shared.delegate as? AppDelegate)?.isConnected() ?? false
+    // Prefer AppDelegate.shared — SwiftUI wraps UIApplication.shared.delegate.
+    if let delegate = AppDelegate.shared ?? (UIApplication.shared.delegate as? AppDelegate) {
+        return delegate.isConnected()
+    }
+    // Optimistic default so catalog requests are not blocked before reachability is ready.
+    return true
 }
 
 // swiftlint:disable identifier_name

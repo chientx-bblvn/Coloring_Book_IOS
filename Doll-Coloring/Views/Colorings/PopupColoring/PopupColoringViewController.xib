@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="btnCancel" destination="mnF-3w-ddH" id="gbj-6T-81Y"/>
                 <outlet property="btnDrawing" destination="ImT-Z6-WO7" id="bHT-WZ-Bno"/>
+                <outlet property="imageIcon" destination="P8h-Ex-7qL" id="obV-8W-yLw"/>
                 <outlet property="lbPercenColoring" destination="YKW-AS-kSP" id="72O-gK-PEF"/>
                 <outlet property="lbTitle" destination="3MS-ik-y7Q" id="l4i-0Q-FL7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -28,19 +29,22 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kjZ-pf-yFy">
                     <rect key="frame" x="-20" y="230.5" width="360" height="127.5"/>
                     <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="P8h-Ex-7qL">
+                            <rect key="frame" x="148" y="20" width="64" height="64"/>
+                        </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="LIX-Ym-Vrc">
                             <rect key="frame" x="16" y="59.5" width="328" height="44"/>
                             <subviews>
                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ImT-Z6-WO7">
                                     <rect key="frame" x="0.0" y="0.0" width="156" height="44"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="AppBackground"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="44" id="WA2-7P-X6u"/>
+                                    <constraint firstAttribute="height" constant="48" id="WA2-7P-X6u"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" title="Yes">
-                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="titleColor" name="ColorTitle"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
@@ -59,11 +63,11 @@
                                 </button>
                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mnF-3w-ddH">
                                     <rect key="frame" x="172" y="0.0" width="156" height="44"/>
-                                    <color key="backgroundColor" red="0.60392159219999997" green="0.63921570780000003" blue="0.92941176889999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="backgroundColor" name="MainPrimary"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" title="No">
-                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
@@ -83,19 +87,19 @@
                             </subviews>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wg5-mr-j5Z">
-                            <rect key="frame" x="16" y="24" width="328" height="19.5"/>
+                            <rect key="frame" x="16" y="92" width="328" height="52"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJc-16-VId">
-                                    <rect key="frame" x="20" y="0.0" width="288" height="19.5"/>
+                                    <rect key="frame" x="20" y="0.0" width="288" height="52"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKW-AS-kSP">
-                                            <rect key="frame" x="0.0" y="0.0" width="56" height="19.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="18"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure you want to exit?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3MS-ik-y7Q">
-                                            <rect key="frame" x="56" y="0.0" width="232" height="19.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save your progress before leaving?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3MS-ik-y7Q">
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="28"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                             <color key="textColor" name="ColorTitle"/>
                                             <nil key="highlightedColor"/>
@@ -112,7 +116,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.98823529480000005" green="0.94509804249999996" blue="0.59215688710000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <color key="backgroundColor" name="AppBackground"/>
                     <constraints>
                         <constraint firstItem="LIX-Ym-Vrc" firstAttribute="leading" secondItem="kjZ-pf-yFy" secondAttribute="leading" constant="16" id="1jc-kg-KF9"/>
                         <constraint firstAttribute="trailing" secondItem="Wg5-mr-j5Z" secondAttribute="trailing" constant="16" id="57R-DT-95x"/>
@@ -120,7 +124,11 @@
                         <constraint firstAttribute="bottom" secondItem="LIX-Ym-Vrc" secondAttribute="bottom" constant="24" id="BGX-C2-77S"/>
                         <constraint firstItem="LIX-Ym-Vrc" firstAttribute="centerX" secondItem="kjZ-pf-yFy" secondAttribute="centerX" id="E47-3F-hqR"/>
                         <constraint firstItem="Wg5-mr-j5Z" firstAttribute="leading" secondItem="kjZ-pf-yFy" secondAttribute="leading" constant="16" id="NTs-iM-Wvq"/>
-                        <constraint firstItem="Wg5-mr-j5Z" firstAttribute="top" secondItem="kjZ-pf-yFy" secondAttribute="top" constant="24" id="bj9-Lp-z8F"/>
+                        <constraint firstItem="Wg5-mr-j5Z" firstAttribute="top" secondItem="P8h-Ex-7qL" secondAttribute="bottom" constant="8" id="bj9-Lp-z8F"/>
+                        <constraint firstItem="P8h-Ex-7qL" firstAttribute="centerX" secondItem="kjZ-pf-yFy" secondAttribute="centerX" id="T8q-Sr-M2k"/>
+                        <constraint firstItem="P8h-Ex-7qL" firstAttribute="top" secondItem="kjZ-pf-yFy" secondAttribute="top" constant="20" id="T8q-Sr-M2m"/>
+                        <constraint firstItem="P8h-Ex-7qL" firstAttribute="width" constant="64" id="T8q-Sr-M2n"/>
+                        <constraint firstItem="P8h-Ex-7qL" firstAttribute="height" constant="64" id="T8q-Sr-M2o"/>
                         <constraint firstAttribute="trailing" secondItem="LIX-Ym-Vrc" secondAttribute="trailing" constant="16" id="hpw-4h-6jw"/>
                         <constraint firstAttribute="width" constant="360" id="tjr-Lb-721"/>
                     </constraints>
@@ -141,8 +149,14 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="AppBackground">
+            <color red="1" green="0.96862745098039216" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="ColorTitle">
-            <color red="0.14509803921568629" green="0.0" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.2196078431372549" green="0.14901960784313725" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MainPrimary">
+            <color red="0.75686274509803919" green="0.24705882352941178" blue="0.40784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

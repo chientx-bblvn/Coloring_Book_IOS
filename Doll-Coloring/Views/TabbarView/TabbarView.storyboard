@@ -54,7 +54,7 @@
                     <connections>
                         <outlet property="heightContraintAds" destination="1M2-5C-Efb" id="tlZ-eS-lyw"/>
                         <outlet property="tabbarView" destination="utE-dL-yNX" id="wO6-Xd-BSc"/>
-                        <outlet property="viewAds" destination="aQW-Hd-auX" id="jrp-9l-czA"/>
+                        <outlet property="bottomSpacer" destination="aQW-Hd-auX" id="jrp-9l-czA"/>
                         <outlet property="viewContent" destination="IN9-ab-tzX" id="IUo-sf-Nop"/>
                     </connections>
                 </viewController>
@@ -183,7 +183,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pKK-1A-tAE">
-                                <rect key="frame" x="35" y="818" width="360" height="80"/>
+                                <rect key="frame" x="35" y="830" width="360" height="68"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="fz1-tQ-qSz">
                                         <rect key="frame" x="8" y="-4" width="344" height="72"/>
@@ -323,8 +323,8 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="fz1-tQ-qSz" firstAttribute="leading" secondItem="pKK-1A-tAE" secondAttribute="leading" constant="8" id="9nF-1X-gbl"/>
-                                    <constraint firstAttribute="height" constant="80" id="C5c-fB-Hxv"/>
-                                    <constraint firstAttribute="bottom" secondItem="fz1-tQ-qSz" secondAttribute="bottom" constant="12" id="FoY-n5-dJe"/>
+                                    <constraint firstAttribute="height" constant="68" id="C5c-fB-Hxv"/>
+                                    <constraint firstItem="fz1-tQ-qSz" firstAttribute="centerY" secondItem="pKK-1A-tAE" secondAttribute="centerY" id="FoY-n5-dJe"/>
                                     <constraint firstAttribute="width" constant="360" id="Opg-ls-GRR"/>
                                     <constraint firstAttribute="trailing" secondItem="fz1-tQ-qSz" secondAttribute="trailing" constant="8" id="bO7-Ur-KMO"/>
                                 </constraints>

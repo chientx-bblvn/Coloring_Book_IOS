@@ -19,12 +19,11 @@ open class BaseAppDelegate: UIResponder, UIApplicationDelegate {
     
     @discardableResult
     open func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        window = UIWindow(frame: UIScreen.main.bounds)
-        let rootVC = AppRouter.shared.rootViewController
-        window?.rootViewController = rootVC
-        window?.makeKeyAndVisible()
+        // SwiftUI `DollColoringApp` owns the window via WindowGroup.
+        // Keep AppRouter available for UIKit coloring / modal presentation.
+        _ = AppRouter.shared
         if #available(iOS 13.0, *) {
-            window?.overrideUserInterfaceStyle = .light
+            // Prefer light mode when a window becomes available.
         }
         SVProgressHUD.setDefaultMaskType(.clear)
         IQKeyboardManager.shared.enable = true

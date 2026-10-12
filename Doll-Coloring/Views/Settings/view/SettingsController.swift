@@ -101,11 +101,11 @@ class SettingsController: BaseViewController {
         viewFeedback.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickViewFeedback)))
         viewMoreApp.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onclickViewMore)))
         
-        switchSound.isOn = !UserDefaultManager.disableMusicBackground
-            switchBrush.isOn = !UserDefaultManager.disableSound
-        
-        imgToggleSound.image = UserDefaultManager.disableMusicBackground ? R.image.imgStopSound() : R.image.imgToggleSound()
-        imgToggleBrush.image = UserDefaultManager.disableSound ? R.image.imgStopBrush() : R.image.imgToggleBrush()
+        // Sound / Sound Brush removed from Settings.
+        switchSound.superview?.isHidden = true
+        switchBrush.superview?.isHidden = true
+        lblSound.superview?.isHidden = true
+        lblBrush.superview?.isHidden = true
     }
     
     @objc private func dismissView() {
@@ -126,7 +126,7 @@ class SettingsController: BaseViewController {
     
     @objc func onclickViewShare() {
         self.shareContent(text: nil,
-                            url: URL(string: "https://apps.apple.com/us/app/boost-find/6502046149"),
+                            url: URL(string: appStoreURL),
                           sourceView: viewShare)
     }
     
@@ -147,9 +147,10 @@ class SettingsController: BaseViewController {
     }
     
     @IBAction func actionSwitchSound(_ sender: UISwitch) {
+        // Background music removed — keep preference write for legacy toggles only.
         UserDefaultManager.currentAccessDisableMusicBackground = !sender.isOn
         imgToggleSound.image = UserDefaultManager.disableMusicBackground ? R.image.imgStopSound() : R.image.imgToggleSound()
-                enableAudioBackground()
+        audioBackground.clearAudioPlayer()
     }
     
     

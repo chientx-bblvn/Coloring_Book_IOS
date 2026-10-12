@@ -15,11 +15,19 @@ enum HistoryColoringRoute: Route {
     var screen: UIViewController {
         switch self {
         case let .main(coloring, typeScreen, coloringAPI):
-            guard let main = R.storyboard.historyColoring.historyColoringController() else {
-              return UIViewController()
+            let build: @MainActor () -> UIViewController = {
+                HistoryColoringPresenter.makeHostingController(
+                    coloring: coloring,
+                    coloringAPI: coloringAPI,
+                    typeScreen: typeScreen
+                )
             }
-            main.viewModel = HistoryColoringVM(coloring: coloring, typeScreen: typeScreen, coloringAPI: coloringAPI)
-            return main
+            if Thread.isMainThread {
+                return MainActor.assumeIsolated(build)
+            }
+            return DispatchQueue.main.sync {
+                MainActor.assumeIsolated(build)
+            }
         }
     }
 }

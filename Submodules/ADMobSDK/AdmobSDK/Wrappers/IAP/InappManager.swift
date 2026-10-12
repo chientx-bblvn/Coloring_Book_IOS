@@ -268,16 +268,24 @@ public class InappManager: NSObject {
                     print("==> purchased expireddate \(expireddate)")
                     self.infoPurchaseProduct = items.first
                     self.purchasedProduct = items.first?.productId
-                    if let productId = self.purchasedProduct {
-                        if let firstProduct = self.listProduct.first(where: { item in
-                            item.productIdentifier == productId
-                        }) {
-                            logCostAnalytic(value: firstProduct.price.doubleValue,
-                                            currency: firstProduct.priceLocale.currencySymbol,
-                                            productId: productId,
-                                            renew: true)
-                            logAdjustmentAnalytic(product: firstProduct)
+                    if let productId = self.purchasedProduct,
+                       let transactionId = self.infoPurchaseProduct?.transactionId,
+                       let product = self.listProduct.first(where: { $0.productIdentifier == productId }) {
+
+                        let isTrial = self.infoPurchaseProduct?.isTrialPeriod == true
+                        let isIntro = self.infoPurchaseProduct?.isInIntroOfferPeriod == true
+                        let isFirstPurchase = isTrial || isIntro
+
+                        if isFirstPurchase {
+                            self.logAdjustNewPurchase(product: product, transactionId: transactionId)
+                        } else {
+                            self.logAdjustRenewal(product: product, transactionId: transactionId)
                         }
+
+                        logCostAnalytic(value: product.price.doubleValue,
+                                        currency: product.priceLocale.currencySymbol,
+                                        productId: productId,
+                                        renew: !isFirstPurchase)
                     }
                     IAPState.iapState = .purchased
                 case .expired(let expireddate,_):
@@ -367,37 +375,49 @@ public class InappManager: NSObject {
             guard let self = self else { return }
             switch result {
             case .success(let receipt):
-                let purchaseResult = SwiftyStoreKit.verifySubscriptions(ofType: .autoRenewable, productIds: self.productIdentifiers, inReceipt: receipt)
+                let purchaseResult = SwiftyStoreKit.verifySubscriptions(ofType: .autoRenewable,
+                                                                         productIds: self.productIdentifiers,
+                                                                         inReceipt: receipt)
                 switch purchaseResult {
-                case .purchased( _, let items):
+                case .purchased(_, let items):
                     self.infoPurchaseProduct = items.first
                     self.purchasedProduct = items.first?.productId
-                    if let productId = self.purchasedProduct {
-                        if let firstProduct = self.listProduct.first(where: { item in
-                            item.productIdentifier == productId
-                        }) {
-                            logCostAnalytic(value: firstProduct.price.doubleValue,
-                                            currency: firstProduct.priceLocale.currencySymbol,
-                                            productId: productId,
-                                            renew: true)
-                            logAdjustmentAnalytic(product: firstProduct)
-                            
+
+                    if let productId = self.purchasedProduct,
+                       let transactionId = self.infoPurchaseProduct?.transactionId,
+                       let product = self.listProduct.first(where: { $0.productIdentifier == productId }) {
+
+                        let isTrial = self.infoPurchaseProduct?.isTrialPeriod == true
+                        let isIntro = self.infoPurchaseProduct?.isInIntroOfferPeriod == true
+                        let isFirstPurchase = isTrial || isIntro
+
+                        if isFirstPurchase {
+                            self.logAdjustNewPurchase(product: product, transactionId: transactionId)
+                        } else {
+                            self.logAdjustRenewal(product: product, transactionId: transactionId)
                         }
+
+                        self.logCostAnalytic(value: product.price.doubleValue,
+                                             currency: product.priceLocale.currencySymbol,
+                                             productId: productId,
+                                             renew: !isFirstPurchase)
                     }
+
                     IAPState.iapState = .purchased
                     self.delegate?.purchaseSuccess(id: self.purchasedProduct ?? "")
-                case .expired(_,_):
+                case .expired(_, _):
                     IAPState.iapState = .expired
                 case .notPurchased:
                     IAPState.iapState = .notPurchased
-                    break
                 }
             case .error(let error):
-                print("verify faild \(error.localizedDescription)")
+                print("verify failed \(error.localizedDescription)")
             }
         }
+
+        // Kết thúc tất cả transaction trong hàng đợi
         for transaction in queue.transactions {
-            SKPaymentQueue.default().finishTransaction(transaction as SKPaymentTransaction)
+            SKPaymentQueue.default().finishTransaction(transaction)
         }
     }
     
@@ -410,43 +430,46 @@ public class InappManager: NSObject {
                                               ])
     }
     
-    private func logAdjustmentAnalytic(product: SKProduct) {
-        // Lấy receipt base64
-        guard let receiptURL = Bundle.main.appStoreReceiptURL,
-              let receiptData = try? Data(contentsOf: receiptURL) else {
-            print("No receipt data found")
-            return
-        }
+    private func logAdjustNewPurchase(product: SKProduct, transactionId: String) {
+        let eventToken = "4v21hi"
+        guard let event = ADJEvent(eventToken: eventToken) else { return }
 
-        let receiptBase64 = receiptData.base64EncodedString()
-        
-        
-        let transactionId = infoPurchaseProduct?.transactionId ?? ""
-        
-        
-        let salesRegion = Locale.current.regionCode ?? "US"
-        
-        
-        guard let subscription = ADJAppStoreSubscription(
-            price: product.price,
-            currency: product.priceLocale.currencyCode ?? "USD",
-            transactionId: transactionId
-        ) else {
-            print("Failed to create ADJAppStoreSubscription")
-            return
-        }
+        event.setTransactionId(transactionId)
+        event.setProductId(product.productIdentifier)
+        event.setRevenue(product.price.doubleValue, currency: product.priceLocale.currencyCode ?? "USD")
 
-        subscription.setTransactionDate(Date())
-        subscription.setSalesRegion(salesRegion)
-        
-        
-        subscription.addCallbackParameter("key1", value: "value1")
-        subscription.addCallbackParameter("key2", value: "value2")
-        subscription.addPartnerParameter("partner_key1", value: "partner_value1")
-        subscription.addPartnerParameter("partner_key2", value: "partner_value2")
-        
-        Adjust.trackAppStoreSubscription(subscription)
-        Adjust.trackEvent(<#T##event: ADJEvent?##ADJEvent?#>)
+        event.addCallbackParameter("plan", value: "premium")
+        event.addCallbackParameter("type", value: "new_purchase")
+        event.addPartnerParameter("source", value: "iap_sdk")
+        event.addPartnerParameter("platform", value: "ios")
+
+        Adjust.verifyAndTrackAppStorePurchase(event) { result in
+            print("✅ New Purchase Verification:")
+            print("Status: \(result.verificationStatus)")
+            print("Code: \(result.code)")
+            print("Message: \(result.message)")
+        }
+    }
+
+    private func logAdjustRenewal(product: SKProduct, transactionId: String) {
+        let eventToken = "9u4asn"
+        guard let event = ADJEvent(eventToken: eventToken) else { return }
+
+        event.setTransactionId(transactionId)
+        event.setProductId(product.productIdentifier)
+        event.setRevenue(product.price.doubleValue, currency: product.priceLocale.currencyCode ?? "USD")
+
+        event.addCallbackParameter("plan", value: "premium")
+        event.addCallbackParameter("type", value: "renewal")
+        event.addPartnerParameter("source", value: "iap_sdk")
+        event.addPartnerParameter("platform", value: "ios")
+
+        Adjust.verifyAndTrackAppStorePurchase(event) { result in
+            print("✅ Renewal Verification:")
+            print("Status: \(result.verificationStatus)")
+            print("Code: \(result.code)")
+            print("Message: \(result.message)")
+        }
     }
 }
 

@@ -19,13 +19,7 @@ class ColoringBookCell: UITableViewCell {
     var itemColoring: [ColoringImage] = []
     var categoryName:String?
     var totalDays:Int = 0
-    private var hasAd = true
-    
-    private var nativeAdView: NativeAdProtocol? {
-        didSet {
-            coloringCollectionView.reloadData()
-        }
-    }
+    private var hasAd = false
     private var coloringLocal: [ColoringHistoryModel] = [] {
          didSet {
              coloringCollectionView.reloadData()
@@ -51,7 +45,6 @@ class ColoringBookCell: UITableViewCell {
         self.coloringCollectionView.backgroundColor =  UIColor.clear
         self.lbCategory.backgroundColor = UIColor.clear
         coloringCollectionView.register(cellType: AllColoringCell.self)
-        coloringCollectionView.register(cellType: HomeNativeAdsCell.self)
         
         if let layout = coloringCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
@@ -113,15 +106,15 @@ extension ColoringBookCell: UICollectionViewDelegate, UICollectionViewDataSource
                 if UserDefaultManager.ABis_free_trial_us {
                     if data.isPremium ?? false {
                         cell.viewWatchAds.isHidden = true
-                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        cell.adsViewAnimation.isHidden = true
                     } else {
                         cell.viewWatchAds.isHidden = true
-                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        cell.adsViewAnimation.isHidden = true
                     }
                 } else {
                     cell.viewWatchAds.isHidden = true
                     if data.isPremium ?? false {
-                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        cell.adsViewAnimation.isHidden = true
                     } else {
                         cell.adsViewAnimation.isHidden = true
                     }
@@ -134,19 +127,15 @@ extension ColoringBookCell: UICollectionViewDelegate, UICollectionViewDataSource
                 cell.adsViewAnimation.isHidden = true
                 
                 if data.isPremium ?? false {
-                    cell.viewWatchAds.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                    cell.viewWatchAds.isHidden = true
                 } else {
                     cell.viewWatchAds.isHidden = true
                 }
             }
             return cell
         }
-        if indexPath.row == 3 {
-            let nativeAdsCell = collectionView.dequeueReusableCell(for: indexPath, cellType: HomeNativeAdsCell.self)
-            if hasAd {
-                nativeAdsCell.loadAds(nativeAd: nativeAdView)
-            }
-            return nativeAdsCell
+        if false {
+            return UICollectionViewCell()
         } else {
             
             let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: AllColoringCell.self)
@@ -166,15 +155,15 @@ extension ColoringBookCell: UICollectionViewDelegate, UICollectionViewDataSource
                 if UserDefaultManager.ABis_free_trial_us {
                     if data.isPremium ?? false {
                         cell.viewWatchAds.isHidden = true
-                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        cell.adsViewAnimation.isHidden = true
                     } else {
                         cell.viewWatchAds.isHidden = true
-                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        cell.adsViewAnimation.isHidden = true
                     }
                 } else {
                     cell.viewWatchAds.isHidden = true
                     if data.isPremium ?? false {
-                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        cell.adsViewAnimation.isHidden = true
                     } else {
                         cell.adsViewAnimation.isHidden = true
                     }
@@ -187,7 +176,7 @@ extension ColoringBookCell: UICollectionViewDelegate, UICollectionViewDataSource
                 cell.adsViewAnimation.isHidden = true
                 
                 if data.isPremium ?? false {
-                    cell.viewWatchAds.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                    cell.viewWatchAds.isHidden = true
                 } else {
                     cell.viewWatchAds.isHidden = true
                 }

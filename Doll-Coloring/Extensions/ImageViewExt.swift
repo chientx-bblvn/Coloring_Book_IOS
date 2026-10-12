@@ -38,14 +38,15 @@ extension UIImageView {
     }
     
     func setImage(with url: String?, placeholder: UIImage? = nil) {
-        var link = url ?? ""
-        if !link.starts(with: "http://") && !link.starts(with: "https://") {
-            link = "\(baseURLImage)\(link)"
+        SDWebImageDownloader.shared.setValue(apiAccessKey, forHTTPHeaderField: "AccessKey")
+        guard let resolved = ColoringCDN.resolveImageURL(url) else {
+            self.image = placeholder
+            return
         }
         let indicatorView = SDWebImageActivityIndicator()
         indicatorView.indicatorView.color = R.color.mainPrimary()
         self.sd_imageIndicator = indicatorView
-        self.sd_setImage(with: URL(string: link)) { [weak self] _, error, _, _ in
+        self.sd_setImage(with: resolved, placeholderImage: placeholder, options: [.retryFailed]) { [weak self] _, error, _, _ in
             if error != nil {
                 self?.image = placeholder
             }

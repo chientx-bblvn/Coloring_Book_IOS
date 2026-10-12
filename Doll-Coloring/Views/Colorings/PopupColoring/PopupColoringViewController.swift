@@ -10,6 +10,8 @@ import UIKit
 class PopupColoringViewController: UIViewController {
     
     @IBOutlet weak var viewContent: UIView!
+
+    @IBOutlet weak var imageIcon: UIImageView!
     
     @IBOutlet weak var viewProgressRing: UIView!
     @IBOutlet weak var lbPercenColoring: UILabel!
@@ -48,20 +50,75 @@ class PopupColoringViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        loadAds()
-         viewContent.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 4, height: 4))
+        applyCrayoChrome()
         lbTitle.text = titlePopup
         btnCancel.setTitle(titleCancel, for: .normal)
-        btnCancel.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 4, height: 4))
         btnDrawing.setTitle(titleOk, for: .normal)
-        btnDrawing.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 4, height: 4))
-//        viewProgressRing.startColor = UIColor(hexString: "80C4E9").withAlphaComponent(0.5)
-//        viewProgressRing.endColor = UIColor(hexString: "80C4E9")
+        if let textStack = viewProgressRing.subviews.compactMap({ $0 as? UIStackView }).first {
+            [lbTitle, lbPercenColoring].forEach {
+                textStack.removeArrangedSubview($0)
+                $0.removeFromSuperview()
+            }
+            textStack.axis = .vertical
+            textStack.alignment = .fill
+            textStack.distribution = .fill
+            textStack.spacing = 6
+            textStack.addArrangedSubview(lbTitle)
+            textStack.addArrangedSubview(lbPercenColoring)
+        }
+    }
+
+    private func applyCrayoChrome() {
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.35)
+        viewContent.backgroundColor = AppTheme.surface
+        viewContent.layer.cornerRadius = 24
+        viewContent.clipsToBounds = true
+        viewContent.layer.borderWidth = 1
+        viewContent.layer.borderColor = AppTheme.border.cgColor
+
+        imageIcon.image = UIImage(named: "exit_coloring_bunny")
+        imageIcon.contentMode = .scaleAspectFit
+        imageIcon.backgroundColor = AppTheme.primarySoft
+        imageIcon.layer.cornerRadius = 32
+        imageIcon.clipsToBounds = true
+
+        lbTitle.textColor = AppTheme.text
+        lbTitle.font = .systemFont(ofSize: 18, weight: .bold)
+        lbTitle.numberOfLines = 0
+        lbTitle.textAlignment = .center
+        lbPercenColoring.textColor = AppTheme.primary
+        lbPercenColoring.font = .systemFont(ofSize: 13, weight: .semibold)
+        lbPercenColoring.textAlignment = .center
+
+        stylePopupButton(btnDrawing, filled: true)
+        stylePopupButton(btnCancel, filled: false)
+    }
+
+    private func stylePopupButton(_ button: UIButton, filled: Bool) {
+        button.layer.cornerRadius = 18
+        button.clipsToBounds = true
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        if filled {
+            button.backgroundColor = AppTheme.primary
+            button.setTitleColor(AppTheme.onPrimary, for: .normal)
+            button.layer.borderWidth = 0
+        } else {
+            button.backgroundColor = AppTheme.primarySoft
+            button.setTitleColor(AppTheme.text, for: .normal)
+            button.layer.borderWidth = 1
+            button.layer.borderColor = AppTheme.border.cgColor
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
 //        viewProgressRing.setProgress(Float(percent), animated: true)
-        lbPercenColoring.text = "\(Int((percent * 100).rounded()))%"
+        let percentage = Int((percent * 100).rounded())
+        let format = "Coloring.ProgressComplete".localizedString(
+            tableName: "Localizable",
+            defaultValue: "%1$d%% complete",
+            comment: "Coloring progress percentage"
+        )
+        lbPercenColoring.text = String(format: format, locale: Constants.currentLanguage.locale, arguments: [percentage])
     }
     
     

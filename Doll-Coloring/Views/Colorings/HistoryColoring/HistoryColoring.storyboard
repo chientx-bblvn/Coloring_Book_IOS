@@ -20,9 +20,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mc4-MN-NSA">
                                 <rect key="frame" x="131" y="287" width="482" height="563"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_popup_iap_iphone" translatesAutoresizingMaskIntoConstraints="NO" id="5G0-Cg-oY8">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5G0-Cg-oY8">
                                         <rect key="frame" x="0.0" y="0.0" width="482" height="563"/>
-                                        <variation key="heightClass=regular-widthClass=regular" image="background_popup_iap_ipad"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7f-xJ-iCo">
                                         <rect key="frame" x="20" y="20" width="442" height="29"/>
@@ -122,7 +121,7 @@
                                 <constraints>
                                     <constraint firstItem="SDy-4N-g00" firstAttribute="top" secondItem="IJ8-Gv-x6A" secondAttribute="bottom" constant="20" id="1XS-rm-Bxc"/>
                                     <constraint firstAttribute="trailing" secondItem="wHN-VA-UAy" secondAttribute="trailing" constant="20" id="23F-5y-whh"/>
-                                    <constraint firstItem="SDy-4N-g00" firstAttribute="height" secondItem="mc4-MN-NSA" secondAttribute="height" multiplier="0.264654" id="2QQ-4Y-coV"/>
+                                            <constraint firstItem="SDy-4N-g00" firstAttribute="height" secondItem="mc4-MN-NSA" secondAttribute="height" multiplier="0.17" id="2QQ-4Y-coV"/>
                                     <constraint firstItem="J7f-xJ-iCo" firstAttribute="leading" secondItem="mc4-MN-NSA" secondAttribute="leading" constant="20" id="31u-NU-VUb"/>
                                     <constraint firstItem="IJ8-Gv-x6A" firstAttribute="leading" secondItem="mc4-MN-NSA" secondAttribute="leading" constant="80" id="4ek-wG-Nur"/>
                                     <constraint firstAttribute="trailing" secondItem="5G0-Cg-oY8" secondAttribute="trailing" id="8t2-8y-jQa"/>
@@ -171,11 +170,17 @@
                     <connections>
                         <outlet property="btnBack" destination="wHN-VA-UAy" id="vCG-Hn-2g1"/>
                         <outlet property="fsPageView" destination="JWZ-IR-wMR" id="4ln-ex-Qhp"/>
+                        <outlet property="imageBackground" destination="5G0-Cg-oY8" id="Qe1-Pn-8eAj"/>
+                        <outlet property="imageCreateFrame" destination="djV-GD-19n" id="cR9-YE-bA1"/>
+                        <outlet property="createIcon" destination="UJc-TO-lO8" id="Kr5-Bc-2aT9"/>
+                        <outlet property="imageHistoryFrame" destination="2F5-k0-9H4" id="HfN-Hx-99a"/>
                         <outlet property="lbCreate" destination="KGz-KA-r8z" id="gsI-UK-hhB"/>
                         <outlet property="lbCurrent" destination="6AZ-so-aN5" id="n3p-84-jg8"/>
                         <outlet property="lblTitle" destination="J7f-xJ-iCo" id="OfS-RT-6gC"/>
+                        <outlet property="separatorLine" destination="IJ8-Gv-x6A" id="ZhT-Wv-K1Cs"/>
                         <outlet property="viewContent" destination="mc4-MN-NSA" id="Fvf-ek-kNg"/>
                         <outlet property="viewCreate" destination="SDy-4N-g00" id="T0A-Bn-SWa"/>
+                        <outlet property="viewHistoryBackground" destination="y5D-KU-uQw" id="M9f-S5-Cc9x"/>
                         <outlet property="viewHistory" destination="JWZ-IR-wMR" id="u61-bQ-hUj"/>
                         <outletCollection property="contraintView" destination="sJv-9n-jZL" collectionClass="NSMutableArray" id="YmZ-oK-gpo"/>
                         <outletCollection property="contraintView" destination="Umc-5V-v7w" collectionClass="NSMutableArray" id="D4r-Lu-SgZ"/>
@@ -187,8 +192,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background_popup_iap_ipad" width="483" height="541"/>
-        <image name="background_popup_iap_iphone" width="310" height="438"/>
         <image name="ic_close" width="32" height="32"/>
         <image name="ic_image_empty" width="74" height="74"/>
         <image name="view_create_coloring" width="298" height="150"/>

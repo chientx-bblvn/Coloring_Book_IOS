@@ -1,8 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Frame 503.pdf",
-      "idiom" : "universal"
+      "filename" : "Paint_Palette.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

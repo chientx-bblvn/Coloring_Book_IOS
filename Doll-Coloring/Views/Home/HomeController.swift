@@ -9,9 +9,7 @@
 import Foundation
 import RxSwift
 import UIKit
-import AdmobSDK
 import BmoViewPager
-import FBAudienceNetwork
 import SDWebImage
 
 class HomeController: BaseViewController {

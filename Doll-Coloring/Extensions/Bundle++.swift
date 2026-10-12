@@ -14,8 +14,8 @@ extension Bundle {
     var buildVersionNumber: String {
         return (infoDictionary?["CFBundleVersion"] as? String) ?? ""
     }
+    /// Full app name for in-app / share (not the short home-screen label).
     var applicationName: String? {
-        object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ??
-            object(forInfoDictionaryKey: "CFBundleName") as? String
+        appDisplayName
     }
 }

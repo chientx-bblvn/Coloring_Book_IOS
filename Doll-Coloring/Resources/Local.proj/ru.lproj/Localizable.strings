@@ -42,6 +42,7 @@ Common.Language                                 =       "Язык";
 Common.EmptyCollections                         =       "Пока нет изображений!";
 Content_delete_collection                       =       "Цвет будет удален \n Нажмите Удалить, чтобы продолжить.";
 Common.Continue = "Продолжить";
+Common.ContinueColoring = "Продолжить раскрашивание";
 Common.UnlockForFree                            =       "Разблокировать бесплатно";
 Common.UnlockColoring                           =       "Купить премиум: Разблокировать все рисунки";
 Common.WatchAShortVideo                         =       "Посмотреть короткое видео";
@@ -141,3 +142,16 @@ Setting.ShareApp                                =       "Поделиться п
 Setting.RateApp                                 =       "Оценить приложение";
 Setting.FeedBack                                =       "Обратная связь";
 Setting.MoreApp                                 =       "Другие приложения";
+
+// Collections empty state
+Collections.EmptyTitle = "Твоя раскраска уже ждёт!";
+Collections.EmptyMessage = "Выбери рисунок и раскрась его по-своему.";
+Collections.EmptyAction = "Выбрать рисунок";
+
+Coloring.PreparingDrawing = "Готовим рисунок…";
+
+// Coloring exit confirmation
+Coloring.ExitConfirm = "Сохранить прогресс перед выходом?";
+Coloring.SaveAndLeave = "Сохранить и выйти";
+Coloring.KeepColoring = "Продолжить раскрашивать";
+Coloring.ProgressComplete = "Готово: %1$d%%";

@@ -9,9 +9,7 @@
 import Foundation
 import RxSwift
 import UIKit
-import AdmobSDK
 import BmoViewPager
-import FBAudienceNetwork
 import SDWebImage
 
 class CheckInController: BaseViewController {
@@ -30,7 +28,6 @@ class CheckInController: BaseViewController {
     override func setup() {
         super.setup()
         setupView()
-//        ADManager.shared.preLoadReward(DollColoringAdID.reward_dailygift)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,7 +61,14 @@ class CheckInController: BaseViewController {
         topbarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
         topbarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
         topbarView.onLeftClick = {
-            AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
+            NotificationCenter.default.post(name: NSNotification.Name("SWIFTUI_POP_CHECKIN"), object: nil)
+            if self.navigationController?.presentingViewController != nil {
+                self.dismiss(animated: true)
+            } else if (self.navigationController?.viewControllers.count ?? 0) > 1 {
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                AppRouter.shared.dismissToSwiftUIHome()
+            }
         }
         topbarView.textAlignmentCenter = true
         loadLanguage()
@@ -137,7 +141,7 @@ extension CheckInController: UICollectionViewDelegate, UICollectionViewDataSourc
             } else {
                 cell.imageItem.setImage(with: image)
             }
-            cell.imageAds.isHidden = SQLiteManager.shared.selectionGitColorings().contains(where: {$0.filePath.contains(image)})
+            cell.imageAds.isHidden = true
             cell.lbDate.text = "\(viewModel.monthsData[indexPath.section - 1].day.reversed()[indexPath.row])"
             return cell
         }
@@ -145,98 +149,32 @@ extension CheckInController: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section != 0 {
-            let image  = viewModel.monthsData[indexPath.section - 1].image.reversed()[indexPath.row]
-            if SQLiteManager.shared.selectionGitColorings().contains(where: {$0.filePath.contains(image)}) {
-                if let data = viewModel.itemDaly.first(where: {$0.filePath?.contains(image) ?? false}) {
-                    navigateColoring(data)
-                }
-            } else {
-                if let data = viewModel.itemDaly.first(where: {$0.filePath?.contains(image) ?? false}) {
-                    if IAPState.isUserVip {
-                        self.navigateColoring(data)
-                        return
-                    }
-                    showRew(data)
-                }
+            let image = viewModel.monthsData[indexPath.section - 1].image.reversed()[indexPath.row]
+            if let data = viewModel.itemDaly.first(where: { $0.filePath?.contains(image) ?? false }) {
+                unlockAndNavigate(data)
             }
         }
     }
     
-    func showRew(_ data: ColoringImage) {
-        guard SQLiteManager.shared.selectionColoringsRew().first(where: { $0.filePath == data.filePath }) == nil else {
-            navigateColoring(data)
-            return
-        }
-
-        if IAPState.isUserVip {
-            navigateColoring(data)
-            return
-        }
-
-        if !UserDefaultManager.disableMusicBackground {
-            pauseAudioBackground()
-        }
-
-        PopupShowAdsViewController.show(in: self, data: data, {
-            // 👉 Thực hiện luôn hành động mở khóa, không chờ quảng cáo
-            SQLiteManager.shared.insertTableColoringRew(data: data)
-            SQLiteManager.shared.insertTableGitColoring(
-                _id: SQLiteManager.shared.selectionGitColorings().count,
-                _name: data.filePath ?? ""
-            )
-
-            if !UserDefaultManager.disableMusicBackground {
-                self.playAudioBackground()
-            }
-
-            self.navigateColoring(data)
-
-        }, {
-            SubcriptionViewController.show(checkTime: true) {
-                if DollColoringAdID.inter_after_iap.isEnableAd {
-                    AdLoadingView.show()
-                    ADManager.shared.loadFull(DollColoringAdID.inter_after_iap) { _ in
-                        AdLoadingView.dismiss()
-                    }
-                }
-            } onClickCLose: { }
-        })
+    /// Daily gifts open free once the day has arrived — no reward ads.
+    func unlockAndNavigate(_ data: ColoringImage) {
+        SQLiteManager.shared.insertTableColoringRew(data: data)
+        SQLiteManager.shared.insertTableGitColoring(
+            _id: SQLiteManager.shared.selectionGitColorings().count,
+            _name: data.filePath ?? ""
+        )
+        navigateColoring(data)
     }
-    
-//    func loadInter(_ data: ColoringImage) {
-//        guard DollColoringAdID.inter_dailygift.isEnableAd else {
-//            if !UserDefaultManager.disableMusicBackground {
-//                self.playAudioBackground()
-//            }
-//            SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
-//            self.navigateColoring(data)
-//            return
-//        }
-//
-//        AdLoadingView.show()
-//        ADManager.shared.loadFull(DollColoringAdID.inter_dailygift, isSplash: true) { state in
-//            AdLoadingView.dismiss()
-//            switch state {
-//            case .closed, .error:
-//                DispatchQueue.main.async {
-//                    if !UserDefaultManager.disableMusicBackground {
-//                        self.playAudioBackground()
-//                    }
-//                    SQLiteManager.shared.insertTableGitColoring(_id: SQLiteManager.shared.selectionGitColorings().count, _name: data.filePath ?? "")
-//                    self.navigateColoring(data)
-//                }
-//            default:
-//                break
-//            }
-//        }
-//    }
     
     func navigateColoring(_ data: ColoringImage) {
-        if let path = data.filePath?.components(separatedBy: "/").last, let colorLocal = SQLiteManager.shared.selectionColorings().first(where: {$0.filePath.contains(path)}) {
-            AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .home, coloringAPI: data), with: .modal)
-        } else {
-            AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .home), with: .modal)
-        }
+        let local: ColoringHistoryModel? = {
+            guard let path = data.filePath?.components(separatedBy: "/").last else { return nil }
+            return SQLiteManager.shared.selectionColorings().first(where: { $0.filePath.contains(path) })
+        }()
+        AppRouter.shared.navigate(
+            to: ColorFlowPresenter.route(api: data, local: local, typeScreen: .home),
+            with: .modal
+        )
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

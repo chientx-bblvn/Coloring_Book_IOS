@@ -36,15 +36,15 @@ class ToastView: BaseCustomXibView {
         var backgroundColor: UIColor? {
             switch self {
             case .success:
-                return R.color.systemGreen()
+                return .systemGreen
             case .error:
-                return R.color.systemRed()
+                return R.color.systemRed() ?? .systemRed
             }
         }
     }
     
-    @IBOutlet private weak var imageView: UIImageView!
-    @IBOutlet private weak var lblTitle: UILabel!
+    @IBOutlet private weak var imageView: UIImageView?
+    @IBOutlet private weak var lblTitle: UILabel?
     
     var type: TypeToast = .success {
         didSet {
@@ -63,9 +63,9 @@ class ToastView: BaseCustomXibView {
     }
     
     private func setupView() {
-        contentView.backgroundColor = type.backgroundColor
-        imageView.image = type.image
-        lblTitle.text = titleToast
+        contentView?.backgroundColor = type.backgroundColor
+        imageView?.image = type.image
+        lblTitle?.text = titleToast
     }
 
 }

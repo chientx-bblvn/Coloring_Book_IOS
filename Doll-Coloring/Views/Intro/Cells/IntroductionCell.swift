@@ -20,48 +20,53 @@ class IntroductionCell: FSPagerViewCell, NibReusable {
     
     @IBOutlet weak var btnNext2: UIButton!
     
-    
     var onNext: (() -> Void)?
-    private var isLoadingAd = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.btnNext2.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
-        
+        self.btnNext2.customGenerateOuterShadow(shadowOpacity: 0.25, shadowRadius: 6, color: UIColor(hexString: "C13F68").withAlphaComponent(0.35), shadowOffset: CGSize(width: 0, height: 2))
     }
-        
-    
     
     func loadData(intro: IntroModel) {
         switch intro.id {
         case 0:
             changeButtonNext(LocalizableUtils.commonNext())
-            viewAds.isHidden = false
+            viewAds?.isHidden = true
             self.btnNext.isHidden = false
             self.btnNext2.isHidden = true
-            loadNativeAd(adId: .native_onboarding_1)
         case 1:
             changeButtonNext(LocalizableUtils.commonNext())
-            viewAds.isHidden = true
+            viewAds?.isHidden = true
             self.btnNext.isHidden = true
             self.btnNext2.isHidden = false
             self.indicatorImg.isHidden = true
-           
-//            loadNativeAd(adId: .native_onboarding_2)
         case 2:
             changeButtonNext(LocalizableUtils.commonStart())
-            viewAds.isHidden = false
+            viewAds?.isHidden = true
             self.btnNext.isHidden = false
             self.btnNext2.isHidden = true
-            loadNativeAd(adId: .native_onboarding_3)
         default:
             break
         }
-        imageviewIntro.image = intro.image
+        // Keep the illustration as the focal image and use the blush surface behind it.
+        imageviewIntro.image = nil
+        imageviewIntro.backgroundColor = UIColor(hexString: "FFF1F5")
         lbTitle.text = intro.name
         lbSubTitle.text = intro.desc
-        imgInside.image = intro.insideImage
+        lbTitle.textColor = UIColor(hexString: "5B5056")
+        lbSubTitle.textColor = UIColor(hexString: "756A70")
+
+        imgInside.image = intro.image
+        imgInside.contentMode = .scaleAspectFill
+        imgInside.layer.cornerRadius = 18
+        imgInside.clipsToBounds = true
         indicatorImg.image = intro.indicator
+
+        let actionPink = UIColor(hexString: "FF5D8F")
+        btnNext.backgroundColor = actionPink
+        btnNext2.backgroundColor = actionPink
+        btnNext.setTitleColor(.white, for: .normal)
+        btnNext2.setTitleColor(.white, for: .normal)
     }
     
     func changeButtonNext(_ title: String) {
@@ -69,20 +74,7 @@ class IntroductionCell: FSPagerViewCell, NibReusable {
         self.btnNext2.setTitle(title, for: .normal)
     }
     
-    private func loadNativeAd(adId: DollColoringAdID) {
-            if isLoadingAd { return }
-            isLoadingAd = true
-            viewAds.isHidden = false
-
-            ADManager.shared.loadNative(adId, to: viewAds, nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success, _ in
-                guard idAds == adId.adId else { return }
-                self?.isLoadingAd = false
-                self?.viewAds.isHidden = !success
-            }
-        }
-    
     @IBAction func buttonNextOnTouch(_ sender: UIButton) {
         onNext?()
     }
-    
 }

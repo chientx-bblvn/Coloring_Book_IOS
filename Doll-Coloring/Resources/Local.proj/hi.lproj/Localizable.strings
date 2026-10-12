@@ -41,6 +41,7 @@ Common.Language = "भाषा";
 Common.EmptyCollections = "अब तक कोई तस्वीरें नहीं!";
 Content_delete_collection = "रंग हटा दिया जाएगा। \n जारी रखने के लिए हटाएं पर क्लिक करें।";
 Common.Continue = "जारी रखें";
+Common.ContinueColoring = "रंग जारी रखें";
 Common.UnlockForFree                            =       "मुफ़्त में अनलॉक करें";
 Common.UnlockColoring                           =       "प्रीमियम खरीदें: सभी चित्र अनलॉक करें";
 Common.WatchAShortVideo                         =       "एक छोटा वीडियो देखें";
@@ -139,3 +140,16 @@ Setting.ShareApp                                =       "ऐप साझा क
 Setting.RateApp                                 =       "ऐप रेट करें";
 Setting.FeedBack                                =       "प्रतिक्रिया";
 Setting.MoreApp                                 =       "अधिक ऐप्स";
+
+// Collections empty state
+Collections.EmptyTitle = "आपकी रंग भरने की किताब आपका इंतज़ार कर रही है!";
+Collections.EmptyMessage = "एक चित्र चुनें और उसे अपने रंगों से सजाएँ।";
+Collections.EmptyAction = "चित्र देखें";
+
+Coloring.PreparingDrawing = "आपकी ड्राइंग तैयार हो रही है…";
+
+// Coloring exit confirmation
+Coloring.ExitConfirm = "जाने से पहले अपनी प्रगति सहेजें?";
+Coloring.SaveAndLeave = "सहेजें और बाहर जाएँ";
+Coloring.KeepColoring = "रंग भरना जारी रखें";
+Coloring.ProgressComplete = "%1$d%% पूरा";

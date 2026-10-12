@@ -110,10 +110,7 @@ extension ADManager {
     public func loadOpenAsync(_ id: AdConfigId, completion: @escaping ((_ showed: Bool) -> Void)) {
         var adId = id.adUnitId
         if isTestMode {
-            // TODO: AppOpen Test not working show disable this ads for testmode
             adId = SampleAdUnitID.adFormatAppOpen
-            //            completion(false)
-            //            return
         }
         BBLLogging.d("ADMANAGER: OPEN ASYNC \(id.name) with id: \(adId.rawValue)")
         guard id.isEnableAd else {
@@ -400,12 +397,63 @@ extension ADManager {
                 completion(idRequested ?? "", true, nativeAdView)
             }
         }
+        
         AdMobManager.shared.addAdNative(unitId: adId,
                                         view: view,
                                         refreshAd: refreshAd,
                                         type: nativeAdType,
                                         ratio: ratio)
     }
+    
+    public func loadNativeClick(_ id: AdConfigId,
+                           to view: UIView,
+                           refreshAd: Bool = false,
+                           nativeAdType: NativeAdType,
+                           ratio: GADMediaAspectRatio = .landscape,
+                           _ completion: @escaping ((_ adId: String,
+                                                     _ success: Bool,
+                                                     _ nativeAdView: NativeAdProtocol?) -> Void), onClickAds: @escaping () -> Void) {
+        var adId = id.adUnitId
+        if isTestMode {
+            adId = SampleAdUnitID.adFormatNativeAdvancedVideo
+        }
+        guard id.isEnableAd else {
+            completion(id.adId, false, nil)
+            return
+        }
+        AdMobManager.shared.blockNativeFailed = { adId in
+            BBLLogging.d("ADMANAGER: NATIVE LOAD FAILED: \(adId)")
+            completion(adId, false, nil)
+        }
+        AdMobManager.shared.blockLoadNativeSuccess = { idRequested, nativeAdView in
+            BBLLogging.d("ADMANAGER: NATIVE LOAD SUCCESS: \(idRequested ?? "")")
+            if idRequested?.elementsEqual(adId.rawValue) == true {
+                if let adView = nativeAdView?.getGADView() {
+                    adView.removeFromSuperview()
+                    adView.translatesAutoresizingMaskIntoConstraints = false
+                    view.addSubview(adView)
+                    NSLayoutConstraint.activate([
+                        adView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+                        adView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+                        adView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+                        adView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0)
+                        
+                    ])
+                }
+                completion(idRequested ?? "", true, nativeAdView)
+            }
+        }
+        
+        AdMobManager.shared.blockClickAdsNative = {
+            onClickAds()
+        }
+        AdMobManager.shared.addAdNative(unitId: adId,
+                                        view: view,
+                                        refreshAd: refreshAd,
+                                        type: nativeAdType,
+                                        ratio: ratio)
+    }
+    
     
     public func loadNativeWithoutView(_ id: AdConfigId,
                                       refreshAd: Bool = false,

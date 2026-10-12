@@ -33,6 +33,7 @@ Common.unfinished                               =       "unfinished";
 
 Common.History                                  =       "History";
 Common.Continue                                 =       "Continue";
+Common.ContinueColoring = "Continue Coloring";
 Common.CreateNew                                =       "Create New";
 Common.Music                                    =       "Music";
 Common.Sound                                    =       "Sound";
@@ -151,3 +152,16 @@ save_picture_ads = "To save the drawing to your device, please watch a short adv
 save_picture_success = "Your picture has been saved to your photos.";
 save_picture_fail = "Your picture has not been saved to your photos.";
 
+
+// Collections empty state
+Collections.EmptyTitle = "Your coloring book is waiting!";
+Collections.EmptyMessage = "Pick a page and make it yours.";
+Collections.EmptyAction = "Explore drawings";
+
+Coloring.PreparingDrawing = "Preparing your drawing…";
+
+// Coloring exit confirmation
+Coloring.ExitConfirm = "Save your progress before leaving?";
+Coloring.SaveAndLeave = "Save & leave";
+Coloring.KeepColoring = "Keep coloring";
+Coloring.ProgressComplete = "%1$d%% complete";

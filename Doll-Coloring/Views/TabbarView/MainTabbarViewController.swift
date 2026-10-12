@@ -7,7 +7,6 @@
 
 import UIKit
 import BmoViewPager
-import AdmobSDK
 
 class MainTabbarViewController: BaseViewController {
     
@@ -50,6 +49,11 @@ class MainTabbarViewController: BaseViewController {
     let collectionController = CollectionsRoute.main(navigate: false).screen
     let settingController = SettingsRoute.main.screen
     
+    private let selectedColor = UIColor(hexString: "C92F68")
+    private let normalColor = UIColor(hexString: "9A8FA3")
+    private let selectionPill = UIView()
+    private var selectionPillConstraints: [NSLayoutConstraint] = []
+    
     override func setup() {
         super.setup()
         setupView()
@@ -71,21 +75,37 @@ class MainTabbarViewController: BaseViewController {
         viewSettings.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeTabbar(_ :))))
         viewSettings.isUserInteractionEnabled = true
         
-        tabbarView.layer.backgroundColor = UIColor(hexString: "98A3F3").cgColor
-        tabbarView.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 4, height: 4))
+        setupTabbarAppearance()
         loadLanguage()
-        pointColoringBooks.isHidden = false
-        imgColoringBook.image = R.image.ic_diary_gold()
-        lbColoringBooks.textColor = UIColor(hexString: "FEF08A")
-        pointCollection.isHidden = true
-        imgCollection.image = R.image.ic_collection_dark()
-        lbCollection.textColor = UIColor(hexString: "000000")
-        
-        pointSettings.isHidden = true
-        imgSetting.image = R.image.ic_setting_dark()
-        lbSettings.textColor = UIColor(hexString: "000000")
-        
+        selectTab(at: 0, animated: false)
     }
+    
+    private func setupTabbarAppearance() {
+        tabbarView.backgroundColor = .white
+        tabbarView.layer.cornerRadius = tabbarView.bounds.height / 2
+        tabbarView.layer.cornerCurve = .continuous
+        tabbarView.layer.borderWidth = 1
+        tabbarView.layer.borderColor = UIColor.black.withAlphaComponent(0.05).cgColor
+        tabbarView.layer.masksToBounds = false
+        tabbarView.layer.shadowColor = UIColor(hexString: "38263F").cgColor
+        tabbarView.layer.shadowOpacity = 0.12
+        tabbarView.layer.shadowRadius = 18
+        tabbarView.layer.shadowOffset = CGSize(width: 0, height: 8)
+        
+        selectionPill.translatesAutoresizingMaskIntoConstraints = false
+        selectionPill.backgroundColor = selectedColor.withAlphaComponent(0.1)
+        selectionPill.layer.cornerRadius = (tabbarView.bounds.height - 12) / 2
+        selectionPill.layer.cornerCurve = .continuous
+        selectionPill.isUserInteractionEnabled = false
+        tabbarView.insertSubview(selectionPill, at: 0)
+        
+        [pointColoringBooks, pointCollection, pointSettings].forEach { $0?.isHidden = true }
+        [lbColoringBooks, lbCollection, lbSettings].forEach {
+            $0?.adjustsFontSizeToFitWidth = true
+            $0?.minimumScaleFactor = 0.8
+        }
+    }
+    
     private func loadLanguage() {
         lbColoringBooks.text = LocalizableUtils.commonColoringBooks()
         lbCollection.text = LocalizableUtils.commonCollections()
@@ -93,39 +113,50 @@ class MainTabbarViewController: BaseViewController {
     }
     
     @objc private func changeTabbar(_ gesture: UIGestureRecognizer) {
-        let view = gesture.view
-        pointColoringBooks.isHidden = true
-        imgColoringBook.image = R.image.ic_diary_dark()
-        lbColoringBooks.textColor = UIColor(hexString: "000000")
-        pointCollection.isHidden = true
-        imgCollection.image = R.image.ic_collection_dark()
-        lbCollection.textColor = UIColor(hexString: "000000")
-        pointSettings.isHidden = true
-        imgSetting.image = R.image.ic_setting_dark()
-        lbSettings.textColor = UIColor(hexString: "000000")
-        switch view?.restorationIdentifier {
+        switch gesture.view?.restorationIdentifier {
         case viewColoringBooks.restorationIdentifier:
-            pointColoringBooks.isHidden = false
-            imgColoringBook.image = R.image.ic_diary_gold()
-            lbColoringBooks.textColor = UIColor(hexString: "FEF08A")
-            viewContainer.presentedPageIndex = 0
-            lbColoringBooks.text = LocalizableUtils.commonColoringBooks()
+            selectTab(at: 0, animated: true)
         case viewCollection.restorationIdentifier:
-            pointCollection.isHidden = false
-            imgCollection.image = R.image.ic_collection_gold()
-            lbCollection.textColor = UIColor(hexString: "FEF08A")
-            viewContainer.presentedPageIndex = 1
-            lbCollection.text = LocalizableUtils.commonCollections()
+            selectTab(at: 1, animated: true)
         case viewSettings.restorationIdentifier:
-            pointSettings.isHidden = false
-           
-            viewContainer.presentedPageIndex = 2
-            lbSettings.textColor = UIColor(hexString: "FEF08A")
-            imgSetting.image = R.image.ic_setting_gold()
-            lbSettings.text = LocalizableUtils.commonSettings()
+            selectTab(at: 2, animated: true)
         default:
             break
         }
+    }
+    
+    private func selectTab(at index: Int, animated: Bool) {
+        let items: [(view: UIView, image: UIImageView, label: UILabel, icon: UIImage?)] = [
+            (viewColoringBooks, imgColoringBook, lbColoringBooks, R.image.ic_diary_dark()),
+            (viewCollection, imgCollection, lbCollection, R.image.ic_collection_dark()),
+            (viewSettings, imgSetting, lbSettings, R.image.ic_setting_dark())
+        ]
+        for (i, item) in items.enumerated() {
+            let isSelected = i == index
+            let color = isSelected ? selectedColor : normalColor
+            item.image.image = item.icon?.withRenderingMode(.alwaysTemplate)
+            item.image.tintColor = color
+            item.label.textColor = color
+            item.label.font = .systemFont(ofSize: 12, weight: isSelected ? .semibold : .medium)
+        }
+        
+        let selectedView = items[index].view
+        NSLayoutConstraint.deactivate(selectionPillConstraints)
+        selectionPillConstraints = [
+            selectionPill.centerXAnchor.constraint(equalTo: selectedView.centerXAnchor),
+            selectionPill.centerYAnchor.constraint(equalTo: tabbarView.centerYAnchor),
+            selectionPill.widthAnchor.constraint(equalTo: selectedView.widthAnchor, constant: -8),
+            selectionPill.heightAnchor.constraint(equalTo: tabbarView.heightAnchor, constant: -12)
+        ]
+        NSLayoutConstraint.activate(selectionPillConstraints)
+        
+        if animated {
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5) {
+                self.tabbarView.layoutIfNeeded()
+            }
+            UISelectionFeedbackGenerator().selectionChanged()
+        }
+        viewContainer.presentedPageIndex = index
     }
 }
 extension MainTabbarViewController: BmoViewPagerDelegate, BmoViewPagerDataSource {

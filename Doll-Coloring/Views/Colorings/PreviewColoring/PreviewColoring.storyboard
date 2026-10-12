@@ -17,10 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_home" translatesAutoresizingMaskIntoConstraints="NO" id="M7f-UG-oas">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="start_coloring_loading_bg" translatesAutoresizingMaskIntoConstraints="NO" id="M7f-UG-oas">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rk6-vj-VoK">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rk6-vj-VoK">
                                 <rect key="frame" x="40" y="280.66666666666663" width="348" height="377.66666666666663"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusView">
@@ -37,24 +37,25 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="API-5K-PAV" customClass="LottieAnimationView" customModule="Lottie">
-                                <rect key="frame" x="40" y="280.66666666666663" width="348" height="377.66666666666663"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lcd-hc-5JA" customClass="TopBarView" customModule="Doll_Coloring" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lcd-hc-5JA" customClass="TopBarView" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="47" width="428" height="56"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="2Dd-RA-aPx"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
-                                        <color key="value" name="ColorTextTopBar"/>
-                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorView">
                                         <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                            </view>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="API-5K-PAV" customClass="LottieAnimationView" customModule="Lottie">
+                                <rect key="frame" x="146" y="107" width="136" height="100"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="preview-loader-width"/>
+                                    <constraint firstAttribute="height" constant="100" id="preview-loader-height"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3pi-N7-nbV"/>
@@ -66,13 +67,13 @@
                             <constraint firstItem="M7f-UG-oas" firstAttribute="top" secondItem="Z2g-4m-atm" secondAttribute="top" id="FUb-9h-5Lk"/>
                             <constraint firstItem="M7f-UG-oas" firstAttribute="leading" secondItem="Z2g-4m-atm" secondAttribute="leading" id="GXh-FO-Ufe"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="lcd-hc-5JA" secondAttribute="trailing" id="LKI-kv-q2d"/>
-                            <constraint firstItem="API-5K-PAV" firstAttribute="leading" secondItem="rk6-vj-VoK" secondAttribute="leading" id="MX2-01-5AG"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="rk6-vj-VoK" secondAttribute="trailing" constant="40" id="N3B-xz-4qN"/>
-                            <constraint firstItem="API-5K-PAV" firstAttribute="bottom" secondItem="rk6-vj-VoK" secondAttribute="bottom" id="Ntc-a2-sJw"/>
-                            <constraint firstItem="API-5K-PAV" firstAttribute="trailing" secondItem="rk6-vj-VoK" secondAttribute="trailing" id="Twn-fg-x8Z"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="1Qz-aK-2NW" secondAttribute="trailing" constant="30" id="VUF-Xr-IM4"/>
-                            <constraint firstItem="API-5K-PAV" firstAttribute="top" secondItem="rk6-vj-VoK" secondAttribute="top" id="Xox-Lp-JXA"/>
-                            <constraint firstItem="rk6-vj-VoK" firstAttribute="centerY" secondItem="3pi-N7-nbV" secondAttribute="centerY" id="ZvF-6y-Jwv"/>
+                            <constraint firstItem="API-5K-PAV" firstAttribute="top" secondItem="lcd-hc-5JA" secondAttribute="bottom" constant="4" id="preview-loader-below-title"/>
+                            <constraint firstItem="API-5K-PAV" firstAttribute="centerX" secondItem="3pi-N7-nbV" secondAttribute="centerX" id="preview-loader-center"/>
+                            <constraint firstItem="rk6-vj-VoK" firstAttribute="top" secondItem="API-5K-PAV" secondAttribute="bottom" constant="12" id="art-below-dog"/>
+                            <constraint firstItem="rk6-vj-VoK" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="3pi-N7-nbV" secondAttribute="bottom" constant="-24" id="art-bottom-safe"/>
+                            <constraint firstItem="rk6-vj-VoK" firstAttribute="height" secondItem="rk6-vj-VoK" secondAttribute="width" multiplier="1.15" priority="750" id="art-aspect"/>
                             <constraint firstItem="lcd-hc-5JA" firstAttribute="top" secondItem="3pi-N7-nbV" secondAttribute="top" id="h02-Ku-rSf"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="bottom" secondItem="1Qz-aK-2NW" secondAttribute="bottom" constant="30" id="hqZ-fe-xjl"/>
                             <constraint firstAttribute="bottom" secondItem="M7f-UG-oas" secondAttribute="bottom" id="jaY-cJ-42u"/>
@@ -93,7 +94,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background_home" width="393" height="852"/>
+        <image name="start_coloring_loading_bg" width="941" height="1672"/>
         <namedColor name="ColorTextTopBar">
             <color red="0.66274509803921566" green="0.40784313725490196" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -106,14 +106,35 @@ public extension Router {
             if let navigation = navigation {
                 rootViewController = navigation
                 navigation.pushViewController(viewController, animated: animated)
+                currentViewController = viewController
+            } else if let nav = UIApplication.topViewController()?.navigationController {
+                nav.pushViewController(viewController, animated: animated)
+                rootViewController = nav
+                currentViewController = viewController
+            } else if let rootNav = rootViewController, rootNav.view.window != nil {
+                rootNav.pushViewController(viewController, animated: animated)
+                currentViewController = viewController
+            } else if let top = UIApplication.topViewController() {
+                // SwiftUI root has no UIKit nav — present a full-screen stack for coloring / detail.
+                let nav = UINavigationController(rootViewController: viewController)
+                nav.isNavigationBarHidden = true
+                nav.modalPresentationStyle = .fullScreen
+                top.present(nav, animated: animated, completion: completion)
+                rootViewController = nav
+                currentViewController = viewController
             } else {
                 rootViewController?.pushViewController(viewController, animated: animated)
+                currentViewController = viewController
             }
-            currentViewController = viewController
         case .reset:
             rootViewController?.setViewControllers([viewController], animated: animated)
             currentViewController = viewController
         case .changeRoot:
+            if viewController is MainTabbarViewController {
+                dismissToSwiftUIHome(animated: animated)
+                completion?()
+                return
+            }
             if let navigation = (viewController as? UINavigationController) {
                 var window = UIApplication.shared.keyWindow
                 if window == nil {
@@ -200,12 +221,37 @@ public extension Router {
     }
     
     func popToController(controller: AnyClass, animated: Bool = true) {
+        // SwiftUI shell replaced MainTabbarViewController — dismiss UIKit overlays and return home.
+        if controller == MainTabbarViewController.self || NSStringFromClass(controller).contains("MainTabbarViewController") {
+            dismissToSwiftUIHome(animated: animated)
+            return
+        }
         guard
             let viewControllers = rootViewController?.viewControllers, let viewController = viewControllers.first(where: {$0.isKind(of: controller)})
-            else { return }
+            else {
+                dismissToSwiftUIHome(animated: animated)
+                return
+            }
         
         rootViewController?.popToViewController(viewController, animated: animated)
         currentViewController = viewController
+    }
+    
+    func dismissToSwiftUIHome(animated: Bool = true) {
+        NotificationCenter.default.post(name: NSNotification.Name("SWIFTUI_POP_TO_HOME"), object: nil)
+        if let root = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .flatMap({ $0.windows })
+            .first(where: { $0.isKeyWindow })?
+            .rootViewController,
+           root.presentedViewController != nil {
+            root.dismiss(animated: animated) {
+                self.currentViewController = root
+            }
+        } else {
+            rootViewController?.popToRootViewController(animated: animated)
+            currentViewController = rootViewController?.topViewController
+        }
     }
     
     func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
@@ -260,7 +306,16 @@ public enum TransitionType {
 
 extension UIApplication {
     
-    static func topViewController(base: UIViewController? = UIApplication.shared.delegate?.window??.rootViewController) -> UIViewController? {
+    static var keyWindowRoot: UIViewController? {
+        shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .first(where: { $0.isKeyWindow })?
+            .rootViewController
+            ?? shared.delegate?.window??.rootViewController
+    }
+    
+    static func topViewController(base: UIViewController? = UIApplication.keyWindowRoot) -> UIViewController? {
         if let nav = base as? UINavigationController {
             return topViewController(base: nav.visibleViewController)
         }

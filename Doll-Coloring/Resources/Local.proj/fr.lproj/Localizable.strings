@@ -42,6 +42,7 @@ Common.Language                                 =       "Langue";
 Common.EmptyCollections                         =       "Pas encore d'images !";
 Content_delete_collection                       =       "La couleur sera supprimée \n Cliquez sur Supprimer pour continuer.";
 Common.Continue = "Continuer";
+Common.ContinueColoring = "Continuer à colorier";
 Common.UnlockForFree                            =       "Déverrouiller gratuitement";
 Common.UnlockColoring                           =       "Achetez premium : Déverrouillez tous les dessins";
 Common.WatchAShortVideo                         =       "Regardez une courte vidéo";
@@ -140,3 +141,16 @@ Setting.ShareApp                                =       "Partager l'application"
 Setting.RateApp                                 =       "Noter l'application";
 Setting.FeedBack                                =       "Retour d'information";
 Setting.MoreApp                                 =       "Plus d'applications";
+
+// Collections empty state
+Collections.EmptyTitle = "Ton livre de coloriage t’attend !";
+Collections.EmptyMessage = "Choisis un dessin et donne-lui vie.";
+Collections.EmptyAction = "Voir les dessins";
+
+Coloring.PreparingDrawing = "Préparation de ton dessin…";
+
+// Coloring exit confirmation
+Coloring.ExitConfirm = "Enregistrer ta progression avant de quitter ?";
+Coloring.SaveAndLeave = "Enregistrer et quitter";
+Coloring.KeepColoring = "Continuer à colorier";
+Coloring.ProgressComplete = "%1$d%% terminé";

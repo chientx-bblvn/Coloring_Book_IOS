@@ -76,13 +76,6 @@ extension ArticleDetailController {
     
     private func loadAds() {
         viewBanners.isHidden = true
-        if !PetAdID.BannerAll.isEnableAd {
-            return
-        }
-        viewBanners.isHidden = false
-        ADManager.shared.loadBanner(PetAdID.BannerAll, viewBanner: viewBanners) { [weak self] success in
-            self?.viewBanners.isHidden = !success
-        }
     }
 }
 
@@ -100,23 +93,9 @@ extension ArticleDetailController: UITableViewDataSource, UITableViewDelegate {
         let row = indexPath.row
         let article = listArticle[row]
         if article.isAd {
-            if let adCell = self.adCell {
-                return adCell
-            }
-            let articleAdsCell = tableView.dequeueReusableCell(for: indexPath, cellType: ArticleAdsCell.self)
-            if adCell == nil {
-                adCell = articleAdsCell
-                articleAdsCell.loadAds()
-            }
-            articleAdsCell.onLoadAd = { [weak self] success in
-                if success {
-                    self?.heightNativeAd = 190
-                } else {
-                    self?.heightNativeAd = 0.001
-                }
-                self?.tableViewContent.reloadData()
-            }
-            return articleAdsCell
+            let cell = UITableViewCell()
+            cell.isHidden = true
+            return cell
         }
         let detailArticleCell = tableView.dequeueReusableCell(for: indexPath, cellType: DetailArticleCell.self)
         detailArticleCell.loadData(articleDetail: article)

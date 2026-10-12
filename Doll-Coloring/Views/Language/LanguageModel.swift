@@ -27,6 +27,7 @@ enum Language: Int, CaseIterable {
         case "en": self = .english
         case "ja": self = .japanese
         case "pt-BR": self = .brazil
+        case "pt": self = .portuguese
         case "hi": self = .hindi
         case "de": self = .german
         case "fr": self = .french
@@ -34,7 +35,6 @@ enum Language: Int, CaseIterable {
         case "es": self = .spanish
         case "ko": self = .korean
         case "vi": self = .vietnam
-        case "p": self = .portuguese
         default: self = .english
         }
     }
@@ -50,7 +50,7 @@ enum Language: Int, CaseIterable {
         case .french:
             return "fr"
         case .portuguese:
-            return "pt-BR"
+            return "pt"
         case .brazil:
             return "pt-BR"
         case .japanese:
@@ -130,9 +130,9 @@ enum Language: Int, CaseIterable {
         case .korean:
             return Locale.init(identifier: "ko_KR")
         case .portuguese:
-            return Locale.init(identifier: "pt_BR")
+            return Locale.init(identifier: "pt_PT")
         case .vietnam:
-            return Locale.init(identifier: "ko_VN")
+            return Locale.init(identifier: "vi_VN")
         }
     }
     

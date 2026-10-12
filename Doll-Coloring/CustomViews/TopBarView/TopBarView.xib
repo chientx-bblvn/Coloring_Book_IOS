@@ -16,12 +16,13 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TopBarView" customModule="Doll_Coloring" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TopBarView" customModuleProvider="target">
             <connections>
                 <outlet property="btnLeft" destination="Kua-HD-q5C" id="V7n-Vn-UIK"/>
                 <outlet property="btnPremium" destination="5yd-07-rjo" id="QUL-62-MOU"/>
                 <outlet property="btnRight" destination="Nfo-Jj-cPU" id="vMB-V8-CPr"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="cxR-XU-Xbh"/>
+                <outlet property="ivTitleLogo" destination="cRy-a0-Logo" id="logo-outlet-01"/>
                 <outlet property="lbTitle" destination="4oh-aG-OPp" id="euV-lr-ZYz"/>
                 <outlet property="viewPremium" destination="zOX-cP-q6l" id="b9E-xK-l2M"/>
             </connections>
@@ -60,6 +61,9 @@
                                             <color key="textColor" name="TextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cRy-a0-Logo">
+                                            <rect key="frame" x="16" y="0.0" width="18" height="74"/>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
@@ -67,6 +71,10 @@
                                         <constraint firstAttribute="trailing" secondItem="4oh-aG-OPp" secondAttribute="trailing" constant="16" id="6sA-ZH-WtM"/>
                                         <constraint firstAttribute="bottom" secondItem="4oh-aG-OPp" secondAttribute="bottom" id="r05-sQ-RvK"/>
                                         <constraint firstItem="4oh-aG-OPp" firstAttribute="leading" secondItem="nzf-7Q-yOS" secondAttribute="leading" constant="16" id="u88-IK-1Qy"/>
+                                        <constraint firstItem="cRy-a0-Logo" firstAttribute="top" secondItem="nzf-7Q-yOS" secondAttribute="top" id="logo-top-01"/>
+                                        <constraint firstAttribute="bottom" secondItem="cRy-a0-Logo" secondAttribute="bottom" id="logo-bottom-01"/>
+                                        <constraint firstItem="cRy-a0-Logo" firstAttribute="leading" secondItem="nzf-7Q-yOS" secondAttribute="leading" constant="8" id="logo-leading-01"/>
+                                        <constraint firstAttribute="trailing" secondItem="cRy-a0-Logo" secondAttribute="trailing" constant="8" id="logo-trailing-01"/>
                                     </constraints>
                                 </view>
                                 <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zOX-cP-q6l">

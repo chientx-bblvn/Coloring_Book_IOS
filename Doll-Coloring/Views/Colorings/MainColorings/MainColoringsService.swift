@@ -15,13 +15,13 @@ enum MainColoringsService {
 extension MainColoringsService: TargetType {
     
     public var baseURL: URL {
-        return URL(string: apiBaseUrl)!
+        return URL(string: newApiBaseURL)!
     }
     
     public var path: String {
         switch self {
         case .list:
-            return "/doll-coloring2/doll_v3.json"
+            return ""
         }
     }
     
@@ -45,12 +45,10 @@ extension MainColoringsService: TargetType {
     }
     
     public var headers: [String: String]? {
-        switch self {
-        case .list:
-            return [
-                "Content-type": "application/json"
-            ]
-        }
+        return [
+            "AccessKey": apiAccessKey,
+            "Content-type": "application/json"
+        ]
     }
 }
 

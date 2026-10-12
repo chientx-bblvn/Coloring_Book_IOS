@@ -18,7 +18,7 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
     
     @IBOutlet weak var tabbarView: UIView!
     
-    @IBOutlet weak var viewAds: UIView!
+    @IBOutlet weak var bottomSpacer: UIView! // previously bottomSpacer
     
     @IBOutlet weak var heightContraintAds: NSLayoutConstraint! {
         didSet {
@@ -119,7 +119,7 @@ class TabbarViewController: UIViewController, SOTabBarDelegate {
     
     private func getCurrentHeightAds(isSuccess: Bool = true) {
         guard isSuccess else {
-            viewAds.subviews.forEach { view in
+            bottomSpacer.subviews.forEach { view in
                 view.removeFromSuperview()
             }
             heightContraintAds.constant = 15

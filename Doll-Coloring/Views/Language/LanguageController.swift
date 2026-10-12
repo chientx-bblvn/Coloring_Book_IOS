@@ -9,7 +9,6 @@
 import Foundation
 import RxSwift
 import UIKit
-import AdmobSDK
 
 enum LanguageGoFrom {
     case intro
@@ -78,35 +77,9 @@ extension LanguageController {
         tableviewListCountry.register(cellType: LanguageCell.self)
         tableviewListCountry.delegate = self
         tableviewListCountry.dataSource = self
-        if goFrom == .intro {
-            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_1,
-                                           nativeAdType: .customMediaFixedHeight)
-            
-            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_3,
-                                           nativeAdType: .customMediaFixedHeight)
-            
-        }
-        setupListenChangeIAP()
-    }
-    
-    private func setupListenChangeIAP() {
-        InappManager.share.didPaymentSuccess.asObservable().subscribe(onNext: { [weak self] _ in
-            self?.loadAdsHigh()
-        }).disposed(by: disposeBag)
-    }
-    
-    private func loadAdsHigh() {
-        viewAds.isHidden = false
-        ADManager.shared.loadNative(DollColoringAdID.native_language,
-                                    to: self.viewAds, nativeAdType: .customMediaFixedHeight) { [weak self] idAds, success ,_  in
-            guard idAds.contains(DollColoringAdID.native_language.adId) else {
-                return
-            }
-            if success {
-                self?.viewAds.isHidden = !success
-            } else {
-                self?.viewAds.isHidden = true
-            }
+        viewAds?.isHidden = true
+        if let height = viewAds?.constraints.first(where: { $0.firstAttribute == .height }) {
+            height.constant = 0
         }
     }
     

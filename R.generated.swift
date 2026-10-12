@@ -112,9 +112,65 @@ struct _R {
       var default_title: RswiftResources.StringResource { .init(key: "default_title", tableName: "ErrorCode", source: source, developmentValue: "Error", comment: nil) }
     }
 
-    /// This `_R.string.localizable` struct is generated, and contains static references to 112 localization keys.
+    /// This `_R.string.localizable` struct is generated, and contains static references to 121 localization keys.
     struct localizable {
       let source: RswiftResources.StringResource.Source
+
+      /// en translation: Explore drawings
+      ///
+      /// Key: Collections.EmptyAction
+      ///
+      /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
+      var collectionsEmptyAction: RswiftResources.StringResource { .init(key: "Collections.EmptyAction", tableName: "Localizable", source: source, developmentValue: "Explore drawings", comment: nil) }
+
+      /// en translation: Pick a page and make it yours.
+      ///
+      /// Key: Collections.EmptyMessage
+      ///
+      /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
+      var collectionsEmptyMessage: RswiftResources.StringResource { .init(key: "Collections.EmptyMessage", tableName: "Localizable", source: source, developmentValue: "Pick a page and make it yours.", comment: nil) }
+
+      /// en translation: Your coloring book is waiting!
+      ///
+      /// Key: Collections.EmptyTitle
+      ///
+      /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
+      var collectionsEmptyTitle: RswiftResources.StringResource { .init(key: "Collections.EmptyTitle", tableName: "Localizable", source: source, developmentValue: "Your coloring book is waiting!", comment: nil) }
+
+      /// en translation: Save your progress before leaving?
+      ///
+      /// Key: Coloring.ExitConfirm
+      ///
+      /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
+      var coloringExitConfirm: RswiftResources.StringResource { .init(key: "Coloring.ExitConfirm", tableName: "Localizable", source: source, developmentValue: "Save your progress before leaving?", comment: nil) }
+
+      /// en translation: Keep coloring
+      ///
+      /// Key: Coloring.KeepColoring
+      ///
+      /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
+      var coloringKeepColoring: RswiftResources.StringResource { .init(key: "Coloring.KeepColoring", tableName: "Localizable", source: source, developmentValue: "Keep coloring", comment: nil) }
+
+      /// en translation: Preparing your drawing…
+      ///
+      /// Key: Coloring.PreparingDrawing
+      ///
+      /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
+      var coloringPreparingDrawing: RswiftResources.StringResource { .init(key: "Coloring.PreparingDrawing", tableName: "Localizable", source: source, developmentValue: "Preparing your drawing…", comment: nil) }
+
+      /// en translation: %1$d%% complete
+      ///
+      /// Key: Coloring.ProgressComplete
+      ///
+      /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
+      var coloringProgressComplete: RswiftResources.StringResource1<Int> { .init(key: "Coloring.ProgressComplete", tableName: "Localizable", source: source, developmentValue: "%1$d%% complete", comment: nil) }
+
+      /// en translation: Save & leave
+      ///
+      /// Key: Coloring.SaveAndLeave
+      ///
+      /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
+      var coloringSaveAndLeave: RswiftResources.StringResource { .init(key: "Coloring.SaveAndLeave", tableName: "Localizable", source: source, developmentValue: "Save & leave", comment: nil) }
 
       /// en translation: Agree
       ///
@@ -185,6 +241,13 @@ struct _R {
       ///
       /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
       var commonContinue: RswiftResources.StringResource { .init(key: "Common.Continue", tableName: "Localizable", source: source, developmentValue: "Continue", comment: nil) }
+
+      /// en translation: Continue Coloring
+      ///
+      /// Key: Common.ContinueColoring
+      ///
+      /// Locales: en, hi, fr, de, ko, ja, vi, ru, es, pt, pt-BR
+      var commonContinueColoring: RswiftResources.StringResource { .init(key: "Common.ContinueColoring", tableName: "Localizable", source: source, developmentValue: "Continue Coloring", comment: nil) }
 
       /// en translation: Create New
       ///
@@ -902,9 +965,12 @@ struct _R {
     }
   }
 
-  /// This `_R.color` struct is generated, and contains static references to 9 colors.
+  /// This `_R.color` struct is generated, and contains static references to 8 colors.
   struct color {
     let bundle: Foundation.Bundle
+
+    /// Color `AppBackground`.
+    var appBackground: RswiftResources.ColorResource { .init(name: "AppBackground", path: [], bundle: bundle) }
 
     /// Color `ColorBGAds`.
     var colorBGAds: RswiftResources.ColorResource { .init(name: "ColorBGAds", path: [], bundle: bundle) }
@@ -918,12 +984,6 @@ struct _R {
     /// Color `MainPrimary`.
     var mainPrimary: RswiftResources.ColorResource { .init(name: "MainPrimary", path: [], bundle: bundle) }
 
-    /// Color `SystemBlue`.
-    var systemBlue: RswiftResources.ColorResource { .init(name: "SystemBlue", path: [], bundle: bundle) }
-
-    /// Color `SystemGreen`.
-    var systemGreen: RswiftResources.ColorResource { .init(name: "SystemGreen", path: [], bundle: bundle) }
-
     /// Color `SystemOrange`.
     var systemOrange: RswiftResources.ColorResource { .init(name: "SystemOrange", path: [], bundle: bundle) }
 
@@ -934,7 +994,7 @@ struct _R {
     var textColor: RswiftResources.ColorResource { .init(name: "TextColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 785 images.
+  /// This `_R.image` struct is generated, and contains static references to 751 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -1042,21 +1102,6 @@ struct _R {
 
     /// Image `BZ`.
     var bZ: RswiftResources.ImageResource { .init(name: "BZ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `Banner_IAP0`.
-    var banner_IAP0: RswiftResources.ImageResource { .init(name: "Banner_IAP0", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `Banner_IAP1`.
-    var banner_IAP1: RswiftResources.ImageResource { .init(name: "Banner_IAP1", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `Banner_IAP2`.
-    var banner_IAP2: RswiftResources.ImageResource { .init(name: "Banner_IAP2", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `Banner_IAP3`.
-    var banner_IAP3: RswiftResources.ImageResource { .init(name: "Banner_IAP3", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `Banner_IAP4`.
-    var banner_IAP4: RswiftResources.ImageResource { .init(name: "Banner_IAP4", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `CA`.
     var cA: RswiftResources.ImageResource { .init(name: "CA", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -1171,6 +1216,9 @@ struct _R {
 
     /// Image `FR`.
     var fR: RswiftResources.ImageResource { .init(name: "FR", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `Frame 112797`.
+    var frame112797: RswiftResources.ImageResource { .init(name: "Frame 112797", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `GA`.
     var gA: RswiftResources.ImageResource { .init(name: "GA", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -1742,32 +1790,17 @@ struct _R {
     /// Image `background_button_download`.
     var background_button_download: RswiftResources.ImageResource { .init(name: "background_button_download", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `background_collection`.
-    var background_collection: RswiftResources.ImageResource { .init(name: "background_collection", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
     /// Image `background_discount`.
     var background_discount: RswiftResources.ImageResource { .init(name: "background_discount", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `background_history`.
-    var background_history: RswiftResources.ImageResource { .init(name: "background_history", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
     /// Image `background_home`.
     var background_home: RswiftResources.ImageResource { .init(name: "background_home", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `background_intro`.
-    var background_intro: RswiftResources.ImageResource { .init(name: "background_intro", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `background_palettes`.
-    var background_palettes: RswiftResources.ImageResource { .init(name: "background_palettes", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `background_popup_iap_ipad`.
     var background_popup_iap_ipad: RswiftResources.ImageResource { .init(name: "background_popup_iap_ipad", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `background_popup_iap_iphone`.
     var background_popup_iap_iphone: RswiftResources.ImageResource { .init(name: "background_popup_iap_iphone", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `background_settings`.
-    var background_settings: RswiftResources.ImageResource { .init(name: "background_settings", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `background_splash`.
     var background_splash: RswiftResources.ImageResource { .init(name: "background_splash", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -1793,9 +1826,6 @@ struct _R {
     /// Image `banner3_ipad`.
     var banner3_ipad: RswiftResources.ImageResource { .init(name: "banner3_ipad", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `banner_IAP`.
-    var banner_IAP: RswiftResources.ImageResource { .init(name: "banner_IAP", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
     /// Image `bg_iap_1`.
     var bg_iap_1: RswiftResources.ImageResource { .init(name: "bg_iap_1", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -1820,8 +1850,8 @@ struct _R {
     /// Image `chevron-next`.
     var chevronNext: RswiftResources.ImageResource { .init(name: "chevron-next", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `chevron-next-tint`.
-    var chevronNextTint: RswiftResources.ImageResource { .init(name: "chevron-next-tint", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+    /// Image `collections_empty_bunny`.
+    var collections_empty_bunny: RswiftResources.ImageResource { .init(name: "collections_empty_bunny", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `color_bling3_mystical0`.
     var color_bling3_mystical0: RswiftResources.ImageResource { .init(name: "color_bling3_mystical0", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -2885,6 +2915,33 @@ struct _R {
     /// Image `coloring`.
     var coloring: RswiftResources.ImageResource { .init(name: "coloring", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `crayo_logo`.
+    var crayo_logo: RswiftResources.ImageResource { .init(name: "crayo_logo", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `drawing_tool_icons`.
+    var drawing_tool_icons: RswiftResources.ImageResource { .init(name: "drawing_tool_icons", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `exit_coloring_bunny`.
+    var exit_coloring_bunny: RswiftResources.ImageResource { .init(name: "exit_coloring_bunny", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `history_corner_bunny`.
+    var history_corner_bunny: RswiftResources.ImageResource { .init(name: "history_corner_bunny", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `history_create_bunny_plus`.
+    var history_create_bunny_plus: RswiftResources.ImageResource { .init(name: "history_create_bunny_plus", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `history_popup_paper`.
+    var history_popup_paper: RswiftResources.ImageResource { .init(name: "history_popup_paper", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `home_feature_chibi`.
+    var home_feature_chibi: RswiftResources.ImageResource { .init(name: "home_feature_chibi", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `home_feature_christmas`.
+    var home_feature_christmas: RswiftResources.ImageResource { .init(name: "home_feature_christmas", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `home_feature_halloween`.
+    var home_feature_halloween: RswiftResources.ImageResource { .init(name: "home_feature_halloween", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `ic_Bling`.
     var ic_Bling: RswiftResources.ImageResource { .init(name: "ic_Bling", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -2912,14 +2969,14 @@ struct _R {
     /// Image `ic_app_intro`.
     var ic_app_intro: RswiftResources.ImageResource { .init(name: "ic_app_intro", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `ic_app_splash`.
+    var ic_app_splash: RswiftResources.ImageResource { .init(name: "ic_app_splash", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `ic_arrow_setting`.
     var ic_arrow_setting: RswiftResources.ImageResource { .init(name: "ic_arrow_setting", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_back`.
     var ic_back: RswiftResources.ImageResource { .init(name: "ic_back", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_back_coloring`.
-    var ic_back_coloring: RswiftResources.ImageResource { .init(name: "ic_back_coloring", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_back_left`.
     var ic_back_left: RswiftResources.ImageResource { .init(name: "ic_back_left", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -2930,14 +2987,8 @@ struct _R {
     /// Image `ic_back_right_calendar`.
     var ic_back_right_calendar: RswiftResources.ImageResource { .init(name: "ic_back_right_calendar", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `ic_best_iap`.
-    var ic_best_iap: RswiftResources.ImageResource { .init(name: "ic_best_iap", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
     /// Image `ic_btn_premium`.
     var ic_btn_premium: RswiftResources.ImageResource { .init(name: "ic_btn_premium", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_choose_subcription`.
-    var ic_choose_subcription: RswiftResources.ImageResource { .init(name: "ic_choose_subcription", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_close`.
     var ic_close: RswiftResources.ImageResource { .init(name: "ic_close", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -2945,29 +2996,14 @@ struct _R {
     /// Image `ic_close_discount`.
     var ic_close_discount: RswiftResources.ImageResource { .init(name: "ic_close_discount", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `ic_close_iap`.
-    var ic_close_iap: RswiftResources.ImageResource { .init(name: "ic_close_iap", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
     /// Image `ic_collection_dark`.
     var ic_collection_dark: RswiftResources.ImageResource { .init(name: "ic_collection_dark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_collection_gold`.
-    var ic_collection_gold: RswiftResources.ImageResource { .init(name: "ic_collection_gold", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_collection_pain`.
-    var ic_collection_pain: RswiftResources.ImageResource { .init(name: "ic_collection_pain", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_collection_paper`.
     var ic_collection_paper: RswiftResources.ImageResource { .init(name: "ic_collection_paper", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_collection_photo`.
     var ic_collection_photo: RswiftResources.ImageResource { .init(name: "ic_collection_photo", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_coloring_not_select`.
-    var ic_coloring_not_select: RswiftResources.ImageResource { .init(name: "ic_coloring_not_select", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_coloring_select`.
-    var ic_coloring_select: RswiftResources.ImageResource { .init(name: "ic_coloring_select", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_comeback`.
     var ic_comeback: RswiftResources.ImageResource { .init(name: "ic_comeback", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -2981,17 +3017,11 @@ struct _R {
     /// Image `ic_diary_dark`.
     var ic_diary_dark: RswiftResources.ImageResource { .init(name: "ic_diary_dark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `ic_diary_gold`.
-    var ic_diary_gold: RswiftResources.ImageResource { .init(name: "ic_diary_gold", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
     /// Image `ic_dismiss`.
     var ic_dismiss: RswiftResources.ImageResource { .init(name: "ic_dismiss", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_download_theme`.
     var ic_download_theme: RswiftResources.ImageResource { .init(name: "ic_download_theme", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_edit_coloring`.
-    var ic_edit_coloring: RswiftResources.ImageResource { .init(name: "ic_edit_coloring", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_edit_image`.
     var ic_edit_image: RswiftResources.ImageResource { .init(name: "ic_edit_image", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -3001,12 +3031,6 @@ struct _R {
 
     /// Image `ic_feedback_setting`.
     var ic_feedback_setting: RswiftResources.ImageResource { .init(name: "ic_feedback_setting", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_fill_color_not_select`.
-    var ic_fill_color_not_select: RswiftResources.ImageResource { .init(name: "ic_fill_color_not_select", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_fill_color_select`.
-    var ic_fill_color_select: RswiftResources.ImageResource { .init(name: "ic_fill_color_select", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_git_lock`.
     var ic_git_lock: RswiftResources.ImageResource { .init(name: "ic_git_lock", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -3026,17 +3050,8 @@ struct _R {
     /// Image `ic_home_tabbar_select`.
     var ic_home_tabbar_select: RswiftResources.ImageResource { .init(name: "ic_home_tabbar_select", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `ic_iap_ads`.
-    var ic_iap_ads: RswiftResources.ImageResource { .init(name: "ic_iap_ads", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_iap_image`.
-    var ic_iap_image: RswiftResources.ImageResource { .init(name: "ic_iap_image", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
     /// Image `ic_iap_item`.
     var ic_iap_item: RswiftResources.ImageResource { .init(name: "ic_iap_item", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_iap_unlock`.
-    var ic_iap_unlock: RswiftResources.ImageResource { .init(name: "ic_iap_unlock", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_image_empty`.
     var ic_image_empty: RswiftResources.ImageResource { .init(name: "ic_image_empty", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -3077,9 +3092,6 @@ struct _R {
     /// Image `ic_moreapp_setting`.
     var ic_moreapp_setting: RswiftResources.ImageResource { .init(name: "ic_moreapp_setting", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `ic_non_subcription`.
-    var ic_non_subcription: RswiftResources.ImageResource { .init(name: "ic_non_subcription", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
     /// Image `ic_not_select_brush`.
     var ic_not_select_brush: RswiftResources.ImageResource { .init(name: "ic_not_select_brush", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -3091,12 +3103,6 @@ struct _R {
 
     /// Image `ic_not_select_pencil`.
     var ic_not_select_pencil: RswiftResources.ImageResource { .init(name: "ic_not_select_pencil", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_off_music_background`.
-    var ic_off_music_background: RswiftResources.ImageResource { .init(name: "ic_off_music_background", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_off_sound`.
-    var ic_off_sound: RswiftResources.ImageResource { .init(name: "ic_off_sound", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_on_music_background`.
     var ic_on_music_background: RswiftResources.ImageResource { .init(name: "ic_on_music_background", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -3134,29 +3140,17 @@ struct _R {
     /// Image `ic_rate_star`.
     var ic_rate_star: RswiftResources.ImageResource { .init(name: "ic_rate_star", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `ic_redo`.
-    var ic_redo: RswiftResources.ImageResource { .init(name: "ic_redo", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
     /// Image `ic_redo_result`.
     var ic_redo_result: RswiftResources.ImageResource { .init(name: "ic_redo_result", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_reload`.
     var ic_reload: RswiftResources.ImageResource { .init(name: "ic_reload", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `ic_right_back`.
-    var ic_right_back: RswiftResources.ImageResource { .init(name: "ic_right_back", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_sale_off`.
-    var ic_sale_off: RswiftResources.ImageResource { .init(name: "ic_sale_off", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
     /// Image `ic_save`.
     var ic_save: RswiftResources.ImageResource { .init(name: "ic_save", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_save_image`.
     var ic_save_image: RswiftResources.ImageResource { .init(name: "ic_save_image", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_save_photo`.
-    var ic_save_photo: RswiftResources.ImageResource { .init(name: "ic_save_photo", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_select_brush`.
     var ic_select_brush: RswiftResources.ImageResource { .init(name: "ic_select_brush", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -3166,9 +3160,6 @@ struct _R {
 
     /// Image `ic_select_eraser`.
     var ic_select_eraser: RswiftResources.ImageResource { .init(name: "ic_select_eraser", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_select_language`.
-    var ic_select_language: RswiftResources.ImageResource { .init(name: "ic_select_language", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_select_pencil`.
     var ic_select_pencil: RswiftResources.ImageResource { .init(name: "ic_select_pencil", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -3181,9 +3172,6 @@ struct _R {
 
     /// Image `ic_setting_dark`.
     var ic_setting_dark: RswiftResources.ImageResource { .init(name: "ic_setting_dark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_setting_gold`.
-    var ic_setting_gold: RswiftResources.ImageResource { .init(name: "ic_setting_gold", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `ic_share`.
     var ic_share: RswiftResources.ImageResource { .init(name: "ic_share", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -3200,18 +3188,6 @@ struct _R {
     /// Image `ic_tabbar_collection_select`.
     var ic_tabbar_collection_select: RswiftResources.ImageResource { .init(name: "ic_tabbar_collection_select", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `ic_tick`.
-    var ic_tick: RswiftResources.ImageResource { .init(name: "ic_tick", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_title_intro_0`.
-    var ic_title_intro_0: RswiftResources.ImageResource { .init(name: "ic_title_intro_0", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_title_intro_1`.
-    var ic_title_intro_1: RswiftResources.ImageResource { .init(name: "ic_title_intro_1", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_title_intro_2`.
-    var ic_title_intro_2: RswiftResources.ImageResource { .init(name: "ic_title_intro_2", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
     /// Image `ic_trash`.
     var ic_trash: RswiftResources.ImageResource { .init(name: "ic_trash", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -3226,18 +3202,6 @@ struct _R {
 
     /// Image `ic_undo`.
     var ic_undo: RswiftResources.ImageResource { .init(name: "ic_undo", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_unselect_language`.
-    var ic_unselect_language: RswiftResources.ImageResource { .init(name: "ic_unselect_language", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_video_ads`.
-    var ic_video_ads: RswiftResources.ImageResource { .init(name: "ic_video_ads", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `ic_white_left`.
-    var ic_white_left: RswiftResources.ImageResource { .init(name: "ic_white_left", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `iccon_checkmark`.
-    var iccon_checkmark: RswiftResources.ImageResource { .init(name: "iccon_checkmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `imgStopBrush`.
     var imgStopBrush: RswiftResources.ImageResource { .init(name: "imgStopBrush", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -3269,20 +3233,14 @@ struct _R {
     /// Image `indicator_page3`.
     var indicator_page3: RswiftResources.ImageResource { .init(name: "indicator_page3", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `intro_doll0`.
-    var intro_doll0: RswiftResources.ImageResource { .init(name: "intro_doll0", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+    /// Image `premium_crown_sticker`.
+    var premium_crown_sticker: RswiftResources.ImageResource { .init(name: "premium_crown_sticker", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `intro_doll1`.
-    var intro_doll1: RswiftResources.ImageResource { .init(name: "intro_doll1", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+    /// Image `settings_iap_banner`.
+    var settings_iap_banner: RswiftResources.ImageResource { .init(name: "settings_iap_banner", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `intro_doll2`.
-    var intro_doll2: RswiftResources.ImageResource { .init(name: "intro_doll2", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `tabbar_setting`.
-    var tabbar_setting: RswiftResources.ImageResource { .init(name: "tabbar_setting", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `tabbar_setting_select`.
-    var tabbar_setting_select: RswiftResources.ImageResource { .init(name: "tabbar_setting_select", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+    /// Image `start_coloring_loading_bg`.
+    var start_coloring_loading_bg: RswiftResources.ImageResource { .init(name: "start_coloring_loading_bg", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `unknown`.
     var unknown: RswiftResources.ImageResource { .init(name: "unknown", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -3299,30 +3257,15 @@ struct _R {
     let apsEnvironment: String = "development"
   }
 
-  /// This `_R.file` struct is generated, and contains static references to 18 resource files.
+  /// This `_R.file` struct is generated, and contains static references to 12 resource files.
   struct file {
     let bundle: Foundation.Bundle
-
-    /// Resource file `AdLoading.json`.
-    var adLoadingJson: RswiftResources.FileResource { .init(name: "AdLoading", pathExtension: "json", bundle: bundle, locale: LocaleReference.none) }
 
     /// Resource file `AnimationGitDaly.json`.
     var animationGitDalyJson: RswiftResources.FileResource { .init(name: "AnimationGitDaly", pathExtension: "json", bundle: bundle, locale: LocaleReference.none) }
 
-    /// Resource file `GoogleService-Info.plist`.
-    var googleServiceInfoPlist: RswiftResources.FileResource { .init(name: "GoogleService-Info", pathExtension: "plist", bundle: bundle, locale: LocaleReference.none) }
-
-    /// Resource file `animationView_StartColoring.json`.
-    var animationView_StartColoringJson: RswiftResources.FileResource { .init(name: "animationView_StartColoring", pathExtension: "json", bundle: bundle, locale: LocaleReference.none) }
-
     /// Resource file `animation_ads_video.json`.
     var animation_ads_videoJson: RswiftResources.FileResource { .init(name: "animation_ads_video", pathExtension: "json", bundle: bundle, locale: LocaleReference.none) }
-
-    /// Resource file `animation_collection.json`.
-    var animation_collectionJson: RswiftResources.FileResource { .init(name: "animation_collection", pathExtension: "json", bundle: bundle, locale: LocaleReference.none) }
-
-    /// Resource file `animation_coloring.json`.
-    var animation_coloringJson: RswiftResources.FileResource { .init(name: "animation_coloring", pathExtension: "json", bundle: bundle, locale: LocaleReference.none) }
 
     /// Resource file `animation_dissconnect.json`.
     var animation_dissconnectJson: RswiftResources.FileResource { .init(name: "animation_dissconnect", pathExtension: "json", bundle: bundle, locale: LocaleReference.none) }
@@ -3335,9 +3278,6 @@ struct _R {
 
     /// Resource file `animation_splash.json`.
     var animation_splashJson: RswiftResources.FileResource { .init(name: "animation_splash", pathExtension: "json", bundle: bundle, locale: LocaleReference.none) }
-
-    /// Resource file `animation_splash_new.json`.
-    var animation_splash_newJson: RswiftResources.FileResource { .init(name: "animation_splash_new", pathExtension: "json", bundle: bundle, locale: LocaleReference.none) }
 
     /// Resource file `asrmColoring.mp3`.
     var asrmColoringMp3: RswiftResources.FileResource { .init(name: "asrmColoring", pathExtension: "mp3", bundle: bundle, locale: LocaleReference.none) }
@@ -3358,12 +3298,9 @@ struct _R {
     var soundFillColorMp3: RswiftResources.FileResource { .init(name: "soundFillColor", pathExtension: "mp3", bundle: bundle, locale: LocaleReference.none) }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 55 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 42 nibs.
   struct nib {
     let bundle: Foundation.Bundle
-
-    /// Nib `AdLoadingView`.
-    var adLoadingView: RswiftResources.NibReference<UIKit.UIView> { .init(name: "AdLoadingView", bundle: bundle) }
 
     /// Nib `AlertViewController`.
     var alertViewController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "AlertViewController", bundle: bundle) }
@@ -3401,18 +3338,6 @@ struct _R {
     /// Nib `ColoringBookCell`.
     var coloringBookCell: RswiftResources.NibReferenceReuseIdentifier<ColoringBookCell, ColoringBookCell> { .init(name: "ColoringBookCell", bundle: bundle, identifier: "ColoringBookCell") }
 
-    /// Nib `CustomMediaNativeAdView`.
-    var customMediaNativeAdView: RswiftResources.NibReference<CustomMediaNativeAdView> { .init(name: "CustomMediaNativeAdView", bundle: bundle) }
-
-    /// Nib `CustomMediaNativeAdViewFixedHeight`.
-    var customMediaNativeAdViewFixedHeight: RswiftResources.NibReference<CustomMediaNativeAdViewFixedHeight> { .init(name: "CustomMediaNativeAdViewFixedHeight", bundle: bundle) }
-
-    /// Nib `CustomNativeMediaHorizontal`.
-    var customNativeMediaHorizontal: RswiftResources.NibReference<CustomNativeMediaHorizontal> { .init(name: "CustomNativeMediaHorizontal", bundle: bundle) }
-
-    /// Nib `CustomSmallNativeAdView`.
-    var customSmallNativeAdView: RswiftResources.NibReference<CustomSmallNativeAdView> { .init(name: "CustomSmallNativeAdView", bundle: bundle) }
-
     /// Nib `DiscountViewController`.
     var discountViewController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "DiscountViewController", bundle: bundle) }
 
@@ -3427,9 +3352,6 @@ struct _R {
 
     /// Nib `FillterColorCell`.
     var fillterColorCell: RswiftResources.NibReference<FillterColorCell> { .init(name: "FillterColorCell", bundle: bundle) }
-
-    /// Nib `FullScreenNativeAdsView`.
-    var fullScreenNativeAdsView: RswiftResources.NibReference<FullScreenNativeAdsView> { .init(name: "FullScreenNativeAdsView", bundle: bundle) }
 
     /// Nib `GitDaylyCell`.
     var gitDaylyCell: RswiftResources.NibReference<GitDaylyCell> { .init(name: "GitDaylyCell", bundle: bundle) }
@@ -3446,23 +3368,8 @@ struct _R {
     /// Nib `HistoryCellCollectionViewCell`.
     var historyCellCollectionViewCell: RswiftResources.NibReference<HistoryCellCollectionViewCell> { .init(name: "HistoryCellCollectionViewCell", bundle: bundle) }
 
-    /// Nib `HomeAdsCell`.
-    var homeAdsCell: RswiftResources.NibReference<HomeAdsCell> { .init(name: "HomeAdsCell", bundle: bundle) }
-
-    /// Nib `HomeNativeAdsCell`.
-    var homeNativeAdsCell: RswiftResources.NibReference<HomeNativeAdsCell> { .init(name: "HomeNativeAdsCell", bundle: bundle) }
-
-    /// Nib `HorizontalNativeAdView`.
-    var horizontalNativeAdView: RswiftResources.NibReference<HorizontalNativeAdView> { .init(name: "HorizontalNativeAdView", bundle: bundle) }
-
     /// Nib `IAPController`.
     var iapController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "IAPController", bundle: bundle) }
-
-    /// Nib `InsightNativeAdView`.
-    var insightNativeAdView: RswiftResources.NibReference<InsightNativeAdView> { .init(name: "InsightNativeAdView", bundle: bundle) }
-
-    /// Nib `IntroADSFullCollectionViewCell`.
-    var introADSFullCollectionViewCell: RswiftResources.NibReference<IntroADSFullCollectionViewCell> { .init(name: "IntroADSFullCollectionViewCell", bundle: bundle) }
 
     /// Nib `IntroController`.
     var introController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "IntroController", bundle: bundle) }
@@ -3491,9 +3398,6 @@ struct _R {
     /// Nib `MenuActionCell`.
     var menuActionCell: RswiftResources.NibReferenceReuseIdentifier<MenuActionCell, MenuActionCell> { .init(name: "MenuActionCell", bundle: bundle, identifier: "MenuActionCell") }
 
-    /// Nib `NativeFullScreenController`.
-    var nativeFullScreenController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "NativeFullScreenController", bundle: bundle) }
-
     /// Nib `PageViewSwirlViewController`.
     var pageViewSwirlViewController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "PageViewSwirlViewController", bundle: bundle) }
 
@@ -3508,9 +3412,6 @@ struct _R {
 
     /// Nib `SplashController`.
     var splashController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "SplashController", bundle: bundle) }
-
-    /// Nib `SubcriptionViewController`.
-    var subcriptionViewController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "SubcriptionViewController", bundle: bundle) }
 
     /// Nib `TableColorCell`.
     var tableColorCell: RswiftResources.NibReference<TableColorCell> { .init(name: "TableColorCell", bundle: bundle) }
@@ -3528,9 +3429,6 @@ struct _R {
     var webViewController: RswiftResources.NibReference<UIKit.UIView> { .init(name: "WebViewController", bundle: bundle) }
 
     func validate() throws {
-      if UIKit.UIImage(named: "background_splash", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'background_splash' is used in nib 'AdLoadingView', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "ColorTextTopBar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTextTopBar' is used in nib 'AdLoadingView', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "NeutralBackground", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'NeutralBackground' is used in nib 'AdLoadingView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "alert", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'alert' is used in nib 'AlertViewController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'AlertViewController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "NeutralBackground", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'NeutralBackground' is used in nib 'AlertViewController', but couldn't be loaded.") }
@@ -3553,18 +3451,6 @@ struct _R {
       if UIKit.UIColor(named: "ColorTextTopBar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTextTopBar' is used in nib 'ChooseDateBlock', but couldn't be loaded.") }
       if UIKit.UIImage(named: "ic_trash_collection", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_trash_collection' is used in nib 'CollectionCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'CollectionCell', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "ColorBGAds", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGAds' is used in nib 'CustomMediaNativeAdView', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'CustomMediaNativeAdView', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'CustomMediaNativeAdView', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TextColorSecondaryV2", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondaryV2' is used in nib 'CustomMediaNativeAdView', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'CustomMediaNativeAdViewFixedHeight', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'CustomNativeMediaHorizontal', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'CustomNativeMediaHorizontal', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TextColorSecondaryV2", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondaryV2' is used in nib 'CustomNativeMediaHorizontal', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "ColorBGAds", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGAds' is used in nib 'CustomSmallNativeAdView', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'CustomSmallNativeAdView', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'CustomSmallNativeAdView', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TextColorSecondaryV2", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondaryV2' is used in nib 'CustomSmallNativeAdView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "background_discount", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'background_discount' is used in nib 'DiscountViewController', but couldn't be loaded.") }
       if UIKit.UIImage(named: "ic_close_discount", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_close_discount' is used in nib 'DiscountViewController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColorSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondary' is used in nib 'EmptyView', but couldn't be loaded.") }
@@ -3576,7 +3462,6 @@ struct _R {
       if UIKit.UIColor(named: "ColorTextTopBar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTextTopBar' is used in nib 'FillterCell', but couldn't be loaded.") }
       if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "doc.on.doc.fill") == nil { throw RswiftResources.ValidationError("[R.swift] System image named 'doc.on.doc.fill' is used in nib 'FillterColorCell', but couldn't be loaded.") } }
       if UIKit.UIColor(named: "ColorTextTopBar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTextTopBar' is used in nib 'FillterColorCell', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'FullScreenNativeAdsView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "button", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'button' is used in nib 'GitViewController', but couldn't be loaded.") }
       if UIKit.UIImage(named: "coloring", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'coloring' is used in nib 'GitViewController', but couldn't be loaded.") }
       if UIKit.UIImage(named: "ic_trengding", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_trengding' is used in nib 'HeaderHomeCell', but couldn't be loaded.") }
@@ -3584,12 +3469,6 @@ struct _R {
       if UIKit.UIColor(named: "SystemRed", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SystemRed' is used in nib 'HeaderHomeCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'HistoryCellCollectionViewCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "SystemRed", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SystemRed' is used in nib 'HistoryCellCollectionViewCell', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "ColorBGAds", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGAds' is used in nib 'HomeNativeAdsCell', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'HomeNativeAdsCell', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "ColorBGAds", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGAds' is used in nib 'HorizontalNativeAdView', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'HorizontalNativeAdView', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'HorizontalNativeAdView', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TextColorSecondaryV2", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondaryV2' is used in nib 'HorizontalNativeAdView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "bg_splash", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'bg_splash' is used in nib 'IAPController', but couldn't be loaded.") }
       if UIKit.UIImage(named: "ic_close", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_close' is used in nib 'IAPController', but couldn't be loaded.") }
       if UIKit.UIImage(named: "icon_verified_seller", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'icon_verified_seller' is used in nib 'IAPController', but couldn't be loaded.") }
@@ -3600,10 +3479,6 @@ struct _R {
       if UIKit.UIColor(named: "SystemOrange", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SystemOrange' is used in nib 'IAPController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'IAPController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColorSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondary' is used in nib 'IAPController', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "ColorBGAds", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGAds' is used in nib 'InsightNativeAdView', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'InsightNativeAdView', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'InsightNativeAdView', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TextColorSecondaryV2", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColorSecondaryV2' is used in nib 'InsightNativeAdView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "background_splash", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'background_splash' is used in nib 'IntroController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "NeutralBackground", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'NeutralBackground' is used in nib 'IntroController', but couldn't be loaded.") }
       if UIKit.UIImage(named: "ic_item_onboading1", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_item_onboading1' is used in nib 'IntroductionCell', but couldn't be loaded.") }
@@ -3617,8 +3492,9 @@ struct _R {
       if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'LanguageController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'LanguageSecondViewController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'MenuActionCell', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "ic_close", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_close' is used in nib 'NativeFullScreenController', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "AppBackground", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AppBackground' is used in nib 'PopupColoringViewController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "ColorTitle", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTitle' is used in nib 'PopupColoringViewController', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'PopupColoringViewController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "ColorTitle", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTitle' is used in nib 'PopupTomorrowViewController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in nib 'PopupTomorrowViewController', but couldn't be loaded.") }
       if UIKit.UIImage(named: "X", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'X' is used in nib 'PremiumFloatingView', but couldn't be loaded.") }
@@ -3626,17 +3502,6 @@ struct _R {
       if UIKit.UIImage(named: "background_splash", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'background_splash' is used in nib 'SplashController', but couldn't be loaded.") }
       if UIKit.UIImage(named: "ic_app_intro", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_app_intro' is used in nib 'SplashController', but couldn't be loaded.") }
       if UIKit.UIColor(named: "ColorBGAds", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorBGAds' is used in nib 'SplashController', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "ic_best_iap", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_best_iap' is used in nib 'SubcriptionViewController', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "ic_close_iap", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_close_iap' is used in nib 'SubcriptionViewController', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "ic_select_language", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_select_language' is used in nib 'SubcriptionViewController', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "ic_unselect_language", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_unselect_language' is used in nib 'SubcriptionViewController', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "ic_white_left", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_white_left' is used in nib 'SubcriptionViewController', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "img_iap_option1", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'img_iap_option1' is used in nib 'SubcriptionViewController', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "img_iap_option2", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'img_iap_option2' is used in nib 'SubcriptionViewController', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "img_iap_option3", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'img_iap_option3' is used in nib 'SubcriptionViewController', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "ColorTextTopBar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTextTopBar' is used in nib 'SubcriptionViewController', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "ColorTitle", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTitle' is used in nib 'SubcriptionViewController', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TextColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor' is used in nib 'SubcriptionViewController', but couldn't be loaded.") }
       if UIKit.UIImage(named: "ic_iap_item", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_iap_item' is used in nib 'TableColorCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "ic_pro", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_pro' is used in nib 'TableColorCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "background_button_download", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'background_button_download' is used in nib 'ThemeCell', but couldn't be loaded.") }
@@ -3849,8 +3714,6 @@ struct _R {
       var historyColoringController: RswiftResources.StoryboardViewControllerIdentifier<HistoryColoringController> { .init(identifier: "HistoryColoringController", storyboard: name, bundle: bundle) }
 
       func validate() throws {
-        if UIKit.UIImage(named: "background_popup_iap_ipad", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'background_popup_iap_ipad' is used in storyboard 'HistoryColoring', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "background_popup_iap_iphone", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'background_popup_iap_iphone' is used in storyboard 'HistoryColoring', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_close", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_close' is used in storyboard 'HistoryColoring', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_image_empty", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_image_empty' is used in storyboard 'HistoryColoring', but couldn't be loaded.") }
         if UIKit.UIImage(named: "view_create_coloring", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'view_create_coloring' is used in storyboard 'HistoryColoring', but couldn't be loaded.") }
@@ -3966,8 +3829,7 @@ struct _R {
       var previewColoringController: RswiftResources.StoryboardViewControllerIdentifier<PreviewColoringController> { .init(identifier: "PreviewColoringController", storyboard: name, bundle: bundle) }
 
       func validate() throws {
-        if UIKit.UIImage(named: "background_home", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'background_home' is used in storyboard 'PreviewColoring', but couldn't be loaded.") }
-        if UIKit.UIColor(named: "ColorTextTopBar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTextTopBar' is used in storyboard 'PreviewColoring', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "start_coloring_loading_bg", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'start_coloring_loading_bg' is used in storyboard 'PreviewColoring', but couldn't be loaded.") }
         if previewColoringController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'previewColoringController' could not be loaded from storyboard 'PreviewColoring' as 'PreviewColoringController'.") }
       }
     }
@@ -4030,6 +3892,7 @@ struct _R {
         if UIKit.UIColor(named: "ColorTextTopBar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTextTopBar' is used in storyboard 'Settings', but couldn't be loaded.") }
         if UIKit.UIColor(named: "ColorTitle", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTitle' is used in storyboard 'Settings', but couldn't be loaded.") }
         if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in storyboard 'Settings', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "SettingsBorder", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SettingsBorder' is used in storyboard 'Settings', but couldn't be loaded.") }
         if deleteColoringViewController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'deleteColoringViewController' could not be loaded from storyboard 'Settings' as 'DeleteColoringViewController'.") }
         if popupSaveColoringViewController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'popupSaveColoringViewController' could not be loaded from storyboard 'Settings' as 'PopupSaveColoringViewController'.") }
         if popupShowAdsViewController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'popupShowAdsViewController' could not be loaded from storyboard 'Settings' as 'PopupShowAdsViewController'.") }
@@ -4046,12 +3909,14 @@ struct _R {
       var startColoringIPadViewController: RswiftResources.StoryboardViewControllerIdentifier<StartColoringIPadViewController> { .init(identifier: "StartColoringIPadViewController", storyboard: name, bundle: bundle) }
 
       func validate() throws {
+        if UIKit.UIImage(named: "Frame 112797", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'Frame 112797' is used in storyboard 'StartColoring', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_image_save", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_image_save' is used in storyboard 'StartColoring', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_left_back", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_left_back' is used in storyboard 'StartColoring', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_minus", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_minus' is used in storyboard 'StartColoring', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_not_select_brush", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_not_select_brush' is used in storyboard 'StartColoring', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_not_select_bucket", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_not_select_bucket' is used in storyboard 'StartColoring', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_not_select_eraser", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_not_select_eraser' is used in storyboard 'StartColoring', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "ic_not_select_pencil", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_not_select_pencil' is used in storyboard 'StartColoring', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_paint_palate", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_paint_palate' is used in storyboard 'StartColoring', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_plus", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_plus' is used in storyboard 'StartColoring', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_redo_result", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_redo_result' is used in storyboard 'StartColoring', but couldn't be loaded.") }
@@ -4059,7 +3924,9 @@ struct _R {
         if UIKit.UIImage(named: "ic_select_brush", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_select_brush' is used in storyboard 'StartColoring', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_select_bucket", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_select_bucket' is used in storyboard 'StartColoring', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_select_eraser", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_select_eraser' is used in storyboard 'StartColoring', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "ic_select_pencil", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_select_pencil' is used in storyboard 'StartColoring', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic_undo", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ic_undo' is used in storyboard 'StartColoring', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "AppBackground", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AppBackground' is used in storyboard 'StartColoring', but couldn't be loaded.") }
         if UIKit.UIColor(named: "ColorTextTopBar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'ColorTextTopBar' is used in storyboard 'StartColoring', but couldn't be loaded.") }
         if UIKit.UIColor(named: "MainPrimary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'MainPrimary' is used in storyboard 'StartColoring', but couldn't be loaded.") }
         if startColoringIPadViewController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'startColoringIPadViewController' could not be loaded from storyboard 'StartColoring' as 'StartColoringIPadViewController'.") }

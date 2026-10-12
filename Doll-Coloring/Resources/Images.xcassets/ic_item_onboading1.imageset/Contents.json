@@ -1,23 +1,23 @@
 {
-  "images" : [
+  "images": [
     {
-      "filename" : "Obn 4.png",
-      "idiom" : "universal",
-      "scale" : "1x"
+      "filename": "Obn 4.png",
+      "idiom": "universal",
+      "scale": "1x"
     },
     {
-      "filename" : "Obn 4@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
+      "filename": "Obn 4@2x.png",
+      "idiom": "universal",
+      "scale": "2x"
     },
     {
-      "filename" : "Obn 4@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename": "Obn 4@3x.png",
+      "idiom": "universal",
+      "scale": "3x"
     }
   ],
-  "info" : {
-    "author" : "xcode",
-    "version" : 1
+  "info": {
+    "author": "xcode",
+    "version": 1
   }
 }

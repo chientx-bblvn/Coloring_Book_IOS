@@ -5,43 +5,40 @@
 //  Created by BBLabs on 03/09/2021.
 //
 
-import FirebaseCore
-import FirebaseMessaging
-import FirebaseRemoteConfig
 import RxSwift
 import SVProgressHUD
 import UIKit
-import AppTrackingTransparency
-import AdmobSDK
-import FBAudienceNetwork
 import SDWebImageSVGNativeCoder
 import SDWebImage
 import AVFAudio
 import Clarity
 
 var appDelegate: AppDelegate? {
-    return  UIApplication.shared.delegate as? AppDelegate
+    AppDelegate.shared ?? UIApplication.shared.delegate as? AppDelegate
 }
 
-@UIApplicationMain
-
 class AppDelegate: BaseAppDelegate {
+
+    /// Kept because SwiftUI's UIApplicationDelegateAdaptor wraps the real delegate,
+    /// so `UIApplication.shared.delegate as? AppDelegate` often returns nil.
+    static weak var shared: AppDelegate?
     
     private var reachability: Reachability?
     internal var alertController: AlertViewController?
     
     override init() {
         super.init()
-        //        UIFont.overrideInitialize()
+        AppDelegate.shared = self
     }
     
     override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        //        UIFont.overrideInitialize()
+        AppDelegate.shared = self
         createAudioSession()
         super.application(application, didFinishLaunchingWithOptions: launchOptions)
         SQLiteManager.shared.connectionDatabase()
-        configurationFirebase(application, launchOptions)
-        configurationFB()
+        
+        // Bunny CDN AccessKey for image downloads
+        SDWebImageDownloader.shared.setValue(apiAccessKey, forHTTPHeaderField: "AccessKey")
         
         UITableViewHeaderFooterView.appearance().tintColor = .clear
         UITableView.appearance().showsVerticalScrollIndicator = false
@@ -53,22 +50,17 @@ class AppDelegate: BaseAppDelegate {
         
         let clarityConfig = ClarityConfig(projectId: "priky2anur")
         ClaritySDK.initialize(config: clarityConfig)
+
+        // StoreKit 2 listener + product preload (KeyBoard_IOS pattern).
+        StoreKitIAPManager.shared.startAtLaunch()
         
         return true
     }
     
     override func applicationWillEnterForeground(_ application: UIApplication) {
         super.applicationWillEnterForeground(application)
-        if !DollColoringAdID.appopen_resume.isEnableAd { return }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            ADManager.shared.loadOpen(DollColoringAdID.appopen_resume)
-        }
         if !checkForceUpdate() {
         }
-    }
-    
-    private func configurationFB() {
-       
     }
     
     private func configuarationSDWebImageSVG() {
@@ -83,7 +75,6 @@ class AppDelegate: BaseAppDelegate {
         } catch {
         }
     }
-    
 }
 
 // MARK: - For config network change

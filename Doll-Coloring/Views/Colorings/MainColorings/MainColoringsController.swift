@@ -58,11 +58,8 @@ class MainColoringsController: BaseViewController {
     }
     
     func loadAdsView() {
-        heightAdsView.constant = 60
-        ADManager.shared.loadCollapsibleBannerAdaptive(DollColoringAdID.banner_coloring, viewBanner: viewAds) { [weak self] success in
-            self?.viewAds.isHidden = !success
-            self?.heightAdsView.constant = success ? 60 : 0
-        }
+        viewAds?.isHidden = true
+        heightAdsView?.constant = 0
     }
     
     

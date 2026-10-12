@@ -10,38 +10,31 @@ import Foundation
 import Lottie
 import RxSwift
 import UIKit
-import GoogleMobileAds
-import FBAudienceNetwork
-import AdmobSDK
 import SwiftyStoreKit
 import SDWebImage
 
 class SplashController: BaseViewController {
     @IBOutlet private weak var animationView: LottieAnimationView!
     @IBOutlet weak var animationColoring: LottieAnimationView!
-     
     
     @IBOutlet weak var viewBannerAds: UIView!
     
-    
     private var isSetLanguage = false
     private var configLoaded = false
-    private var timer: Timer? = nil
+    private var timer: Timer?
     
     // MARK: - Setup controller and IBAction
     override func setup() {
         super.setup()
         UserDefaultManager.saveInstallDateIfNeeded()
         loadSavedLanguage()
+        viewBannerAds?.isHidden = true
         setupView()
-        requestNotification {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                self.loadConfigData()
-            }
+        // Push notifications disabled until Firebase is connected.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.loadConfigData()
         }
-
     }
-    
     
     override func bindingData() {
         super.bindingData()
@@ -59,35 +52,17 @@ class SplashController: BaseViewController {
 extension SplashController {
     
     private func loadConfigData() {
-        let dispatchGroup = DispatchGroup()
-        dispatchGroup.enter()
         fetchRemoteConfig {
             self.configIAP(completion: {
-                self.requestGDPRAndATT { [weak self] in
-                    DispatchQueue.main.asyncSafety {
-                        ADManager.shared.initialize(readConfig: self?.configLoaded ?? false) { [weak self] success in
-                            self?.processScreen()
-                        }
-                    }
-                }
+                self.navigateScreen()
             })
         }
-    }
-    
-    private func setUpCountdown() {
-        if UserDefaults.standard.string(forKey: UserDefault.date_first_install_app.rawValue) == nil {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd/MM/yyyy"
-            let todayString = formatter.string(from: Date())
-            UserDefaults.standard.set(todayString, forKey: UserDefault.date_first_install_app.rawValue)
-        }
-
     }
     
     // MARK: - Check IAP config
     private func configIAP(completion: @escaping (() -> Void)) {
         BBLLogging.d("Check:: configIAP")
-        InappManager.share.productIdentifiers = Set(IAPIdType.allCases.compactMap({ $0.rawValue }))
+        InappManager.share.productIdentifiers = IAPIdType.mainProductIdentifiers
         InappManager.share.checkPurchaseProduct()
         _ = InappManager.share.productInfo(id: InappManager.share.productIdentifiers, isShowLoading: false) { [weak self] listProduct in
             BBLLogging.d("Check:: productInfo   ---   \(listProduct.count)")
@@ -113,56 +88,30 @@ extension SplashController {
         }
     }
     
-    // MARK: - Check GDPR
-    private func requestGDPRAndATT(completion: @escaping (() -> Void)) {
-        BBLLogging.d("Check:: requestGDPRAndATT")
-        appDelegate?.requestShowUMPForEEAMarket(idx: 1, completion: { accepted in
-            let needAcceptConsent = RemoteConfigManager.shared.getValue(by: RMBGRemoteConfig.needAcceptConsent)?.boolValue ?? true
-            BBLLogging.d("Check:: requestShowUMPForEEAMarket   ---  accepted: \(accepted)  needAcceptConsent: \(needAcceptConsent)")
-            if !needAcceptConsent {
-                FBAdSettings.setAdvertiserTrackingEnabled(true)
-                completion()
-                return
-            }
-            if accepted {
-                FBAdSettings.setAdvertiserTrackingEnabled(true)
-            }
-            completion()
-        })
-    }
-    
     private func fetchRemoteConfig(completion: @escaping (() -> Void)) {
-        DispatchQueue.main.asyncSafety{ [weak self] in
+        DispatchQueue.main.asyncSafety { [weak self] in
             RemoteConfigManager.shared.fetchConfig(completion: { [weak self] isLoaded in
                 BBLLogging.d("Check:: fetchConfig \(isLoaded)")
-                UserDefaultManager.currentAccessNumberClick = RemoteConfigManager.shared.number(forKey: KeyRemoteConfig.NumberClickItemAllTopic)
-                
-                UserDefaultManager.currentAccessABTestFillColoring = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.ABTestFillColoring)
-                
+                UserDefaultManager.currentAccessNumberClick = 0
+                UserDefaultManager.currentAccessABTestFillColoring = false
                 UserDefaultManager.currentAccessABShowIAPColoring = true
                 UserDefaultManager.currentAccessAB_is_free_trial_US = false
                 
-                if !RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiBaseURL).isEmpty {
-                    newApiBaseURL = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiBaseURL)
-                }
+                // Keep Bunny CDN defaults; reject blocked remote overrides
+                ColoringCDN.applyRemoteOverride(
+                    baseURL: RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiBaseURL),
+                    imageURL: RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiURLImage),
+                    accessKey: RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.APIAccessKey)
+                )
                 
-                if !RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.APIAccessKey).isEmpty {
-                    apiAccessKey = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.APIAccessKey)
-                }
-                
-                if !RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiURLImage).isEmpty {
-                    baseURLImage = RemoteConfigManager.shared.string(forKey: KeyRemoteConfig.ApiURLImage)
-                }
                 UserDefaultManager.currentTimeCountdown = RemoteConfigManager.shared.number(forKey: KeyRemoteConfig.TimeCountdowntSale)
                 
-                // Setup countdown end time if not already set
                 if UserDefaultManager.countdownEndTime == nil {
                     UserDefaultManager.setupCountdownTimer(duration: RemoteConfigManager.shared.number(forKey: KeyRemoteConfig.TimeCountdowntSale))
                 }
                 
                 UserDefaultManager.currentAccessDisableSale = RemoteConfigManager.shared.bool(forKey: KeyRemoteConfig.IsDisableSale)
                 
-
                 let manager = SDWebImageDownloader.shared
                 manager.setValue(apiAccessKey, forHTTPHeaderField: "AccessKey")
                 self?.configLoaded = isLoaded
@@ -171,99 +120,22 @@ extension SplashController {
         }
     }
     
-    private func processScreen() {
-        if !IAPState.isUserVip {
-            self.showAdvert()
-        } else {
-            self.navigateScreen()
-        }
-    }
-    
-    private func showAdvert() {
-        let showIntro = UserDefaults.standard.bool(forKey: UserDefault.showedIntro.rawValue)
-        if !isSetLanguage {
-            ADManager.shared.preLoadNative(DollColoringAdID.native_language_2nd,
-                                           nativeAdType: .customMediaFixedHeight)
-            ADManager.shared.preLoadNative(DollColoringAdID.native_language, nativeAdType: .customMediaFixedHeight)
-        } else if !showIntro {
-            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_1,
-                                           nativeAdType: .customMediaFixedHeight)
-            
-            ADManager.shared.preLoadNative(DollColoringAdID.native_onboarding_3,
-                                                      nativeAdType: .customMediaFixedHeight)
-        }
-        BBLLogging.d("Check:: showAdvert")
-        self.loadAdsHigh()
-        
-    }
-    
-    private func preloadOpenResumeAd() {
-        if DollColoringAdID.appopen_resume.isEnableAd {
-            ADManager.shared.loadOpen(DollColoringAdID.appopen_resume)
-        }
-    }
-    
-    private func loadAdsHigh() {
-        BBLLogging.d("Check:: showFullAdsHigh")
-        ADManager.shared.loadFull(DollColoringAdID.inter_splash_high, needRefresh: false) { [weak self] adResult in
-            guard let self = self else { return }
-            BBLLogging.d("Check:: loaded high: \(adResult)")
-            switch adResult {
-            case .error:
-                DispatchQueue.main.asyncSafety {
-                    self.loadAds()
-                }
-
-            case .closed:
-                DispatchQueue.main.asyncSafety {
-                    self.navigateScreen()
-                }
-
-            default:
-                break
-            }
-        }
-    }
-
-    private func loadAds() {
-        BBLLogging.d("Check:: showFullAds")
-        ADManager.shared.loadFull(DollColoringAdID.inter_splash, needRefresh: false) { [weak self] adResult in
-            guard let self = self else { return }
-            BBLLogging.d("Check:: loaded normal: \(adResult)")
-            switch adResult {
-            case .closed, .error:
-                DispatchQueue.main.asyncSafety {
-                    self.navigateScreen()
-                }
-
-            default:
-                break
-            }
-        }
-    }
-
     private func navigateScreen() {
         BBLLogging.d("Check:: navigateScreen")
         DispatchQueue.main.asyncSafety { [weak self] in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.timer?.invalidate()
             self.timer = nil
-            let showIntro = UserDefaults.standard.bool(forKey: UserDefault.showedIntro.rawValue)
+            // Skip language + onboarding — splash goes straight home.
             if !self.isSetLanguage {
-                BBLLogging.d("Check:: isSetLanguage")
-                AppRouter.shared.navigate(to: LanguageRoute.languageSecond(gofrom: .intro), with: .push)
-                return
+                Constants.currentLanguage = .english
+                UserDefaults.standard.set(Language.english.key, forKey: UserDefault.languageKey.rawValue)
             }
-            if !showIntro {
-                BBLLogging.d("Check:: showIntro")
-                AppRouter.shared.navigate(to: IntroRoute.intro, with: .push)
-                return
-            }
+            UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
             BBLLogging.d("Check:: gotoHome")
             AppRouter.shared.navigate(to: MainTabbarViewRoute.tabbar, with: .changeRoot)
         }
     }
-    
 }
 
 // MARK: - Setup view
@@ -273,22 +145,6 @@ extension SplashController {
         InappManager.share.sharedSecret = sharedSecret
         FirebaseEventManager.logEvent(with: RMBGEventTracking.splashScr)
         animationColoring.loadAnimation(file: "animation_splash", loopMode: .loop, autoPlay: true)
-        let style = ThemeStyleAds
-            .custom(backgroundColor: UIColor.white.withAlphaComponent(0.8),
-                    titleColor: R.color.textColor()!,
-                    vertiserColor: .yellow,
-                    contenColor: R.color.textColor()!,
-                    actionColor: R.color.textColor()!,
-                    backgroundAction: [R.color.colorTextTopBar()!])
-        let testIds: [String] = []
-        ADManager.shared.startAds(style: style, testIds: testIds)
-        if !IAPState.isUserVip {
-            viewBannerAds.isHidden = false
-            ADManager.shared.forceLoadSingleBanner(DollColoringAdID.banner_splash,
-                                                   viewBanner: viewBannerAds) { success in
-                self.viewBannerAds.isHidden = !success
-            }
-        }
         let archiveFiles = ArchiveFileLocal.allCases
         for file in archiveFiles {
             if !FileManagerLocal.shared.checkFileExits(typeFile: file, fileName: "") {
@@ -299,7 +155,7 @@ extension SplashController {
     
     private func loadText() {
     }
-
+    
     private func loadSavedLanguage() {
         let currLang = UserDefaults.standard.string(forKey: UserDefault.languageKey.rawValue) ?? ""
         if !currLang.isEmpty {
@@ -310,6 +166,7 @@ extension SplashController {
         isSetLanguage = false
         Constants.currentLanguage = .english
     }
+    
     private func requestNotification(complection: @escaping () -> Void) {
         BBLLogging.d("Check:: requestNotification")
         appDelegate?.requestNotificationPermission(completion: { success, error in

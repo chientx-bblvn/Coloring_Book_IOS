@@ -15,11 +15,13 @@ enum PreviewColoringRoute: Route {
     var screen: UIViewController {
         switch self {
         case let .main(coloring, coloringLocal, history: history, typeScreen):
-            guard let main = R.storyboard.previewColoring.previewColoringController() else {
-              return UIViewController()
-            }
-            main.viewModel = PreviewColoringVM(coloring: coloring, coloringLocal: coloringLocal, history: history, typeScreen: typeScreen)
-            return main
+            let viewModel = PreparingDrawingViewModel(
+                coloring: coloring,
+                coloringLocal: coloringLocal,
+                history: history,
+                typeScreen: typeScreen
+            )
+            return PreparingDrawingHostController(viewModel: viewModel)
         }
     }
 }

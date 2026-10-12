@@ -42,6 +42,7 @@ Common.Language                                 =       "言語";
 Common.EmptyCollections                         =       "まだ画像がありません！";
 Content_delete_collection                       =       "色が削除されます。\n削除をクリックして続行してください。";
 Common.Continue = "続ける";
+Common.ContinueColoring = "ぬり絵を続ける";
 Common.UnlockForFree                            =       "無料でアンロック";
 Common.UnlockColoring                           =       "プレミアムを購入: すべての絵をアンロック";
 Common.WatchAShortVideo                         =       "短いビデオを見る";
@@ -139,3 +140,16 @@ Setting.ShareApp                                =       "アプリを共有";
 Setting.RateApp                                 =       "アプリを評価";
 Setting.FeedBack                                =       "フィードバック";
 Setting.MoreApp                                 =       "その他のアプリ";
+
+// Collections empty state
+Collections.EmptyTitle = "ぬりえブックが待っています！";
+Collections.EmptyMessage = "好きな絵を選んで、自分らしく塗ろう。";
+Collections.EmptyAction = "ぬりえを探す";
+
+Coloring.PreparingDrawing = "ぬりえを準備しています…";
+
+// Coloring exit confirmation
+Coloring.ExitConfirm = "ぬりえを保存して終了しますか？";
+Coloring.SaveAndLeave = "保存して終了";
+Coloring.KeepColoring = "ぬりえを続ける";
+Coloring.ProgressComplete = "%1$d%% 完了";

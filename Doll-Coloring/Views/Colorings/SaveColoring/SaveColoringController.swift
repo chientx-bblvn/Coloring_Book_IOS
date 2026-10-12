@@ -10,7 +10,6 @@ import Foundation
 import RxSwift
 import UIKit
 import Photos
-import AdmobSDK
 
 class SaveColoringController: BaseViewController {
     
@@ -35,12 +34,11 @@ class SaveColoringController: BaseViewController {
     override func setup() {
         super.setup()
         setupView()
-        ADManager.shared.preLoadReward(DollColoringAdID.reward_save)
-        
+        viewAds?.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        loadNativeAds()
+        viewAds?.isHidden = true
     }
     
     override func bindingData() {
@@ -94,7 +92,7 @@ extension SaveColoringController {
     
     func showActivityController() {
         // Setting description
-        let firstActivityItem = Bundle.main.applicationName ?? "Brainrot Coloring"
+        let firstActivityItem = appDisplayName
         
         // Setting url
         let imageToShare = [viewModel.imageColoring, firstActivityItem] as [Any]
@@ -220,17 +218,8 @@ extension SaveColoringController {
     }
     
     private func checkVip() {
-        if IAPState.isUserVip {
-            savePhotosAlbum()
-        } else {
-            PopupSaveColoringViewController.show(in: self) {
-                
-            } onclickDelete: {
-                DispatchQueue.main.async {
-                    self.loadAdsView()
-                }
-            }
-        }
+        // Ads removed — save freely
+        savePhotosAlbum()
     }
     
 //    func loadInterAds() {
@@ -254,23 +243,12 @@ extension SaveColoringController {
 //    }
     
     func loadAdsView() {
-        ADManager.shared.loadReward(DollColoringAdID.reward_save) {[weak self] status in
-            switch status {
-            case .closed, .success:
-                self?.savePhotosAlbum()
-            case .error:
-                print("reward save error")
-            default:
-                break
-            }
-        }
+        // Ads removed — save directly
+        savePhotosAlbum()
     }
     
     func loadNativeAds() {
-        viewAds.isHidden = false
-        ADManager.shared.loadNative(DollColoringAdID.native_result, to: viewAds, refreshAd: true, nativeAdType: .customMediaFixedHeight) {[weak self] adId, success, nativeAdView in
-            self?.viewAds.isHidden = !success
-        }
+        viewAds?.isHidden = true
     }
     
     func savePhotosAlbum() {

@@ -10,7 +10,7 @@ import UIKit
 
 class BaseCustomXibView: UIView {
     
-    @IBOutlet var contentView: UIView!
+    @IBOutlet var contentView: UIView?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,7 +22,13 @@ class BaseCustomXibView: UIView {
     }
     
     fileprivate func xibSetup() {
-        Bundle(for: type(of: self)).loadNibNamed(String(describing: type(of: self)), owner: self, options: nil)
+        let nibName = String(describing: type(of: self))
+        let owners: [Bundle] = [Bundle(for: type(of: self)), .main]
+        for bundle in owners {
+            _ = bundle.loadNibNamed(nibName, owner: self, options: nil)
+            if contentView != nil { break }
+        }
+        guard let contentView else { return }
         addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

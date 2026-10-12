@@ -272,6 +272,7 @@ extension AdMobManager {
 extension AdMobManager: GADNativeAdDelegate {
     public func nativeAdDidRecordClick(_ nativeAd: GADNativeAd) {
         print("ad==> nativeAdDidRecordClick ")
+        blockClickAdsNative?()
         logEventNative(nativeAd: nativeAd)
     }
     

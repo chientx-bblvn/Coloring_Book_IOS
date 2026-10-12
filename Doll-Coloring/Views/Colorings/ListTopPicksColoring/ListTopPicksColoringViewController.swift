@@ -64,41 +64,30 @@ extension ListTopPicksColoringViewController: UITableViewDataSource, UITableView
         cell.didSelectItemColoring = {[weak self] item in
             guard let self = self else {return}
             let data = item
+            let open: (ColoringImage) -> Void = { image in
+                let local = SQLiteManager.shared.selectionColorings().first(where: { $0.filePath == image.filePath })
+                    ?? self.coloringLocal.first(where: { $0.filePath == image.filePath })
+                AppRouter.shared.navigate(
+                    to: ColorFlowPresenter.route(api: image, local: local, typeScreen: .coloring),
+                    with: .modal
+                )
+            }
             guard !(data.isPremium ?? false) else {
-                if let _ = SQLiteManager.shared.selectionColoringsRew().first(where: { $0.filePath == data.filePath }) {
-                    if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: { $0.filePath == data.filePath }) {
-                        AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .coloring, coloringAPI: data), with: .modal)
-                    } else {
-                        AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .coloring), with: .modal)
-                    }
-                    return
+                if SQLiteManager.shared.selectionColoringsRew().first(where: { $0.filePath == data.filePath }) == nil {
+                    SQLiteManager.shared.insertTableColoringRew(data: data)
                 }
-                SQLiteManager.shared.insertTableColoringRew(data: data)
-
-                if let colorLocal = SQLiteManager.shared.selectionColorings().first(where: { $0.filePath == data.filePath }) {
-                    AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .coloring, coloringAPI: data), with: .modal)
-                } else {
-                    AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .coloring), with: .modal)
-                }
+                open(data)
                 return
             }
             self.indexCategory = indexPath.row
             self.numberClick += 1
             guard self.numberClick >= UserDefaultManager.numberClickItemAllTopic  else {
-                if let colorLocal = self.coloringLocal.first(where: {$0.filePath == data.filePath}) {
-                    AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .coloring, coloringAPI: data), with: .modal)
-                } else {
-                    AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .coloring), with: .modal)
-                }
+                open(data)
                 return
             }
             
             self.numberClick = 0
-            if let colorLocal = self.coloringLocal.first(where: { $0.filePath == data.filePath }) {
-                AppRouter.shared.navigate(to: HistoryColoringRoute.main(coloring: colorLocal, typeScreen: .coloring, coloringAPI: data), with: .modal)
-            } else {
-                AppRouter.shared.navigate(to: PreviewColoringRoute.main(coloring: data, coloringLocal: nil, history: nil, typeScreen: .coloring), with: .modal)
-            }
+            open(data)
         }
         return cell
     }

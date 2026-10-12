@@ -102,6 +102,7 @@ class AdMobManager: NSObject {
     public var blockCompletionHandeler     : BoolBlockAds?
     public var blockNativeFailed            : StringBlockAds?
     public var blockLoadNativeSuccess      : StringBlockNativeAds?
+    public var blockClickAdsNative        : VoidBlockAds?
     public var blockBannerFailed      : ((String) -> Void)?
     public var blockLoadBannerSuccess: ((Bool) -> Void)?
     public var blockBannerClick      : StringBlockAds?

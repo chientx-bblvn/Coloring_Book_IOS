@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import UIKit
 import simd
+import Photos
 #if canImport(PhotosUI)
 import PhotosUI
 #endif
@@ -63,17 +64,33 @@ class StartColoringIPadViewController: BaseViewController {
     
     @IBOutlet weak var stackToolsView: UIStackView!
     
-//    @IBOutlet weak var btnPencil: UIButton!
     
     @IBOutlet weak var btnEraser: UIButton!
     
     @IBOutlet weak var btnPaintPalette: UIButton!
+
+    /// Thin pencil brush — restored programmatically (was removed from storyboard).
+    private lazy var btnPencil: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "ic_not_select_pencil"), for: .normal)
+        button.setImage(UIImage(named: "ic_select_pencil"), for: .selected)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(actionPencil), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
+        return button
+    }()
     
     @IBOutlet weak var viewTools: UIView!
     
     @IBOutlet weak var viewColor: UIView!
     
     @IBOutlet weak var topView: UIView!
+    
+    @IBOutlet weak var btnHidenNative: UIButton!
+    
+    @IBOutlet weak var viewAdsNative: UIView!
+    @IBOutlet weak var viewCollapNative: UIView!
     
     private var currentConstraintColorView: CGFloat = 160
     private var palettes: PalettesColor = .Plain
@@ -101,7 +118,6 @@ class StartColoringIPadViewController: BaseViewController {
         getListColorIpad()
         createColoringBookView()
         loadAdsView()
-//        ADManager.shared.preLoadNative(DollColoringAdID.native_dialog, nativeAdType: .customMediaFixedHeight)
     }
     
     override func updateMorePortrait() {
@@ -137,15 +153,216 @@ class StartColoringIPadViewController: BaseViewController {
         listColor.delegate = self
         listColor.dataSource = self
         
-        topBarView.roundCorners(corners: [.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 16)
-        topView.roundCorners(corners: [.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 16)
-        
-        topBarView.onLeftClick = {
-            self.actionBackTabbars()
+        installPencilToolIfNeeded()
+        installUndoInToolBar()
+        hideLegacyCanvasActionStrip()
+        applyCrayoChrome()
+    }
+
+    /// Back + Share as plain white circular chips; no title.
+    private func configureTopBarActions() {
+        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 13, weight: .semibold)
+        let backIcon = UIImage(systemName: "chevron.left", withConfiguration: symbolConfig)
+            ?? UIImage(named: "ic_left_back")
+            ?? UIImage(named: "ic_back")
+        let saveIcon = UIImage(systemName: "square.and.arrow.up", withConfiguration: symbolConfig)
+            ?? UIImage(named: "ic_download_theme")
+            ?? UIImage(named: "ic_save_image")
+
+        topBarView.showPremium = false
+        topBarView.setTitleHidden(true)
+        topBarView.applyPlainWhiteActionButtons(
+            leftImage: backIcon,
+            rightImage: saveIcon,
+            tintColor: AppTheme.text
+        )
+        topBarView.onLeftClick = { [weak self] in
+            self?.actionBackTabbars()
         }
-        topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
-        topBarView.title = "Coloring Books"
-        
+        topBarView.onRightClick = { [weak self] in
+            self?.exportArtworkToPhotos()
+        }
+    }
+
+    private func installPencilToolIfNeeded() {
+        guard btnPencil.superview == nil else { return }
+        // Order: Undo → Pencil → Fill → Brush → Eraser → Palette
+        stackToolView.insertArrangedSubview(btnPencil, at: 0)
+    }
+
+    /// Put Undo next to drawing tools so the previous stroke can be undone easily.
+    private func installUndoInToolBar() {
+        guard let btnUndo else { return }
+        btnUndo.removeFromSuperview()
+        let undoIcon = UIImage(systemName: "arrow.uturn.backward",
+                               withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .semibold))
+            ?? UIImage(named: "ic_undo")
+        btnUndo.setImage(undoIcon?.withRenderingMode(.alwaysTemplate), for: .normal)
+        btnUndo.setImage(nil, for: .selected)
+        btnUndo.backgroundColor = .clear
+        stackToolView.insertArrangedSubview(btnUndo, at: 0)
+    }
+
+    /// Old floating Undo/Clear/Save/Redo strip — replaced by top-bar Save + tool-bar Undo.
+    private func hideLegacyCanvasActionStrip() {
+        btnBack?.isHidden = true
+        btnSave?.isHidden = true
+        btnRedo?.isHidden = true
+        btnBack?.superview?.superview?.isHidden = true
+    }
+
+    /// Match Home / Crayo pink cream palette (replaces old blue–yellow chrome).
+    private func applyCrayoChrome() {
+        let bg = AppTheme.background
+        view.backgroundColor = bg
+        contentView.backgroundColor = bg
+        stackContent?.backgroundColor = .clear
+        viewColorPicker?.backgroundColor = .clear
+        viewColorPicker?.isOpaque = false
+        stackToolsView?.backgroundColor = .clear
+        stackToolsView?.isOpaque = false
+        // Storyboard full-bleed bg imageView still uses AppBackground asset — force pink.
+        view.subviews
+            .compactMap { $0 as? UIImageView }
+            .forEach { $0.backgroundColor = bg; $0.image = nil }
+
+        // Transparent top chrome so canvas shows through; only the corner chips remain.
+        topView.backgroundColor = .clear
+        topView.isOpaque = false
+        topView.layer.cornerRadius = 0
+        topView.layer.maskedCorners = []
+        topView.clipsToBounds = false
+        topBarView.backgroundColorView = .clear
+        topBarView.backgroundColor = .clear
+        topBarView.isOpaque = false
+        topBarView.layer.cornerRadius = 0
+        topBarView.clipsToBounds = false
+        topBarView.setTitleHidden(true)
+        topBarView.tintColor = AppTheme.text
+        // iPad status bar often isn't in safeAreaInsets — keep Back/Share below it.
+        if let heightConstraint = topView.constraints.first(where: { $0.firstAttribute == .height }) {
+            heightConstraint.constant = max(118, LayoutChrome.windowTopSafeArea + 56 + 16)
+        }
+
+        // Only the floating tool pill stays white; strip behind it is clear.
+        viewTools.backgroundColor = UIColor.white.withAlphaComponent(0.96)
+        viewTools.layer.cornerRadius = 24
+        viewTools.layer.maskedCorners = [
+            .layerMinXMinYCorner,
+            .layerMaxXMinYCorner,
+            .layerMinXMaxYCorner,
+            .layerMaxXMaxYCorner
+        ]
+        viewTools.layer.borderWidth = 1
+        viewTools.layer.borderColor = AppTheme.border.cgColor
+        viewTools.clipsToBounds = true
+        viewTools.layer.shadowOpacity = 0
+        viewTools.layer.shadowRadius = 0
+        viewTools.layer.shadowOffset = .zero
+        [btnUndo, btnFill, btnPen, btnPencil, btnEraser, btnPaintPalette].forEach { button in
+            button?.backgroundColor = .clear
+            button?.layer.cornerRadius = 12
+            button?.clipsToBounds = true
+        }
+        applyConsistentToolIcons()
+
+        viewColor.backgroundColor = .clear
+        viewColor.isOpaque = false
+        viewColor.layer.borderWidth = 0
+        viewColor.layer.shadowOpacity = 0
+        listColor?.backgroundColor = .clear
+        listColor?.isOpaque = false
+        // Clear storyboard fill on the tool-row host (not the color cells).
+        viewTools.superview?.backgroundColor = .clear
+        viewTools.superview?.isOpaque = false
+
+        viewChangeLineWidth.backgroundColor = AppTheme.surface.withAlphaComponent(0.92)
+        viewChangeLineWidth.layer.borderWidth = 1
+        viewChangeLineWidth.layer.borderColor = AppTheme.border.cgColor
+        sliderView.minimumTrackTintColor = AppTheme.primary
+        sliderView.maximumTrackTintColor = AppTheme.primarySoft
+        sliderView.tintColor = AppTheme.primary
+
+        styleRoundChipButtons([btnMinus, btnPlus])
+        styleToolUndoButton()
+        configureTopBarActions()
+    }
+
+    private func styleToolUndoButton() {
+        guard let btnUndo else { return }
+        btnUndo.backgroundColor = .clear
+        btnUndo.layer.cornerRadius = 12
+        btnUndo.clipsToBounds = true
+        btnUndo.tintColor = AppTheme.textSecondary
+        btnUndo.imageView?.contentMode = .scaleAspectFit
+    }
+
+    /// Use one generated illustration family for every drawing action.
+    private func applyConsistentToolIcons() {
+        let tools: [(button: UIButton?, label: String, atlasIndex: Int, selectable: Bool)] = [
+            (btnUndo, "Undo", 0, false),
+            (btnPencil, "Pencil", 1, true),
+            (btnFill, "Fill", 2, true),
+            (btnPen, "Brush", 3, true),
+            (btnEraser, "Eraser", 4, true),
+            (btnPaintPalette, "Color palette", 5, false)
+        ]
+
+        for (button, label, atlasIndex, selectable) in tools {
+            guard let button else { continue }
+            let image = generatedToolIcon(at: atlasIndex)
+            button.setImage(image, for: .normal)
+            if selectable {
+                button.setImage(image, for: .selected)
+            }
+            button.imageView?.contentMode = .scaleAspectFit
+            button.accessibilityLabel = label
+        }
+    }
+
+    private func generatedToolIcon(at index: Int) -> UIImage? {
+        guard (0..<6).contains(index),
+              let atlas = UIImage(named: "drawing_tool_icons"),
+              let cgImage = atlas.cgImage else { return nil }
+
+        let cellWidth = cgImage.width / 3
+        let cellHeight = cgImage.height / 2
+        let column = index % 3
+        let row = index / 3
+        let rect = CGRect(
+            x: CGFloat(column * cellWidth),
+            y: CGFloat(row * cellHeight),
+            width: CGFloat(cellWidth),
+            height: CGFloat(cellHeight)
+        )
+        guard let icon = cgImage.cropping(to: rect) else { return nil }
+        return UIImage(cgImage: icon, scale: atlas.scale, orientation: .up)
+    }
+
+    private func styleCanvasActionButtons(_ buttons: [UIButton?]) {
+        for button in buttons {
+            guard let button else { continue }
+            button.backgroundColor = AppTheme.primarySoft
+            button.layer.cornerRadius = 14
+            button.clipsToBounds = true
+            button.tintColor = AppTheme.primary
+            if let image = button.image(for: .normal)?.withRenderingMode(.alwaysTemplate) {
+                button.setImage(image, for: .normal)
+            }
+        }
+    }
+
+    private func styleRoundChipButtons(_ buttons: [UIButton?]) {
+        for button in buttons {
+            guard let button else { continue }
+            button.backgroundColor = AppTheme.primarySoft
+            button.layer.cornerRadius = 22
+            button.clipsToBounds = true
+            button.tintColor = AppTheme.primary
+            if let image = button.image(for: .normal)?.withRenderingMode(.alwaysTemplate) {
+                button.setImage(image, for: .normal)
+            }
+        }
     }
     
     private func getListColorIpad() {
@@ -212,6 +429,13 @@ class StartColoringIPadViewController: BaseViewController {
         }
         coloringBookView.transform = .identity
         coloringBookView.transform = .identity.scaledBy(x: 1.2, y: 1.2)
+        viewTools.layer.cornerRadius = 24
+        viewTools.layer.maskedCorners = [
+            .layerMinXMinYCorner,
+            .layerMaxXMinYCorner,
+            .layerMinXMaxYCorner,
+            .layerMaxXMaxYCorner
+        ]
     }
     
     @objc private func changePanGestureTemplate(_ gesture: UIPanGestureRecognizer) {
@@ -263,8 +487,17 @@ class StartColoringIPadViewController: BaseViewController {
     }
     
     func updateLineWidthPen() {
-        addDashedCircle(size: simd_mix(1.0, 40.0, lineWidthPen))
-        coloringBookView.currentWidth = CGFloat(simd_mix(1.0, 40.0, lineWidthPen))
+        let size = resolvedStrokeWidth()
+        addDashedCircle(size: Float(size))
+        coloringBookView.currentWidth = size
+    }
+
+    /// Pencil stays thin/hard; brush uses the full soft range.
+    private func resolvedStrokeWidth() -> CGFloat {
+        if btnPencil.isSelected {
+            return CGFloat(simd_mix(1.2, 12.0, lineWidthPen))
+        }
+        return CGFloat(simd_mix(2.5, 40.0, lineWidthPen))
     }
     
     func addDashedCircle(size: Float) {
@@ -276,11 +509,11 @@ class StartColoringIPadViewController: BaseViewController {
                                         endAngle: .pi * 2,
                                         clockwise: true).cgPath
         circleLayer.lineWidth = 2.0
-        circleLayer.strokeColor =  UIColor.red.cgColor//border of circle
+        circleLayer.strokeColor =  UIColor.red.cgColor
         if btnEraser.isSelected {
             circleLayer.fillColor = UIColor.clear.cgColor
         } else {
-            circleLayer.fillColor = currentColor?.withAlphaComponent(0.5).cgColor//inside the circle
+            circleLayer.fillColor = currentColor?.withAlphaComponent(0.5).cgColor
         }
         circleLayer.lineJoin = .round
         circleLayer.lineDashPattern = [6,3]
@@ -304,6 +537,7 @@ class StartColoringIPadViewController: BaseViewController {
     func changeStateColoring(_ isPens: Bool) {
         btnPen.isSelected = isPens
         btnFill.isSelected = !isPens
+        updateFlatToolSelection()
         viewChangeLineWidth.isHidden = !isPens
         coloringBookView.isPens = isPens
         panGesture.maximumNumberOfTouches = isPens ? 2 : 1
@@ -314,35 +548,61 @@ class StartColoringIPadViewController: BaseViewController {
         btnPen.isSelected = false
         btnFill.isSelected = false
         btnEraser.isSelected = false
-//        btnPencil.isSelected = false
+        btnPencil.isSelected = false
         switch tools {
-//        case .Pencil:
-//            btnPencil.isSelected = true
-//            viewChangeLineWidth.isHidden = true
-//            coloringBookView.currentWidth = CGFloat(simd_mix(1.0, 40.0, 0.2))
-//            coloringBookView.currentColor = currentColor ?? .red
-//            coloringBookView.nameColor = nameColor ?? ""
-//            panGesture.maximumNumberOfTouches = 2
-//            panGesture.minimumNumberOfTouches = 2
-//            coloringBookView.isPens = true
+        case .Pencil:
+            btnPencil.isSelected = true
+            viewChangeLineWidth.isHidden = false
+            coloringBookView.currentColor = currentColor ?? .red
+            coloringBookView.nameColor = nameColor ?? ""
+            coloringBookView.strokeKind = .pencil
+            panGesture.maximumNumberOfTouches = 2
+            panGesture.minimumNumberOfTouches = 2
+            coloringBookView.isPens = true
+            updateLineWidthPen()
         case .Eraser:
             panGesture.maximumNumberOfTouches = 2
             panGesture.minimumNumberOfTouches = 2
             coloringBookView.currentColor = UIColor(hexString: "FFFFFE")
             coloringBookView.nameColor = "FFFFFE"
+            coloringBookView.strokeKind = .brush
+            coloringBookView.isPens = true
             btnEraser.isSelected = true
+            viewChangeLineWidth.isHidden = false
+            updateLineWidthPen()
         case .Bucket:
             btnFill.isSelected = true
             viewChangeLineWidth.isHidden = true
             coloringBookView.currentColor = currentColor ?? .red
             coloringBookView.nameColor = nameColor ?? ""
+            coloringBookView.isPens = false
         case .Brush:
             viewChangeLineWidth.isHidden = false
             coloringBookView.currentColor = currentColor ?? .red
             coloringBookView.nameColor = nameColor ?? ""
+            coloringBookView.strokeKind = .brush
+            coloringBookView.isPens = true
             btnPen.isSelected = true
+            panGesture.maximumNumberOfTouches = 2
+            panGesture.minimumNumberOfTouches = 2
+            updateLineWidthPen()
         }
+        updateFlatToolSelection()
         FirebaseEventManager.logEvent(with: RMBGEventTracking.tool_click, params: ["tool": tools.rawValue])
+    }
+
+    /// Flat, tactile tool chips matching the lightweight 2D toolbar reference.
+    private func updateFlatToolSelection() {
+        [btnFill, btnPen, btnPencil, btnEraser].forEach { button in
+            guard let button else { return }
+            button.backgroundColor = button.isSelected ? AppTheme.primarySoft : .clear
+            button.layer.borderWidth = button.isSelected ? 1 : 0
+            button.layer.borderColor = button.isSelected
+                ? AppTheme.primary.withAlphaComponent(0.18).cgColor
+                : UIColor.clear.cgColor
+            button.tintColor = button.isSelected ? AppTheme.primary : AppTheme.text
+            button.layer.shadowOpacity = 0
+        }
     }
     
     private func swapViews(at index1: Int, with index2: Int, in stackView: UIStackView) {
@@ -370,6 +630,10 @@ class StartColoringIPadViewController: BaseViewController {
         updateLineWidthPen()
         
     }
+    @IBAction func actionCloseAds(_ sender: Any) {
+        viewAdsNative.isHidden = true
+        heightViewAds?.constant = 0
+    }
     
     @IBAction func actionBack(_ sender: Any) {
         coloringBookView?.clear()
@@ -380,58 +644,46 @@ class StartColoringIPadViewController: BaseViewController {
         let percent = coloringBookView.percentColoring
         let percentColoring = Int((percent * 100).rounded())
 
+        // 0% — leave quietly; do not persist into Collections.
+        if percentColoring <= 0 {
+            removeCurrentHistoryIfNeeded()
+            popFromColoringScreen()
+            return
+        }
+
         if percentColoring < 100 {
             PopupColoringViewController.show(in: self,
                                              _percent: percent,
-                                             _title: LocalizableUtils.commonDescExit(),
-                                             _titleOk: LocalizableUtils.commonOK(),
-                                             _titleCancel: LocalizableUtils.commonNo()) {
-                if IAPState.isUserVip {
-                    self.dissmissHistoryColoring()
-                    return
-                }
-
-                guard DollColoringAdID.inter_back.isEnableAd else {
-                    self.dissmissHistoryColoring()
-                    return
-                }
-
-                AdLoadingView.show()
-                ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) { state in
-                    AdLoadingView.dismiss()
-                    switch state {
-                    case .closed, .error:
-                        self.dissmissHistoryColoring()
-                    default:
-                        break
-                    }
-                }
-
+                                             _title: "Coloring.ExitConfirm".localizedString(
+                                                tableName: "Localizable",
+                                                defaultValue: "Save your progress before leaving?",
+                                                comment: "Confirm leaving a coloring page"
+                                             ),
+                                             _titleOk: "Coloring.SaveAndLeave".localizedString(
+                                                tableName: "Localizable",
+                                                defaultValue: "Save & leave",
+                                                comment: "Save progress and leave coloring"
+                                             ),
+                                             _titleCancel: "Coloring.KeepColoring".localizedString(
+                                                tableName: "Localizable",
+                                                defaultValue: "Keep coloring",
+                                                comment: "Stay on the coloring page"
+                                             )) {
+                self.dissmissHistoryColoring()
             } actionCancel: {
             }
-
             return
         }
 
-        guard DollColoringAdID.inter_back.isEnableAd else {
-            self.dissmissHistoryColoring()
-            return
-        }
-
-        AdLoadingView.show()
-        ADManager.shared.loadFull(DollColoringAdID.inter_back, isSplash: true) { state in
-            AdLoadingView.dismiss()
-            switch state {
-            case .closed, .error:
-                self.dissmissHistoryColoring()
-            default:
-                break
-            }
-        }
+        dissmissHistoryColoring()
     }
     
     func dissmissHistoryColoring(){
         self.saveHistoryColoring()
+        popFromColoringScreen()
+    }
+
+    private func popFromColoringScreen() {
         switch self.viewModel.typeScreen {
         case .home:
             AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
@@ -460,10 +712,11 @@ class StartColoringIPadViewController: BaseViewController {
         changeStateColoring(true)
         changeStateTools(.Brush)
     }
-    
-//    @IBAction func actionPencil(_ sender: Any) {
-//        changeStateTools(.Pencil)
-//    }
+
+    @objc private func actionPencil() {
+        changeStateColoring(true)
+        changeStateTools(.Pencil)
+    }
     
     @IBAction func actionEraser(_ sender: Any) {
         changeStateColoring(true)
@@ -489,30 +742,52 @@ class StartColoringIPadViewController: BaseViewController {
     }
     
     @IBAction func actionDone(_ sender: Any) {
-        let percent = coloringBookView.percentColoring
-        let percentColoring = Int((percent * 100).rounded())
-        if percentColoring < 100 {
-            PopupColoringViewController.show(in: self, _percent: percent, _title: LocalizableUtils.commonSaveColoring(), _titleOk: LocalizableUtils.commonSave(), _titleCancel: LocalizableUtils.commonDiscard()) {
-                self.saveHistoryColoring()
-                self.coloringBookView.layer.borderWidth = 0
-                if let history = self.viewModel.history {
-                    AppRouter.shared.navigate(to: DetailCollectionRoute.main(coloringLocal: self.viewModel.coloringLocal, history:history, isCollection: true), with: .push)
+        exportArtworkToPhotos()
+    }
+
+    /// Save the current artwork into the Photos library (download).
+    private func exportArtworkToPhotos() {
+        let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
+        switch status {
+        case .authorized, .limited:
+            writeArtworkToPhotos()
+        case .denied, .restricted:
+            createMyAlert(title: LocalizableUtils.title_open_library(), LocalizableUtils.message_open_libary()) {
+                guard let url = URL(string: UIApplication.openSettingsURLString),
+                      UIApplication.shared.canOpenURL(url) else { return }
+                UIApplication.shared.open(url)
+            }
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization(for: .addOnly) { [weak self] newStatus in
+                DispatchQueue.main.async {
+                    if newStatus == .authorized || newStatus == .limited {
+                        self?.writeArtworkToPhotos()
+                    }
                 }
-//
-//                AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: self.coloringBookView.asImage(), coloringLocal: self.viewModel.coloringLocal, history: self.viewModel.history, typeScreen: self.viewModel.typeScreen), with: .push)
-                self.coloringBookView.layer.borderWidth = 0.5
-            } actionCancel: {
-                
             }
-        } else {
-            saveHistoryColoring()
-            coloringBookView.layer.borderWidth = 0
-            if let history = self.viewModel.history {
-                AppRouter.shared.navigate(to: DetailCollectionRoute.main(coloringLocal: self.viewModel.coloringLocal, history:history, isCollection: true), with: .push)
-            }
-//            AppRouter.shared.navigate(to: SaveColoringRoute.main(imageColoring: coloringBookView.asImage(), coloringLocal: viewModel.coloringLocal, history: viewModel.history, typeScreen: viewModel.typeScreen), with: .push)
-            coloringBookView.layer.borderWidth = 0.5
+        @unknown default:
+            break
         }
+    }
+
+    private func writeArtworkToPhotos() {
+        guard coloringBookView != nil else { return }
+        saveHistoryColoring()
+        coloringBookView.layer.borderWidth = 0
+        let image = coloringBookView.asImage()
+        coloringBookView.layer.borderWidth = 0.5
+        FirebaseEventManager.logEvent(with: RMBGEventTracking.save_coloring_screen)
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(artwork(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+
+    @objc private func artwork(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        let title = LocalizableUtils.commonSave()
+        let message = error == nil
+            ? LocalizableUtils.save_picture_success()
+            : LocalizableUtils.save_picture_fail()
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: LocalizableUtils.commonOK(), style: .default))
+        present(alert, animated: true)
     }
     
     @IBAction func actionMinus(_ sender: Any) {
@@ -585,7 +860,6 @@ extension StartColoringIPadViewController: UICollectionViewDelegate, UICollectio
 
 extension StartColoringIPadViewController {
     func createColoringBookView() {
-        //Add to contentView settings constraints
         coloringBookView.layer.cornerRadius = 16
         coloringBookView.layer.borderWidth = 0.5
         coloringBookView.layer.borderColor = UIColor.black.cgColor
@@ -596,14 +870,11 @@ extension StartColoringIPadViewController {
             coloringBookView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             coloringBookView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 40)
         ])
-        //Change the default color and width of the new coloring Book View
         coloringBookView.currentColor = currentColor ?? .red
         coloringBookView.nameColor = ""
         coloringBookView.currentWidth = CGFloat(simd_mix(1.0, 40.0, lineWidthPen))
         coloringBookView.delegate = self
         coloringBookView.transform = .identity.scaledBy(x: 1.2, y: 1.2)
-//        progessRing.setProgress(Float(coloringBookView.percentColorImage), animated: true)
-//        lbPercenColoring.text = "\(Int(((coloringBookView.percentColorImage) * 100).rounded()))%"
         getHistoryColoring()
     }
     
@@ -614,6 +885,13 @@ extension StartColoringIPadViewController {
     
     
     func saveHistoryColoring() {
+        let percentColoring = Int((coloringBookView.percentColoring * 100).rounded())
+        // Never add a blank (0%) page to Collections.
+        if percentColoring <= 0 {
+            removeCurrentHistoryIfNeeded()
+            return
+        }
+
         if let history = viewModel.history, !history.imagePath.isEmpty {
             FileManagerLocal.shared.deleteFile(typeFile: .ColoringSave, fileName: history.imagePath)
         }
@@ -629,11 +907,11 @@ extension StartColoringIPadViewController {
         }
         coloringBookView.layer.borderWidth = 0.5
         // lưu các config và đường đãn của ảnh vừa vẽ vào DB
-        let newHistory = HistoryModel(imagePath: fileName, percent_complete: coloringBookView.percentColoring, strokes: coloringBookView.strokes.map({ stroke in
-            StrokeModel(lineWidth: stroke.lineWidth, color: stroke.color.toHexString(), id: 0, nameColor: stroke.nameColor, isPens: stroke.isPens, points: stroke.points.map({ point in
-                PointModel(x: point.x, y: point.y)
-            }), strokeRect: StrokeRectMode(x: stroke.strokeRect.x, y: stroke.strokeRect.y, width: stroke.strokeRect.width, height: stroke.strokeRect.height))
-        }))
+        let newHistory = HistoryModel(
+            imagePath: fileName,
+            percent_complete: coloringBookView.percentColoring,
+            strokes: coloringBookView.strokes.map { makeStrokeModel(from: $0) }
+        )
         
         if coloringBookView != nil {
             let coloring = viewModel.coloringLocal
@@ -644,11 +922,11 @@ extension StartColoringIPadViewController {
                 let historys = ColoringHistoryModel(id: coloring.id, filePath: coloring.filePath, fileLocal: coloring.fileLocal, historys: newHis)
                 if !SQLiteManager.shared.updateColorings(data: historys) {
                     self.coloringBookView?.reloadStrokes()
-                    let new = HistoryModel(imagePath: fileName, percent_complete: newHistory.percent_complete, strokes: coloringBookView.strokes.map({ stroke in
-                        StrokeModel(lineWidth: stroke.lineWidth, color: stroke.color.toHexString(), id: 0, nameColor: stroke.nameColor, points: stroke.points.map({ point in
-                            PointModel(x: point.x, y: point.y)
-                        }), strokeRect: StrokeRectMode(x: stroke.strokeRect.x, y: stroke.strokeRect.y, width: stroke.strokeRect.width, height: stroke.strokeRect.height))
-                    }))
+                    let new = HistoryModel(
+                        imagePath: fileName,
+                        percent_complete: newHistory.percent_complete,
+                        strokes: coloringBookView.strokes.map { makeStrokeModel(from: $0) }
+                    )
                     newHis.removeAll(where: {$0.imagePath == new.imagePath})
                     newHis.append(new)
                     let his = ColoringHistoryModel(id: coloring.id, filePath: coloring.filePath, fileLocal: coloring.fileLocal, historys: newHis)
@@ -660,11 +938,11 @@ extension StartColoringIPadViewController {
                 let historys = ColoringHistoryModel(id: coloring.id, filePath: coloring.filePath, fileLocal: coloring.fileLocal, historys: newHis)
                 if !SQLiteManager.shared.updateColorings(data: historys) {
                     self.coloringBookView?.reloadStrokes()
-                    let new = HistoryModel(imagePath: fileName, percent_complete: newHistory.percent_complete, strokes: coloringBookView.strokes.map({ stroke in
-                        StrokeModel(lineWidth: stroke.lineWidth, color: stroke.color.toHexString(), id: 0, nameColor: stroke.nameColor, points: stroke.points.map({ point in
-                            PointModel(x: point.x, y: point.y)
-                        }), strokeRect: StrokeRectMode(x: stroke.strokeRect.x, y: stroke.strokeRect.y, width: stroke.strokeRect.width, height: stroke.strokeRect.height))
-                    }))
+                    let new = HistoryModel(
+                        imagePath: fileName,
+                        percent_complete: newHistory.percent_complete,
+                        strokes: coloringBookView.strokes.map { makeStrokeModel(from: $0) }
+                    )
                     newHis.removeAll(where: {$0.imagePath == new.imagePath})
                     newHis.append(new)
                     let his = ColoringHistoryModel(id: coloring.id, filePath: coloring.filePath, fileLocal: coloring.fileLocal, historys: newHis)
@@ -675,10 +953,40 @@ extension StartColoringIPadViewController {
                 viewModel.coloringLocal = coloringModel
             }
             viewModel.history = newHistory
-//            let percent =  Float(newHistory.percent_complete ?? 0)
-//            progessRing.setProgress(percent, animated: true)
-//            lbPercenColoring.text = "\(Int((percent * 100).rounded()))%"
         }
+    }
+
+    private func makeStrokeModel(from stroke: Stroke) -> StrokeModel {
+        StrokeModel(
+            lineWidth: stroke.lineWidth,
+            color: stroke.color.toHexString(),
+            id: 0,
+            nameColor: stroke.nameColor,
+            isPens: stroke.isPens,
+            strokeKind: stroke.kind.rawValue,
+            points: stroke.points.map { PointModel(x: $0.x, y: $0.y) },
+            strokeRect: StrokeRectMode(
+                x: stroke.strokeRect.origin.x,
+                y: stroke.strokeRect.origin.y,
+                width: stroke.strokeRect.width,
+                height: stroke.strokeRect.height
+            )
+        )
+    }
+
+    /// Drop the in-progress history when the page is fully blank again.
+    private func removeCurrentHistoryIfNeeded() {
+        guard let history = viewModel.history, !history.imagePath.isEmpty else { return }
+        var coloring = viewModel.coloringLocal
+        guard coloring.historys.contains(where: { $0.imagePath == history.imagePath }) else {
+            viewModel.history = nil
+            return
+        }
+        FileManagerLocal.shared.deleteFile(typeFile: .ColoringSave, fileName: history.imagePath)
+        coloring.historys.removeAll(where: { $0.imagePath == history.imagePath })
+        _ = SQLiteManager.shared.updateColorings(data: coloring)
+        viewModel.coloringLocal = coloring
+        viewModel.history = nil
     }
     
     func getHistoryColoring() {
@@ -698,7 +1006,13 @@ extension StartColoringIPadViewController {
                         color = UIColor(hexString: hex ?? "")
                     }
                 }
-                var item = Stroke(color: color, lineWidth: detail.lineWidth, nameColor: detail.nameColor, isPens: detail.isPens ?? true)
+                var item = Stroke(
+                    color: color,
+                    lineWidth: detail.lineWidth,
+                    nameColor: detail.nameColor,
+                    isPens: detail.isPens ?? true,
+                    kind: StrokeKind(raw: detail.strokeKind)
+                )
                 detail.points.forEach { point in
                     item.addPoint(CGPoint(x: point.x, y: point.y))
                 }
@@ -712,35 +1026,27 @@ extension StartColoringIPadViewController {
     
     func loadAdsView() {
         bannerReloadTimer?.invalidate()
-
-        if DeviceInfos.isIpad() {
-            heightViewAds.constant = 90
-        } else {
-            heightViewAds.constant = 70
-        }
-        viewAds.isHidden = false
-        ADManager.shared.loadBanner(DollColoringAdID.banner_coloring, viewBanner: viewAds) { [weak self] success in
-            guard let self = self else { return }
-            self.viewAds.isHidden = !success
-            self.heightViewAds.constant = success
-                ? (DeviceInfos.isIpad() ? 90 : 70)
-                : 32
-
-            self.bannerReloadTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { _ in
-                ADManager.shared.loadBanner(DollColoringAdID.banner_coloring, viewBanner: self.viewAds) { success in
-                    self.viewAds.isHidden = !success
-                }
-            }
-        }
+        viewAdsNative?.isHidden = true
+        viewCollapNative?.isHidden = true
+        viewAds?.isHidden = true
+        heightViewAds?.constant = 0
     }
+    
+    func reloadNativeAds() {
+        // Ads removed
+    }
+    
+    
 }
 
 extension StartColoringIPadViewController: ColoringBookViewDelegate {
     func viewWillStartDrawing() {
         circleLayer.removeFromSuperlayer()
-        if !UserDefaultManager.disableSound, coloringBookView.isPens{
-            soundColoring.loadAudio(type: .Sound)
-        } else if !UserDefaultManager.disableSound, !coloringBookView.isPens {
+        guard !UserDefaultManager.disableSound else { return }
+        if coloringBookView.isPens {
+            // Loop ASMR brush sound for the whole stroke (old feel).
+            soundColoring.loadAudio(type: .Sound, isLoop: true)
+        } else {
             soundColoring.loadAudio(type: .fillColor)
         }
     }
@@ -753,6 +1059,7 @@ extension StartColoringIPadViewController: ColoringBookViewDelegate {
 }
 
 enum ToolsColoring: String {
+    case Pencil = "Pencil"
     case Eraser = "Eraser"
     case Bucket = "Bucket"
     case Brush = "Brush"

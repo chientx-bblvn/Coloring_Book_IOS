@@ -36,23 +36,17 @@ def shared_pods
   pod 'SDWebImageSVGNativeCoder'
   pod 'SVProgressHUD'
   
-  ### Facebook SDK
-  pod 'FBAudienceNetwork'
-  pod 'FBSDKCoreKit'
-  pod 'FBAEMKit'
-  pod 'GoogleMobileAdsMediationFacebook'
-
+  # IAP
+  pod 'SwiftyStoreKit'
   
-  # For firebase
-  #  # (Recommended) Pod for Google Analytics
-  pod 'Firebase/Messaging'
+  # Firebase temporarily disabled
+  # pod 'Firebase/Messaging'
+  # pod 'Firebase/RemoteConfig'
+  # pod 'Firebase/Analytics'
+  # pod 'Firebase/Crashlytics'
   
   pod 'BmoViewPager', :path => "./Submodules/BmoViewPager"
   
-  
-  ### Admobs
-  #pod 'AdmobSDK', :git => "https://AnhNVBBLabs@github.com/Binary-Bridge-Labs/ADMobSDK", :branch => 'release/0.0.22-beta'
-  pod 'AdmobSDK', :path => "./Submodules/ADMobSDK"
   pod 'Clarity'
   
   ### SQLite DB
@@ -60,7 +54,7 @@ def shared_pods
   
 end
 
-target 'Brainrot Coloring - Coloritas' do
+target 'Crayo' do
 
   shared_pods
   

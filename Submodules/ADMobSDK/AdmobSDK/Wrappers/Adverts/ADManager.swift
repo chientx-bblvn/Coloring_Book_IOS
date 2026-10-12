@@ -177,6 +177,7 @@ public class ADManager: NSObject {
                 print("Couldn't found `adjust_app_token` from `Info.plist` file.")
             }
         }
+        
         if adjustToken.isEmpty {
             adjustToken = RemoteConfigManager.shared.getValue(by: DefaultRemoteKey.adjustToken)?.stringValue ?? ""
             if adjustToken.isEmpty {

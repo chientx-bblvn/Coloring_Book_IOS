@@ -43,6 +43,7 @@ Common.Language = "Sprache";
 Common.EmptyCollections = "Keine Bilder vorhanden!";
 Content_delete_collection = "Die Farbe wird gelöscht \n Klicken Sie auf Löschen, um fortzufahren.";
 Common.Continue = "Weitermachen";
+Common.ContinueColoring = "Weiter ausmalen";
 Common.UnlockForFree                            =       "Kostenlos freischalten";
 Common.UnlockColoring                           =       "Premium kaufen: Alle Zeichnungen freischalten";
 Common.WatchAShortVideo                         =       "Ein kurzes Video ansehen";
@@ -138,3 +139,16 @@ Setting.ShareApp                                =       "App teilen";
 Setting.RateApp                                 =       "App bewerten";
 Setting.FeedBack                                =       "Feedback";
 Setting.MoreApp                                 =       "Weitere Apps";
+
+// Collections empty state
+Collections.EmptyTitle = "Dein Malbuch wartet!";
+Collections.EmptyMessage = "Wähle ein Bild und male es aus.";
+Collections.EmptyAction = "Bilder entdecken";
+
+Coloring.PreparingDrawing = "Dein Bild wird vorbereitet…";
+
+// Coloring exit confirmation
+Coloring.ExitConfirm = "Fortschritt vor dem Verlassen speichern?";
+Coloring.SaveAndLeave = "Speichern & verlassen";
+Coloring.KeepColoring = "Weiter ausmalen";
+Coloring.ProgressComplete = "%1$d%% abgeschlossen";

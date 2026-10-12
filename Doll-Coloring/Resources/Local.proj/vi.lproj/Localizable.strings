@@ -42,6 +42,7 @@ Common.Language = "Ngôn ngữ";
 Common.EmptyCollections = "Chưa có hình ảnh nào!";
 Content_delete_collection = "Màu sẽ bị xóa \n Nhấn Xóa để tiếp tục.";
 Common.Continue = "Tiếp tục";
+Common.ContinueColoring = "Tiếp tục tô màu";
 Common.UnlockForFree                            =       "Mở khóa miễn phí";
 Common.UnlockColoring                           =       "Mua cao cấp: Mở khóa tất cả các bản vẽ";
 Common.WatchAShortVideo                         =       "Xem một video ngắn";
@@ -137,3 +138,16 @@ Setting.ShareApp                                =       "Chia sẻ ứng dụng"
 Setting.RateApp                                 =       "Đánh giá ứng dụng";
 Setting.FeedBack                                =       "Phản hồi";
 Setting.MoreApp                                 =       "Ứng dụng khác";
+
+// Collections empty state
+Collections.EmptyTitle = "Cuốn sách tô màu đang chờ bạn!";
+Collections.EmptyMessage = "Chọn một bức tranh và tô theo cách của bạn.";
+Collections.EmptyAction = "Khám phá tranh";
+
+Coloring.PreparingDrawing = "Đang chuẩn bị tranh để tô…";
+
+// Coloring exit confirmation
+Coloring.ExitConfirm = "Lưu tiến độ trước khi thoát?";
+Coloring.SaveAndLeave = "Lưu và thoát";
+Coloring.KeepColoring = "Tiếp tục tô màu";
+Coloring.ProgressComplete = "%1$d%% hoàn thành";

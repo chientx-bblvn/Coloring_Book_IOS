@@ -131,7 +131,7 @@ extension AdMobManager: GADFullScreenContentDelegate {
                                 blockWillDismiss: VoidBlockAds? = nil,
                                 blockDidDismiss: VoidBlockAds? = nil, blockFail: VoidBlockAds? = nil) {
         if isSplash {
-            AdResumeManager.shared.isShowingAd = true // kiểm tra nếu show inter thì ko show resume
+            AdResumeManager.shared.isShowingAd = true
             createAdInterstitialIfNeed(unitId: unitId) { [weak self] result in
                 if result {
                     self?.isSplash = true

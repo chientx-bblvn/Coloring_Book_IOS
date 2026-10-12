@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import UIKit
+import SVProgressHUD
 import Lottie
 import StoreKit
 
@@ -201,11 +202,11 @@ extension IAPController {
         loadData()
         iapIds = IAPIdType.getOption()
         if InappManager.share.listProduct.isEmpty {
-            LoadingProgressHUD.show()
+            SVProgressHUD.show()
             _ = InappManager.share.productInfo(id: InappManager.share.productIdentifiers) { [weak self] product in
                 self?.iapIds = IAPIdType.getOption()
                 self?.loadData()
-                LoadingProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
             }
         } else {
             iapIds = IAPIdType.getOption()

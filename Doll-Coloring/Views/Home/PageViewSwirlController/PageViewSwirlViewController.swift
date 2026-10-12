@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AdmobSDK
 
 class PageViewSwirlViewController: BaseViewController {
     
@@ -17,19 +16,13 @@ class PageViewSwirlViewController: BaseViewController {
     var categoryName: String?
     var totalDays: Int = 0
     
-    private var nativeAdView: NativeAdProtocol? {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
-    
     private var coloringLocal: [ColoringHistoryModel] = [] {
         didSet {
             collectionView.reloadData()
         }
     }
     
-    private var hasAd = true
+    private var hasAd = false
     
     var onClickItem: ((ColoringImage, String, Int) -> Void)?
     var handleScrollView: ((UIScrollView) -> Void)?
@@ -67,7 +60,6 @@ class PageViewSwirlViewController: BaseViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(cellType: AllColoringCell.self)
-        collectionView.register(cellType: HomeNativeAdsCell.self)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 20, right: 16)
         updateLayoutContent()
     }
@@ -120,15 +112,15 @@ extension PageViewSwirlViewController: UICollectionViewDelegate, UICollectionVie
                 if UserDefaultManager.ABis_free_trial_us {
                     if data.isPremium ?? false {
                         cell.viewWatchAds.isHidden = true
-                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        cell.adsViewAnimation.isHidden = true
                     } else {
                         cell.viewWatchAds.isHidden = true
-                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        cell.adsViewAnimation.isHidden = true
                     }
                 } else {
                     cell.viewWatchAds.isHidden = true
                     if data.isPremium ?? false {
-                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        cell.adsViewAnimation.isHidden = true
                     } else {
                         cell.adsViewAnimation.isHidden = true
                     }
@@ -141,7 +133,7 @@ extension PageViewSwirlViewController: UICollectionViewDelegate, UICollectionVie
                 cell.adsViewAnimation.isHidden = true
                 
                 if data.isPremium ?? false {
-                    cell.viewWatchAds.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                    cell.viewWatchAds.isHidden = true
                 } else {
                     cell.viewWatchAds.isHidden = true
                 }
@@ -149,11 +141,7 @@ extension PageViewSwirlViewController: UICollectionViewDelegate, UICollectionVie
             return cell
         }
         if indexPath.row == 3 {
-            let nativeAdsCell = collectionView.dequeueReusableCell(for: indexPath, cellType: HomeNativeAdsCell.self)
-            if hasAd {
-                nativeAdsCell.loadAds(nativeAd: nativeAdView)
-            }
-            return nativeAdsCell
+            return UICollectionViewCell()
         } else {
             
             let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: AllColoringCell.self)
@@ -173,15 +161,15 @@ extension PageViewSwirlViewController: UICollectionViewDelegate, UICollectionVie
                 if UserDefaultManager.ABis_free_trial_us {
                     if data.isPremium ?? false {
                         cell.viewWatchAds.isHidden = true
-                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        cell.adsViewAnimation.isHidden = true
                     } else {
                         cell.viewWatchAds.isHidden = true
-                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        cell.adsViewAnimation.isHidden = true
                     }
                 } else {
                     cell.viewWatchAds.isHidden = true
                     if data.isPremium ?? false {
-                        cell.adsViewAnimation.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                        cell.adsViewAnimation.isHidden = true
                     } else {
                         cell.adsViewAnimation.isHidden = true
                     }
@@ -194,7 +182,7 @@ extension PageViewSwirlViewController: UICollectionViewDelegate, UICollectionVie
                 cell.adsViewAnimation.isHidden = true
                 
                 if data.isPremium ?? false {
-                    cell.viewWatchAds.isHidden = SQLiteManager.shared.selectionColoringsRew().first(where: {$0.filePath == data.filePath}) != nil
+                    cell.viewWatchAds.isHidden = true
                 } else {
                     cell.viewWatchAds.isHidden = true
                 }

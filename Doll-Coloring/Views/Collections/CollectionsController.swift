@@ -10,7 +10,6 @@ import Foundation
 import RxSwift
 import UIKit
 import Lottie
-import AdmobSDK
 import SDWebImage
 
 class CollectionsController: BaseViewController {
@@ -120,7 +119,6 @@ class CollectionsController: BaseViewController {
     @IBAction func actionStartColoring(_ sender: Any) {
         FirebaseEventManager.logEvent(with: RMBGEventTracking.collection_start_coloring)
         NotificationCenter.default.post(name: NSNotification.Name("GOTOHOME_TABBAR"), object: nil)
-        //        AppRouter.shared.navigate(to: MainColoringsRoute.main, with: .push)
     }
     
     
@@ -134,11 +132,12 @@ class CollectionsController: BaseViewController {
         listCollection = FileManagerLocal.shared.getFileColoringlocal()
         switch segmentControl.selectedSegmentIndex {
         case 0:
-            listCollection = lisCompleted
+            listCollection = listNotCompleted
             collectionView.reloadData()
             viewEmpty.isHidden = !listCollection.isEmpty
+            
         case 1:
-            listCollection = listNotCompleted
+            listCollection = lisCompleted
             collectionView.reloadData()
             viewEmpty.isHidden = !listCollection.isEmpty
         default:
@@ -172,22 +171,13 @@ extension CollectionsController {
         topBarView.title = LocalizableUtils.commonCollections()
         lbEmpty.text = LocalizableUtils.commonEmptyCollections()
         btnStartColoring.setTitle(LocalizableUtils.commonStartColoring(), for: .normal)
-        segmentControl.setTitle(LocalizableUtils.commonFinished(), forSegmentAt: 0)
-        segmentControl.setTitle(LocalizableUtils.commonUnfinished(), forSegmentAt: 1)
+        segmentControl.setTitle(LocalizableUtils.commonFinished(), forSegmentAt: 1)
+        segmentControl.setTitle(LocalizableUtils.commonUnfinished(), forSegmentAt: 0)
     }
     
     func loadColapBanner() {
         viewAds.isHidden = true
-//        viewHeightAds.constant = DeviceInfos.isIpad() ? 90 : 56
-//        ADManager.shared.loadBanner(DollColoringAdID.banner_collection, viewBanner: viewAds) {[weak self] success in
-//            self?.viewAds.isHidden = !success
-//            if DeviceInfos.isIpad() {
-//                self?.viewHeightAds.constant = success ? 90 : 0
-//            } else {
-//                self?.viewHeightAds.constant = success ? 56 : 0
-//            }
-//            
-//        }
+
     }
 }
 

@@ -42,6 +42,7 @@ Common.Language                                 =       "언어";
 Common.EmptyCollections                         =       "아직 사진이 없습니다!";
 Content_delete_collection                       =       "색상이 삭제됩니다. \n 계속하려면 삭제를 클릭하십시오.";
 Common.Continue = "계속하다";
+Common.ContinueColoring = "색칠 이어하기";
 Common.UnlockForFree                            =       "무료로 잠금 해제";
 Common.UnlockColoring                           =       "프리미엄 구매: 모든 그림 잠금 해제";
 Common.WatchAShortVideo                         =       "짧은 동영상을 시청하세요";
@@ -140,3 +141,16 @@ Setting.ShareApp                                =       "앱 공유하기";
 Setting.RateApp                                 =       "앱 평가하기";
 Setting.FeedBack                                =       "피드백";
 Setting.MoreApp                                 =       "더 많은 앱";
+
+// Collections empty state
+Collections.EmptyTitle = "컬러링북이 기다리고 있어요!";
+Collections.EmptyMessage = "그림을 골라 나만의 색으로 완성해 보세요.";
+Collections.EmptyAction = "그림 둘러보기";
+
+Coloring.PreparingDrawing = "그림을 준비하고 있어요…";
+
+// Coloring exit confirmation
+Coloring.ExitConfirm = "진행 상황을 저장하고 나갈까요?";
+Coloring.SaveAndLeave = "저장하고 나가기";
+Coloring.KeepColoring = "계속 색칠하기";
+Coloring.ProgressComplete = "%1$d%% 완료";

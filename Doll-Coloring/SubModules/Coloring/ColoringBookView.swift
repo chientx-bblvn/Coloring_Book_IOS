@@ -45,6 +45,8 @@ class ColoringBookView: UIView {
     public var currentColor:UIColor = .red
     public var nameColor: String = ""
     public var currentWidth:CGFloat = 5.0
+    /// Active tip: pencil (hard/thin) vs brush (soft/wide).
+    public var strokeKind: StrokeKind = .brush
     
     //Variables to handle possible touch cancellations
     
@@ -148,8 +150,13 @@ class ColoringBookView: UIView {
         delegate?.viewWillStartDrawing()
         
         //Create a stroke with current settings
-        activeStroke = Stroke(color: currentColor,
-                              lineWidth: currentWidth, nameColor: nameColor, isPens: isPens)
+        activeStroke = Stroke(
+            color: currentColor,
+            lineWidth: currentWidth,
+            nameColor: nameColor,
+            isPens: isPens,
+            kind: strokeKind
+        )
         
         let firstLocation = touches.first!.location(in: self)
         

@@ -16,28 +16,27 @@ class DetailCollectionController: BaseViewController {
     
     var viewModel: DetailCollectionVM!
     
-    @IBOutlet weak var topBarView: TopBarView!
+    @IBOutlet weak var topBarView: TopBarView?
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView?
     
-    @IBOutlet weak var btnDelete: UIButton!
+    @IBOutlet weak var btnDelete: UIButton?
     
-    @IBOutlet weak var btnSave: UIButton!
+    @IBOutlet weak var btnSave: UIButton?
     
-    @IBOutlet weak var btnEdit: UIButton!
+    @IBOutlet weak var btnEdit: UIButton?
     
-    @IBOutlet weak var btnShare: UIButton!
+    @IBOutlet weak var btnShare: UIButton?
     
-    @IBOutlet weak var viewAds: UIView!
+    @IBOutlet weak var viewAds: UIView?
     
     
     
     override func setup() {
         super.setup()
         setupView()
-        loadNativeAds()
+        viewAds?.isHidden = true
         FirebaseEventManager.logEvent(with: RMBGEventTracking.collection_detail)
-        ADManager.shared.preLoadReward(DollColoringAdID.reward_save)
     }
 
     override func bindingData() {
@@ -45,20 +44,26 @@ class DetailCollectionController: BaseViewController {
     }
     
     private func setupView() {
-        topBarView.title = LocalizableUtils.commonCollections().uppercased()
-        topBarView.titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
-        topBarView.onLeftClick = {
-            if self.viewModel.isCollection {
-                AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
-            } else {
-                AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
-            }
+        topBarView?.title = LocalizableUtils.commonCollections().uppercased()
+        topBarView?.titleFont = UIFont.systemFont(ofSize: 20, weight: .bold)
+        topBarView?.onLeftClick = { [weak self] in
+            self?.closeDetail()
         }
-//        if IAPState.isUserVip {
-//            btnSave.setImage(nil, for: .normal)
-//        }
-        topBarView.titleFont = UIFont.systemFont(ofSize: 20, weight: .bold)
-        imageView.setLocalImage(with: FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: viewModel.history?.imagePath ?? "").path, placeholder: nil)
+        let path = FileManagerLocal.shared
+            .getFileFoderFileUssing(typeFile: .ColoringSave, file: viewModel.history?.imagePath ?? "")
+            .path
+        imageView?.setLocalImage(with: path, placeholder: nil)
+    }
+
+    private func closeDetail() {
+        // SwiftUI shell — prefer dismissing the presented nav over MainTabbar pop.
+        if let nav = navigationController, nav.presentingViewController != nil {
+            nav.dismiss(animated: true)
+        } else if presentingViewController != nil {
+            dismiss(animated: true)
+        } else {
+            AppRouter.shared.dismissToSwiftUIHome(animated: true)
+        }
     }
     
     
@@ -83,7 +88,7 @@ class DetailCollectionController: BaseViewController {
     }
     
     func showActivityController() {
-        let firstActivityItem = Bundle.main.applicationName ?? "Doll Coloring"
+        let firstActivityItem = appDisplayName
         let imagePath = FileManagerLocal.shared.getFileFoderFileUssing(typeFile: .ColoringSave, file: viewModel.history?.imagePath ?? "").path
 
            guard let image = UIImage(contentsOfFile: imagePath) else {
@@ -117,11 +122,7 @@ class DetailCollectionController: BaseViewController {
     func deleteColoring() {
         let coloring = viewModel.coloringLocal
         guard let history = viewModel.history else {
-            if viewModel.isCollection {
-                AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
-            } else {
-                AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
-            }
+            closeDetail()
             return
         }
         FirebaseEventManager.logEvent(with: RMBGEventTracking.collection_detele)
@@ -136,11 +137,7 @@ class DetailCollectionController: BaseViewController {
             _ = SQLiteManager.shared.updateColorings(data: historys)
             FileManagerLocal.shared.deleteFile(typeFile: .ColoringSave, fileName: history.imagePath)
         }
-        if viewModel.isCollection {
-            AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
-        } else {
-            AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
-        }
+        closeDetail()
         let local = FileManagerLocal.shared.getFileColoringlocalURL()
         local.forEach { url in
             let cacheKey = SDWebImageManager.shared.cacheKey(for: url)
@@ -208,17 +205,8 @@ class DetailCollectionController: BaseViewController {
     }
     
     private func checkVip() {
-        if IAPState.isUserVip {
-            savePhotosAlbum()
-        } else {
-            PopupSaveColoringViewController.show(in: self) {
-                
-            } onclickDelete: {
-                DispatchQueue.main.async {
-                    self.loadAdsView()
-                }
-            }
-        }
+        // Ads removed — save freely
+        savePhotosAlbum()
     }
     
 //    func loadInterAds() {
@@ -268,26 +256,16 @@ class DetailCollectionController: BaseViewController {
 //    }
     
     func loadAdsView() {
-        ADManager.shared.loadReward(DollColoringAdID.reward_save) { [weak self] status in
-            switch status {
-            case .closed, .success:
-                self?.savePhotosAlbum()
-            case .error:
-                print("Reward ad failed to load or show: reward_save")
-            default:
-                break
-            }
-        }
+        // Ads removed — save directly
+        savePhotosAlbum()
     }
     
     func loadNativeAds() {
-        ADManager.shared.loadNative(DollColoringAdID.native_result, to: viewAds, nativeAdType: .customMediaFixedHeight) {[weak self] adId, success, nativeAdView in
-            self?.viewAds.isHidden = !success
-        }
+        viewAds?.isHidden = true
     }
     
     func savePhotosAlbum() {
-        if let image = imageView.image {
+        if let image = imageView?.image {
             FirebaseEventManager.logEvent(with: RMBGEventTracking.collection_save)
             UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
         }
@@ -307,11 +285,7 @@ class DetailCollectionController: BaseViewController {
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: {_ in
             DispatchQueue.main.async {
-                if self.viewModel.isCollection {
-                    AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
-                } else {
-                    AppRouter.shared.popToController(controller: MainTabbarViewController.classForCoder())
-                }
+                self.closeDetail()
             }
         }))
         present(ac, animated: true)

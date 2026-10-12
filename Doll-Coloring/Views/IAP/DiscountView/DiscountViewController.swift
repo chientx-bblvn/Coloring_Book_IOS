@@ -6,8 +6,8 @@
 //
 
 import UIKit
+import SVProgressHUD
 import Lottie
-import AdmobSDK
 
 class DiscountViewController: BaseViewController {
 
@@ -67,10 +67,10 @@ class DiscountViewController: BaseViewController {
            }
         
         viewCountdown.cornerRadiusView = 8
-        viewCountdown.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 1, height: 1))
+        viewCountdown.customGenerateOuterShadow(shadowOpacity: 0.25, shadowRadius: 6, color: UIColor(hexString: "C13F68").withAlphaComponent(0.3), shadowOffset: CGSize(width: 0, height: 2))
         videoView.loadAnimation(file: "flower", loopMode: .loop, contentMode: .scaleAspectFill)
         btnClamItNow.cornerRadiusView = 28
-        btnClamItNow.customGenerateOuterShadow(shadowOpacity: 1, shadowRadius: 0, color: UIColor(hexString: "000000"), shadowOffset: CGSize(width: 2, height: 2))
+        btnClamItNow.customGenerateOuterShadow(shadowOpacity: 0.25, shadowRadius: 6, color: UIColor(hexString: "C13F68").withAlphaComponent(0.3), shadowOffset: CGSize(width: 0, height: 2))
        
         currentTime = UserDefaultManager.getRemainingCountdownTime()
         if UserDefaultManager.countdownEndTime == nil {
@@ -102,11 +102,11 @@ class DiscountViewController: BaseViewController {
         loadData()
         iapIds = IAPIdType.getOption()
         if InappManager.share.listProduct.isEmpty {
-            LoadingProgressHUD.show()
+            SVProgressHUD.show()
             _ = InappManager.share.productInfo(id: InappManager.share.productIdentifiers) {[weak self]_ in
                 self?.iapIds = IAPIdType.getOption()
                 self?.loadData()
-                LoadingProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
             }
         } else {
             iapIds = IAPIdType.getOption()

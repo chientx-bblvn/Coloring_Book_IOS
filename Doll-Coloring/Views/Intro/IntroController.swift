@@ -36,31 +36,19 @@ class IntroController: BaseViewController {
                    indicator: R.image.indicator_page3())
     ]
     
-    private var hasAd: Bool = true
-//    
-    private var nativeAdNative: NativeAdProtocol? {
-        didSet {
-            fsPagerView.reloadData()
-        }
-    }
-    
     // MARK: - Setup controller and IBAction
     override func setup() {
         super.setup()
         setupView()
-//        loadNativeFullSCR()
     }
     
     override func bindingData() {
         super.bindingData()
     }
     
-    // MARK: - Language change event
     override func onLanguageChange() {
         super.onLanguageChange()
     }
-    
-
 }
 
 // MARK: - Action view
@@ -70,16 +58,15 @@ extension IntroController {
         UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
     }
     
-    @IBAction func clickNext (_ sender: Any) {
+    @IBAction func clickNext(_ sender: Any) {
         let currentPage = fsPagerView.currentIndex
         if currentPage < (listIntro.count - 1) {
             fsPagerView.scrollToItem(at: currentPage + 1, animated: true)
         } else {
             UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
-            AppRouter.shared.navigate(to:   MainTabbarViewRoute.tabbar, with: .changeRoot)
+            AppRouter.shared.navigate(to: MainTabbarViewRoute.tabbar, with: .changeRoot)
         }
     }
-    
 }
 
 // MARK: - Setup view
@@ -89,48 +76,18 @@ extension IntroController {
         fsPagerView.dataSource = self
         fsPagerView.delegate = self
         fsPagerView.isInfinite = false
-        fsPagerView.isScrollEnabled = true
+        fsPagerView.isScrollEnabled = false
         fsPagerView.decelerationDistance = 1
         fsPagerView.register(cellType: IntroductionCell.self)
-//        fsPagerView.register(cellType: IntroADSFullCollectionViewCell.self)
     }
-    
-    
 }
 
 extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {
     func numberOfItems(in pagerView: FSPagerView) -> Int {
-//        if hasAd {
-//            return listIntro.count + 1
-//        }
         return listIntro.count
     }
     
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
-        guard hasAd else {
-            let cell = pagerView.dequeueReusableCell(for: index, cellType: IntroductionCell.self)
-            let intro = listIntro[index]
-            cell.loadData(intro: intro)
-            cell.onNext = {
-                DispatchQueue.main.asyncSafety {
-                    let currentPage = self.fsPagerView.currentIndex
-                    if currentPage < (self.listIntro.count - 1) {
-                        self.fsPagerView.scrollToItem(at: currentPage + 1, animated: true)
-                    } else {
-                        UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
-                        UserDefaultManager.currentDateFirstOpenApp = Date().toMyString(format: "dd/MM/yyyy")
-                        AppRouter.shared.navigate(to: MainTabbarViewRoute.tabbar, with: .changeRoot)
-                    }
-                }
-            }
-            return cell
-        }
-        
-//        if index == 2 {
-//            let cell = pagerView.dequeueReusableCell(for: index, cellType: IntroADSFullCollectionViewCell.self)
-//            return cell
-//        }
-    
         let cell = pagerView.dequeueReusableCell(for: index, cellType: IntroductionCell.self)
         let intro = listIntro[index]
         cell.loadData(intro: intro)
@@ -142,7 +99,7 @@ extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {
                 } else {
                     UserDefaults.standard.set(true, forKey: UserDefault.showedIntro.rawValue)
                     UserDefaultManager.currentDateFirstOpenApp = Date().toMyString(format: "dd/MM/yyyy")
-                    AppRouter.shared.navigate(to:  MainTabbarViewRoute.tabbar, with: .changeRoot)
+                    AppRouter.shared.navigate(to: MainTabbarViewRoute.tabbar, with: .changeRoot)
                 }
             }
         }
@@ -158,19 +115,8 @@ extension IntroController: FSPagerViewDelegate, FSPagerViewDataSource {
             FirebaseEventManager.logEvent(with: RMBGEventTracking.scrOnboard2)
         case 2:
             FirebaseEventManager.logEvent(with: RMBGEventTracking.scrOnboard3)
-        default: break
+        default:
+            break
         }
     }
-    
-//    func pagerView(_ pagerView: FSPagerView, willDisplay cell: FSPagerViewCell, forItemAt index: Int) {
-//        if let cell = cell as? IntroADSFullCollectionViewCell {
-//            cell.loadAds(nativeAd: nativeAdNative)
-//        }
-//    }
-//    
-//    func pagerView(_ pagerView: FSPagerView, didEndDisplaying cell: FSPagerViewCell, forItemAt index: Int) {
-//        if let cell = cell as? IntroADSFullCollectionViewCell {
-//            cell.removeViewAds()
-//        }
-//    }
 }
